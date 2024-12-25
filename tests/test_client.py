@@ -729,12 +729,12 @@ class TestHyperspell:
     @mock.patch("hyperspell._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/ingest").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.post("/query").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
             self.client.post(
-                "/ingest",
-                body=cast(object, dict()),
+                "/query",
+                body=cast(object, dict(query="query")),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -744,12 +744,12 @@ class TestHyperspell:
     @mock.patch("hyperspell._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/ingest").mock(return_value=httpx.Response(500))
+        respx_mock.post("/query").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
             self.client.post(
-                "/ingest",
-                body=cast(object, dict()),
+                "/query",
+                body=cast(object, dict(query="query")),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -780,9 +780,9 @@ class TestHyperspell:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/ingest").mock(side_effect=retry_handler)
+        respx_mock.post("/query").mock(side_effect=retry_handler)
 
-        response = client.ingest.with_raw_response.add()
+        response = client.query.with_raw_response.retrieve(query="query")
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -804,9 +804,11 @@ class TestHyperspell:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/ingest").mock(side_effect=retry_handler)
+        respx_mock.post("/query").mock(side_effect=retry_handler)
 
-        response = client.ingest.with_raw_response.add(extra_headers={"x-stainless-retry-count": Omit()})
+        response = client.query.with_raw_response.retrieve(
+            query="query", extra_headers={"x-stainless-retry-count": Omit()}
+        )
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
@@ -827,9 +829,11 @@ class TestHyperspell:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/ingest").mock(side_effect=retry_handler)
+        respx_mock.post("/query").mock(side_effect=retry_handler)
 
-        response = client.ingest.with_raw_response.add(extra_headers={"x-stainless-retry-count": "42"})
+        response = client.query.with_raw_response.retrieve(
+            query="query", extra_headers={"x-stainless-retry-count": "42"}
+        )
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
 
@@ -1513,12 +1517,12 @@ class TestAsyncHyperspell:
     @mock.patch("hyperspell._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/ingest").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.post("/query").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
             await self.client.post(
-                "/ingest",
-                body=cast(object, dict()),
+                "/query",
+                body=cast(object, dict(query="query")),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -1528,12 +1532,12 @@ class TestAsyncHyperspell:
     @mock.patch("hyperspell._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     async def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
-        respx_mock.post("/ingest").mock(return_value=httpx.Response(500))
+        respx_mock.post("/query").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
             await self.client.post(
-                "/ingest",
-                body=cast(object, dict()),
+                "/query",
+                body=cast(object, dict(query="query")),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -1565,9 +1569,9 @@ class TestAsyncHyperspell:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/ingest").mock(side_effect=retry_handler)
+        respx_mock.post("/query").mock(side_effect=retry_handler)
 
-        response = await client.ingest.with_raw_response.add()
+        response = await client.query.with_raw_response.retrieve(query="query")
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -1590,9 +1594,11 @@ class TestAsyncHyperspell:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/ingest").mock(side_effect=retry_handler)
+        respx_mock.post("/query").mock(side_effect=retry_handler)
 
-        response = await client.ingest.with_raw_response.add(extra_headers={"x-stainless-retry-count": Omit()})
+        response = await client.query.with_raw_response.retrieve(
+            query="query", extra_headers={"x-stainless-retry-count": Omit()}
+        )
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
@@ -1614,9 +1620,11 @@ class TestAsyncHyperspell:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/ingest").mock(side_effect=retry_handler)
+        respx_mock.post("/query").mock(side_effect=retry_handler)
 
-        response = await client.ingest.with_raw_response.add(extra_headers={"x-stainless-retry-count": "42"})
+        response = await client.query.with_raw_response.retrieve(
+            query="query", extra_headers={"x-stainless-retry-count": "42"}
+        )
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
 

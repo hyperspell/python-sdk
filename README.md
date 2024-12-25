@@ -28,8 +28,9 @@ from hyperspell import Hyperspell
 
 client = Hyperspell()
 
-response = client.ingest.add()
-print(response.document_id)
+query = client.query.retrieve(
+    query="query",
+)
 ```
 
 While you can provide a `bearer_token` keyword argument,
@@ -49,8 +50,9 @@ client = AsyncHyperspell()
 
 
 async def main() -> None:
-    response = await client.ingest.add()
-    print(response.document_id)
+    query = await client.query.retrieve(
+        query="query",
+    )
 
 
 asyncio.run(main())
@@ -83,7 +85,9 @@ from hyperspell import Hyperspell
 client = Hyperspell()
 
 try:
-    client.ingest.add()
+    client.query.retrieve(
+        query="query",
+    )
 except hyperspell.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx.
@@ -126,7 +130,9 @@ client = Hyperspell(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).ingest.add()
+client.with_options(max_retries=5).query.retrieve(
+    query="query",
+)
 ```
 
 ### Timeouts
@@ -149,7 +155,9 @@ client = Hyperspell(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).ingest.add()
+client.with_options(timeout=5.0).query.retrieve(
+    query="query",
+)
 ```
 
 On timeout, an `APITimeoutError` is thrown.
@@ -190,11 +198,13 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from hyperspell import Hyperspell
 
 client = Hyperspell()
-response = client.ingest.with_raw_response.add()
+response = client.query.with_raw_response.retrieve(
+    query="query",
+)
 print(response.headers.get('X-My-Header'))
 
-ingest = response.parse()  # get the object that `ingest.add()` would have returned
-print(ingest.document_id)
+query = response.parse()  # get the object that `query.retrieve()` would have returned
+print(query)
 ```
 
 These methods return an [`APIResponse`](https://github.com/hyperspell/python-sdk/tree/main/src/hyperspell/_response.py) object.
@@ -208,7 +218,9 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.ingest.with_streaming_response.add() as response:
+with client.query.with_streaming_response.retrieve(
+    query="query",
+) as response:
     print(response.headers.get("X-My-Header"))
 
     for line in response.iter_lines():

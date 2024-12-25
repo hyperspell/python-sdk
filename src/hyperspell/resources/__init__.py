@@ -8,14 +8,6 @@ from .query import (
     QueryResourceWithStreamingResponse,
     AsyncQueryResourceWithStreamingResponse,
 )
-from .ingest import (
-    IngestResource,
-    AsyncIngestResource,
-    IngestResourceWithRawResponse,
-    AsyncIngestResourceWithRawResponse,
-    IngestResourceWithStreamingResponse,
-    AsyncIngestResourceWithStreamingResponse,
-)
 from .documents import (
     DocumentsResource,
     AsyncDocumentsResource,
@@ -26,12 +18,6 @@ from .documents import (
 )
 
 __all__ = [
-    "IngestResource",
-    "AsyncIngestResource",
-    "IngestResourceWithRawResponse",
-    "AsyncIngestResourceWithRawResponse",
-    "IngestResourceWithStreamingResponse",
-    "AsyncIngestResourceWithStreamingResponse",
     "QueryResource",
     "AsyncQueryResource",
     "QueryResourceWithRawResponse",

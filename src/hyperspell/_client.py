@@ -24,7 +24,7 @@ from ._utils import (
     get_async_library,
 )
 from ._version import __version__
-from .resources import query, ingest, documents
+from .resources import query, documents
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import APIStatusError, HyperspellError
 from ._base_client import (
@@ -46,7 +46,6 @@ __all__ = [
 
 
 class Hyperspell(SyncAPIClient):
-    ingest: ingest.IngestResource
     query: query.QueryResource
     documents: documents.DocumentsResource
     with_raw_response: HyperspellWithRawResponse
@@ -106,7 +105,6 @@ class Hyperspell(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.ingest = ingest.IngestResource(self)
         self.query = query.QueryResource(self)
         self.documents = documents.DocumentsResource(self)
         self.with_raw_response = HyperspellWithRawResponse(self)
@@ -218,7 +216,6 @@ class Hyperspell(SyncAPIClient):
 
 
 class AsyncHyperspell(AsyncAPIClient):
-    ingest: ingest.AsyncIngestResource
     query: query.AsyncQueryResource
     documents: documents.AsyncDocumentsResource
     with_raw_response: AsyncHyperspellWithRawResponse
@@ -278,7 +275,6 @@ class AsyncHyperspell(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.ingest = ingest.AsyncIngestResource(self)
         self.query = query.AsyncQueryResource(self)
         self.documents = documents.AsyncDocumentsResource(self)
         self.with_raw_response = AsyncHyperspellWithRawResponse(self)
@@ -391,28 +387,24 @@ class AsyncHyperspell(AsyncAPIClient):
 
 class HyperspellWithRawResponse:
     def __init__(self, client: Hyperspell) -> None:
-        self.ingest = ingest.IngestResourceWithRawResponse(client.ingest)
         self.query = query.QueryResourceWithRawResponse(client.query)
         self.documents = documents.DocumentsResourceWithRawResponse(client.documents)
 
 
 class AsyncHyperspellWithRawResponse:
     def __init__(self, client: AsyncHyperspell) -> None:
-        self.ingest = ingest.AsyncIngestResourceWithRawResponse(client.ingest)
         self.query = query.AsyncQueryResourceWithRawResponse(client.query)
         self.documents = documents.AsyncDocumentsResourceWithRawResponse(client.documents)
 
 
 class HyperspellWithStreamedResponse:
     def __init__(self, client: Hyperspell) -> None:
-        self.ingest = ingest.IngestResourceWithStreamingResponse(client.ingest)
         self.query = query.QueryResourceWithStreamingResponse(client.query)
         self.documents = documents.DocumentsResourceWithStreamingResponse(client.documents)
 
 
 class AsyncHyperspellWithStreamedResponse:
     def __init__(self, client: AsyncHyperspell) -> None:
-        self.ingest = ingest.AsyncIngestResourceWithStreamingResponse(client.ingest)
         self.query = query.AsyncQueryResourceWithStreamingResponse(client.query)
         self.documents = documents.AsyncDocumentsResourceWithStreamingResponse(client.documents)
 
