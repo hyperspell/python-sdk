@@ -1,16 +1,3 @@
-# Ingest
-
-Types:
-
-```python
-from hyperspell.types import IngestAddResponse, IngestFileResponse
-```
-
-Methods:
-
-- <code title="post /ingest">client.ingest.<a href="./src/hyperspell/resources/ingest.py">add</a>(\*\*<a href="src/hyperspell/types/ingest_add_params.py">params</a>) -> <a href="./src/hyperspell/types/ingest_add_response.py">IngestAddResponse</a></code>
-- <code title="post /ingest_file">client.ingest.<a href="./src/hyperspell/resources/ingest.py">file</a>(\*\*<a href="src/hyperspell/types/ingest_file_params.py">params</a>) -> <a href="./src/hyperspell/types/ingest_file_response.py">object</a></code>
-
 # Query
 
 Types:
