@@ -57,7 +57,7 @@ class DocumentsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> Document:
         """
-        Get a document by ID.
+        Retrieves a document by ID.
 
         Args:
           extra_headers: Send extra headers
@@ -91,8 +91,10 @@ class DocumentsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> DocumentListResponse:
-        """
-        List all documents in the index.
+        """This endpoint allows you to paginate through all documents in the index.
+
+        You can
+        filter the documents by title, date, metadata, etc.
 
         Args:
           filter: Filter the query results.
@@ -158,7 +160,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> Document:
         """
-        Get a document by ID.
+        Retrieves a document by ID.
 
         Args:
           extra_headers: Send extra headers
@@ -192,8 +194,10 @@ class AsyncDocumentsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> DocumentListResponse:
-        """
-        List all documents in the index.
+        """This endpoint allows you to paginate through all documents in the index.
+
+        You can
+        filter the documents by title, date, metadata, etc.
 
         Args:
           filter: Filter the query results.
