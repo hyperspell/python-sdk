@@ -1,45 +1,44 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Dict, List, Optional
+from typing import List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["Document", "Chunk"]
+__all__ = ["Document", "Section"]
 
 
-class Chunk(BaseModel):
-    score: float
-
-    text: str
+class Section(BaseModel):
+    content: str
 
     type: Literal["text", "markdown", "table", "image", "messages", "message"]
 
-    metadata: Optional[Dict[str, str]] = None
+    children_ids: Optional[List[str]] = None
+
+    document_id: Optional[str] = None
+
+    metadata: Optional[object] = None
+
+    parent_id: Optional[str] = None
 
 
 class Document(BaseModel):
-    id: str
+    collection: str
 
-    chunk_count: int
+    resource_id: str
+    """Along with service, uniquely identifies the source document"""
 
-    ingested_at: datetime
+    created_at: Optional[datetime] = None
 
-    chunk_ids: Optional[List[str]] = None
+    ingested_at: Optional[datetime] = None
 
-    chunks: Optional[List[Chunk]] = None
+    metadata: Optional[object] = None
 
-    date: Optional[datetime] = None
+    sections: Optional[List[Section]] = None
 
-    metadata: Optional[Dict[str, str]] = None
-
-    org_id: Optional[str] = None
+    service: Optional[Literal["slack", "s3", "gmail", "notion", "google_docs", "api"]] = None
 
     title: Optional[str] = None
 
-    url: Optional[str] = None
-
-    user_id: Optional[str] = None
-
-    visibility: Optional[Literal["user", "org", "app", "system"]] = None
+    type: Optional[Literal["chat", "email", "generic", "transcript", "legal"]] = None
