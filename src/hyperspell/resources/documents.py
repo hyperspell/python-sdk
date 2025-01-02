@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import List
+
 import httpx
 
 from ..types import document_list_params
@@ -81,6 +83,7 @@ class DocumentsResource(SyncAPIResource):
     def list(
         self,
         *,
+        collections: List[str],
         filter: document_list_params.Filter | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
         page: int | NotGiven = NOT_GIVEN,
@@ -97,6 +100,8 @@ class DocumentsResource(SyncAPIResource):
         filter the documents by title, date, metadata, etc.
 
         Args:
+          collections: The collections to filter documents by.
+
           filter: Filter the query results.
 
           limit: Number of documents to return per page.
@@ -115,6 +120,7 @@ class DocumentsResource(SyncAPIResource):
             "/documents/list",
             body=maybe_transform(
                 {
+                    "collections": collections,
                     "filter": filter,
                     "limit": limit,
                     "page": page,
@@ -184,6 +190,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
     async def list(
         self,
         *,
+        collections: List[str],
         filter: document_list_params.Filter | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
         page: int | NotGiven = NOT_GIVEN,
@@ -200,6 +207,8 @@ class AsyncDocumentsResource(AsyncAPIResource):
         filter the documents by title, date, metadata, etc.
 
         Args:
+          collections: The collections to filter documents by.
+
           filter: Filter the query results.
 
           limit: Number of documents to return per page.
@@ -218,6 +227,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
             "/documents/list",
             body=await async_maybe_transform(
                 {
+                    "collections": collections,
                     "filter": filter,
                     "limit": limit,
                     "page": page,
