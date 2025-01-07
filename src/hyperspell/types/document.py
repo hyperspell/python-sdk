@@ -14,20 +14,22 @@ class Section(BaseModel):
 
     type: Literal["text", "markdown", "table", "image", "messages", "message"]
 
-    children_ids: Optional[List[str]] = None
+    children_ids: Optional[List[int]] = None
 
-    document_id: Optional[str] = None
+    document_id: Optional[int] = None
 
     metadata: Optional[object] = None
 
-    parent_id: Optional[str] = None
+    parent_id: Optional[int] = None
 
 
 class Document(BaseModel):
-    collection: str
+    collection_id: int
 
-    resource_id: str
+    resource_id: int
     """Along with service, uniquely identifies the source document"""
+
+    id: Optional[int] = None
 
     created_at: Optional[datetime] = None
 
