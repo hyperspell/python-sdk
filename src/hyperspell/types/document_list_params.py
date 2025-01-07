@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, Union
+from typing import List, Union, Iterable
 from datetime import datetime
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
@@ -12,7 +12,7 @@ __all__ = ["DocumentListParams", "Filter"]
 
 
 class DocumentListParams(TypedDict, total=False):
-    collections: Required[List[str]]
+    collections: Required[Iterable[int]]
     """The collections to filter documents by."""
 
     filter: Filter
@@ -29,7 +29,7 @@ class Filter(TypedDict, total=False):
     chunk_type: List[Literal["text", "markdown", "table", "image", "messages", "message"]]
     """Only query chunks of these types."""
 
-    collections: List[str]
+    collections: Iterable[int]
     """Only query documents in these collections."""
 
     document_type: List[Literal["chat", "email", "generic", "transcript", "legal"]]
