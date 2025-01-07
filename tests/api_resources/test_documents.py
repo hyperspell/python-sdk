@@ -21,14 +21,14 @@ class TestDocuments:
     @parametrize
     def test_method_retrieve(self, client: Hyperspell) -> None:
         document = client.documents.retrieve(
-            "document_id",
+            0,
         )
         assert_matches_type(Document, document, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve(self, client: Hyperspell) -> None:
         response = client.documents.with_raw_response.retrieve(
-            "document_id",
+            0,
         )
 
         assert response.is_closed is True
@@ -39,7 +39,7 @@ class TestDocuments:
     @parametrize
     def test_streaming_response_retrieve(self, client: Hyperspell) -> None:
         with client.documents.with_streaming_response.retrieve(
-            "document_id",
+            0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -50,26 +50,19 @@ class TestDocuments:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_path_params_retrieve(self, client: Hyperspell) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `document_id` but received ''"):
-            client.documents.with_raw_response.retrieve(
-                "",
-            )
-
-    @parametrize
     def test_method_list(self, client: Hyperspell) -> None:
         document = client.documents.list(
-            collections=["string"],
+            collections=[0],
         )
         assert_matches_type(DocumentListResponse, document, path=["response"])
 
     @parametrize
     def test_method_list_with_all_params(self, client: Hyperspell) -> None:
         document = client.documents.list(
-            collections=["string"],
+            collections=[0],
             filter={
                 "chunk_type": ["text"],
-                "collections": ["string"],
+                "collections": [0],
                 "document_type": ["chat"],
                 "end_date": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "provider": ["slack"],
@@ -83,7 +76,7 @@ class TestDocuments:
     @parametrize
     def test_raw_response_list(self, client: Hyperspell) -> None:
         response = client.documents.with_raw_response.list(
-            collections=["string"],
+            collections=[0],
         )
 
         assert response.is_closed is True
@@ -94,7 +87,7 @@ class TestDocuments:
     @parametrize
     def test_streaming_response_list(self, client: Hyperspell) -> None:
         with client.documents.with_streaming_response.list(
-            collections=["string"],
+            collections=[0],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -111,14 +104,14 @@ class TestAsyncDocuments:
     @parametrize
     async def test_method_retrieve(self, async_client: AsyncHyperspell) -> None:
         document = await async_client.documents.retrieve(
-            "document_id",
+            0,
         )
         assert_matches_type(Document, document, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncHyperspell) -> None:
         response = await async_client.documents.with_raw_response.retrieve(
-            "document_id",
+            0,
         )
 
         assert response.is_closed is True
@@ -129,7 +122,7 @@ class TestAsyncDocuments:
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncHyperspell) -> None:
         async with async_client.documents.with_streaming_response.retrieve(
-            "document_id",
+            0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -140,26 +133,19 @@ class TestAsyncDocuments:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_path_params_retrieve(self, async_client: AsyncHyperspell) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `document_id` but received ''"):
-            await async_client.documents.with_raw_response.retrieve(
-                "",
-            )
-
-    @parametrize
     async def test_method_list(self, async_client: AsyncHyperspell) -> None:
         document = await async_client.documents.list(
-            collections=["string"],
+            collections=[0],
         )
         assert_matches_type(DocumentListResponse, document, path=["response"])
 
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncHyperspell) -> None:
         document = await async_client.documents.list(
-            collections=["string"],
+            collections=[0],
             filter={
                 "chunk_type": ["text"],
-                "collections": ["string"],
+                "collections": [0],
                 "document_type": ["chat"],
                 "end_date": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "provider": ["slack"],
@@ -173,7 +159,7 @@ class TestAsyncDocuments:
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncHyperspell) -> None:
         response = await async_client.documents.with_raw_response.list(
-            collections=["string"],
+            collections=[0],
         )
 
         assert response.is_closed is True
@@ -184,7 +170,7 @@ class TestAsyncDocuments:
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncHyperspell) -> None:
         async with async_client.documents.with_streaming_response.list(
-            collections=["string"],
+            collections=[0],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
