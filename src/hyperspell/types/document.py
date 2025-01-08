@@ -12,11 +12,11 @@ __all__ = ["Document", "Section"]
 class Section(BaseModel):
     content: str
 
+    document_id: int
+
     type: Literal["text", "markdown", "table", "image", "messages", "message"]
 
     children_ids: Optional[List[int]] = None
-
-    document_id: Optional[int] = None
 
     metadata: Optional[object] = None
 
