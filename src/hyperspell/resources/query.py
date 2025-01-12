@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import List
 from typing_extensions import Literal
 
 import httpx
@@ -49,7 +50,7 @@ class QueryResource(SyncAPIResource):
         self,
         *,
         query: str,
-        filter: query_retrieve_params.Filter | NotGiven = NOT_GIVEN,
+        collections: List[str] | NotGiven = NOT_GIVEN,
         max_results: int | NotGiven = NOT_GIVEN,
         query_type: Literal["auto", "semantic", "keyword"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -65,7 +66,7 @@ class QueryResource(SyncAPIResource):
         Args:
           query: Query to run.
 
-          filter: Filter the query results.
+          collections: Only query documents in these collections.
 
           max_results: Maximum number of results to return.
 
@@ -84,7 +85,7 @@ class QueryResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "query": query,
-                    "filter": filter,
+                    "collections": collections,
                     "max_results": max_results,
                     "query_type": query_type,
                 },
@@ -121,7 +122,7 @@ class AsyncQueryResource(AsyncAPIResource):
         self,
         *,
         query: str,
-        filter: query_retrieve_params.Filter | NotGiven = NOT_GIVEN,
+        collections: List[str] | NotGiven = NOT_GIVEN,
         max_results: int | NotGiven = NOT_GIVEN,
         query_type: Literal["auto", "semantic", "keyword"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -137,7 +138,7 @@ class AsyncQueryResource(AsyncAPIResource):
         Args:
           query: Query to run.
 
-          filter: Filter the query results.
+          collections: Only query documents in these collections.
 
           max_results: Maximum number of results to return.
 
@@ -156,7 +157,7 @@ class AsyncQueryResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "query": query,
-                    "filter": filter,
+                    "collections": collections,
                     "max_results": max_results,
                     "query_type": query_type,
                 },

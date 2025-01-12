@@ -29,9 +29,6 @@ class Filter(TypedDict, total=False):
     chunk_type: List[Literal["text", "markdown", "table", "image", "messages", "message"]]
     """Only query chunks of these types."""
 
-    collections: Iterable[int]
-    """Only query documents in these collections."""
-
     document_type: List[Literal["chat", "email", "generic", "transcript", "legal"]]
     """Only query documents of these types."""
 
