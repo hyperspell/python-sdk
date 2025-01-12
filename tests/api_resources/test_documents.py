@@ -62,7 +62,6 @@ class TestDocuments:
             collections=[0],
             filter={
                 "chunk_type": ["text"],
-                "collections": [0],
                 "document_type": ["chat"],
                 "end_date": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "provider": ["slack"],
@@ -145,7 +144,6 @@ class TestAsyncDocuments:
             collections=[0],
             filter={
                 "chunk_type": ["text"],
-                "collections": [0],
                 "document_type": ["chat"],
                 "end_date": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "provider": ["slack"],

@@ -2,44 +2,21 @@
 
 from __future__ import annotations
 
-from typing import List, Union, Iterable
-from datetime import datetime
-from typing_extensions import Literal, Required, Annotated, TypedDict
+from typing import List
+from typing_extensions import Literal, Required, TypedDict
 
-from .._utils import PropertyInfo
-
-__all__ = ["QueryRetrieveParams", "Filter"]
+__all__ = ["QueryRetrieveParams"]
 
 
 class QueryRetrieveParams(TypedDict, total=False):
     query: Required[str]
     """Query to run."""
 
-    filter: Filter
-    """Filter the query results."""
+    collections: List[str]
+    """Only query documents in these collections."""
 
     max_results: int
     """Maximum number of results to return."""
 
     query_type: Literal["auto", "semantic", "keyword"]
     """Type of query to run."""
-
-
-class Filter(TypedDict, total=False):
-    chunk_type: List[Literal["text", "markdown", "table", "image", "messages", "message"]]
-    """Only query chunks of these types."""
-
-    collections: Iterable[int]
-    """Only query documents in these collections."""
-
-    document_type: List[Literal["chat", "email", "generic", "transcript", "legal"]]
-    """Only query documents of these types."""
-
-    end_date: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
-    """Only query documents before this date."""
-
-    provider: List[Literal["slack", "s3", "gmail", "notion", "google_docs", "api"]]
-    """Only query documents from these providers."""
-
-    start_date: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
-    """Only query documents on or after this date."""
