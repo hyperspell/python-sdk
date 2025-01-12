@@ -14,19 +14,22 @@ class Section(BaseModel):
 
     document_id: int
 
-    type: Literal["text", "markdown", "table", "image", "messages", "message"]
+    id: Optional[int] = None
 
-    children_ids: Optional[List[int]] = None
+    embedding_e5_large: Optional[List[float]] = None
+
+    fts: Optional[List[float]] = None
 
     metadata: Optional[object] = None
 
-    parent_id: Optional[int] = None
+    type: Optional[Literal["text", "markdown", "table", "image", "messages", "message"]] = None
+    """Type of the section"""
 
 
 class Document(BaseModel):
     collection_id: int
 
-    resource_id: int
+    resource_id: str
     """Along with service, uniquely identifies the source document"""
 
     id: Optional[int] = None
@@ -40,6 +43,8 @@ class Document(BaseModel):
     sections: Optional[List[Section]] = None
 
     service: Optional[Literal["slack", "s3", "gmail", "notion", "google_docs", "api"]] = None
+
+    status: Optional[Literal["pending", "processing", "completed", "failed"]] = None
 
     title: Optional[str] = None
 

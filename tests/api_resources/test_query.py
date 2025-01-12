@@ -9,7 +9,6 @@ import pytest
 
 from hyperspell import Hyperspell, AsyncHyperspell
 from tests.utils import assert_matches_type
-from hyperspell._utils import parse_datetime
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -28,14 +27,7 @@ class TestQuery:
     def test_method_retrieve_with_all_params(self, client: Hyperspell) -> None:
         query = client.query.retrieve(
             query="query",
-            filter={
-                "chunk_type": ["text"],
-                "collections": [0],
-                "document_type": ["chat"],
-                "end_date": parse_datetime("2019-12-27T18:11:19.117Z"),
-                "provider": ["slack"],
-                "start_date": parse_datetime("2019-12-27T18:11:19.117Z"),
-            },
+            collections=["string"],
             max_results=0,
             query_type="auto",
         )
@@ -80,14 +72,7 @@ class TestAsyncQuery:
     async def test_method_retrieve_with_all_params(self, async_client: AsyncHyperspell) -> None:
         query = await async_client.query.retrieve(
             query="query",
-            filter={
-                "chunk_type": ["text"],
-                "collections": [0],
-                "document_type": ["chat"],
-                "end_date": parse_datetime("2019-12-27T18:11:19.117Z"),
-                "provider": ["slack"],
-                "start_date": parse_datetime("2019-12-27T18:11:19.117Z"),
-            },
+            collections=["string"],
             max_results=0,
             query_type="auto",
         )
