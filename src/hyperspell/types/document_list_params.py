@@ -29,14 +29,25 @@ class Filter(TypedDict, total=False):
     chunk_type: List[Literal["text", "markdown", "table", "image", "messages", "message"]]
     """Only query chunks of these types."""
 
-    document_type: List[Literal["chat", "email", "generic", "transcript", "legal"]]
-    """Only query documents of these types."""
-
     end_date: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
     """Only query documents before this date."""
 
-    provider: List[Literal["slack", "s3", "gmail", "notion", "google_docs", "api"]]
-    """Only query documents from these providers."""
+    source: List[
+        Literal[
+            "generic",
+            "generic_chat",
+            "generic_email",
+            "generic_transcript",
+            "generic_legal",
+            "website",
+            "slack",
+            "s3",
+            "gmail",
+            "notion",
+            "google_docs",
+        ]
+    ]
+    """Only query documents of these types."""
 
     start_date: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
     """Only query documents on or after this date."""
