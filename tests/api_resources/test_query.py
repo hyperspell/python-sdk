@@ -9,6 +9,7 @@ import pytest
 
 from hyperspell import Hyperspell, AsyncHyperspell
 from tests.utils import assert_matches_type
+from hyperspell._utils import parse_datetime
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -28,6 +29,12 @@ class TestQuery:
         query = client.query.retrieve(
             query="query",
             collections=["string"],
+            filter={
+                "chunk_type": ["text"],
+                "end_date": parse_datetime("2019-12-27T18:11:19.117Z"),
+                "source": ["generic"],
+                "start_date": parse_datetime("2019-12-27T18:11:19.117Z"),
+            },
             max_results=0,
             query_type="auto",
         )
@@ -73,6 +80,12 @@ class TestAsyncQuery:
         query = await async_client.query.retrieve(
             query="query",
             collections=["string"],
+            filter={
+                "chunk_type": ["text"],
+                "end_date": parse_datetime("2019-12-27T18:11:19.117Z"),
+                "source": ["generic"],
+                "start_date": parse_datetime("2019-12-27T18:11:19.117Z"),
+            },
             max_results=0,
             query_type="auto",
         )
