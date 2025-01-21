@@ -42,10 +42,22 @@ class Document(BaseModel):
 
     sections: Optional[List[Section]] = None
 
-    service: Optional[Literal["slack", "s3", "gmail", "notion", "google_docs", "api"]] = None
+    source: Optional[
+        Literal[
+            "generic",
+            "generic_chat",
+            "generic_email",
+            "generic_transcript",
+            "generic_legal",
+            "website",
+            "slack",
+            "s3",
+            "gmail",
+            "notion",
+            "google_docs",
+        ]
+    ] = None
 
     status: Optional[Literal["pending", "processing", "completed", "failed"]] = None
 
     title: Optional[str] = None
-
-    type: Optional[Literal["chat", "email", "generic", "transcript", "legal"]] = None
