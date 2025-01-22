@@ -42,6 +42,8 @@ class Document(BaseModel):
 
     sections: Optional[List[Section]] = None
 
+    sections_count: Optional[int] = None
+
     source: Optional[
         Literal[
             "generic",

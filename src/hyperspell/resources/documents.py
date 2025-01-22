@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Iterable
+from typing import Optional
 
 import httpx
 
@@ -81,10 +81,9 @@ class DocumentsResource(SyncAPIResource):
     def list(
         self,
         *,
-        collections: Iterable[int],
-        filter: document_list_params.Filter | NotGiven = NOT_GIVEN,
-        limit: int | NotGiven = NOT_GIVEN,
-        page: int | NotGiven = NOT_GIVEN,
+        collection: str,
+        cursor: Optional[str] | NotGiven = NOT_GIVEN,
+        size: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -98,14 +97,6 @@ class DocumentsResource(SyncAPIResource):
         filter the documents by title, date, metadata, etc.
 
         Args:
-          collections: The collections to filter documents by.
-
-          filter: Filter the query results.
-
-          limit: Number of documents to return per page.
-
-          page: Page number to return.
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -116,17 +107,19 @@ class DocumentsResource(SyncAPIResource):
         """
         return self._post(
             "/documents/list",
-            body=maybe_transform(
-                {
-                    "collections": collections,
-                    "filter": filter,
-                    "limit": limit,
-                    "page": page,
-                },
-                document_list_params.DocumentListParams,
-            ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "collection": collection,
+                        "cursor": cursor,
+                        "size": size,
+                    },
+                    document_list_params.DocumentListParams,
+                ),
             ),
             cast_to=DocumentListResponse,
         )
@@ -186,10 +179,9 @@ class AsyncDocumentsResource(AsyncAPIResource):
     async def list(
         self,
         *,
-        collections: Iterable[int],
-        filter: document_list_params.Filter | NotGiven = NOT_GIVEN,
-        limit: int | NotGiven = NOT_GIVEN,
-        page: int | NotGiven = NOT_GIVEN,
+        collection: str,
+        cursor: Optional[str] | NotGiven = NOT_GIVEN,
+        size: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -203,14 +195,6 @@ class AsyncDocumentsResource(AsyncAPIResource):
         filter the documents by title, date, metadata, etc.
 
         Args:
-          collections: The collections to filter documents by.
-
-          filter: Filter the query results.
-
-          limit: Number of documents to return per page.
-
-          page: Page number to return.
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -221,17 +205,19 @@ class AsyncDocumentsResource(AsyncAPIResource):
         """
         return await self._post(
             "/documents/list",
-            body=await async_maybe_transform(
-                {
-                    "collections": collections,
-                    "filter": filter,
-                    "limit": limit,
-                    "page": page,
-                },
-                document_list_params.DocumentListParams,
-            ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "collection": collection,
+                        "cursor": cursor,
+                        "size": size,
+                    },
+                    document_list_params.DocumentListParams,
+                ),
             ),
             cast_to=DocumentListResponse,
         )
