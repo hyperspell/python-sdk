@@ -28,15 +28,12 @@ class TestQuery:
     def test_method_retrieve_with_all_params(self, client: Hyperspell) -> None:
         query = client.query.retrieve(
             query="query",
+            collections=["string"],
             filter={
                 "chunk_type": ["text"],
-                "document_type": ["chat"],
                 "end_date": parse_datetime("2019-12-27T18:11:19.117Z"),
-                "namespace": "namespace",
-                "org_id": "org_id",
-                "provider": ["slack"],
+                "source": ["generic"],
                 "start_date": parse_datetime("2019-12-27T18:11:19.117Z"),
-                "user_id": "user_id",
             },
             max_results=0,
             query_type="auto",
@@ -82,15 +79,12 @@ class TestAsyncQuery:
     async def test_method_retrieve_with_all_params(self, async_client: AsyncHyperspell) -> None:
         query = await async_client.query.retrieve(
             query="query",
+            collections=["string"],
             filter={
                 "chunk_type": ["text"],
-                "document_type": ["chat"],
                 "end_date": parse_datetime("2019-12-27T18:11:19.117Z"),
-                "namespace": "namespace",
-                "org_id": "org_id",
-                "provider": ["slack"],
+                "source": ["generic"],
                 "start_date": parse_datetime("2019-12-27T18:11:19.117Z"),
-                "user_id": "user_id",
             },
             max_results=0,
             query_type="auto",

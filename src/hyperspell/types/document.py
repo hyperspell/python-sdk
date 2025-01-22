@@ -1,45 +1,63 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Dict, List, Optional
+from typing import List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["Document", "Chunk"]
+__all__ = ["Document", "Section"]
 
 
-class Chunk(BaseModel):
-    score: float
+class Section(BaseModel):
+    content: str
 
-    text: str
+    document_id: int
 
-    type: Literal["text", "markdown", "table", "image", "messages", "message"]
+    id: Optional[int] = None
 
-    metadata: Optional[Dict[str, str]] = None
+    embedding_e5_large: Optional[List[float]] = None
+
+    fts: Optional[List[float]] = None
+
+    metadata: Optional[object] = None
+
+    type: Optional[Literal["text", "markdown", "table", "image", "messages", "message"]] = None
+    """Type of the section"""
 
 
 class Document(BaseModel):
-    id: str
+    collection_id: int
 
-    chunk_count: int
+    resource_id: str
+    """Along with service, uniquely identifies the source document"""
 
-    ingested_at: datetime
+    id: Optional[int] = None
 
-    chunk_ids: Optional[List[str]] = None
+    created_at: Optional[datetime] = None
 
-    chunks: Optional[List[Chunk]] = None
+    ingested_at: Optional[datetime] = None
 
-    date: Optional[datetime] = None
+    metadata: Optional[object] = None
 
-    metadata: Optional[Dict[str, str]] = None
+    sections: Optional[List[Section]] = None
 
-    org_id: Optional[str] = None
+    source: Optional[
+        Literal[
+            "generic",
+            "generic_chat",
+            "generic_email",
+            "generic_transcript",
+            "generic_legal",
+            "website",
+            "slack",
+            "s3",
+            "gmail",
+            "notion",
+            "google_docs",
+        ]
+    ] = None
+
+    status: Optional[Literal["pending", "processing", "completed", "failed"]] = None
 
     title: Optional[str] = None
-
-    url: Optional[str] = None
-
-    user_id: Optional[str] = None
-
-    visibility: Optional[Literal["user", "org", "app", "system"]] = None

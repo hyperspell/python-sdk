@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-from typing import List, Union, Optional
+from typing import List, Union, Iterable
 from datetime import datetime
-from typing_extensions import Literal, Annotated, TypedDict
+from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
@@ -12,6 +12,9 @@ __all__ = ["DocumentListParams", "Filter"]
 
 
 class DocumentListParams(TypedDict, total=False):
+    collections: Required[Iterable[int]]
+    """The collections to filter documents by."""
+
     filter: Filter
     """Filter the query results."""
 
@@ -26,23 +29,25 @@ class Filter(TypedDict, total=False):
     chunk_type: List[Literal["text", "markdown", "table", "image", "messages", "message"]]
     """Only query chunks of these types."""
 
-    document_type: List[Literal["chat", "email", "generic", "transcript", "legal"]]
-    """Only query documents of these types."""
-
     end_date: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
     """Only query documents before this date."""
 
-    namespace: Optional[str]
-    """Only query documents in this namespace."""
-
-    org_id: Optional[str]
-    """Only query documents this organization has access to."""
-
-    provider: List[Literal["slack", "s3", "gmail", "notion", "google_docs", "api"]]
-    """Only query documents from these providers."""
+    source: List[
+        Literal[
+            "generic",
+            "generic_chat",
+            "generic_email",
+            "generic_transcript",
+            "generic_legal",
+            "website",
+            "slack",
+            "s3",
+            "gmail",
+            "notion",
+            "google_docs",
+        ]
+    ]
+    """Only query documents of these types."""
 
     start_date: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
     """Only query documents on or after this date."""
-
-    user_id: Optional[str]
-    """Only query documents that this user has access to."""

@@ -15,12 +15,9 @@ The REST API documentation can be found on [hyperspell.com](https://hyperspell.c
 ## Installation
 
 ```sh
-# install from this staging repo
-pip install git+ssh://git@github.com/stainless-sdks/hyperspell-python.git
+# install from PyPI
+pip install --pre hyperspell
 ```
-
-> [!NOTE]
-> Once this package is [published to PyPI](https://app.stainlessapi.com/docs/guides/publish), this will become: `pip install --pre hyperspell`
 
 ## Usage
 
@@ -31,8 +28,9 @@ from hyperspell import Hyperspell
 
 client = Hyperspell()
 
-response = client.ingest.add()
-print(response.document_id)
+query = client.query.retrieve(
+    query="query",
+)
 ```
 
 While you can provide a `bearer_token` keyword argument,
@@ -52,8 +50,9 @@ client = AsyncHyperspell()
 
 
 async def main() -> None:
-    response = await client.ingest.add()
-    print(response.document_id)
+    query = await client.query.retrieve(
+        query="query",
+    )
 
 
 asyncio.run(main())
@@ -86,7 +85,9 @@ from hyperspell import Hyperspell
 client = Hyperspell()
 
 try:
-    client.ingest.add()
+    client.query.retrieve(
+        query="query",
+    )
 except hyperspell.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx.
@@ -98,7 +99,7 @@ except hyperspell.APIStatusError as e:
     print(e.response)
 ```
 
-Error codes are as followed:
+Error codes are as follows:
 
 | Status Code | Error Type                 |
 | ----------- | -------------------------- |
@@ -129,7 +130,9 @@ client = Hyperspell(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).ingest.add()
+client.with_options(max_retries=5).query.retrieve(
+    query="query",
+)
 ```
 
 ### Timeouts
@@ -152,7 +155,9 @@ client = Hyperspell(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).ingest.add()
+client.with_options(timeout=5.0).query.retrieve(
+    query="query",
+)
 ```
 
 On timeout, an `APITimeoutError` is thrown.
@@ -193,16 +198,18 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from hyperspell import Hyperspell
 
 client = Hyperspell()
-response = client.ingest.with_raw_response.add()
+response = client.query.with_raw_response.retrieve(
+    query="query",
+)
 print(response.headers.get('X-My-Header'))
 
-ingest = response.parse()  # get the object that `ingest.add()` would have returned
-print(ingest.document_id)
+query = response.parse()  # get the object that `query.retrieve()` would have returned
+print(query)
 ```
 
-These methods return an [`APIResponse`](https://github.com/stainless-sdks/hyperspell-python/tree/main/src/hyperspell/_response.py) object.
+These methods return an [`APIResponse`](https://github.com/hyperspell/python-sdk/tree/main/src/hyperspell/_response.py) object.
 
-The async client returns an [`AsyncAPIResponse`](https://github.com/stainless-sdks/hyperspell-python/tree/main/src/hyperspell/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
+The async client returns an [`AsyncAPIResponse`](https://github.com/hyperspell/python-sdk/tree/main/src/hyperspell/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
 
 #### `.with_streaming_response`
 
@@ -211,7 +218,9 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.ingest.with_streaming_response.add() as response:
+with client.query.with_streaming_response.retrieve(
+    query="query",
+) as response:
     print(response.headers.get("X-My-Header"))
 
     for line in response.iter_lines():
@@ -229,8 +238,7 @@ If you need to access undocumented endpoints, params, or response properties, th
 #### Undocumented endpoints
 
 To make requests to undocumented endpoints, you can make requests using `client.get`, `client.post`, and other
-http verbs. Options on the client will be respected (such as retries) will be respected when making this
-request.
+http verbs. Options on the client will be respected (such as retries) when making this request.
 
 ```py
 import httpx
@@ -302,12 +310,12 @@ with Hyperspell() as client:
 This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions, though certain backwards-incompatible changes may be released as minor versions:
 
 1. Changes that only affect static types, without breaking runtime behavior.
-2. Changes to library internals which are technically public but not intended or documented for external use. _(Please open a GitHub issue to let us know if you are relying on such internals)_.
+2. Changes to library internals which are technically public but not intended or documented for external use. _(Please open a GitHub issue to let us know if you are relying on such internals.)_
 3. Changes that we do not expect to impact the vast majority of users in practice.
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/stainless-sdks/hyperspell-python/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/hyperspell/python-sdk/issues) with questions, bugs, or suggestions.
 
 ### Determining the installed version
 

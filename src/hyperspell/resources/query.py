@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import List
 from typing_extensions import Literal
 
 import httpx
@@ -29,10 +30,10 @@ class QueryResource(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> QueryResourceWithRawResponse:
         """
-        This property can be used as a prefix for any HTTP method call to return the
+        This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/hyperspell-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/hyperspell/python-sdk#accessing-raw-response-data-eg-headers
         """
         return QueryResourceWithRawResponse(self)
 
@@ -41,7 +42,7 @@ class QueryResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/hyperspell-python#with_streaming_response
+        For more information, see https://www.github.com/hyperspell/python-sdk#with_streaming_response
         """
         return QueryResourceWithStreamingResponse(self)
 
@@ -49,6 +50,7 @@ class QueryResource(SyncAPIResource):
         self,
         *,
         query: str,
+        collections: List[str] | NotGiven = NOT_GIVEN,
         filter: query_retrieve_params.Filter | NotGiven = NOT_GIVEN,
         max_results: int | NotGiven = NOT_GIVEN,
         query_type: Literal["auto", "semantic", "keyword"] | NotGiven = NOT_GIVEN,
@@ -64,6 +66,8 @@ class QueryResource(SyncAPIResource):
 
         Args:
           query: Query to run.
+
+          collections: Only query documents in these collections.
 
           filter: Filter the query results.
 
@@ -84,6 +88,7 @@ class QueryResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "query": query,
+                    "collections": collections,
                     "filter": filter,
                     "max_results": max_results,
                     "query_type": query_type,
@@ -101,10 +106,10 @@ class AsyncQueryResource(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncQueryResourceWithRawResponse:
         """
-        This property can be used as a prefix for any HTTP method call to return the
+        This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/hyperspell-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/hyperspell/python-sdk#accessing-raw-response-data-eg-headers
         """
         return AsyncQueryResourceWithRawResponse(self)
 
@@ -113,7 +118,7 @@ class AsyncQueryResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/hyperspell-python#with_streaming_response
+        For more information, see https://www.github.com/hyperspell/python-sdk#with_streaming_response
         """
         return AsyncQueryResourceWithStreamingResponse(self)
 
@@ -121,6 +126,7 @@ class AsyncQueryResource(AsyncAPIResource):
         self,
         *,
         query: str,
+        collections: List[str] | NotGiven = NOT_GIVEN,
         filter: query_retrieve_params.Filter | NotGiven = NOT_GIVEN,
         max_results: int | NotGiven = NOT_GIVEN,
         query_type: Literal["auto", "semantic", "keyword"] | NotGiven = NOT_GIVEN,
@@ -136,6 +142,8 @@ class AsyncQueryResource(AsyncAPIResource):
 
         Args:
           query: Query to run.
+
+          collections: Only query documents in these collections.
 
           filter: Filter the query results.
 
@@ -156,6 +164,7 @@ class AsyncQueryResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "query": query,
+                    "collections": collections,
                     "filter": filter,
                     "max_results": max_results,
                     "query_type": query_type,

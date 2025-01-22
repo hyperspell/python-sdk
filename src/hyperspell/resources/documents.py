@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Iterable
+
 import httpx
 
 from ..types import document_list_params
@@ -29,10 +31,10 @@ class DocumentsResource(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> DocumentsResourceWithRawResponse:
         """
-        This property can be used as a prefix for any HTTP method call to return the
+        This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/hyperspell-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/hyperspell/python-sdk#accessing-raw-response-data-eg-headers
         """
         return DocumentsResourceWithRawResponse(self)
 
@@ -41,13 +43,13 @@ class DocumentsResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/hyperspell-python#with_streaming_response
+        For more information, see https://www.github.com/hyperspell/python-sdk#with_streaming_response
         """
         return DocumentsResourceWithStreamingResponse(self)
 
     def retrieve(
         self,
-        document_id: str,
+        document_id: int,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -57,7 +59,7 @@ class DocumentsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> Document:
         """
-        Get a document by ID.
+        Retrieves a document by ID.
 
         Args:
           extra_headers: Send extra headers
@@ -68,8 +70,6 @@ class DocumentsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not document_id:
-            raise ValueError(f"Expected a non-empty value for `document_id` but received {document_id!r}")
         return self._get(
             f"/documents/get/{document_id}",
             options=make_request_options(
@@ -81,6 +81,7 @@ class DocumentsResource(SyncAPIResource):
     def list(
         self,
         *,
+        collections: Iterable[int],
         filter: document_list_params.Filter | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
         page: int | NotGiven = NOT_GIVEN,
@@ -91,10 +92,14 @@ class DocumentsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> DocumentListResponse:
-        """
-        List all documents in the index.
+        """This endpoint allows you to paginate through all documents in the index.
+
+        You can
+        filter the documents by title, date, metadata, etc.
 
         Args:
+          collections: The collections to filter documents by.
+
           filter: Filter the query results.
 
           limit: Number of documents to return per page.
@@ -113,6 +118,7 @@ class DocumentsResource(SyncAPIResource):
             "/documents/list",
             body=maybe_transform(
                 {
+                    "collections": collections,
                     "filter": filter,
                     "limit": limit,
                     "page": page,
@@ -130,10 +136,10 @@ class AsyncDocumentsResource(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncDocumentsResourceWithRawResponse:
         """
-        This property can be used as a prefix for any HTTP method call to return the
+        This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/hyperspell-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/hyperspell/python-sdk#accessing-raw-response-data-eg-headers
         """
         return AsyncDocumentsResourceWithRawResponse(self)
 
@@ -142,13 +148,13 @@ class AsyncDocumentsResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/hyperspell-python#with_streaming_response
+        For more information, see https://www.github.com/hyperspell/python-sdk#with_streaming_response
         """
         return AsyncDocumentsResourceWithStreamingResponse(self)
 
     async def retrieve(
         self,
-        document_id: str,
+        document_id: int,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -158,7 +164,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> Document:
         """
-        Get a document by ID.
+        Retrieves a document by ID.
 
         Args:
           extra_headers: Send extra headers
@@ -169,8 +175,6 @@ class AsyncDocumentsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not document_id:
-            raise ValueError(f"Expected a non-empty value for `document_id` but received {document_id!r}")
         return await self._get(
             f"/documents/get/{document_id}",
             options=make_request_options(
@@ -182,6 +186,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
     async def list(
         self,
         *,
+        collections: Iterable[int],
         filter: document_list_params.Filter | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
         page: int | NotGiven = NOT_GIVEN,
@@ -192,10 +197,14 @@ class AsyncDocumentsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> DocumentListResponse:
-        """
-        List all documents in the index.
+        """This endpoint allows you to paginate through all documents in the index.
+
+        You can
+        filter the documents by title, date, metadata, etc.
 
         Args:
+          collections: The collections to filter documents by.
+
           filter: Filter the query results.
 
           limit: Number of documents to return per page.
@@ -214,6 +223,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
             "/documents/list",
             body=await async_maybe_transform(
                 {
+                    "collections": collections,
                     "filter": filter,
                     "limit": limit,
                     "page": page,
