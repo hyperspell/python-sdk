@@ -6,15 +6,47 @@ from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["Document", "Section"]
+__all__ = ["Document", "Section", "SectionElement", "SectionElementMetadata"]
+
+
+class SectionElementMetadata(BaseModel):
+    author: Optional[str] = None
+
+    continued_from: Optional[str] = None
+    """
+    The id of the element that this element is continued from if it had to be split
+    during chunking
+    """
+
+    filename: Optional[str] = None
+
+    languages: Optional[List[str]] = None
+
+    links: Optional[List[str]] = None
+
+    page_number: Optional[int] = None
+
+    title_level: Optional[int] = None
+
+
+class SectionElement(BaseModel):
+    text: str
+
+    type: Literal["text", "markdown", "image", "table", "title"]
+
+    id: Optional[str] = None
+
+    metadata: Optional[SectionElementMetadata] = None
+
+    summary: Optional[str] = None
 
 
 class Section(BaseModel):
-    content: str
-
     document_id: int
 
     id: Optional[int] = None
+
+    elements: Optional[List[SectionElement]] = None
 
     embedding_e5_large: Optional[List[float]] = None
 
@@ -22,15 +54,9 @@ class Section(BaseModel):
 
     metadata: Optional[object] = None
 
-    type: Optional[Literal["text", "markdown", "table", "image", "messages", "message"]] = None
-    """Type of the section"""
-
 
 class Document(BaseModel):
     collection_id: int
-
-    resource_id: str
-    """Along with service, uniquely identifies the source document"""
 
     id: Optional[int] = None
 
@@ -40,6 +66,9 @@ class Document(BaseModel):
 
     metadata: Optional[object] = None
 
+    resource_id: Optional[str] = None
+    """Along with service, uniquely identifies the source document"""
+
     sections: Optional[List[Section]] = None
 
     sections_count: Optional[int] = None
@@ -47,11 +76,15 @@ class Document(BaseModel):
     source: Optional[
         Literal[
             "generic",
-            "generic_chat",
-            "generic_email",
-            "generic_transcript",
-            "generic_legal",
+            "markdown",
+            "chat",
+            "email",
+            "transcript",
+            "legal",
             "website",
+            "image",
+            "pdf",
+            "audio",
             "slack",
             "s3",
             "gmail",
