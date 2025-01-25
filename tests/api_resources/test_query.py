@@ -30,7 +30,6 @@ class TestQuery:
             query="query",
             collections=["string"],
             filter={
-                "chunk_type": ["text"],
                 "end_date": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "source": ["generic"],
                 "start_date": parse_datetime("2019-12-27T18:11:19.117Z"),
@@ -81,7 +80,6 @@ class TestAsyncQuery:
             query="query",
             collections=["string"],
             filter={
-                "chunk_type": ["text"],
                 "end_date": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "source": ["generic"],
                 "start_date": parse_datetime("2019-12-27T18:11:19.117Z"),
