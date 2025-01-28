@@ -31,6 +31,7 @@ client = Hyperspell()
 query = client.query.retrieve(
     query="query",
 )
+print(query.documents)
 ```
 
 While you can provide a `bearer_token` keyword argument,
@@ -53,6 +54,7 @@ async def main() -> None:
     query = await client.query.retrieve(
         query="query",
     )
+    print(query.documents)
 
 
 asyncio.run(main())
@@ -204,7 +206,7 @@ response = client.query.with_raw_response.retrieve(
 print(response.headers.get('X-My-Header'))
 
 query = response.parse()  # get the object that `query.retrieve()` would have returned
-print(query)
+print(query.documents)
 ```
 
 These methods return an [`APIResponse`](https://github.com/hyperspell/python-sdk/tree/main/src/hyperspell/_response.py) object.

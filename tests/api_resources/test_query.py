@@ -9,6 +9,7 @@ import pytest
 
 from hyperspell import Hyperspell, AsyncHyperspell
 from tests.utils import assert_matches_type
+from hyperspell.types import QueryRetrieveResponse
 from hyperspell._utils import parse_datetime
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -22,7 +23,7 @@ class TestQuery:
         query = client.query.retrieve(
             query="query",
         )
-        assert_matches_type(object, query, path=["response"])
+        assert_matches_type(QueryRetrieveResponse, query, path=["response"])
 
     @parametrize
     def test_method_retrieve_with_all_params(self, client: Hyperspell) -> None:
@@ -34,10 +35,11 @@ class TestQuery:
                 "source": ["generic"],
                 "start_date": parse_datetime("2019-12-27T18:11:19.117Z"),
             },
+            include_elements=True,
             max_results=0,
             query_type="auto",
         )
-        assert_matches_type(object, query, path=["response"])
+        assert_matches_type(QueryRetrieveResponse, query, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve(self, client: Hyperspell) -> None:
@@ -48,7 +50,7 @@ class TestQuery:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         query = response.parse()
-        assert_matches_type(object, query, path=["response"])
+        assert_matches_type(QueryRetrieveResponse, query, path=["response"])
 
     @parametrize
     def test_streaming_response_retrieve(self, client: Hyperspell) -> None:
@@ -59,7 +61,7 @@ class TestQuery:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             query = response.parse()
-            assert_matches_type(object, query, path=["response"])
+            assert_matches_type(QueryRetrieveResponse, query, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -72,7 +74,7 @@ class TestAsyncQuery:
         query = await async_client.query.retrieve(
             query="query",
         )
-        assert_matches_type(object, query, path=["response"])
+        assert_matches_type(QueryRetrieveResponse, query, path=["response"])
 
     @parametrize
     async def test_method_retrieve_with_all_params(self, async_client: AsyncHyperspell) -> None:
@@ -84,10 +86,11 @@ class TestAsyncQuery:
                 "source": ["generic"],
                 "start_date": parse_datetime("2019-12-27T18:11:19.117Z"),
             },
+            include_elements=True,
             max_results=0,
             query_type="auto",
         )
-        assert_matches_type(object, query, path=["response"])
+        assert_matches_type(QueryRetrieveResponse, query, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncHyperspell) -> None:
@@ -98,7 +101,7 @@ class TestAsyncQuery:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         query = await response.parse()
-        assert_matches_type(object, query, path=["response"])
+        assert_matches_type(QueryRetrieveResponse, query, path=["response"])
 
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncHyperspell) -> None:
@@ -109,6 +112,6 @@ class TestAsyncQuery:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             query = await response.parse()
-            assert_matches_type(object, query, path=["response"])
+            assert_matches_type(QueryRetrieveResponse, query, path=["response"])
 
         assert cast(Any, response.is_closed) is True
