@@ -8,7 +8,7 @@ from hyperspell.types import QueryRetrieveResponse
 
 Methods:
 
-- <code title="post /query">client.query.<a href="./src/hyperspell/resources/query.py">retrieve</a>(\*\*<a href="src/hyperspell/types/query_retrieve_params.py">params</a>) -> <a href="./src/hyperspell/types/query_retrieve_response.py">object</a></code>
+- <code title="post /query">client.query.<a href="./src/hyperspell/resources/query.py">retrieve</a>(\*\*<a href="src/hyperspell/types/query_retrieve_params.py">params</a>) -> <a href="./src/hyperspell/types/query_retrieve_response.py">QueryRetrieveResponse</a></code>
 
 # Documents
 

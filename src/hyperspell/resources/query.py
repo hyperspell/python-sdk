@@ -22,6 +22,7 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
+from ..types.query_retrieve_response import QueryRetrieveResponse
 
 __all__ = ["QueryResource", "AsyncQueryResource"]
 
@@ -52,6 +53,7 @@ class QueryResource(SyncAPIResource):
         query: str,
         collections: List[str] | NotGiven = NOT_GIVEN,
         filter: query_retrieve_params.Filter | NotGiven = NOT_GIVEN,
+        include_elements: bool | NotGiven = NOT_GIVEN,
         max_results: int | NotGiven = NOT_GIVEN,
         query_type: Literal["auto", "semantic", "keyword"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -60,7 +62,7 @@ class QueryResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> QueryRetrieveResponse:
         """
         Retrieves documents matching the query.
 
@@ -70,6 +72,8 @@ class QueryResource(SyncAPIResource):
           collections: Only query documents in these collections.
 
           filter: Filter the query results.
+
+          include_elements: Include the elements of a section in the results.
 
           max_results: Maximum number of results to return.
 
@@ -90,6 +94,7 @@ class QueryResource(SyncAPIResource):
                     "query": query,
                     "collections": collections,
                     "filter": filter,
+                    "include_elements": include_elements,
                     "max_results": max_results,
                     "query_type": query_type,
                 },
@@ -98,7 +103,7 @@ class QueryResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=QueryRetrieveResponse,
         )
 
 
@@ -128,6 +133,7 @@ class AsyncQueryResource(AsyncAPIResource):
         query: str,
         collections: List[str] | NotGiven = NOT_GIVEN,
         filter: query_retrieve_params.Filter | NotGiven = NOT_GIVEN,
+        include_elements: bool | NotGiven = NOT_GIVEN,
         max_results: int | NotGiven = NOT_GIVEN,
         query_type: Literal["auto", "semantic", "keyword"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -136,7 +142,7 @@ class AsyncQueryResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
+    ) -> QueryRetrieveResponse:
         """
         Retrieves documents matching the query.
 
@@ -146,6 +152,8 @@ class AsyncQueryResource(AsyncAPIResource):
           collections: Only query documents in these collections.
 
           filter: Filter the query results.
+
+          include_elements: Include the elements of a section in the results.
 
           max_results: Maximum number of results to return.
 
@@ -166,6 +174,7 @@ class AsyncQueryResource(AsyncAPIResource):
                     "query": query,
                     "collections": collections,
                     "filter": filter,
+                    "include_elements": include_elements,
                     "max_results": max_results,
                     "query_type": query_type,
                 },
@@ -174,7 +183,7 @@ class AsyncQueryResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=QueryRetrieveResponse,
         )
 
 

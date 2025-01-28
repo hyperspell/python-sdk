@@ -6,10 +6,16 @@ from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["Document", "Section", "SectionElement", "SectionElementMetadata"]
+__all__ = [
+    "QueryRetrieveResponse",
+    "Document",
+    "DocumentSection",
+    "DocumentSectionElement",
+    "DocumentSectionElementMetadata",
+]
 
 
-class SectionElementMetadata(BaseModel):
+class DocumentSectionElementMetadata(BaseModel):
     author: Optional[str] = None
 
     continued_from: Optional[str] = None
@@ -29,24 +35,24 @@ class SectionElementMetadata(BaseModel):
     title_level: Optional[int] = None
 
 
-class SectionElement(BaseModel):
+class DocumentSectionElement(BaseModel):
     text: str
 
     type: Literal["text", "markdown", "image", "table", "title"]
 
     id: Optional[str] = None
 
-    metadata: Optional[SectionElementMetadata] = None
+    metadata: Optional[DocumentSectionElementMetadata] = None
 
     summary: Optional[str] = None
 
 
-class Section(BaseModel):
+class DocumentSection(BaseModel):
     document_id: int
 
     id: Optional[int] = None
 
-    elements: Optional[List[SectionElement]] = None
+    elements: Optional[List[DocumentSectionElement]] = None
 
     embedding_e5_large: Optional[List[float]] = None
 
@@ -58,22 +64,21 @@ class Section(BaseModel):
 
 
 class Document(BaseModel):
-    collection_id: int
-
     id: Optional[int] = None
+
+    collection: str
 
     created_at: Optional[datetime] = None
 
     ingested_at: Optional[datetime] = None
 
-    metadata: Optional[object] = None
+    metadata: object
 
-    resource_id: Optional[str] = None
-    """Along with service, uniquely identifies the source document"""
+    resource_id: str
 
-    sections: Optional[List[Section]] = None
+    title: Optional[str] = None
 
-    sections_count: Optional[int] = None
+    sections: Optional[List[DocumentSection]] = None
 
     source: Optional[
         Literal[
@@ -97,4 +102,8 @@ class Document(BaseModel):
 
     status: Optional[Literal["pending", "processing", "completed", "failed"]] = None
 
-    title: Optional[str] = None
+
+class QueryRetrieveResponse(BaseModel):
+    documents: List[Document]
+
+    total_sections: int
