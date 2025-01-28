@@ -21,6 +21,9 @@ class QueryRetrieveParams(TypedDict, total=False):
     filter: Filter
     """Filter the query results."""
 
+    include_elements: bool
+    """Include the elements of a section in the results."""
+
     max_results: int
     """Maximum number of results to return."""
 
