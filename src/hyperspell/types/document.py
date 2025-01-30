@@ -6,7 +6,7 @@ from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["Document", "Section", "SectionElement", "SectionElementMetadata"]
+__all__ = ["Document", "Section", "SectionElement", "SectionElementMetadata", "SectionScores"]
 
 
 class SectionElementMetadata(BaseModel):
@@ -32,13 +32,24 @@ class SectionElementMetadata(BaseModel):
 class SectionElement(BaseModel):
     text: str
 
-    type: Literal["text", "markdown", "image", "table", "title"]
+    type: Literal["text", "markdown", "image", "table", "title", "query"]
 
     id: Optional[str] = None
 
     metadata: Optional[SectionElementMetadata] = None
 
     summary: Optional[str] = None
+
+
+class SectionScores(BaseModel):
+    full_text_search: Optional[float] = None
+    """How relevant the section is based on full text search"""
+
+    semantic_search: Optional[float] = None
+    """How relevant the section is based on vector search"""
+
+    weighted: Optional[float] = None
+    """The final weighted score of the section"""
 
 
 class Section(BaseModel):
@@ -50,9 +61,11 @@ class Section(BaseModel):
 
     embedding_e5_large: Optional[List[float]] = None
 
-    fts: Optional[List[float]] = None
+    embedding_ts: Optional[str] = None
 
     metadata: Optional[object] = None
+
+    scores: Optional[SectionScores] = None
 
     text: Optional[str] = None
 
