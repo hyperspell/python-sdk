@@ -12,6 +12,7 @@ __all__ = [
     "DocumentSection",
     "DocumentSectionElement",
     "DocumentSectionElementMetadata",
+    "DocumentSectionScores",
 ]
 
 
@@ -38,13 +39,24 @@ class DocumentSectionElementMetadata(BaseModel):
 class DocumentSectionElement(BaseModel):
     text: str
 
-    type: Literal["text", "markdown", "image", "table", "title"]
+    type: Literal["text", "markdown", "image", "table", "title", "query"]
 
     id: Optional[str] = None
 
     metadata: Optional[DocumentSectionElementMetadata] = None
 
     summary: Optional[str] = None
+
+
+class DocumentSectionScores(BaseModel):
+    full_text_search: Optional[float] = None
+    """How relevant the section is based on full text search"""
+
+    semantic_search: Optional[float] = None
+    """How relevant the section is based on vector search"""
+
+    weighted: Optional[float] = None
+    """The final weighted score of the section"""
 
 
 class DocumentSection(BaseModel):
@@ -56,9 +68,11 @@ class DocumentSection(BaseModel):
 
     embedding_e5_large: Optional[List[float]] = None
 
-    fts: Optional[List[float]] = None
+    embedding_ts: Optional[str] = None
 
     metadata: Optional[object] = None
+
+    scores: Optional[DocumentSectionScores] = None
 
     text: Optional[str] = None
 
