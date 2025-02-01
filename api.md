@@ -15,9 +15,9 @@ Methods:
 Types:
 
 ```python
-from hyperspell.types import Document
+from hyperspell.types import DocumentRetrieveResponse
 ```
 
 Methods:
 
-- <code title="get /documents/get/{document_id}">client.documents.<a href="./src/hyperspell/resources/documents.py">retrieve</a>(document_id) -> <a href="./src/hyperspell/types/document.py">Document</a></code>
+- <code title="get /documents/get/{document_id}">client.documents.<a href="./src/hyperspell/resources/documents.py">retrieve</a>(document_id) -> <a href="./src/hyperspell/types/document_retrieve_response.py">DocumentRetrieveResponse</a></code>

@@ -9,7 +9,7 @@ import pytest
 
 from hyperspell import Hyperspell, AsyncHyperspell
 from tests.utils import assert_matches_type
-from hyperspell.types import Document
+from hyperspell.types import DocumentRetrieveResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -22,7 +22,7 @@ class TestDocuments:
         document = client.documents.retrieve(
             0,
         )
-        assert_matches_type(Document, document, path=["response"])
+        assert_matches_type(DocumentRetrieveResponse, document, path=["response"])
 
     @parametrize
     def test_raw_response_retrieve(self, client: Hyperspell) -> None:
@@ -33,7 +33,7 @@ class TestDocuments:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         document = response.parse()
-        assert_matches_type(Document, document, path=["response"])
+        assert_matches_type(DocumentRetrieveResponse, document, path=["response"])
 
     @parametrize
     def test_streaming_response_retrieve(self, client: Hyperspell) -> None:
@@ -44,7 +44,7 @@ class TestDocuments:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             document = response.parse()
-            assert_matches_type(Document, document, path=["response"])
+            assert_matches_type(DocumentRetrieveResponse, document, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -57,7 +57,7 @@ class TestAsyncDocuments:
         document = await async_client.documents.retrieve(
             0,
         )
-        assert_matches_type(Document, document, path=["response"])
+        assert_matches_type(DocumentRetrieveResponse, document, path=["response"])
 
     @parametrize
     async def test_raw_response_retrieve(self, async_client: AsyncHyperspell) -> None:
@@ -68,7 +68,7 @@ class TestAsyncDocuments:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         document = await response.parse()
-        assert_matches_type(Document, document, path=["response"])
+        assert_matches_type(DocumentRetrieveResponse, document, path=["response"])
 
     @parametrize
     async def test_streaming_response_retrieve(self, async_client: AsyncHyperspell) -> None:
@@ -79,6 +79,6 @@ class TestAsyncDocuments:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             document = await response.parse()
-            assert_matches_type(Document, document, path=["response"])
+            assert_matches_type(DocumentRetrieveResponse, document, path=["response"])
 
         assert cast(Any, response.is_closed) is True
