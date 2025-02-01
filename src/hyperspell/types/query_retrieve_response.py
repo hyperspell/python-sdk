@@ -1,8 +1,8 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import List, Union, Optional
 from datetime import datetime
-from typing_extensions import Literal
+from typing_extensions import Literal, TypeAlias
 
 from .._models import BaseModel
 
@@ -10,13 +10,35 @@ __all__ = [
     "QueryRetrieveResponse",
     "Document",
     "DocumentSection",
-    "DocumentSectionElement",
-    "DocumentSectionElementMetadata",
-    "DocumentSectionScores",
+    "DocumentSectionSectionResult",
+    "DocumentSectionSectionResultScores",
+    "DocumentSectionSectionResultWithElements",
+    "DocumentSectionSectionResultWithElementsElement",
+    "DocumentSectionSectionResultWithElementsElementMetadata",
+    "DocumentSectionSectionResultWithElementsScores",
 ]
 
 
-class DocumentSectionElementMetadata(BaseModel):
+class DocumentSectionSectionResultScores(BaseModel):
+    full_text_search: Optional[float] = None
+    """How relevant the section is based on full text search"""
+
+    semantic_search: Optional[float] = None
+    """How relevant the section is based on vector search"""
+
+    weighted: Optional[float] = None
+    """The final weighted score of the section"""
+
+
+class DocumentSectionSectionResult(BaseModel):
+    id: Optional[int] = None
+
+    scores: Optional[DocumentSectionSectionResultScores] = None
+
+    text: Optional[str] = None
+
+
+class DocumentSectionSectionResultWithElementsElementMetadata(BaseModel):
     author: Optional[str] = None
 
     continued_from: Optional[str] = None
@@ -36,19 +58,19 @@ class DocumentSectionElementMetadata(BaseModel):
     title_level: Optional[int] = None
 
 
-class DocumentSectionElement(BaseModel):
+class DocumentSectionSectionResultWithElementsElement(BaseModel):
     text: str
 
     type: Literal["text", "markdown", "image", "table", "title", "query"]
 
     id: Optional[str] = None
 
-    metadata: Optional[DocumentSectionElementMetadata] = None
+    metadata: Optional[DocumentSectionSectionResultWithElementsElementMetadata] = None
 
     summary: Optional[str] = None
 
 
-class DocumentSectionScores(BaseModel):
+class DocumentSectionSectionResultWithElementsScores(BaseModel):
     full_text_search: Optional[float] = None
     """How relevant the section is based on full text search"""
 
@@ -59,22 +81,17 @@ class DocumentSectionScores(BaseModel):
     """The final weighted score of the section"""
 
 
-class DocumentSection(BaseModel):
-    document_id: int
-
+class DocumentSectionSectionResultWithElements(BaseModel):
     id: Optional[int] = None
 
-    elements: Optional[List[DocumentSectionElement]] = None
+    elements: Optional[List[DocumentSectionSectionResultWithElementsElement]] = None
 
-    embedding_e5_large: Optional[List[float]] = None
-
-    embedding_ts: Optional[str] = None
-
-    metadata: Optional[object] = None
-
-    scores: Optional[DocumentSectionScores] = None
+    scores: Optional[DocumentSectionSectionResultWithElementsScores] = None
 
     text: Optional[str] = None
+
+
+DocumentSection: TypeAlias = Union[DocumentSectionSectionResult, DocumentSectionSectionResultWithElements]
 
 
 class Document(BaseModel):
