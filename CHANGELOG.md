@@ -1,5 +1,26 @@
 # Changelog
 
+## 1.0.0 (2025-02-04)
+
+Full Changelog: [v0.1.0-alpha.1...v1.0.0](https://github.com/hyperspell/python-sdk/compare/v0.1.0-alpha.1...v1.0.0)
+
+### Features
+
+* **api:** api update ([#23](https://github.com/hyperspell/python-sdk/issues/23)) ([83dcd1d](https://github.com/hyperspell/python-sdk/commit/83dcd1d6bdd291e299330d532e974ab4e534c06d))
+* **api:** api update ([#25](https://github.com/hyperspell/python-sdk/issues/25)) ([26170a5](https://github.com/hyperspell/python-sdk/commit/26170a5f86b9ed0dcbdd6cc01708a3a1a8a161b7))
+* **api:** api update ([#28](https://github.com/hyperspell/python-sdk/issues/28)) ([72667ce](https://github.com/hyperspell/python-sdk/commit/72667cec5a0c172460551b0cce48aa667e88b99a))
+* **api:** api update ([#29](https://github.com/hyperspell/python-sdk/issues/29)) ([e2312ba](https://github.com/hyperspell/python-sdk/commit/e2312bac25802f12f99f762d1e8e0cd7693dcf23))
+* **api:** api update ([#30](https://github.com/hyperspell/python-sdk/issues/30)) ([08bae2f](https://github.com/hyperspell/python-sdk/commit/08bae2f240c913ffae8a6594877f4c78789f20f0))
+* **api:** api update ([#31](https://github.com/hyperspell/python-sdk/issues/31)) ([a245e70](https://github.com/hyperspell/python-sdk/commit/a245e70aea6c76a5bdf45685ccb02edf271ab25b))
+* **api:** update via SDK Studio ([#32](https://github.com/hyperspell/python-sdk/issues/32)) ([f8f7ad1](https://github.com/hyperspell/python-sdk/commit/f8f7ad136e37e084d5f3b8379d8e58bb04b85f2b))
+* **api:** update via SDK Studio ([#33](https://github.com/hyperspell/python-sdk/issues/33)) ([d8aad38](https://github.com/hyperspell/python-sdk/commit/d8aad387e9a44b98f8fb1e2a0564e400203649d7))
+
+
+### Chores
+
+* **internal:** codegen related update ([#26](https://github.com/hyperspell/python-sdk/issues/26)) ([f6008b9](https://github.com/hyperspell/python-sdk/commit/f6008b93caaecd5b28e50c84dc908d820a0f222b))
+* **internal:** minor formatting changes ([#27](https://github.com/hyperspell/python-sdk/issues/27)) ([b58a9f0](https://github.com/hyperspell/python-sdk/commit/b58a9f01edc5f9918f7a29fa81f1a8a1ae93bdfa))
+
 ## 0.1.0-alpha.1 (2025-01-21)
 
 Full Changelog: [v0.0.1-alpha.0...v0.1.0-alpha.1](https://github.com/hyperspell/python-sdk/compare/v0.0.1-alpha.0...v0.1.0-alpha.1)
