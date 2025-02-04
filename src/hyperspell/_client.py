@@ -13,6 +13,7 @@ from ._qs import Querystring
 from ._types import (
     NOT_GIVEN,
     Omit,
+    Headers,
     Timeout,
     NotGiven,
     Transport,
@@ -24,9 +25,9 @@ from ._utils import (
     get_async_library,
 )
 from ._version import __version__
-from .resources import query, documents
+from .resources import auth, query, documents, collections
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
-from ._exceptions import APIStatusError, HyperspellError
+from ._exceptions import APIStatusError
 from ._base_client import (
     DEFAULT_MAX_RETRIES,
     SyncAPIClient,
@@ -46,18 +47,20 @@ __all__ = [
 
 
 class Hyperspell(SyncAPIClient):
-    query: query.QueryResource
     documents: documents.DocumentsResource
+    collections: collections.CollectionsResource
+    query: query.QueryResource
+    auth: auth.AuthResource
     with_raw_response: HyperspellWithRawResponse
     with_streaming_response: HyperspellWithStreamedResponse
 
     # client options
-    bearer_token: str
+    api_key: str | None
 
     def __init__(
         self,
         *,
-        bearer_token: str | None = None,
+        api_key: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
@@ -79,20 +82,16 @@ class Hyperspell(SyncAPIClient):
     ) -> None:
         """Construct a new synchronous hyperspell client instance.
 
-        This automatically infers the `bearer_token` argument from the `BEARER_TOKEN` environment variable if it is not provided.
+        This automatically infers the `api_key` argument from the `HYPERSPELL_API_KEY` environment variable if it is not provided.
         """
-        if bearer_token is None:
-            bearer_token = os.environ.get("BEARER_TOKEN")
-        if bearer_token is None:
-            raise HyperspellError(
-                "The bearer_token client option must be set either by passing bearer_token to the client or by setting the BEARER_TOKEN environment variable"
-            )
-        self.bearer_token = bearer_token
+        if api_key is None:
+            api_key = os.environ.get("HYPERSPELL_API_KEY")
+        self.api_key = api_key
 
         if base_url is None:
             base_url = os.environ.get("HYPERSPELL_BASE_URL")
         if base_url is None:
-            base_url = f"https://localhost:8080/test-api"
+            base_url = f"https://api.hyperspell.com"
 
         super().__init__(
             version=__version__,
@@ -105,8 +104,10 @@ class Hyperspell(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.query = query.QueryResource(self)
         self.documents = documents.DocumentsResource(self)
+        self.collections = collections.CollectionsResource(self)
+        self.query = query.QueryResource(self)
+        self.auth = auth.AuthResource(self)
         self.with_raw_response = HyperspellWithRawResponse(self)
         self.with_streaming_response = HyperspellWithStreamedResponse(self)
 
@@ -118,8 +119,10 @@ class Hyperspell(SyncAPIClient):
     @property
     @override
     def auth_headers(self) -> dict[str, str]:
-        bearer_token = self.bearer_token
-        return {"Authorization": f"Bearer {bearer_token}"}
+        api_key = self.api_key
+        if api_key is None:
+            return {}
+        return {"Authorization": f"Bearer {api_key}"}
 
     @property
     @override
@@ -130,10 +133,21 @@ class Hyperspell(SyncAPIClient):
             **self._custom_headers,
         }
 
+    @override
+    def _validate_headers(self, headers: Headers, custom_headers: Headers) -> None:
+        if self.api_key and headers.get("Authorization"):
+            return
+        if isinstance(custom_headers.get("Authorization"), Omit):
+            return
+
+        raise TypeError(
+            '"Could not resolve authentication method. Expected the api_key to be set. Or for the `Authorization` headers to be explicitly omitted"'
+        )
+
     def copy(
         self,
         *,
-        bearer_token: str | None = None,
+        api_key: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
         http_client: httpx.Client | None = None,
@@ -167,7 +181,7 @@ class Hyperspell(SyncAPIClient):
 
         http_client = http_client or self._client
         return self.__class__(
-            bearer_token=bearer_token or self.bearer_token,
+            api_key=api_key or self.api_key,
             base_url=base_url or self.base_url,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
@@ -216,18 +230,20 @@ class Hyperspell(SyncAPIClient):
 
 
 class AsyncHyperspell(AsyncAPIClient):
-    query: query.AsyncQueryResource
     documents: documents.AsyncDocumentsResource
+    collections: collections.AsyncCollectionsResource
+    query: query.AsyncQueryResource
+    auth: auth.AsyncAuthResource
     with_raw_response: AsyncHyperspellWithRawResponse
     with_streaming_response: AsyncHyperspellWithStreamedResponse
 
     # client options
-    bearer_token: str
+    api_key: str | None
 
     def __init__(
         self,
         *,
-        bearer_token: str | None = None,
+        api_key: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
@@ -249,20 +265,16 @@ class AsyncHyperspell(AsyncAPIClient):
     ) -> None:
         """Construct a new async hyperspell client instance.
 
-        This automatically infers the `bearer_token` argument from the `BEARER_TOKEN` environment variable if it is not provided.
+        This automatically infers the `api_key` argument from the `HYPERSPELL_API_KEY` environment variable if it is not provided.
         """
-        if bearer_token is None:
-            bearer_token = os.environ.get("BEARER_TOKEN")
-        if bearer_token is None:
-            raise HyperspellError(
-                "The bearer_token client option must be set either by passing bearer_token to the client or by setting the BEARER_TOKEN environment variable"
-            )
-        self.bearer_token = bearer_token
+        if api_key is None:
+            api_key = os.environ.get("HYPERSPELL_API_KEY")
+        self.api_key = api_key
 
         if base_url is None:
             base_url = os.environ.get("HYPERSPELL_BASE_URL")
         if base_url is None:
-            base_url = f"https://localhost:8080/test-api"
+            base_url = f"https://api.hyperspell.com"
 
         super().__init__(
             version=__version__,
@@ -275,8 +287,10 @@ class AsyncHyperspell(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.query = query.AsyncQueryResource(self)
         self.documents = documents.AsyncDocumentsResource(self)
+        self.collections = collections.AsyncCollectionsResource(self)
+        self.query = query.AsyncQueryResource(self)
+        self.auth = auth.AsyncAuthResource(self)
         self.with_raw_response = AsyncHyperspellWithRawResponse(self)
         self.with_streaming_response = AsyncHyperspellWithStreamedResponse(self)
 
@@ -288,8 +302,10 @@ class AsyncHyperspell(AsyncAPIClient):
     @property
     @override
     def auth_headers(self) -> dict[str, str]:
-        bearer_token = self.bearer_token
-        return {"Authorization": f"Bearer {bearer_token}"}
+        api_key = self.api_key
+        if api_key is None:
+            return {}
+        return {"Authorization": f"Bearer {api_key}"}
 
     @property
     @override
@@ -300,10 +316,21 @@ class AsyncHyperspell(AsyncAPIClient):
             **self._custom_headers,
         }
 
+    @override
+    def _validate_headers(self, headers: Headers, custom_headers: Headers) -> None:
+        if self.api_key and headers.get("Authorization"):
+            return
+        if isinstance(custom_headers.get("Authorization"), Omit):
+            return
+
+        raise TypeError(
+            '"Could not resolve authentication method. Expected the api_key to be set. Or for the `Authorization` headers to be explicitly omitted"'
+        )
+
     def copy(
         self,
         *,
-        bearer_token: str | None = None,
+        api_key: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
         http_client: httpx.AsyncClient | None = None,
@@ -337,7 +364,7 @@ class AsyncHyperspell(AsyncAPIClient):
 
         http_client = http_client or self._client
         return self.__class__(
-            bearer_token=bearer_token or self.bearer_token,
+            api_key=api_key or self.api_key,
             base_url=base_url or self.base_url,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
@@ -387,26 +414,34 @@ class AsyncHyperspell(AsyncAPIClient):
 
 class HyperspellWithRawResponse:
     def __init__(self, client: Hyperspell) -> None:
-        self.query = query.QueryResourceWithRawResponse(client.query)
         self.documents = documents.DocumentsResourceWithRawResponse(client.documents)
+        self.collections = collections.CollectionsResourceWithRawResponse(client.collections)
+        self.query = query.QueryResourceWithRawResponse(client.query)
+        self.auth = auth.AuthResourceWithRawResponse(client.auth)
 
 
 class AsyncHyperspellWithRawResponse:
     def __init__(self, client: AsyncHyperspell) -> None:
-        self.query = query.AsyncQueryResourceWithRawResponse(client.query)
         self.documents = documents.AsyncDocumentsResourceWithRawResponse(client.documents)
+        self.collections = collections.AsyncCollectionsResourceWithRawResponse(client.collections)
+        self.query = query.AsyncQueryResourceWithRawResponse(client.query)
+        self.auth = auth.AsyncAuthResourceWithRawResponse(client.auth)
 
 
 class HyperspellWithStreamedResponse:
     def __init__(self, client: Hyperspell) -> None:
-        self.query = query.QueryResourceWithStreamingResponse(client.query)
         self.documents = documents.DocumentsResourceWithStreamingResponse(client.documents)
+        self.collections = collections.CollectionsResourceWithStreamingResponse(client.collections)
+        self.query = query.QueryResourceWithStreamingResponse(client.query)
+        self.auth = auth.AuthResourceWithStreamingResponse(client.auth)
 
 
 class AsyncHyperspellWithStreamedResponse:
     def __init__(self, client: AsyncHyperspell) -> None:
-        self.query = query.AsyncQueryResourceWithStreamingResponse(client.query)
         self.documents = documents.AsyncDocumentsResourceWithStreamingResponse(client.documents)
+        self.collections = collections.AsyncCollectionsResourceWithStreamingResponse(client.collections)
+        self.query = query.AsyncQueryResourceWithStreamingResponse(client.query)
+        self.auth = auth.AsyncAuthResourceWithStreamingResponse(client.auth)
 
 
 Client = Hyperspell

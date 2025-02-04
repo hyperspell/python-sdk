@@ -3,14 +3,12 @@
 from __future__ import annotations
 
 from typing import Optional
-from typing_extensions import Required, TypedDict
+from typing_extensions import TypedDict
 
-__all__ = ["DocumentListParams"]
+__all__ = ["CollectionListParams"]
 
 
-class DocumentListParams(TypedDict, total=False):
-    collection: Required[str]
-
+class CollectionListParams(TypedDict, total=False):
     cursor: Optional[str]
 
     size: int

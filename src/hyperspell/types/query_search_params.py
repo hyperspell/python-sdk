@@ -8,10 +8,10 @@ from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
-__all__ = ["QueryRetrieveParams", "Filter"]
+__all__ = ["QuerySearchParams", "Filter"]
 
 
-class QueryRetrieveParams(TypedDict, total=False):
+class QuerySearchParams(TypedDict, total=False):
     query: Required[str]
     """Query to run."""
 
@@ -21,6 +21,9 @@ class QueryRetrieveParams(TypedDict, total=False):
     filter: Filter
     """Filter the query results."""
 
+    include_elements: bool
+    """Include the elements of a section in the results."""
+
     max_results: int
     """Maximum number of results to return."""
 
@@ -29,20 +32,21 @@ class QueryRetrieveParams(TypedDict, total=False):
 
 
 class Filter(TypedDict, total=False):
-    chunk_type: List[Literal["text", "markdown", "table", "image", "messages", "message"]]
-    """Only query chunks of these types."""
-
     end_date: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
     """Only query documents before this date."""
 
     source: List[
         Literal[
             "generic",
-            "generic_chat",
-            "generic_email",
-            "generic_transcript",
-            "generic_legal",
+            "markdown",
+            "chat",
+            "email",
+            "transcript",
+            "legal",
             "website",
+            "image",
+            "pdf",
+            "audio",
             "slack",
             "s3",
             "gmail",

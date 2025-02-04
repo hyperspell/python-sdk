@@ -1,18 +1,47 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List
+from typing import Optional
+from datetime import datetime
+from typing_extensions import Literal
 
 from .._models import BaseModel
-from .document import Document
 
 __all__ = ["DocumentListResponse"]
 
 
 class DocumentListResponse(BaseModel):
-    count: int
+    id: Optional[int] = None
 
-    documents: List[Document]
+    created_at: Optional[datetime] = None
 
-    has_more: bool
+    ingested_at: Optional[datetime] = None
 
-    page: int
+    metadata: object
+
+    resource_id: str
+
+    sections_count: Optional[int] = None
+
+    title: Optional[str] = None
+
+    source: Optional[
+        Literal[
+            "generic",
+            "markdown",
+            "chat",
+            "email",
+            "transcript",
+            "legal",
+            "website",
+            "image",
+            "pdf",
+            "audio",
+            "slack",
+            "s3",
+            "gmail",
+            "notion",
+            "google_docs",
+        ]
+    ] = None
+
+    status: Optional[Literal["pending", "processing", "completed", "failed"]] = None
