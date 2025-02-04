@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.5.3 (2025-02-04)
+
+Full Changelog: [v1.0.0...v0.5.3](https://github.com/hyperspell/python-sdk/compare/v1.0.0...v0.5.3)
+
+### Features
+
+* **api:** api update ([#38](https://github.com/hyperspell/python-sdk/issues/38)) ([fd5a6d5](https://github.com/hyperspell/python-sdk/commit/fd5a6d5ba2b090d5cea1e70bf73d1674209c5907))
+* **api:** api update ([#39](https://github.com/hyperspell/python-sdk/issues/39)) ([5aaf7cd](https://github.com/hyperspell/python-sdk/commit/5aaf7cd7208f1fef5edfeab8324ad6e977fae517))
+
+
+### Chores
+
+* **internal:** bummp ruff dependency ([#37](https://github.com/hyperspell/python-sdk/issues/37)) ([cef604a](https://github.com/hyperspell/python-sdk/commit/cef604afecf30df7c584bb70ce4fa61ace9d4742))
+* **internal:** change default timeout to an int ([#35](https://github.com/hyperspell/python-sdk/issues/35)) ([f192b6f](https://github.com/hyperspell/python-sdk/commit/f192b6fdf340bfeb9e1853c752df0244841ab8c9))
+
 ## 1.0.0 (2025-02-04)
 
 Full Changelog: [v0.1.0-alpha.1...v1.0.0](https://github.com/hyperspell/python-sdk/compare/v0.1.0-alpha.1...v1.0.0)
