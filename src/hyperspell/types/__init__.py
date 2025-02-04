@@ -12,6 +12,8 @@ from .document_list_params import DocumentListParams as DocumentListParams
 from .query_search_response import QuerySearchResponse as QuerySearchResponse
 from .auth_user_token_params import AuthUserTokenParams as AuthUserTokenParams
 from .collection_list_params import CollectionListParams as CollectionListParams
+from .document_list_response import DocumentListResponse as DocumentListResponse
 from .document_upload_params import DocumentUploadParams as DocumentUploadParams
 from .document_add_url_params import DocumentAddURLParams as DocumentAddURLParams
 from .collection_create_params import CollectionCreateParams as CollectionCreateParams
+from .collection_list_response import CollectionListResponse as CollectionListResponse
