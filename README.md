@@ -10,7 +10,7 @@ It is generated with [Stainless](https://www.stainlessapi.com/).
 
 ## Documentation
 
-The REST API documentation can be found on [hyperspell.com](https://hyperspell.com/). The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found on [docs.hyperspell.com](https://docs.hyperspell.com/). The full API of this library can be found in [api.md](api.md).
 
 ## Installation
 
@@ -24,37 +24,45 @@ pip install --pre hyperspell
 The full API of this library can be found in [api.md](api.md).
 
 ```python
+import os
 from hyperspell import Hyperspell
 
-client = Hyperspell()
-
-query = client.query.retrieve(
-    query="query",
+client = Hyperspell(
+    api_key=os.environ.get("HYPERSPELL_API_KEY"),  # This is the default and can be omitted
 )
-print(query.documents)
+
+response = client.documents.add(
+    collection="collection",
+    text="text",
+)
+print(response.id)
 ```
 
-While you can provide a `bearer_token` keyword argument,
+While you can provide an `api_key` keyword argument,
 we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
-to add `BEARER_TOKEN="My Bearer Token"` to your `.env` file
-so that your Bearer Token is not stored in source control.
+to add `HYPERSPELL_API_KEY="My API Key"` to your `.env` file
+so that your API Key is not stored in source control.
 
 ## Async usage
 
 Simply import `AsyncHyperspell` instead of `Hyperspell` and use `await` with each API call:
 
 ```python
+import os
 import asyncio
 from hyperspell import AsyncHyperspell
 
-client = AsyncHyperspell()
+client = AsyncHyperspell(
+    api_key=os.environ.get("HYPERSPELL_API_KEY"),  # This is the default and can be omitted
+)
 
 
 async def main() -> None:
-    query = await client.query.retrieve(
-        query="query",
+    response = await client.documents.add(
+        collection="collection",
+        text="text",
     )
-    print(query.documents)
+    print(response.id)
 
 
 asyncio.run(main())
@@ -70,6 +78,77 @@ Nested request parameters are [TypedDicts](https://docs.python.org/3/library/typ
 - Converting to a dictionary, `model.to_dict()`
 
 Typed requests and responses provide autocomplete and documentation within your editor. If you would like to see type errors in VS Code to help catch bugs earlier, set `python.analysis.typeCheckingMode` to `basic`.
+
+## Pagination
+
+List methods in the Hyperspell API are paginated.
+
+This library provides auto-paginating iterators with each list response, so you do not have to request successive pages manually:
+
+```python
+from hyperspell import Hyperspell
+
+client = Hyperspell()
+
+all_documents = []
+# Automatically fetches more pages as needed.
+for document in client.documents.list(
+    collection="REPLACE_ME",
+):
+    # Do something with document here
+    all_documents.append(document)
+print(all_documents)
+```
+
+Or, asynchronously:
+
+```python
+import asyncio
+from hyperspell import AsyncHyperspell
+
+client = AsyncHyperspell()
+
+
+async def main() -> None:
+    all_documents = []
+    # Iterate through items across all pages, issuing requests as needed.
+    async for document in client.documents.list(
+        collection="REPLACE_ME",
+    ):
+        all_documents.append(document)
+    print(all_documents)
+
+
+asyncio.run(main())
+```
+
+Alternatively, you can use the `.has_next_page()`, `.next_page_info()`, or `.get_next_page()` methods for more granular control working with pages:
+
+```python
+first_page = await client.documents.list(
+    collection="REPLACE_ME",
+)
+if first_page.has_next_page():
+    print(f"will fetch next page using these details: {first_page.next_page_info()}")
+    next_page = await first_page.get_next_page()
+    print(f"number of items we just fetched: {len(next_page.items)}")
+
+# Remove `await` for non-async usage.
+```
+
+Or just work directly with the returned data:
+
+```python
+first_page = await client.documents.list(
+    collection="REPLACE_ME",
+)
+
+print(f"next page cursor: {first_page.next_cursor}")  # => "next page cursor: ..."
+for document in first_page.items:
+    print(document.id)
+
+# Remove `await` for non-async usage.
+```
 
 ## Handling errors
 
@@ -87,8 +166,9 @@ from hyperspell import Hyperspell
 client = Hyperspell()
 
 try:
-    client.query.retrieve(
-        query="query",
+    client.documents.add(
+        collection="collection",
+        text="text",
     )
 except hyperspell.APIConnectionError as e:
     print("The server could not be reached")
@@ -132,8 +212,9 @@ client = Hyperspell(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).query.retrieve(
-    query="query",
+client.with_options(max_retries=5).documents.add(
+    collection="collection",
+    text="text",
 )
 ```
 
@@ -157,8 +238,9 @@ client = Hyperspell(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).query.retrieve(
-    query="query",
+client.with_options(timeout=5.0).documents.add(
+    collection="collection",
+    text="text",
 )
 ```
 
@@ -200,13 +282,14 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from hyperspell import Hyperspell
 
 client = Hyperspell()
-response = client.query.with_raw_response.retrieve(
-    query="query",
+response = client.documents.with_raw_response.add(
+    collection="collection",
+    text="text",
 )
 print(response.headers.get('X-My-Header'))
 
-query = response.parse()  # get the object that `query.retrieve()` would have returned
-print(query.documents)
+document = response.parse()  # get the object that `documents.add()` would have returned
+print(document.id)
 ```
 
 These methods return an [`APIResponse`](https://github.com/hyperspell/python-sdk/tree/main/src/hyperspell/_response.py) object.
@@ -220,8 +303,9 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.query.with_streaming_response.retrieve(
-    query="query",
+with client.documents.with_streaming_response.add(
+    collection="collection",
+    text="text",
 ) as response:
     print(response.headers.get("X-My-Header"))
 

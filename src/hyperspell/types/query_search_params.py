@@ -8,10 +8,10 @@ from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
-__all__ = ["QueryRetrieveParams", "Filter"]
+__all__ = ["QuerySearchParams", "Filter"]
 
 
-class QueryRetrieveParams(TypedDict, total=False):
+class QuerySearchParams(TypedDict, total=False):
     query: Required[str]
     """Query to run."""
 
