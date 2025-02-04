@@ -22,9 +22,8 @@ from .._response import (
 )
 from ..pagination import SyncCursorPage, AsyncCursorPage
 from .._base_client import AsyncPaginator, make_request_options
-from ..types.collection_get_response import CollectionGetResponse
+from ..types.collection import Collection
 from ..types.collection_list_response import CollectionListResponse
-from ..types.collection_create_response import CollectionCreateResponse
 
 __all__ = ["CollectionsResource", "AsyncCollectionsResource"]
 
@@ -60,7 +59,7 @@ class CollectionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> CollectionCreateResponse:
+    ) -> Collection:
         """This endpoint allows you to paginate through all documents in the index.
 
         You can
@@ -92,7 +91,7 @@ class CollectionsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=CollectionCreateResponse,
+            cast_to=Collection,
         )
 
     def list(
@@ -148,7 +147,7 @@ class CollectionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> CollectionGetResponse:
+    ) -> Collection:
         """
         Retrieves a collection by name.
 
@@ -168,7 +167,7 @@ class CollectionsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=CollectionGetResponse,
+            cast_to=Collection,
         )
 
 
@@ -203,7 +202,7 @@ class AsyncCollectionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> CollectionCreateResponse:
+    ) -> Collection:
         """This endpoint allows you to paginate through all documents in the index.
 
         You can
@@ -235,7 +234,7 @@ class AsyncCollectionsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=CollectionCreateResponse,
+            cast_to=Collection,
         )
 
     def list(
@@ -291,7 +290,7 @@ class AsyncCollectionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> CollectionGetResponse:
+    ) -> Collection:
         """
         Retrieves a collection by name.
 
@@ -311,7 +310,7 @@ class AsyncCollectionsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=CollectionGetResponse,
+            cast_to=Collection,
         )
 
 

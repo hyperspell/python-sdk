@@ -4,10 +4,10 @@ from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["DocumentAddResponse"]
+__all__ = ["DocumentStatus"]
 
 
-class DocumentAddResponse(BaseModel):
+class DocumentStatus(BaseModel):
     id: int
 
     status: Literal["pending", "processing", "completed", "failed"]
