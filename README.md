@@ -16,7 +16,7 @@ The REST API documentation can be found on [docs.hyperspell.com](https://docs.hy
 
 ```sh
 # install from PyPI
-pip install --pre hyperspell
+pip install hyperspell
 ```
 
 ## Usage
