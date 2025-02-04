@@ -7,7 +7,7 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..types import query_retrieve_params
+from ..types import query_search_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import (
     maybe_transform,
@@ -22,7 +22,7 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from .._base_client import make_request_options
-from ..types.query_retrieve_response import QueryRetrieveResponse
+from ..types.query_search_response import QuerySearchResponse
 
 __all__ = ["QueryResource", "AsyncQueryResource"]
 
@@ -47,12 +47,12 @@ class QueryResource(SyncAPIResource):
         """
         return QueryResourceWithStreamingResponse(self)
 
-    def retrieve(
+    def search(
         self,
         *,
         query: str,
         collections: List[str] | NotGiven = NOT_GIVEN,
-        filter: query_retrieve_params.Filter | NotGiven = NOT_GIVEN,
+        filter: query_search_params.Filter | NotGiven = NOT_GIVEN,
         include_elements: bool | NotGiven = NOT_GIVEN,
         max_results: int | NotGiven = NOT_GIVEN,
         query_type: Literal["auto", "semantic", "keyword"] | NotGiven = NOT_GIVEN,
@@ -62,7 +62,7 @@ class QueryResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> QueryRetrieveResponse:
+    ) -> QuerySearchResponse:
         """
         Retrieves documents matching the query.
 
@@ -98,12 +98,12 @@ class QueryResource(SyncAPIResource):
                     "max_results": max_results,
                     "query_type": query_type,
                 },
-                query_retrieve_params.QueryRetrieveParams,
+                query_search_params.QuerySearchParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=QueryRetrieveResponse,
+            cast_to=QuerySearchResponse,
         )
 
 
@@ -127,12 +127,12 @@ class AsyncQueryResource(AsyncAPIResource):
         """
         return AsyncQueryResourceWithStreamingResponse(self)
 
-    async def retrieve(
+    async def search(
         self,
         *,
         query: str,
         collections: List[str] | NotGiven = NOT_GIVEN,
-        filter: query_retrieve_params.Filter | NotGiven = NOT_GIVEN,
+        filter: query_search_params.Filter | NotGiven = NOT_GIVEN,
         include_elements: bool | NotGiven = NOT_GIVEN,
         max_results: int | NotGiven = NOT_GIVEN,
         query_type: Literal["auto", "semantic", "keyword"] | NotGiven = NOT_GIVEN,
@@ -142,7 +142,7 @@ class AsyncQueryResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> QueryRetrieveResponse:
+    ) -> QuerySearchResponse:
         """
         Retrieves documents matching the query.
 
@@ -178,12 +178,12 @@ class AsyncQueryResource(AsyncAPIResource):
                     "max_results": max_results,
                     "query_type": query_type,
                 },
-                query_retrieve_params.QueryRetrieveParams,
+                query_search_params.QuerySearchParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=QueryRetrieveResponse,
+            cast_to=QuerySearchResponse,
         )
 
 
@@ -191,8 +191,8 @@ class QueryResourceWithRawResponse:
     def __init__(self, query: QueryResource) -> None:
         self._query = query
 
-        self.retrieve = to_raw_response_wrapper(
-            query.retrieve,
+        self.search = to_raw_response_wrapper(
+            query.search,
         )
 
 
@@ -200,8 +200,8 @@ class AsyncQueryResourceWithRawResponse:
     def __init__(self, query: AsyncQueryResource) -> None:
         self._query = query
 
-        self.retrieve = async_to_raw_response_wrapper(
-            query.retrieve,
+        self.search = async_to_raw_response_wrapper(
+            query.search,
         )
 
 
@@ -209,8 +209,8 @@ class QueryResourceWithStreamingResponse:
     def __init__(self, query: QueryResource) -> None:
         self._query = query
 
-        self.retrieve = to_streamed_response_wrapper(
-            query.retrieve,
+        self.search = to_streamed_response_wrapper(
+            query.search,
         )
 
 
@@ -218,6 +218,6 @@ class AsyncQueryResourceWithStreamingResponse:
     def __init__(self, query: AsyncQueryResource) -> None:
         self._query = query
 
-        self.retrieve = async_to_streamed_response_wrapper(
-            query.retrieve,
+        self.search = async_to_streamed_response_wrapper(
+            query.search,
         )
