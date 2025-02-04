@@ -29,11 +29,9 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ..pagination import SyncCursorPage, AsyncCursorPage
-from .._base_client import AsyncPaginator, make_request_options
+from .._base_client import make_request_options
 from ..types.document import Document
 from ..types.document_status import DocumentStatus
-from ..types.document_list_response import DocumentListResponse
 
 __all__ = ["DocumentsResource", "AsyncDocumentsResource"]
 
@@ -70,7 +68,7 @@ class DocumentsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncCursorPage[DocumentListResponse]:
+    ) -> object:
         """This endpoint allows you to paginate through all documents in the index.
 
         You can
@@ -85,9 +83,8 @@ class DocumentsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return self._get_api_list(
+        return self._get(
             "/documents/list",
-            page=SyncCursorPage[DocumentListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -102,7 +99,7 @@ class DocumentsResource(SyncAPIResource):
                     document_list_params.DocumentListParams,
                 ),
             ),
-            model=DocumentListResponse,
+            cast_to=object,
         )
 
     def add(
@@ -334,7 +331,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         """
         return AsyncDocumentsResourceWithStreamingResponse(self)
 
-    def list(
+    async def list(
         self,
         *,
         collection: str,
@@ -346,7 +343,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[DocumentListResponse, AsyncCursorPage[DocumentListResponse]]:
+    ) -> object:
         """This endpoint allows you to paginate through all documents in the index.
 
         You can
@@ -361,15 +358,14 @@ class AsyncDocumentsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return self._get_api_list(
+        return await self._get(
             "/documents/list",
-            page=AsyncCursorPage[DocumentListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform(
+                query=await async_maybe_transform(
                     {
                         "collection": collection,
                         "cursor": cursor,
@@ -378,7 +374,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
                     document_list_params.DocumentListParams,
                 ),
             ),
-            model=DocumentListResponse,
+            cast_to=object,
         )
 
     async def add(

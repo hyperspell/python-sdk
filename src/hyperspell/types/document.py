@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Union, Optional
+from typing import Dict, List, Union, Optional
 from datetime import datetime
 from typing_extensions import Literal, TypeAlias
 
@@ -94,19 +94,18 @@ Section: TypeAlias = Union[SectionSectionResult, SectionSectionResultWithElement
 
 
 class Document(BaseModel):
-    id: Optional[int] = None
-
     collection: str
+
+    id: Optional[int] = None
 
     created_at: Optional[datetime] = None
 
     ingested_at: Optional[datetime] = None
 
-    metadata: object
+    metadata: Optional[Dict[str, object]] = None
 
-    resource_id: str
-
-    title: Optional[str] = None
+    resource_id: Optional[str] = None
+    """Along with service, uniquely identifies the source document"""
 
     sections: Optional[List[Section]] = None
 
@@ -131,3 +130,5 @@ class Document(BaseModel):
     ] = None
 
     status: Optional[Literal["pending", "processing", "completed", "failed"]] = None
+
+    title: Optional[str] = None
