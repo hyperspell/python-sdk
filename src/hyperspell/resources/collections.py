@@ -20,10 +20,8 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ..pagination import SyncCursorPage, AsyncCursorPage
-from .._base_client import AsyncPaginator, make_request_options
+from .._base_client import make_request_options
 from ..types.collection import Collection
-from ..types.collection_list_response import CollectionListResponse
 
 __all__ = ["CollectionsResource", "AsyncCollectionsResource"]
 
@@ -105,7 +103,7 @@ class CollectionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncCursorPage[CollectionListResponse]:
+    ) -> object:
         """
         Lists all collections the user has access to.
 
@@ -118,9 +116,8 @@ class CollectionsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return self._get_api_list(
+        return self._get(
             "/collections/list",
-            page=SyncCursorPage[CollectionListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -134,7 +131,7 @@ class CollectionsResource(SyncAPIResource):
                     collection_list_params.CollectionListParams,
                 ),
             ),
-            model=CollectionListResponse,
+            cast_to=object,
         )
 
     def get(
@@ -237,7 +234,7 @@ class AsyncCollectionsResource(AsyncAPIResource):
             cast_to=Collection,
         )
 
-    def list(
+    async def list(
         self,
         *,
         cursor: Optional[str] | NotGiven = NOT_GIVEN,
@@ -248,7 +245,7 @@ class AsyncCollectionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[CollectionListResponse, AsyncCursorPage[CollectionListResponse]]:
+    ) -> object:
         """
         Lists all collections the user has access to.
 
@@ -261,15 +258,14 @@ class AsyncCollectionsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        return self._get_api_list(
+        return await self._get(
             "/collections/list",
-            page=AsyncCursorPage[CollectionListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform(
+                query=await async_maybe_transform(
                     {
                         "cursor": cursor,
                         "size": size,
@@ -277,7 +273,7 @@ class AsyncCollectionsResource(AsyncAPIResource):
                     collection_list_params.CollectionListParams,
                 ),
             ),
-            model=CollectionListResponse,
+            cast_to=object,
         )
 
     async def get(
