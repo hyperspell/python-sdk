@@ -9,10 +9,12 @@ __all__ = ["CollectionListResponse"]
 
 
 class CollectionListResponse(BaseModel):
-    created_at: datetime
+    name: str
+
+    id: Optional[int] = None
+
+    created_at: Optional[datetime] = None
 
     documents_count: Optional[int] = None
-
-    name: str
 
     owner: Optional[str] = None

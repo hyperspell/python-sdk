@@ -10,4 +10,6 @@ __all__ = ["DocumentStatus"]
 class DocumentStatus(BaseModel):
     id: int
 
+    collection: str
+
     status: Literal["pending", "processing", "completed", "failed"]
