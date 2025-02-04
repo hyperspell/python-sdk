@@ -31,11 +31,11 @@ client = Hyperspell(
     api_key=os.environ.get("HYPERSPELL_API_KEY"),  # This is the default and can be omitted
 )
 
-response = client.documents.add(
+document_status = client.documents.add(
     collection="collection",
     text="text",
 )
-print(response.id)
+print(document_status.id)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -58,11 +58,11 @@ client = AsyncHyperspell(
 
 
 async def main() -> None:
-    response = await client.documents.add(
+    document_status = await client.documents.add(
         collection="collection",
         text="text",
     )
-    print(response.id)
+    print(document_status.id)
 
 
 asyncio.run(main())

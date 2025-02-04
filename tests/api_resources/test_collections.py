@@ -9,11 +9,7 @@ import pytest
 
 from hyperspell import Hyperspell, AsyncHyperspell
 from tests.utils import assert_matches_type
-from hyperspell.types import (
-    CollectionGetResponse,
-    CollectionListResponse,
-    CollectionCreateResponse,
-)
+from hyperspell.types import Collection, CollectionListResponse
 from hyperspell.pagination import SyncCursorPage, AsyncCursorPage
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -27,7 +23,7 @@ class TestCollections:
         collection = client.collections.create(
             name="name",
         )
-        assert_matches_type(CollectionCreateResponse, collection, path=["response"])
+        assert_matches_type(Collection, collection, path=["response"])
 
     @parametrize
     def test_method_create_with_all_params(self, client: Hyperspell) -> None:
@@ -35,7 +31,7 @@ class TestCollections:
             name="name",
             owner="owner",
         )
-        assert_matches_type(CollectionCreateResponse, collection, path=["response"])
+        assert_matches_type(Collection, collection, path=["response"])
 
     @parametrize
     def test_raw_response_create(self, client: Hyperspell) -> None:
@@ -46,7 +42,7 @@ class TestCollections:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         collection = response.parse()
-        assert_matches_type(CollectionCreateResponse, collection, path=["response"])
+        assert_matches_type(Collection, collection, path=["response"])
 
     @parametrize
     def test_streaming_response_create(self, client: Hyperspell) -> None:
@@ -57,7 +53,7 @@ class TestCollections:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             collection = response.parse()
-            assert_matches_type(CollectionCreateResponse, collection, path=["response"])
+            assert_matches_type(Collection, collection, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -99,7 +95,7 @@ class TestCollections:
         collection = client.collections.get(
             "name",
         )
-        assert_matches_type(CollectionGetResponse, collection, path=["response"])
+        assert_matches_type(Collection, collection, path=["response"])
 
     @parametrize
     def test_raw_response_get(self, client: Hyperspell) -> None:
@@ -110,7 +106,7 @@ class TestCollections:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         collection = response.parse()
-        assert_matches_type(CollectionGetResponse, collection, path=["response"])
+        assert_matches_type(Collection, collection, path=["response"])
 
     @parametrize
     def test_streaming_response_get(self, client: Hyperspell) -> None:
@@ -121,7 +117,7 @@ class TestCollections:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             collection = response.parse()
-            assert_matches_type(CollectionGetResponse, collection, path=["response"])
+            assert_matches_type(Collection, collection, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -141,7 +137,7 @@ class TestAsyncCollections:
         collection = await async_client.collections.create(
             name="name",
         )
-        assert_matches_type(CollectionCreateResponse, collection, path=["response"])
+        assert_matches_type(Collection, collection, path=["response"])
 
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncHyperspell) -> None:
@@ -149,7 +145,7 @@ class TestAsyncCollections:
             name="name",
             owner="owner",
         )
-        assert_matches_type(CollectionCreateResponse, collection, path=["response"])
+        assert_matches_type(Collection, collection, path=["response"])
 
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncHyperspell) -> None:
@@ -160,7 +156,7 @@ class TestAsyncCollections:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         collection = await response.parse()
-        assert_matches_type(CollectionCreateResponse, collection, path=["response"])
+        assert_matches_type(Collection, collection, path=["response"])
 
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncHyperspell) -> None:
@@ -171,7 +167,7 @@ class TestAsyncCollections:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             collection = await response.parse()
-            assert_matches_type(CollectionCreateResponse, collection, path=["response"])
+            assert_matches_type(Collection, collection, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -213,7 +209,7 @@ class TestAsyncCollections:
         collection = await async_client.collections.get(
             "name",
         )
-        assert_matches_type(CollectionGetResponse, collection, path=["response"])
+        assert_matches_type(Collection, collection, path=["response"])
 
     @parametrize
     async def test_raw_response_get(self, async_client: AsyncHyperspell) -> None:
@@ -224,7 +220,7 @@ class TestAsyncCollections:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         collection = await response.parse()
-        assert_matches_type(CollectionGetResponse, collection, path=["response"])
+        assert_matches_type(Collection, collection, path=["response"])
 
     @parametrize
     async def test_streaming_response_get(self, async_client: AsyncHyperspell) -> None:
@@ -235,7 +231,7 @@ class TestAsyncCollections:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             collection = await response.parse()
-            assert_matches_type(CollectionGetResponse, collection, path=["response"])
+            assert_matches_type(Collection, collection, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

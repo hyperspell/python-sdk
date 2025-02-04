@@ -7,7 +7,7 @@ from typing_extensions import Literal, TypeAlias
 from .._models import BaseModel
 
 __all__ = [
-    "DocumentGetResponse",
+    "Document",
     "Section",
     "SectionSectionResult",
     "SectionSectionResultScores",
@@ -93,7 +93,7 @@ class SectionSectionResultWithElements(BaseModel):
 Section: TypeAlias = Union[SectionSectionResult, SectionSectionResultWithElements]
 
 
-class DocumentGetResponse(BaseModel):
+class Document(BaseModel):
     id: Optional[int] = None
 
     collection: str

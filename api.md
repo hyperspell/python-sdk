@@ -3,36 +3,30 @@
 Types:
 
 ```python
-from hyperspell.types import (
-    DocumentListResponse,
-    DocumentAddResponse,
-    DocumentAddURLResponse,
-    DocumentGetResponse,
-    DocumentUploadResponse,
-)
+from hyperspell.types import Document, DocumentStatus, DocumentListResponse
 ```
 
 Methods:
 
 - <code title="get /documents/list">client.documents.<a href="./src/hyperspell/resources/documents.py">list</a>(\*\*<a href="src/hyperspell/types/document_list_params.py">params</a>) -> <a href="./src/hyperspell/types/document_list_response.py">SyncCursorPage[DocumentListResponse]</a></code>
-- <code title="post /documents/add">client.documents.<a href="./src/hyperspell/resources/documents.py">add</a>(\*\*<a href="src/hyperspell/types/document_add_params.py">params</a>) -> <a href="./src/hyperspell/types/document_add_response.py">DocumentAddResponse</a></code>
-- <code title="post /documents/scrape">client.documents.<a href="./src/hyperspell/resources/documents.py">add_url</a>(\*\*<a href="src/hyperspell/types/document_add_url_params.py">params</a>) -> <a href="./src/hyperspell/types/document_add_url_response.py">DocumentAddURLResponse</a></code>
-- <code title="get /documents/get/{document_id}">client.documents.<a href="./src/hyperspell/resources/documents.py">get</a>(document_id) -> <a href="./src/hyperspell/types/document_get_response.py">DocumentGetResponse</a></code>
-- <code title="post /documents/upload">client.documents.<a href="./src/hyperspell/resources/documents.py">upload</a>(\*\*<a href="src/hyperspell/types/document_upload_params.py">params</a>) -> <a href="./src/hyperspell/types/document_upload_response.py">DocumentUploadResponse</a></code>
+- <code title="post /documents/add">client.documents.<a href="./src/hyperspell/resources/documents.py">add</a>(\*\*<a href="src/hyperspell/types/document_add_params.py">params</a>) -> <a href="./src/hyperspell/types/document_status.py">DocumentStatus</a></code>
+- <code title="post /documents/scrape">client.documents.<a href="./src/hyperspell/resources/documents.py">add_url</a>(\*\*<a href="src/hyperspell/types/document_add_url_params.py">params</a>) -> <a href="./src/hyperspell/types/document_status.py">DocumentStatus</a></code>
+- <code title="get /documents/get/{document_id}">client.documents.<a href="./src/hyperspell/resources/documents.py">get</a>(document_id) -> <a href="./src/hyperspell/types/document.py">Document</a></code>
+- <code title="post /documents/upload">client.documents.<a href="./src/hyperspell/resources/documents.py">upload</a>(\*\*<a href="src/hyperspell/types/document_upload_params.py">params</a>) -> <a href="./src/hyperspell/types/document_status.py">DocumentStatus</a></code>
 
 # Collections
 
 Types:
 
 ```python
-from hyperspell.types import CollectionCreateResponse, CollectionListResponse, CollectionGetResponse
+from hyperspell.types import Collection, CollectionListResponse
 ```
 
 Methods:
 
-- <code title="post /collections/add">client.collections.<a href="./src/hyperspell/resources/collections.py">create</a>(\*\*<a href="src/hyperspell/types/collection_create_params.py">params</a>) -> <a href="./src/hyperspell/types/collection_create_response.py">CollectionCreateResponse</a></code>
+- <code title="post /collections/add">client.collections.<a href="./src/hyperspell/resources/collections.py">create</a>(\*\*<a href="src/hyperspell/types/collection_create_params.py">params</a>) -> <a href="./src/hyperspell/types/collection.py">Collection</a></code>
 - <code title="get /collections/list">client.collections.<a href="./src/hyperspell/resources/collections.py">list</a>(\*\*<a href="src/hyperspell/types/collection_list_params.py">params</a>) -> <a href="./src/hyperspell/types/collection_list_response.py">SyncCursorPage[CollectionListResponse]</a></code>
-- <code title="get /collections/get/{name}">client.collections.<a href="./src/hyperspell/resources/collections.py">get</a>(name) -> <a href="./src/hyperspell/types/collection_get_response.py">CollectionGetResponse</a></code>
+- <code title="get /collections/get/{name}">client.collections.<a href="./src/hyperspell/resources/collections.py">get</a>(name) -> <a href="./src/hyperspell/types/collection.py">Collection</a></code>
 
 # Query
 
@@ -51,9 +45,9 @@ Methods:
 Types:
 
 ```python
-from hyperspell.types import AuthUserTokenResponse
+from hyperspell.types import Token
 ```
 
 Methods:
 
-- <code title="post /auth/user_token">client.auth.<a href="./src/hyperspell/resources/auth.py">user_token</a>(\*\*<a href="src/hyperspell/types/auth_user_token_params.py">params</a>) -> <a href="./src/hyperspell/types/auth_user_token_response.py">AuthUserTokenResponse</a></code>
+- <code title="post /auth/user_token">client.auth.<a href="./src/hyperspell/resources/auth.py">user_token</a>(\*\*<a href="src/hyperspell/types/auth_user_token_params.py">params</a>) -> <a href="./src/hyperspell/types/token.py">Token</a></code>
