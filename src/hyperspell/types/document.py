@@ -4,35 +4,23 @@ from typing import Dict, List, Union, Optional
 from datetime import datetime
 from typing_extensions import Literal, TypeAlias
 
+from .scores import Scores
 from .._models import BaseModel
 
 __all__ = [
     "Document",
     "Section",
     "SectionSectionResult",
-    "SectionSectionResultScores",
     "SectionSectionResultWithElements",
     "SectionSectionResultWithElementsElement",
     "SectionSectionResultWithElementsElementMetadata",
-    "SectionSectionResultWithElementsScores",
 ]
-
-
-class SectionSectionResultScores(BaseModel):
-    full_text_search: Optional[float] = None
-    """How relevant the section is based on full text search"""
-
-    semantic_search: Optional[float] = None
-    """How relevant the section is based on vector search"""
-
-    weighted: Optional[float] = None
-    """The final weighted score of the section"""
 
 
 class SectionSectionResult(BaseModel):
     id: Optional[int] = None
 
-    scores: Optional[SectionSectionResultScores] = None
+    scores: Optional[Scores] = None
 
     text: Optional[str] = None
 
@@ -69,23 +57,12 @@ class SectionSectionResultWithElementsElement(BaseModel):
     summary: Optional[str] = None
 
 
-class SectionSectionResultWithElementsScores(BaseModel):
-    full_text_search: Optional[float] = None
-    """How relevant the section is based on full text search"""
-
-    semantic_search: Optional[float] = None
-    """How relevant the section is based on vector search"""
-
-    weighted: Optional[float] = None
-    """The final weighted score of the section"""
-
-
 class SectionSectionResultWithElements(BaseModel):
     id: Optional[int] = None
 
     elements: Optional[List[SectionSectionResultWithElementsElement]] = None
 
-    scores: Optional[SectionSectionResultWithElementsScores] = None
+    scores: Optional[Scores] = None
 
     text: Optional[str] = None
 

@@ -4,9 +4,10 @@ from typing import Dict, List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
+from .scores import Scores
 from .._models import BaseModel
 
-__all__ = ["DocumentListResponse", "Section", "SectionElement", "SectionElementMetadata", "SectionScores"]
+__all__ = ["DocumentListResponse", "Section", "SectionElement", "SectionElementMetadata"]
 
 
 class SectionElementMetadata(BaseModel):
@@ -41,17 +42,6 @@ class SectionElement(BaseModel):
     summary: Optional[str] = None
 
 
-class SectionScores(BaseModel):
-    full_text_search: Optional[float] = None
-    """How relevant the section is based on full text search"""
-
-    semantic_search: Optional[float] = None
-    """How relevant the section is based on vector search"""
-
-    weighted: Optional[float] = None
-    """The final weighted score of the section"""
-
-
 class Section(BaseModel):
     document_id: int
 
@@ -65,7 +55,7 @@ class Section(BaseModel):
 
     metadata: Optional[Dict[str, object]] = None
 
-    scores: Optional[SectionScores] = None
+    scores: Optional[Scores] = None
 
     text: Optional[str] = None
 
