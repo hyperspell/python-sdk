@@ -31,11 +31,9 @@ from .._response import (
 )
 from ..pagination import SyncCursorPage, AsyncCursorPage
 from .._base_client import AsyncPaginator, make_request_options
-from ..types.document_add_response import DocumentAddResponse
-from ..types.document_get_response import DocumentGetResponse
+from ..types.document import Document
+from ..types.document_status import DocumentStatus
 from ..types.document_list_response import DocumentListResponse
-from ..types.document_upload_response import DocumentUploadResponse
-from ..types.document_add_url_response import DocumentAddURLResponse
 
 __all__ = ["DocumentsResource", "AsyncDocumentsResource"]
 
@@ -138,7 +136,7 @@ class DocumentsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DocumentAddResponse:
+    ) -> DocumentStatus:
         """Adds an arbitrary document to the index.
 
         This can be any text, email, call
@@ -184,7 +182,7 @@ class DocumentsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=DocumentAddResponse,
+            cast_to=DocumentStatus,
         )
 
     def add_url(
@@ -198,7 +196,7 @@ class DocumentsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DocumentAddURLResponse:
+    ) -> DocumentStatus:
         """Adds an arbitrary document to the index.
 
         This can be any text, email, call
@@ -232,7 +230,7 @@ class DocumentsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=DocumentAddURLResponse,
+            cast_to=DocumentStatus,
         )
 
     def get(
@@ -245,7 +243,7 @@ class DocumentsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DocumentGetResponse:
+    ) -> Document:
         """
         Retrieves a document by ID, including its collection name and sections.
 
@@ -263,7 +261,7 @@ class DocumentsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=DocumentGetResponse,
+            cast_to=Document,
         )
 
     def upload(
@@ -277,7 +275,7 @@ class DocumentsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DocumentUploadResponse:
+    ) -> DocumentStatus:
         """This endpoint will upload a file to the index and return a document ID.
 
         The file
@@ -312,7 +310,7 @@ class DocumentsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=DocumentUploadResponse,
+            cast_to=DocumentStatus,
         )
 
 
@@ -414,7 +412,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DocumentAddResponse:
+    ) -> DocumentStatus:
         """Adds an arbitrary document to the index.
 
         This can be any text, email, call
@@ -460,7 +458,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=DocumentAddResponse,
+            cast_to=DocumentStatus,
         )
 
     async def add_url(
@@ -474,7 +472,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DocumentAddURLResponse:
+    ) -> DocumentStatus:
         """Adds an arbitrary document to the index.
 
         This can be any text, email, call
@@ -508,7 +506,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=DocumentAddURLResponse,
+            cast_to=DocumentStatus,
         )
 
     async def get(
@@ -521,7 +519,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DocumentGetResponse:
+    ) -> Document:
         """
         Retrieves a document by ID, including its collection name and sections.
 
@@ -539,7 +537,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=DocumentGetResponse,
+            cast_to=Document,
         )
 
     async def upload(
@@ -553,7 +551,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DocumentUploadResponse:
+    ) -> DocumentStatus:
         """This endpoint will upload a file to the index and return a document ID.
 
         The file
@@ -588,7 +586,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=DocumentUploadResponse,
+            cast_to=DocumentStatus,
         )
 
 

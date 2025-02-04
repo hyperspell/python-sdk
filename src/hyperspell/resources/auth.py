@@ -18,8 +18,8 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
+from ..types.token import Token
 from .._base_client import make_request_options
-from ..types.auth_user_token_response import AuthUserTokenResponse
 
 __all__ = ["AuthResource", "AsyncAuthResource"]
 
@@ -54,7 +54,7 @@ class AuthResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AuthUserTokenResponse:
+    ) -> Token:
         """Use this endpoing to create a user token for a specific user.
 
         This token can be
@@ -75,7 +75,7 @@ class AuthResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AuthUserTokenResponse,
+            cast_to=Token,
         )
 
 
@@ -109,7 +109,7 @@ class AsyncAuthResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AuthUserTokenResponse:
+    ) -> Token:
         """Use this endpoing to create a user token for a specific user.
 
         This token can be
@@ -130,7 +130,7 @@ class AsyncAuthResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=AuthUserTokenResponse,
+            cast_to=Token,
         )
 
 

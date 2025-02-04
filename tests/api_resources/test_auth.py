@@ -9,7 +9,7 @@ import pytest
 
 from hyperspell import Hyperspell, AsyncHyperspell
 from tests.utils import assert_matches_type
-from hyperspell.types import AuthUserTokenResponse
+from hyperspell.types import Token
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -22,7 +22,7 @@ class TestAuth:
         auth = client.auth.user_token(
             user_id="user_id",
         )
-        assert_matches_type(AuthUserTokenResponse, auth, path=["response"])
+        assert_matches_type(Token, auth, path=["response"])
 
     @parametrize
     def test_raw_response_user_token(self, client: Hyperspell) -> None:
@@ -33,7 +33,7 @@ class TestAuth:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         auth = response.parse()
-        assert_matches_type(AuthUserTokenResponse, auth, path=["response"])
+        assert_matches_type(Token, auth, path=["response"])
 
     @parametrize
     def test_streaming_response_user_token(self, client: Hyperspell) -> None:
@@ -44,7 +44,7 @@ class TestAuth:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             auth = response.parse()
-            assert_matches_type(AuthUserTokenResponse, auth, path=["response"])
+            assert_matches_type(Token, auth, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -57,7 +57,7 @@ class TestAsyncAuth:
         auth = await async_client.auth.user_token(
             user_id="user_id",
         )
-        assert_matches_type(AuthUserTokenResponse, auth, path=["response"])
+        assert_matches_type(Token, auth, path=["response"])
 
     @parametrize
     async def test_raw_response_user_token(self, async_client: AsyncHyperspell) -> None:
@@ -68,7 +68,7 @@ class TestAsyncAuth:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         auth = await response.parse()
-        assert_matches_type(AuthUserTokenResponse, auth, path=["response"])
+        assert_matches_type(Token, auth, path=["response"])
 
     @parametrize
     async def test_streaming_response_user_token(self, async_client: AsyncHyperspell) -> None:
@@ -79,6 +79,6 @@ class TestAsyncAuth:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             auth = await response.parse()
-            assert_matches_type(AuthUserTokenResponse, auth, path=["response"])
+            assert_matches_type(Token, auth, path=["response"])
 
         assert cast(Any, response.is_closed) is True
