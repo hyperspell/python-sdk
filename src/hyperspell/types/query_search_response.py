@@ -7,18 +7,19 @@ from typing_extensions import Literal, TypeAlias
 from .._models import BaseModel
 
 __all__ = [
-    "DocumentRetrieveResponse",
-    "Section",
-    "SectionSectionResult",
-    "SectionSectionResultScores",
-    "SectionSectionResultWithElements",
-    "SectionSectionResultWithElementsElement",
-    "SectionSectionResultWithElementsElementMetadata",
-    "SectionSectionResultWithElementsScores",
+    "QuerySearchResponse",
+    "Document",
+    "DocumentSection",
+    "DocumentSectionSectionResult",
+    "DocumentSectionSectionResultScores",
+    "DocumentSectionSectionResultWithElements",
+    "DocumentSectionSectionResultWithElementsElement",
+    "DocumentSectionSectionResultWithElementsElementMetadata",
+    "DocumentSectionSectionResultWithElementsScores",
 ]
 
 
-class SectionSectionResultScores(BaseModel):
+class DocumentSectionSectionResultScores(BaseModel):
     full_text_search: Optional[float] = None
     """How relevant the section is based on full text search"""
 
@@ -29,15 +30,15 @@ class SectionSectionResultScores(BaseModel):
     """The final weighted score of the section"""
 
 
-class SectionSectionResult(BaseModel):
+class DocumentSectionSectionResult(BaseModel):
     id: Optional[int] = None
 
-    scores: Optional[SectionSectionResultScores] = None
+    scores: Optional[DocumentSectionSectionResultScores] = None
 
     text: Optional[str] = None
 
 
-class SectionSectionResultWithElementsElementMetadata(BaseModel):
+class DocumentSectionSectionResultWithElementsElementMetadata(BaseModel):
     author: Optional[str] = None
 
     continued_from: Optional[str] = None
@@ -57,19 +58,19 @@ class SectionSectionResultWithElementsElementMetadata(BaseModel):
     title_level: Optional[int] = None
 
 
-class SectionSectionResultWithElementsElement(BaseModel):
+class DocumentSectionSectionResultWithElementsElement(BaseModel):
     text: str
 
     type: Literal["text", "markdown", "image", "table", "title", "query"]
 
     id: Optional[str] = None
 
-    metadata: Optional[SectionSectionResultWithElementsElementMetadata] = None
+    metadata: Optional[DocumentSectionSectionResultWithElementsElementMetadata] = None
 
     summary: Optional[str] = None
 
 
-class SectionSectionResultWithElementsScores(BaseModel):
+class DocumentSectionSectionResultWithElementsScores(BaseModel):
     full_text_search: Optional[float] = None
     """How relevant the section is based on full text search"""
 
@@ -80,20 +81,20 @@ class SectionSectionResultWithElementsScores(BaseModel):
     """The final weighted score of the section"""
 
 
-class SectionSectionResultWithElements(BaseModel):
+class DocumentSectionSectionResultWithElements(BaseModel):
     id: Optional[int] = None
 
-    elements: Optional[List[SectionSectionResultWithElementsElement]] = None
+    elements: Optional[List[DocumentSectionSectionResultWithElementsElement]] = None
 
-    scores: Optional[SectionSectionResultWithElementsScores] = None
+    scores: Optional[DocumentSectionSectionResultWithElementsScores] = None
 
     text: Optional[str] = None
 
 
-Section: TypeAlias = Union[SectionSectionResult, SectionSectionResultWithElements]
+DocumentSection: TypeAlias = Union[DocumentSectionSectionResult, DocumentSectionSectionResultWithElements]
 
 
-class DocumentRetrieveResponse(BaseModel):
+class Document(BaseModel):
     id: Optional[int] = None
 
     collection: str
@@ -108,7 +109,7 @@ class DocumentRetrieveResponse(BaseModel):
 
     title: Optional[str] = None
 
-    sections: Optional[List[Section]] = None
+    sections: Optional[List[DocumentSection]] = None
 
     source: Optional[
         Literal[
@@ -131,3 +132,9 @@ class DocumentRetrieveResponse(BaseModel):
     ] = None
 
     status: Optional[Literal["pending", "processing", "completed", "failed"]] = None
+
+
+class QuerySearchResponse(BaseModel):
+    documents: List[Document]
+
+    total_sections: int
