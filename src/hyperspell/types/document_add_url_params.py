@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Optional
 from typing_extensions import Required, TypedDict
 
 __all__ = ["DocumentAddURLParams"]
@@ -15,9 +14,5 @@ class DocumentAddURLParams(TypedDict, total=False):
     If the collection does not exist, it will be created.
     """
 
-    url: Optional[str]
-    """Source URL of the document.
-
-    If text is not provided and URL is publicly accessible, Hyperspell will retrieve
-    the document from this URL.
-    """
+    url: Required[str]
+    """Source URL of the document."""
