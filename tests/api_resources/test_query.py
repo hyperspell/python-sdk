@@ -21,6 +21,7 @@ class TestQuery:
     @parametrize
     def test_method_search(self, client: Hyperspell) -> None:
         query = client.query.search(
+            collections="string",
             query="query",
         )
         assert_matches_type(QuerySearchResponse, query, path=["response"])
@@ -28,8 +29,8 @@ class TestQuery:
     @parametrize
     def test_method_search_with_all_params(self, client: Hyperspell) -> None:
         query = client.query.search(
+            collections="string",
             query="query",
-            collections=["string"],
             filter={
                 "end_date": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "source": ["generic"],
@@ -44,6 +45,7 @@ class TestQuery:
     @parametrize
     def test_raw_response_search(self, client: Hyperspell) -> None:
         response = client.query.with_raw_response.search(
+            collections="string",
             query="query",
         )
 
@@ -55,6 +57,7 @@ class TestQuery:
     @parametrize
     def test_streaming_response_search(self, client: Hyperspell) -> None:
         with client.query.with_streaming_response.search(
+            collections="string",
             query="query",
         ) as response:
             assert not response.is_closed
@@ -72,6 +75,7 @@ class TestAsyncQuery:
     @parametrize
     async def test_method_search(self, async_client: AsyncHyperspell) -> None:
         query = await async_client.query.search(
+            collections="string",
             query="query",
         )
         assert_matches_type(QuerySearchResponse, query, path=["response"])
@@ -79,8 +83,8 @@ class TestAsyncQuery:
     @parametrize
     async def test_method_search_with_all_params(self, async_client: AsyncHyperspell) -> None:
         query = await async_client.query.search(
+            collections="string",
             query="query",
-            collections=["string"],
             filter={
                 "end_date": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "source": ["generic"],
@@ -95,6 +99,7 @@ class TestAsyncQuery:
     @parametrize
     async def test_raw_response_search(self, async_client: AsyncHyperspell) -> None:
         response = await async_client.query.with_raw_response.search(
+            collections="string",
             query="query",
         )
 
@@ -106,6 +111,7 @@ class TestAsyncQuery:
     @parametrize
     async def test_streaming_response_search(self, async_client: AsyncHyperspell) -> None:
         async with async_client.query.with_streaming_response.search(
+            collections="string",
             query="query",
         ) as response:
             assert not response.is_closed
