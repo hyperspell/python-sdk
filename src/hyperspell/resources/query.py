@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List
+from typing import List, Union
 from typing_extensions import Literal
 
 import httpx
@@ -50,8 +50,8 @@ class QueryResource(SyncAPIResource):
     def search(
         self,
         *,
+        collections: Union[str, List[str]],
         query: str,
-        collections: List[str] | NotGiven = NOT_GIVEN,
         filter: query_search_params.Filter | NotGiven = NOT_GIVEN,
         include_elements: bool | NotGiven = NOT_GIVEN,
         max_results: int | NotGiven = NOT_GIVEN,
@@ -67,9 +67,9 @@ class QueryResource(SyncAPIResource):
         Retrieves documents matching the query.
 
         Args:
-          query: Query to run.
-
           collections: Only query documents in these collections.
+
+          query: Query to run.
 
           filter: Filter the query results.
 
@@ -91,8 +91,8 @@ class QueryResource(SyncAPIResource):
             "/query",
             body=maybe_transform(
                 {
-                    "query": query,
                     "collections": collections,
+                    "query": query,
                     "filter": filter,
                     "include_elements": include_elements,
                     "max_results": max_results,
@@ -130,8 +130,8 @@ class AsyncQueryResource(AsyncAPIResource):
     async def search(
         self,
         *,
+        collections: Union[str, List[str]],
         query: str,
-        collections: List[str] | NotGiven = NOT_GIVEN,
         filter: query_search_params.Filter | NotGiven = NOT_GIVEN,
         include_elements: bool | NotGiven = NOT_GIVEN,
         max_results: int | NotGiven = NOT_GIVEN,
@@ -147,9 +147,9 @@ class AsyncQueryResource(AsyncAPIResource):
         Retrieves documents matching the query.
 
         Args:
-          query: Query to run.
-
           collections: Only query documents in these collections.
+
+          query: Query to run.
 
           filter: Filter the query results.
 
@@ -171,8 +171,8 @@ class AsyncQueryResource(AsyncAPIResource):
             "/query",
             body=await async_maybe_transform(
                 {
-                    "query": query,
                     "collections": collections,
+                    "query": query,
                     "filter": filter,
                     "include_elements": include_elements,
                     "max_results": max_results,

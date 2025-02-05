@@ -12,11 +12,11 @@ __all__ = ["QuerySearchParams", "Filter"]
 
 
 class QuerySearchParams(TypedDict, total=False):
+    collections: Required[Union[str, List[str]]]
+    """Only query documents in these collections."""
+
     query: Required[str]
     """Query to run."""
-
-    collections: List[str]
-    """Only query documents in these collections."""
 
     filter: Filter
     """Filter the query results."""
