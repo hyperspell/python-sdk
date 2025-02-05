@@ -112,13 +112,6 @@ class TestDocuments:
     def test_method_add_url(self, client: Hyperspell) -> None:
         document = client.documents.add_url(
             collection="collection",
-        )
-        assert_matches_type(DocumentStatus, document, path=["response"])
-
-    @parametrize
-    def test_method_add_url_with_all_params(self, client: Hyperspell) -> None:
-        document = client.documents.add_url(
-            collection="collection",
             url="url",
         )
         assert_matches_type(DocumentStatus, document, path=["response"])
@@ -127,6 +120,7 @@ class TestDocuments:
     def test_raw_response_add_url(self, client: Hyperspell) -> None:
         response = client.documents.with_raw_response.add_url(
             collection="collection",
+            url="url",
         )
 
         assert response.is_closed is True
@@ -138,6 +132,7 @@ class TestDocuments:
     def test_streaming_response_add_url(self, client: Hyperspell) -> None:
         with client.documents.with_streaming_response.add_url(
             collection="collection",
+            url="url",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -305,13 +300,6 @@ class TestAsyncDocuments:
     async def test_method_add_url(self, async_client: AsyncHyperspell) -> None:
         document = await async_client.documents.add_url(
             collection="collection",
-        )
-        assert_matches_type(DocumentStatus, document, path=["response"])
-
-    @parametrize
-    async def test_method_add_url_with_all_params(self, async_client: AsyncHyperspell) -> None:
-        document = await async_client.documents.add_url(
-            collection="collection",
             url="url",
         )
         assert_matches_type(DocumentStatus, document, path=["response"])
@@ -320,6 +308,7 @@ class TestAsyncDocuments:
     async def test_raw_response_add_url(self, async_client: AsyncHyperspell) -> None:
         response = await async_client.documents.with_raw_response.add_url(
             collection="collection",
+            url="url",
         )
 
         assert response.is_closed is True
@@ -331,6 +320,7 @@ class TestAsyncDocuments:
     async def test_streaming_response_add_url(self, async_client: AsyncHyperspell) -> None:
         async with async_client.documents.with_streaming_response.add_url(
             collection="collection",
+            url="url",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
