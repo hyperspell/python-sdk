@@ -189,7 +189,7 @@ class DocumentsResource(SyncAPIResource):
         self,
         *,
         collection: str,
-        url: Optional[str] | NotGiven = NOT_GIVEN,
+        url: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -207,8 +207,7 @@ class DocumentsResource(SyncAPIResource):
           collection: Name of the collection to add the document to. If the collection does not exist,
               it will be created.
 
-          url: Source URL of the document. If text is not provided and URL is publicly
-              accessible, Hyperspell will retrieve the document from this URL.
+          url: Source URL of the document.
 
           extra_headers: Send extra headers
 
@@ -465,7 +464,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         self,
         *,
         collection: str,
-        url: Optional[str] | NotGiven = NOT_GIVEN,
+        url: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -483,8 +482,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
           collection: Name of the collection to add the document to. If the collection does not exist,
               it will be created.
 
-          url: Source URL of the document. If text is not provided and URL is publicly
-              accessible, Hyperspell will retrieve the document from this URL.
+          url: Source URL of the document.
 
           extra_headers: Send extra headers
 
