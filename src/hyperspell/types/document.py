@@ -9,12 +9,21 @@ from .._models import BaseModel
 
 __all__ = [
     "Document",
+    "Event",
     "Section",
     "SectionSectionResult",
     "SectionSectionResultWithElements",
     "SectionSectionResultWithElementsElement",
     "SectionSectionResultWithElementsElementMetadata",
 ]
+
+
+class Event(BaseModel):
+    message: str
+
+    type: Literal["error", "warning", "info"]
+
+    time: Optional[datetime] = None
 
 
 class SectionSectionResult(BaseModel):
@@ -76,6 +85,8 @@ class Document(BaseModel):
     id: Optional[int] = None
 
     created_at: Optional[datetime] = None
+
+    events: Optional[List[Event]] = None
 
     ingested_at: Optional[datetime] = None
 
