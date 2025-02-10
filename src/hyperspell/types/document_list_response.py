@@ -7,7 +7,15 @@ from typing_extensions import Literal
 from .scores import Scores
 from .._models import BaseModel
 
-__all__ = ["DocumentListResponse", "Section", "SectionElement", "SectionElementMetadata"]
+__all__ = ["DocumentListResponse", "Event", "Section", "SectionElement", "SectionElementMetadata"]
+
+
+class Event(BaseModel):
+    message: str
+
+    type: Literal["error", "warning", "info"]
+
+    time: Optional[datetime] = None
 
 
 class SectionElementMetadata(BaseModel):
@@ -66,6 +74,8 @@ class DocumentListResponse(BaseModel):
     collection: Optional[str] = None
 
     created_at: Optional[datetime] = None
+
+    events: Optional[List[Event]] = None
 
     ingested_at: Optional[datetime] = None
 
