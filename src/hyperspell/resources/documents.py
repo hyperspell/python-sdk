@@ -283,6 +283,10 @@ class DocumentsResource(SyncAPIResource):
         the document later, and check the status of the document.
 
         Args:
+          collection: The collection to add the document to.
+
+          file: The file to ingest.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -558,6 +562,10 @@ class AsyncDocumentsResource(AsyncAPIResource):
         the document later, and check the status of the document.
 
         Args:
+          collection: The collection to add the document to.
+
+          file: The file to ingest.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
