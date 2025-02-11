@@ -11,5 +11,7 @@ __all__ = ["DocumentUploadParams"]
 
 class DocumentUploadParams(TypedDict, total=False):
     collection: Required[str]
+    """The collection to add the document to."""
 
     file: Required[FileTypes]
+    """The file to ingest."""
