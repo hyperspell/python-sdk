@@ -23,6 +23,7 @@ from pydantic import ValidationError
 
 from hyperspell import Hyperspell, AsyncHyperspell, APIResponseValidationError
 from hyperspell._types import Omit
+from hyperspell._utils import maybe_transform
 from hyperspell._models import BaseModel, FinalRequestOptions
 from hyperspell._constants import RAW_RESPONSE_HEADER
 from hyperspell._exceptions import APIStatusError, APITimeoutError, APIResponseValidationError
@@ -32,6 +33,7 @@ from hyperspell._base_client import (
     BaseClient,
     make_request_options,
 )
+from hyperspell.types.document_add_params import DocumentAddParams
 
 from .utils import update_env
 
@@ -734,7 +736,7 @@ class TestHyperspell:
         with pytest.raises(APITimeoutError):
             self.client.post(
                 "/documents/add",
-                body=cast(object, dict(collection="collection", text="text")),
+                body=cast(object, maybe_transform(dict(collection="collection", text="text"), DocumentAddParams)),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -749,7 +751,7 @@ class TestHyperspell:
         with pytest.raises(APIStatusError):
             self.client.post(
                 "/documents/add",
-                body=cast(object, dict(collection="collection", text="text")),
+                body=cast(object, maybe_transform(dict(collection="collection", text="text"), DocumentAddParams)),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -1523,7 +1525,7 @@ class TestAsyncHyperspell:
         with pytest.raises(APITimeoutError):
             await self.client.post(
                 "/documents/add",
-                body=cast(object, dict(collection="collection", text="text")),
+                body=cast(object, maybe_transform(dict(collection="collection", text="text"), DocumentAddParams)),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -1538,7 +1540,7 @@ class TestAsyncHyperspell:
         with pytest.raises(APIStatusError):
             await self.client.post(
                 "/documents/add",
-                body=cast(object, dict(collection="collection", text="text")),
+                body=cast(object, maybe_transform(dict(collection="collection", text="text"), DocumentAddParams)),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
