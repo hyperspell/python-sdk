@@ -80,7 +80,7 @@ class Hyperspell(SyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new synchronous hyperspell client instance.
+        """Construct a new synchronous Hyperspell client instance.
 
         This automatically infers the `api_key` argument from the `HYPERSPELL_API_KEY` environment variable if it is not provided.
         """
@@ -263,7 +263,7 @@ class AsyncHyperspell(AsyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new async hyperspell client instance.
+        """Construct a new async AsyncHyperspell client instance.
 
         This automatically infers the `api_key` argument from the `HYPERSPELL_API_KEY` environment variable if it is not provided.
         """
