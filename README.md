@@ -150,6 +150,30 @@ for document in first_page.items:
 # Remove `await` for non-async usage.
 ```
 
+from hyperspell.\_utils import parse_datetime
+from hyperspell.\_utils import parse_datetime
+
+## Nested params
+
+Nested parameters are dictionaries, typed using `TypedDict`, for example:
+
+```python
+from hyperspell import Hyperspell
+
+client = Hyperspell()
+
+response = client.query.search(
+    collections="string",
+    query="query",
+    filter={
+        "end_date": parse_datetime("2019-12-27T18:11:19.117Z"),
+        "source": ["generic"],
+        "start_date": parse_datetime("2019-12-27T18:11:19.117Z"),
+    },
+)
+print(response.filter)
+```
+
 ## File uploads
 
 Request parameters that correspond to file uploads can be passed as `bytes`, a [`PathLike`](https://docs.python.org/3/library/os.html#os.PathLike) instance or a tuple of `(filename, contents, media type)`.
