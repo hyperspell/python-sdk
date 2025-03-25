@@ -1,7 +1,7 @@
 # Shared Types
 
 ```python
-from hyperspell.types import APIKkey, App
+from hyperspell.types import APIKey, App
 ```
 
 # Documents

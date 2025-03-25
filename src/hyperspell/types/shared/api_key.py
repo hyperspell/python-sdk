@@ -9,10 +9,10 @@ from typing_extensions import Literal
 from ..._compat import PYDANTIC_V2
 from ..._models import BaseModel
 
-__all__ = ["APIKkey"]
+__all__ = ["APIKey"]
 
 
-class APIKkey(BaseModel):
+class APIKey(BaseModel):
     app_id: int
 
     scopes: List[Literal["all", "ingest", "query"]]
@@ -34,6 +34,6 @@ class APIKkey(BaseModel):
 from .app import App
 
 if PYDANTIC_V2:
-    APIKkey.model_rebuild()
+    APIKey.model_rebuild()
 else:
-    APIKkey.update_forward_refs()  # type: ignore
+    APIKey.update_forward_refs()  # type: ignore
