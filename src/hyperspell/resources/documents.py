@@ -61,7 +61,7 @@ class DocumentsResource(SyncAPIResource):
     def list(
         self,
         *,
-        collection: str,
+        collection: Optional[str] | NotGiven = NOT_GIVEN,
         cursor: Optional[str] | NotGiven = NOT_GIVEN,
         size: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -108,27 +108,10 @@ class DocumentsResource(SyncAPIResource):
     def add(
         self,
         *,
-        collection: str,
         text: str,
+        collection: Optional[str] | NotGiven = NOT_GIVEN,
         date: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        source: Literal[
-            "generic",
-            "markdown",
-            "chat",
-            "email",
-            "transcript",
-            "legal",
-            "website",
-            "image",
-            "pdf",
-            "audio",
-            "slack",
-            "s3",
-            "gmail",
-            "notion",
-            "google_docs",
-        ]
-        | NotGiven = NOT_GIVEN,
+        source: Literal["generic", "slack", "s3", "gmail", "notion", "google_docs", "hubspot"] | NotGiven = NOT_GIVEN,
         title: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -144,10 +127,11 @@ class DocumentsResource(SyncAPIResource):
         once the processing is complete.
 
         Args:
-          collection: Name of the collection to add the document to. If the collection does not exist,
-              it will be created.
-
           text: Full text of the document.
+
+          collection: Name of the collection to add the document to. If the collection does not exist,
+              it will be created. If not given, the document will be added to the user's
+              default collection.
 
           date: Date of the document. Depending on the document, this could be the creation date
               or date the document was last updated (eg. for a chat transcript, this would be
@@ -171,8 +155,8 @@ class DocumentsResource(SyncAPIResource):
             "/documents/add",
             body=maybe_transform(
                 {
-                    "collection": collection,
                     "text": text,
+                    "collection": collection,
                     "date": date,
                     "source": source,
                     "title": title,
@@ -188,8 +172,8 @@ class DocumentsResource(SyncAPIResource):
     def add_url(
         self,
         *,
-        collection: str,
         url: str,
+        collection: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -204,10 +188,11 @@ class DocumentsResource(SyncAPIResource):
         once the processing is complete.
 
         Args:
-          collection: Name of the collection to add the document to. If the collection does not exist,
-              it will be created.
-
           url: Source URL of the document.
+
+          collection: Name of the collection to add the document to. If the collection does not exist,
+              it will be created. If not given, the document will be added to the user's
+              default collection.
 
           extra_headers: Send extra headers
 
@@ -221,8 +206,8 @@ class DocumentsResource(SyncAPIResource):
             "/documents/scrape",
             body=maybe_transform(
                 {
-                    "collection": collection,
                     "url": url,
+                    "collection": collection,
                 },
                 document_add_url_params.DocumentAddURLParams,
             ),
@@ -340,7 +325,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
     def list(
         self,
         *,
-        collection: str,
+        collection: Optional[str] | NotGiven = NOT_GIVEN,
         cursor: Optional[str] | NotGiven = NOT_GIVEN,
         size: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -387,27 +372,10 @@ class AsyncDocumentsResource(AsyncAPIResource):
     async def add(
         self,
         *,
-        collection: str,
         text: str,
+        collection: Optional[str] | NotGiven = NOT_GIVEN,
         date: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        source: Literal[
-            "generic",
-            "markdown",
-            "chat",
-            "email",
-            "transcript",
-            "legal",
-            "website",
-            "image",
-            "pdf",
-            "audio",
-            "slack",
-            "s3",
-            "gmail",
-            "notion",
-            "google_docs",
-        ]
-        | NotGiven = NOT_GIVEN,
+        source: Literal["generic", "slack", "s3", "gmail", "notion", "google_docs", "hubspot"] | NotGiven = NOT_GIVEN,
         title: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -423,10 +391,11 @@ class AsyncDocumentsResource(AsyncAPIResource):
         once the processing is complete.
 
         Args:
-          collection: Name of the collection to add the document to. If the collection does not exist,
-              it will be created.
-
           text: Full text of the document.
+
+          collection: Name of the collection to add the document to. If the collection does not exist,
+              it will be created. If not given, the document will be added to the user's
+              default collection.
 
           date: Date of the document. Depending on the document, this could be the creation date
               or date the document was last updated (eg. for a chat transcript, this would be
@@ -450,8 +419,8 @@ class AsyncDocumentsResource(AsyncAPIResource):
             "/documents/add",
             body=await async_maybe_transform(
                 {
-                    "collection": collection,
                     "text": text,
+                    "collection": collection,
                     "date": date,
                     "source": source,
                     "title": title,
@@ -467,8 +436,8 @@ class AsyncDocumentsResource(AsyncAPIResource):
     async def add_url(
         self,
         *,
-        collection: str,
         url: str,
+        collection: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -483,10 +452,11 @@ class AsyncDocumentsResource(AsyncAPIResource):
         once the processing is complete.
 
         Args:
-          collection: Name of the collection to add the document to. If the collection does not exist,
-              it will be created.
-
           url: Source URL of the document.
+
+          collection: Name of the collection to add the document to. If the collection does not exist,
+              it will be created. If not given, the document will be added to the user's
+              default collection.
 
           extra_headers: Send extra headers
 
@@ -500,8 +470,8 @@ class AsyncDocumentsResource(AsyncAPIResource):
             "/documents/scrape",
             body=await async_maybe_transform(
                 {
-                    "collection": collection,
                     "url": url,
+                    "collection": collection,
                 },
                 document_add_url_params.DocumentAddURLParams,
             ),

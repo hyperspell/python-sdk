@@ -50,8 +50,8 @@ class QueryResource(SyncAPIResource):
     def search(
         self,
         *,
-        collections: Union[str, List[str]],
         query: str,
+        collections: Union[str, List[str], None] | NotGiven = NOT_GIVEN,
         filter: query_search_params.Filter | NotGiven = NOT_GIVEN,
         include_elements: bool | NotGiven = NOT_GIVEN,
         max_results: int | NotGiven = NOT_GIVEN,
@@ -67,9 +67,10 @@ class QueryResource(SyncAPIResource):
         Retrieves documents matching the query.
 
         Args:
-          collections: Only query documents in these collections.
-
           query: Query to run.
+
+          collections: Only query documents in these collections. If not given, will query the user's
+              default collection
 
           filter: Filter the query results.
 
@@ -91,8 +92,8 @@ class QueryResource(SyncAPIResource):
             "/query",
             body=maybe_transform(
                 {
-                    "collections": collections,
                     "query": query,
+                    "collections": collections,
                     "filter": filter,
                     "include_elements": include_elements,
                     "max_results": max_results,
@@ -130,8 +131,8 @@ class AsyncQueryResource(AsyncAPIResource):
     async def search(
         self,
         *,
-        collections: Union[str, List[str]],
         query: str,
+        collections: Union[str, List[str], None] | NotGiven = NOT_GIVEN,
         filter: query_search_params.Filter | NotGiven = NOT_GIVEN,
         include_elements: bool | NotGiven = NOT_GIVEN,
         max_results: int | NotGiven = NOT_GIVEN,
@@ -147,9 +148,10 @@ class AsyncQueryResource(AsyncAPIResource):
         Retrieves documents matching the query.
 
         Args:
-          collections: Only query documents in these collections.
-
           query: Query to run.
+
+          collections: Only query documents in these collections. If not given, will query the user's
+              default collection
 
           filter: Filter the query results.
 
@@ -171,8 +173,8 @@ class AsyncQueryResource(AsyncAPIResource):
             "/query",
             body=await async_maybe_transform(
                 {
-                    "collections": collections,
                     "query": query,
+                    "collections": collections,
                     "filter": filter,
                     "include_elements": include_elements,
                     "max_results": max_results,

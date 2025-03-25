@@ -12,11 +12,14 @@ __all__ = ["QuerySearchParams", "Filter"]
 
 
 class QuerySearchParams(TypedDict, total=False):
-    collections: Required[Union[str, List[str]]]
-    """Only query documents in these collections."""
-
     query: Required[str]
     """Query to run."""
+
+    collections: Union[str, List[str], None]
+    """Only query documents in these collections.
+
+    If not given, will query the user's default collection
+    """
 
     filter: Filter
     """Filter the query results."""
@@ -35,7 +38,13 @@ class Filter(TypedDict, total=False):
     end_date: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
     """Only query documents before this date."""
 
-    source: List[
+    source: List[Literal["generic", "slack", "s3", "gmail", "notion", "google_docs", "hubspot"]]
+    """Only query documents from these sources."""
+
+    start_date: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
+    """Only query documents on or after this date."""
+
+    types: List[
         Literal[
             "generic",
             "markdown",
@@ -47,14 +56,18 @@ class Filter(TypedDict, total=False):
             "image",
             "pdf",
             "audio",
-            "slack",
-            "s3",
-            "gmail",
-            "notion",
-            "google_docs",
+            "spreadsheet",
+            "archive",
+            "book",
+            "video",
+            "code",
+            "calendar",
+            "json",
+            "presentation",
+            "unsupported",
+            "person",
+            "company",
+            "crm_contact",
         ]
     ]
     """Only query documents of these types."""
-
-    start_date: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
-    """Only query documents on or after this date."""
