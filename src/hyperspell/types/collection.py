@@ -5,10 +5,10 @@ from datetime import datetime
 
 from .._models import BaseModel
 
-__all__ = ["CollectionResponse"]
+__all__ = ["Collection"]
 
 
-class CollectionResponse(BaseModel):
+class Collection(BaseModel):
     created_at: datetime
 
     name: str
