@@ -32,7 +32,6 @@ client = Hyperspell(
 )
 
 document_status = client.documents.add(
-    collection="collection",
     text="text",
 )
 print(document_status.id)
@@ -59,7 +58,6 @@ client = AsyncHyperspell(
 
 async def main() -> None:
     document_status = await client.documents.add(
-        collection="collection",
         text="text",
     )
     print(document_status.id)
@@ -163,12 +161,12 @@ from hyperspell import Hyperspell
 client = Hyperspell()
 
 response = client.query.search(
-    collections="string",
     query="query",
     filter={
         "end_date": parse_datetime("2019-12-27T18:11:19.117Z"),
         "source": ["generic"],
         "start_date": parse_datetime("2019-12-27T18:11:19.117Z"),
+        "types": ["generic"],
     },
 )
 print(response.filter)
@@ -209,7 +207,6 @@ client = Hyperspell()
 
 try:
     client.documents.add(
-        collection="collection",
         text="text",
     )
 except hyperspell.APIConnectionError as e:
@@ -255,7 +252,6 @@ client = Hyperspell(
 
 # Or, configure per-request:
 client.with_options(max_retries=5).documents.add(
-    collection="collection",
     text="text",
 )
 ```
@@ -281,7 +277,6 @@ client = Hyperspell(
 
 # Override per-request:
 client.with_options(timeout=5.0).documents.add(
-    collection="collection",
     text="text",
 )
 ```
@@ -325,7 +320,6 @@ from hyperspell import Hyperspell
 
 client = Hyperspell()
 response = client.documents.with_raw_response.add(
-    collection="collection",
     text="text",
 )
 print(response.headers.get('X-My-Header'))
@@ -346,7 +340,6 @@ To stream the response body, use `.with_streaming_response` instead, which requi
 
 ```python
 with client.documents.with_streaming_response.add(
-    collection="collection",
     text="text",
 ) as response:
     print(response.headers.get("X-My-Header"))

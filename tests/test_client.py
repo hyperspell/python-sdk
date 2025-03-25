@@ -736,7 +736,7 @@ class TestHyperspell:
         with pytest.raises(APITimeoutError):
             self.client.post(
                 "/documents/add",
-                body=cast(object, maybe_transform(dict(collection="collection", text="text"), DocumentAddParams)),
+                body=cast(object, maybe_transform(dict(text="text"), DocumentAddParams)),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -751,7 +751,7 @@ class TestHyperspell:
         with pytest.raises(APIStatusError):
             self.client.post(
                 "/documents/add",
-                body=cast(object, maybe_transform(dict(collection="collection", text="text"), DocumentAddParams)),
+                body=cast(object, maybe_transform(dict(text="text"), DocumentAddParams)),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -784,7 +784,7 @@ class TestHyperspell:
 
         respx_mock.post("/documents/add").mock(side_effect=retry_handler)
 
-        response = client.documents.with_raw_response.add(collection="collection", text="text")
+        response = client.documents.with_raw_response.add(text="text")
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -809,7 +809,7 @@ class TestHyperspell:
         respx_mock.post("/documents/add").mock(side_effect=retry_handler)
 
         response = client.documents.with_raw_response.add(
-            collection="collection", text="text", extra_headers={"x-stainless-retry-count": Omit()}
+            text="text", extra_headers={"x-stainless-retry-count": Omit()}
         )
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
@@ -833,9 +833,7 @@ class TestHyperspell:
 
         respx_mock.post("/documents/add").mock(side_effect=retry_handler)
 
-        response = client.documents.with_raw_response.add(
-            collection="collection", text="text", extra_headers={"x-stainless-retry-count": "42"}
-        )
+        response = client.documents.with_raw_response.add(text="text", extra_headers={"x-stainless-retry-count": "42"})
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
 
@@ -1525,7 +1523,7 @@ class TestAsyncHyperspell:
         with pytest.raises(APITimeoutError):
             await self.client.post(
                 "/documents/add",
-                body=cast(object, maybe_transform(dict(collection="collection", text="text"), DocumentAddParams)),
+                body=cast(object, maybe_transform(dict(text="text"), DocumentAddParams)),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -1540,7 +1538,7 @@ class TestAsyncHyperspell:
         with pytest.raises(APIStatusError):
             await self.client.post(
                 "/documents/add",
-                body=cast(object, maybe_transform(dict(collection="collection", text="text"), DocumentAddParams)),
+                body=cast(object, maybe_transform(dict(text="text"), DocumentAddParams)),
                 cast_to=httpx.Response,
                 options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
             )
@@ -1574,7 +1572,7 @@ class TestAsyncHyperspell:
 
         respx_mock.post("/documents/add").mock(side_effect=retry_handler)
 
-        response = await client.documents.with_raw_response.add(collection="collection", text="text")
+        response = await client.documents.with_raw_response.add(text="text")
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -1600,7 +1598,7 @@ class TestAsyncHyperspell:
         respx_mock.post("/documents/add").mock(side_effect=retry_handler)
 
         response = await client.documents.with_raw_response.add(
-            collection="collection", text="text", extra_headers={"x-stainless-retry-count": Omit()}
+            text="text", extra_headers={"x-stainless-retry-count": Omit()}
         )
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
@@ -1626,7 +1624,7 @@ class TestAsyncHyperspell:
         respx_mock.post("/documents/add").mock(side_effect=retry_handler)
 
         response = await client.documents.with_raw_response.add(
-            collection="collection", text="text", extra_headers={"x-stainless-retry-count": "42"}
+            text="text", extra_headers={"x-stainless-retry-count": "42"}
         )
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"

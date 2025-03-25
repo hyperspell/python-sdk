@@ -2,91 +2,25 @@
 
 from typing import Dict, List, Union, Optional
 from datetime import datetime
-from typing_extensions import Literal, TypeAlias
+from typing_extensions import Literal
 
-from .scores import Scores
 from .._models import BaseModel
 
-__all__ = [
-    "Document",
-    "Event",
-    "Section",
-    "SectionSectionResult",
-    "SectionSectionResultWithElements",
-    "SectionSectionResultWithElementsElement",
-    "SectionSectionResultWithElementsElementMetadata",
-]
-
-
-class Event(BaseModel):
-    message: str
-
-    type: Literal["error", "warning", "info"]
-
-    time: Optional[datetime] = None
-
-
-class SectionSectionResult(BaseModel):
-    id: Optional[int] = None
-
-    scores: Optional[Scores] = None
-
-    text: Optional[str] = None
-
-
-class SectionSectionResultWithElementsElementMetadata(BaseModel):
-    author: Optional[str] = None
-
-    continued_from: Optional[str] = None
-    """
-    The id of the element that this element is continued from if it had to be split
-    during chunking
-    """
-
-    filename: Optional[str] = None
-
-    languages: Optional[List[str]] = None
-
-    links: Optional[List[str]] = None
-
-    page_number: Optional[int] = None
-
-    title_level: Optional[int] = None
-
-
-class SectionSectionResultWithElementsElement(BaseModel):
-    text: str
-
-    type: Literal["text", "markdown", "image", "table", "title", "query"]
-
-    id: Optional[str] = None
-
-    metadata: Optional[SectionSectionResultWithElementsElementMetadata] = None
-
-    summary: Optional[str] = None
-
-
-class SectionSectionResultWithElements(BaseModel):
-    id: Optional[int] = None
-
-    elements: Optional[List[SectionSectionResultWithElementsElement]] = None
-
-    scores: Optional[Scores] = None
-
-    text: Optional[str] = None
-
-
-Section: TypeAlias = Union[SectionSectionResult, SectionSectionResultWithElements]
+__all__ = ["Document"]
 
 
 class Document(BaseModel):
     collection: str
 
+    data: Union[List[object], object]
+    """Structured representation of the document"""
+
+    summary: str
+    """Summary of the document"""
+
     id: Optional[int] = None
 
     created_at: Optional[datetime] = None
-
-    events: Optional[List[Event]] = None
 
     ingested_at: Optional[datetime] = None
 
@@ -95,9 +29,13 @@ class Document(BaseModel):
     resource_id: Optional[str] = None
     """Along with service, uniquely identifies the source document"""
 
-    sections: Optional[List[Section]] = None
+    source: Optional[Literal["generic", "slack", "s3", "gmail", "notion", "google_docs", "hubspot"]] = None
 
-    source: Optional[
+    status: Optional[Literal["pending", "processing", "completed", "failed"]] = None
+
+    title: Optional[str] = None
+
+    type: Optional[
         Literal[
             "generic",
             "markdown",
@@ -109,14 +47,17 @@ class Document(BaseModel):
             "image",
             "pdf",
             "audio",
-            "slack",
-            "s3",
-            "gmail",
-            "notion",
-            "google_docs",
+            "spreadsheet",
+            "archive",
+            "book",
+            "video",
+            "code",
+            "calendar",
+            "json",
+            "presentation",
+            "unsupported",
+            "person",
+            "company",
+            "crm_contact",
         ]
     ] = None
-
-    status: Optional[Literal["pending", "processing", "completed", "failed"]] = None
-
-    title: Optional[str] = None

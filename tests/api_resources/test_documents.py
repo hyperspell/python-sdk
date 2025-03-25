@@ -25,9 +25,7 @@ class TestDocuments:
 
     @parametrize
     def test_method_list(self, client: Hyperspell) -> None:
-        document = client.documents.list(
-            collection="collection",
-        )
+        document = client.documents.list()
         assert_matches_type(SyncCursorPage[DocumentListResponse], document, path=["response"])
 
     @parametrize
@@ -41,9 +39,7 @@ class TestDocuments:
 
     @parametrize
     def test_raw_response_list(self, client: Hyperspell) -> None:
-        response = client.documents.with_raw_response.list(
-            collection="collection",
-        )
+        response = client.documents.with_raw_response.list()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -52,9 +48,7 @@ class TestDocuments:
 
     @parametrize
     def test_streaming_response_list(self, client: Hyperspell) -> None:
-        with client.documents.with_streaming_response.list(
-            collection="collection",
-        ) as response:
+        with client.documents.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -66,7 +60,6 @@ class TestDocuments:
     @parametrize
     def test_method_add(self, client: Hyperspell) -> None:
         document = client.documents.add(
-            collection="collection",
             text="text",
         )
         assert_matches_type(DocumentStatus, document, path=["response"])
@@ -74,8 +67,8 @@ class TestDocuments:
     @parametrize
     def test_method_add_with_all_params(self, client: Hyperspell) -> None:
         document = client.documents.add(
-            collection="collection",
             text="text",
+            collection="collection",
             date=parse_datetime("2019-12-27T18:11:19.117Z"),
             source="generic",
             title="title",
@@ -85,7 +78,6 @@ class TestDocuments:
     @parametrize
     def test_raw_response_add(self, client: Hyperspell) -> None:
         response = client.documents.with_raw_response.add(
-            collection="collection",
             text="text",
         )
 
@@ -97,7 +89,6 @@ class TestDocuments:
     @parametrize
     def test_streaming_response_add(self, client: Hyperspell) -> None:
         with client.documents.with_streaming_response.add(
-            collection="collection",
             text="text",
         ) as response:
             assert not response.is_closed
@@ -111,15 +102,21 @@ class TestDocuments:
     @parametrize
     def test_method_add_url(self, client: Hyperspell) -> None:
         document = client.documents.add_url(
-            collection="collection",
             url="url",
+        )
+        assert_matches_type(DocumentStatus, document, path=["response"])
+
+    @parametrize
+    def test_method_add_url_with_all_params(self, client: Hyperspell) -> None:
+        document = client.documents.add_url(
+            url="url",
+            collection="collection",
         )
         assert_matches_type(DocumentStatus, document, path=["response"])
 
     @parametrize
     def test_raw_response_add_url(self, client: Hyperspell) -> None:
         response = client.documents.with_raw_response.add_url(
-            collection="collection",
             url="url",
         )
 
@@ -131,7 +128,6 @@ class TestDocuments:
     @parametrize
     def test_streaming_response_add_url(self, client: Hyperspell) -> None:
         with client.documents.with_streaming_response.add_url(
-            collection="collection",
             url="url",
         ) as response:
             assert not response.is_closed
@@ -213,9 +209,7 @@ class TestAsyncDocuments:
 
     @parametrize
     async def test_method_list(self, async_client: AsyncHyperspell) -> None:
-        document = await async_client.documents.list(
-            collection="collection",
-        )
+        document = await async_client.documents.list()
         assert_matches_type(AsyncCursorPage[DocumentListResponse], document, path=["response"])
 
     @parametrize
@@ -229,9 +223,7 @@ class TestAsyncDocuments:
 
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncHyperspell) -> None:
-        response = await async_client.documents.with_raw_response.list(
-            collection="collection",
-        )
+        response = await async_client.documents.with_raw_response.list()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -240,9 +232,7 @@ class TestAsyncDocuments:
 
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncHyperspell) -> None:
-        async with async_client.documents.with_streaming_response.list(
-            collection="collection",
-        ) as response:
+        async with async_client.documents.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -254,7 +244,6 @@ class TestAsyncDocuments:
     @parametrize
     async def test_method_add(self, async_client: AsyncHyperspell) -> None:
         document = await async_client.documents.add(
-            collection="collection",
             text="text",
         )
         assert_matches_type(DocumentStatus, document, path=["response"])
@@ -262,8 +251,8 @@ class TestAsyncDocuments:
     @parametrize
     async def test_method_add_with_all_params(self, async_client: AsyncHyperspell) -> None:
         document = await async_client.documents.add(
-            collection="collection",
             text="text",
+            collection="collection",
             date=parse_datetime("2019-12-27T18:11:19.117Z"),
             source="generic",
             title="title",
@@ -273,7 +262,6 @@ class TestAsyncDocuments:
     @parametrize
     async def test_raw_response_add(self, async_client: AsyncHyperspell) -> None:
         response = await async_client.documents.with_raw_response.add(
-            collection="collection",
             text="text",
         )
 
@@ -285,7 +273,6 @@ class TestAsyncDocuments:
     @parametrize
     async def test_streaming_response_add(self, async_client: AsyncHyperspell) -> None:
         async with async_client.documents.with_streaming_response.add(
-            collection="collection",
             text="text",
         ) as response:
             assert not response.is_closed
@@ -299,15 +286,21 @@ class TestAsyncDocuments:
     @parametrize
     async def test_method_add_url(self, async_client: AsyncHyperspell) -> None:
         document = await async_client.documents.add_url(
-            collection="collection",
             url="url",
+        )
+        assert_matches_type(DocumentStatus, document, path=["response"])
+
+    @parametrize
+    async def test_method_add_url_with_all_params(self, async_client: AsyncHyperspell) -> None:
+        document = await async_client.documents.add_url(
+            url="url",
+            collection="collection",
         )
         assert_matches_type(DocumentStatus, document, path=["response"])
 
     @parametrize
     async def test_raw_response_add_url(self, async_client: AsyncHyperspell) -> None:
         response = await async_client.documents.with_raw_response.add_url(
-            collection="collection",
             url="url",
         )
 
@@ -319,7 +312,6 @@ class TestAsyncDocuments:
     @parametrize
     async def test_streaming_response_add_url(self, async_client: AsyncHyperspell) -> None:
         async with async_client.documents.with_streaming_response.add_url(
-            collection="collection",
             url="url",
         ) as response:
             assert not response.is_closed
