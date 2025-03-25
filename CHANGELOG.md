@@ -1,5 +1,56 @@
 # Changelog
 
+## 0.8.1 (2025-03-25)
+
+Full Changelog: [v0.5.3...v0.8.1](https://github.com/hyperspell/python-sdk/compare/v0.5.3...v0.8.1)
+
+### Features
+
+* **api:** api update ([78195d4](https://github.com/hyperspell/python-sdk/commit/78195d43929013ad14e6a079b2c63c2f90fb8377))
+* **api:** api update ([#43](https://github.com/hyperspell/python-sdk/issues/43)) ([7c8ccc6](https://github.com/hyperspell/python-sdk/commit/7c8ccc641b0f75f99dbd7a2992c15e03a39143c9))
+* **api:** api update ([#44](https://github.com/hyperspell/python-sdk/issues/44)) ([693304c](https://github.com/hyperspell/python-sdk/commit/693304cef80f58fbda0eb78368a2047830f77c50))
+* **api:** api update ([#48](https://github.com/hyperspell/python-sdk/issues/48)) ([5a8674d](https://github.com/hyperspell/python-sdk/commit/5a8674d60ac79e1a0e2784bd63aafa2a59727357))
+* **api:** api update ([#49](https://github.com/hyperspell/python-sdk/issues/49)) ([2c1476c](https://github.com/hyperspell/python-sdk/commit/2c1476cdb81b093fa1729b830822be93f3709527))
+* **api:** api update ([#71](https://github.com/hyperspell/python-sdk/issues/71)) ([5e4a65e](https://github.com/hyperspell/python-sdk/commit/5e4a65e73caf6914b2aa6a847709fb6b490af0f1))
+* **api:** update via SDK Studio ([#41](https://github.com/hyperspell/python-sdk/issues/41)) ([2aaad04](https://github.com/hyperspell/python-sdk/commit/2aaad04fee563cf795dd0dbbc9d15b2ee0bbac65))
+* **api:** update via SDK Studio ([#67](https://github.com/hyperspell/python-sdk/issues/67)) ([52566fe](https://github.com/hyperspell/python-sdk/commit/52566fe8f84f526eb78a5949b68de52bf0414cd4))
+* **api:** update via SDK Studio ([#68](https://github.com/hyperspell/python-sdk/issues/68)) ([3014583](https://github.com/hyperspell/python-sdk/commit/3014583dd53a24950206dc0b2ef7fb3be53fbf55))
+* **api:** update via SDK Studio ([#69](https://github.com/hyperspell/python-sdk/issues/69)) ([01cdba5](https://github.com/hyperspell/python-sdk/commit/01cdba5e514ddefc6f0aba9bcff2c8954a3b10e5))
+* **api:** update via SDK Studio ([#70](https://github.com/hyperspell/python-sdk/issues/70)) ([f5871a8](https://github.com/hyperspell/python-sdk/commit/f5871a8f77a3839d90ce67bedcf9336caafb227b))
+* **api:** update via SDK Studio ([#72](https://github.com/hyperspell/python-sdk/issues/72)) ([3551d71](https://github.com/hyperspell/python-sdk/commit/3551d711e30daaeac10f0935194ba97a30eecf87))
+* **client:** allow passing `NotGiven` for body ([#53](https://github.com/hyperspell/python-sdk/issues/53)) ([25f5f65](https://github.com/hyperspell/python-sdk/commit/25f5f65fe53fc426f3901ff5c0dabf77be7b0bdc))
+* **client:** send `X-Stainless-Read-Timeout` header ([#45](https://github.com/hyperspell/python-sdk/issues/45)) ([314ac6f](https://github.com/hyperspell/python-sdk/commit/314ac6fbf8b7dbd4b3eb9d5293c4bdf6d21b4f36))
+
+
+### Bug Fixes
+
+* asyncify on non-asyncio runtimes ([#51](https://github.com/hyperspell/python-sdk/issues/51)) ([9a1d74d](https://github.com/hyperspell/python-sdk/commit/9a1d74da8a683ac1ae3474d298df21e097581a8d))
+* **ci:** ensure pip is always available ([#65](https://github.com/hyperspell/python-sdk/issues/65)) ([fc830b0](https://github.com/hyperspell/python-sdk/commit/fc830b067dfc5e4408c772ac2275ad34aa503f97))
+* **ci:** remove publishing patch ([#66](https://github.com/hyperspell/python-sdk/issues/66)) ([ca14208](https://github.com/hyperspell/python-sdk/commit/ca142083e62f5214f3b6fdd21a32c233a6d10ced))
+* **client:** mark some request bodies as optional ([25f5f65](https://github.com/hyperspell/python-sdk/commit/25f5f65fe53fc426f3901ff5c0dabf77be7b0bdc))
+* **types:** handle more discriminated union shapes ([#64](https://github.com/hyperspell/python-sdk/issues/64)) ([ea3ea28](https://github.com/hyperspell/python-sdk/commit/ea3ea28c4fca79d43f3372824dffdf5603d51f27))
+
+
+### Chores
+
+* **docs:** update client docstring ([#57](https://github.com/hyperspell/python-sdk/issues/57)) ([b93eac9](https://github.com/hyperspell/python-sdk/commit/b93eac92c1aa75241baaeba8979ec9603a538193))
+* **internal:** bump rye to 0.44.0 ([#63](https://github.com/hyperspell/python-sdk/issues/63)) ([d0d34fc](https://github.com/hyperspell/python-sdk/commit/d0d34fc3b73469284cdc43bc61bbee53906acb1d))
+* **internal:** codegen related update ([#52](https://github.com/hyperspell/python-sdk/issues/52)) ([1663641](https://github.com/hyperspell/python-sdk/commit/166364110507a27382de3ed086da802448a40420))
+* **internal:** codegen related update ([#62](https://github.com/hyperspell/python-sdk/issues/62)) ([7d8fa4f](https://github.com/hyperspell/python-sdk/commit/7d8fa4f7989e99c2da10e7119d1f0410d38362db))
+* **internal:** fix devcontainers setup ([#54](https://github.com/hyperspell/python-sdk/issues/54)) ([6b255f1](https://github.com/hyperspell/python-sdk/commit/6b255f161ecc1c9113b829327fe162167bf62b9b))
+* **internal:** fix type traversing dictionary params ([#46](https://github.com/hyperspell/python-sdk/issues/46)) ([3b755e0](https://github.com/hyperspell/python-sdk/commit/3b755e0e12f723232830aa9398f61b8d55da5735))
+* **internal:** minor type handling changes ([#47](https://github.com/hyperspell/python-sdk/issues/47)) ([de1503e](https://github.com/hyperspell/python-sdk/commit/de1503e4e5feabe6267187654467ced1f171ff57))
+* **internal:** properly set __pydantic_private__ ([#55](https://github.com/hyperspell/python-sdk/issues/55)) ([412ccce](https://github.com/hyperspell/python-sdk/commit/412ccce91dc434650d88bc4c41f096c06132f1de))
+* **internal:** remove extra empty newlines ([#61](https://github.com/hyperspell/python-sdk/issues/61)) ([b299f2e](https://github.com/hyperspell/python-sdk/commit/b299f2e25d537d7baf139579d11826e8fdbf655d))
+* **internal:** remove unused http client options forwarding ([#58](https://github.com/hyperspell/python-sdk/issues/58)) ([da92b87](https://github.com/hyperspell/python-sdk/commit/da92b87db946431698648460c2fa71ffaffe3437))
+* **internal:** update client tests ([#50](https://github.com/hyperspell/python-sdk/issues/50)) ([f31aeaf](https://github.com/hyperspell/python-sdk/commit/f31aeaf9eaecb541fbc092b5997518efbc8a34e9))
+
+
+### Documentation
+
+* revise readme docs about nested params ([#59](https://github.com/hyperspell/python-sdk/issues/59)) ([26a8c1e](https://github.com/hyperspell/python-sdk/commit/26a8c1e11b1d4286dbc627db63c064dc05e901f3))
+* update URLs from stainlessapi.com to stainless.com ([#56](https://github.com/hyperspell/python-sdk/issues/56)) ([fb40ed8](https://github.com/hyperspell/python-sdk/commit/fb40ed87bdd21583e133307eb6c158d55e49b432))
+
 ## 0.5.3 (2025-02-04)
 
 Full Changelog: [v1.0.0...v0.5.3](https://github.com/hyperspell/python-sdk/compare/v1.0.0...v0.5.3)
