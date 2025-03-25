@@ -1,63 +1,34 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Dict, List, Optional
+from typing import Dict, List, Union, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
+from .scores import Scores
 from .._models import BaseModel
 
-__all__ = ["DocumentListResponse", "Section", "SectionElement", "SectionElementMetadata", "SectionScores"]
+__all__ = ["DocumentListResponse", "Event", "Section"]
 
 
-class SectionElementMetadata(BaseModel):
-    author: Optional[str] = None
+class Event(BaseModel):
+    message: str
 
-    continued_from: Optional[str] = None
-    """
-    The id of the element that this element is continued from if it had to be split
-    during chunking
-    """
+    type: Literal["error", "warning", "info"]
 
-    filename: Optional[str] = None
-
-    languages: Optional[List[str]] = None
-
-    links: Optional[List[str]] = None
-
-    page_number: Optional[int] = None
-
-    title_level: Optional[int] = None
-
-
-class SectionElement(BaseModel):
-    text: str
-
-    type: Literal["text", "markdown", "image", "table", "title", "query"]
-
-    id: Optional[str] = None
-
-    metadata: Optional[SectionElementMetadata] = None
-
-    summary: Optional[str] = None
-
-
-class SectionScores(BaseModel):
-    full_text_search: Optional[float] = None
-    """How relevant the section is based on full text search"""
-
-    semantic_search: Optional[float] = None
-    """How relevant the section is based on vector search"""
-
-    weighted: Optional[float] = None
-    """The final weighted score of the section"""
+    time: Optional[datetime] = None
 
 
 class Section(BaseModel):
     document_id: int
 
+    text: str
+    """Summary of the section"""
+
     id: Optional[int] = None
 
-    elements: Optional[List[SectionElement]] = None
+    content: Optional[str] = None
+
+    elements: Optional[List[object]] = None
 
     embedding_e5_large: Optional[List[float]] = None
 
@@ -65,17 +36,23 @@ class Section(BaseModel):
 
     metadata: Optional[Dict[str, object]] = None
 
-    scores: Optional[SectionScores] = None
-
-    text: Optional[str] = None
+    scores: Optional[Scores] = None
 
 
 class DocumentListResponse(BaseModel):
+    data: Union[List[object], object]
+    """Structured representation of the document"""
+
+    summary: str
+    """Summary of the document"""
+
     id: Optional[int] = None
 
     collection: Optional[str] = None
 
     created_at: Optional[datetime] = None
+
+    events: Optional[List[Event]] = None
 
     ingested_at: Optional[datetime] = None
 
@@ -88,7 +65,13 @@ class DocumentListResponse(BaseModel):
 
     sections_count: Optional[int] = None
 
-    source: Optional[
+    source: Optional[Literal["generic", "slack", "s3", "gmail", "notion", "google_docs", "hubspot"]] = None
+
+    status: Optional[Literal["pending", "processing", "completed", "failed"]] = None
+
+    title: Optional[str] = None
+
+    type: Optional[
         Literal[
             "generic",
             "markdown",
@@ -100,14 +83,17 @@ class DocumentListResponse(BaseModel):
             "image",
             "pdf",
             "audio",
-            "slack",
-            "s3",
-            "gmail",
-            "notion",
-            "google_docs",
+            "spreadsheet",
+            "archive",
+            "book",
+            "video",
+            "code",
+            "calendar",
+            "json",
+            "presentation",
+            "unsupported",
+            "person",
+            "company",
+            "crm_contact",
         ]
     ] = None
-
-    status: Optional[Literal["pending", "processing", "completed", "failed"]] = None
-
-    title: Optional[str] = None

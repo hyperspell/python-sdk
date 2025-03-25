@@ -9,15 +9,12 @@ __all__ = ["DocumentAddURLParams"]
 
 
 class DocumentAddURLParams(TypedDict, total=False):
-    collection: Required[str]
+    url: Required[str]
+    """Source URL of the document."""
+
+    collection: Optional[str]
     """Name of the collection to add the document to.
 
-    If the collection does not exist, it will be created.
-    """
-
-    url: Optional[str]
-    """Source URL of the document.
-
-    If text is not provided and URL is publicly accessible, Hyperspell will retrieve
-    the document from this URL.
+    If the collection does not exist, it will be created. If not given, the document
+    will be added to the user's default collection.
     """

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List
+from typing import List, Union
 from typing_extensions import Literal
 
 import httpx
@@ -51,7 +51,7 @@ class QueryResource(SyncAPIResource):
         self,
         *,
         query: str,
-        collections: List[str] | NotGiven = NOT_GIVEN,
+        collections: Union[str, List[str], None] | NotGiven = NOT_GIVEN,
         filter: query_search_params.Filter | NotGiven = NOT_GIVEN,
         include_elements: bool | NotGiven = NOT_GIVEN,
         max_results: int | NotGiven = NOT_GIVEN,
@@ -69,7 +69,8 @@ class QueryResource(SyncAPIResource):
         Args:
           query: Query to run.
 
-          collections: Only query documents in these collections.
+          collections: Only query documents in these collections. If not given, will query the user's
+              default collection
 
           filter: Filter the query results.
 
@@ -131,7 +132,7 @@ class AsyncQueryResource(AsyncAPIResource):
         self,
         *,
         query: str,
-        collections: List[str] | NotGiven = NOT_GIVEN,
+        collections: Union[str, List[str], None] | NotGiven = NOT_GIVEN,
         filter: query_search_params.Filter | NotGiven = NOT_GIVEN,
         include_elements: bool | NotGiven = NOT_GIVEN,
         max_results: int | NotGiven = NOT_GIVEN,
@@ -149,7 +150,8 @@ class AsyncQueryResource(AsyncAPIResource):
         Args:
           query: Query to run.
 
-          collections: Only query documents in these collections.
+          collections: Only query documents in these collections. If not given, will query the user's
+              default collection
 
           filter: Filter the query results.
 

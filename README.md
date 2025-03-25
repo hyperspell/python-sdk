@@ -6,7 +6,7 @@ The Hyperspell Python library provides convenient access to the Hyperspell REST 
 application. The library includes type definitions for all request params and response fields,
 and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
 
-It is generated with [Stainless](https://www.stainlessapi.com/).
+It is generated with [Stainless](https://www.stainless.com/).
 
 ## Documentation
 
@@ -32,7 +32,6 @@ client = Hyperspell(
 )
 
 document_status = client.documents.add(
-    collection="collection",
     text="text",
 )
 print(document_status.id)
@@ -59,7 +58,6 @@ client = AsyncHyperspell(
 
 async def main() -> None:
     document_status = await client.documents.add(
-        collection="collection",
         text="text",
     )
     print(document_status.id)
@@ -150,6 +148,48 @@ for document in first_page.items:
 # Remove `await` for non-async usage.
 ```
 
+from hyperspell.\_utils import parse_datetime
+from hyperspell.\_utils import parse_datetime
+
+## Nested params
+
+Nested parameters are dictionaries, typed using `TypedDict`, for example:
+
+```python
+from hyperspell import Hyperspell
+
+client = Hyperspell()
+
+response = client.query.search(
+    query="query",
+    filter={
+        "end_date": parse_datetime("2019-12-27T18:11:19.117Z"),
+        "source": ["generic"],
+        "start_date": parse_datetime("2019-12-27T18:11:19.117Z"),
+        "types": ["generic"],
+    },
+)
+print(response.filter)
+```
+
+## File uploads
+
+Request parameters that correspond to file uploads can be passed as `bytes`, a [`PathLike`](https://docs.python.org/3/library/os.html#os.PathLike) instance or a tuple of `(filename, contents, media type)`.
+
+```python
+from pathlib import Path
+from hyperspell import Hyperspell
+
+client = Hyperspell()
+
+client.documents.upload(
+    collection="collection",
+    file=Path("/path/to/file"),
+)
+```
+
+The async client uses the exact same interface. If you pass a [`PathLike`](https://docs.python.org/3/library/os.html#os.PathLike) instance, the file contents will be read asynchronously automatically.
+
 ## Handling errors
 
 When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `hyperspell.APIConnectionError` is raised.
@@ -167,7 +207,6 @@ client = Hyperspell()
 
 try:
     client.documents.add(
-        collection="collection",
         text="text",
     )
 except hyperspell.APIConnectionError as e:
@@ -213,7 +252,6 @@ client = Hyperspell(
 
 # Or, configure per-request:
 client.with_options(max_retries=5).documents.add(
-    collection="collection",
     text="text",
 )
 ```
@@ -239,7 +277,6 @@ client = Hyperspell(
 
 # Override per-request:
 client.with_options(timeout=5.0).documents.add(
-    collection="collection",
     text="text",
 )
 ```
@@ -283,7 +320,6 @@ from hyperspell import Hyperspell
 
 client = Hyperspell()
 response = client.documents.with_raw_response.add(
-    collection="collection",
     text="text",
 )
 print(response.headers.get('X-My-Header'))
@@ -304,7 +340,6 @@ To stream the response body, use `.with_streaming_response` instead, which requi
 
 ```python
 with client.documents.with_streaming_response.add(
-    collection="collection",
     text="text",
 ) as response:
     print(response.headers.get("X-My-Header"))

@@ -3,7 +3,7 @@
 Types:
 
 ```python
-from hyperspell.types import Document, DocumentStatus, DocumentListResponse
+from hyperspell.types import Document, DocumentStatus, Scores, DocumentListResponse
 ```
 
 Methods:
