@@ -20,7 +20,7 @@ class App(BaseModel):
 
     id: Optional[int] = None
 
-    api_keys: Optional[List["APIKkey"]] = None
+    api_keys: Optional[List["APIKey"]] = None
 
     collections: Optional[List[object]] = None
 
@@ -37,7 +37,7 @@ class App(BaseModel):
     settings: Optional[object] = None
 
 
-from .api_kkey import APIKkey
+from .api_key import APIKey
 
 if PYDANTIC_V2:
     App.model_rebuild()
