@@ -22,7 +22,7 @@ class App(BaseModel):
 
     api_keys: Optional[List["APIKkey"]] = None
 
-    collections: Optional[List["Collection"]] = None
+    collections: Optional[List[object]] = None
 
     created_at: Optional[datetime] = None
 
@@ -38,7 +38,6 @@ class App(BaseModel):
 
 
 from .api_kkey import APIKkey
-from .collection import Collection
 
 if PYDANTIC_V2:
     App.model_rebuild()
