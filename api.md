@@ -1,9 +1,3 @@
-# Shared Types
-
-```python
-from hyperspell.types import APIKey, App
-```
-
 # Documents
 
 Types:
