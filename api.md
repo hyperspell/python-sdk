@@ -1,3 +1,9 @@
+# Shared Types
+
+```python
+from hyperspell.types import Apikey, App, Collection
+```
+
 # Documents
 
 Types:

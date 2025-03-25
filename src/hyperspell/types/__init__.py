@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from .token import Token as Token
 from .scores import Scores as Scores
+from .shared import App as App, Apikey as Apikey, Collection as Collection
 from .document import Document as Document
 from .collection import Collection as Collection
 from .document_status import DocumentStatus as DocumentStatus
