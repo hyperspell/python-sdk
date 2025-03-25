@@ -1,7 +1,7 @@
 # Shared Types
 
 ```python
-from hyperspell.types import Apikey, App, Collection
+from hyperspell.types import APIKkey, App, Collection
 ```
 
 # Documents
@@ -25,14 +25,14 @@ Methods:
 Types:
 
 ```python
-from hyperspell.types import Collection, CollectionListResponse
+from hyperspell.types import CollectionResponse, CollectionListResponse
 ```
 
 Methods:
 
-- <code title="post /collections/add">client.collections.<a href="./src/hyperspell/resources/collections.py">create</a>(\*\*<a href="src/hyperspell/types/collection_create_params.py">params</a>) -> <a href="./src/hyperspell/types/collection.py">Collection</a></code>
+- <code title="post /collections/add">client.collections.<a href="./src/hyperspell/resources/collections.py">create</a>(\*\*<a href="src/hyperspell/types/collection_create_params.py">params</a>) -> <a href="./src/hyperspell/types/collection_response.py">CollectionResponse</a></code>
 - <code title="get /collections/list">client.collections.<a href="./src/hyperspell/resources/collections.py">list</a>(\*\*<a href="src/hyperspell/types/collection_list_params.py">params</a>) -> <a href="./src/hyperspell/types/collection_list_response.py">SyncCursorPage[CollectionListResponse]</a></code>
-- <code title="get /collections/get/{name}">client.collections.<a href="./src/hyperspell/resources/collections.py">get</a>(name) -> <a href="./src/hyperspell/types/collection.py">Collection</a></code>
+- <code title="get /collections/get/{name}">client.collections.<a href="./src/hyperspell/resources/collections.py">get</a>(name) -> <a href="./src/hyperspell/types/collection_response.py">CollectionResponse</a></code>
 
 # Query
 

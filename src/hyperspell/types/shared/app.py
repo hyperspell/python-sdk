@@ -20,7 +20,7 @@ class App(BaseModel):
 
     id: Optional[int] = None
 
-    api_keys: Optional[List["Apikey"]] = None
+    api_keys: Optional[List["APIKkey"]] = None
 
     collections: Optional[List["Collection"]] = None
 
@@ -37,7 +37,7 @@ class App(BaseModel):
     settings: Optional[object] = None
 
 
-from .apikey import Apikey
+from .api_kkey import APIKkey
 from .collection import Collection
 
 if PYDANTIC_V2:
