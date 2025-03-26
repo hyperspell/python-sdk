@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.8.2 (2025-03-26)
+
+Full Changelog: [v0.8.1...v0.8.2](https://github.com/hyperspell/python-sdk/compare/v0.8.1...v0.8.2)
+
+### Chores
+
+* update SDK settings ([#74](https://github.com/hyperspell/python-sdk/issues/74)) ([2097566](https://github.com/hyperspell/python-sdk/commit/2097566f6ebaa15a5ab11191d3131f79aa2ae0fb))
+
 ## 0.8.1 (2025-03-25)
 
 Full Changelog: [v0.5.3...v0.8.1](https://github.com/hyperspell/python-sdk/compare/v0.5.3...v0.8.1)
