@@ -38,7 +38,7 @@ class Filter(TypedDict, total=False):
     end_date: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
     """Only query documents before this date."""
 
-    source: List[Literal["generic", "slack", "s3", "gmail", "notion", "google_docs", "hubspot"]]
+    source: List[Literal["generic", "mcp", "slack", "s3", "gmail", "notion", "google_docs", "hubspot"]]
     """Only query documents from these sources."""
 
     start_date: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
@@ -47,6 +47,7 @@ class Filter(TypedDict, total=False):
     types: List[
         Literal[
             "generic",
+            "memory",
             "markdown",
             "chat",
             "email",
