@@ -29,7 +29,7 @@ class Document(BaseModel):
     resource_id: Optional[str] = None
     """Along with service, uniquely identifies the source document"""
 
-    source: Optional[Literal["generic", "slack", "s3", "gmail", "notion", "google_docs", "hubspot"]] = None
+    source: Optional[Literal["generic", "mcp", "slack", "s3", "gmail", "notion", "google_docs", "hubspot"]] = None
 
     status: Optional[Literal["pending", "processing", "completed", "failed"]] = None
 
@@ -38,6 +38,7 @@ class Document(BaseModel):
     type: Optional[
         Literal[
             "generic",
+            "memory",
             "markdown",
             "chat",
             "email",
