@@ -36,7 +36,6 @@ class TestQuery:
                 "start_date": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "types": ["generic"],
             },
-            include_elements=True,
             max_results=0,
             query_type="auto",
         )
@@ -88,7 +87,6 @@ class TestAsyncQuery:
                 "start_date": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "types": ["generic"],
             },
-            include_elements=True,
             max_results=0,
             query_type="auto",
         )
