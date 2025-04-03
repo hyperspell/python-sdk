@@ -1,10 +1,9 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Dict, List, Union, Optional
+from typing import Dict, List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
-from .scores import Scores
 from .._models import BaseModel
 
 __all__ = ["DocumentListResponse", "Event", "Section"]
@@ -36,12 +35,10 @@ class Section(BaseModel):
 
     metadata: Optional[Dict[str, object]] = None
 
-    scores: Optional[Scores] = None
-
 
 class DocumentListResponse(BaseModel):
-    data: Union[List[object], object]
-    """Structured representation of the document"""
+    data: List[object]
+    """Summary of the document"""
 
     summary: str
     """Summary of the document"""
@@ -65,7 +62,11 @@ class DocumentListResponse(BaseModel):
 
     sections_count: Optional[int] = None
 
-    source: Optional[Literal["generic", "mcp", "slack", "s3", "gmail", "notion", "google_docs", "hubspot"]] = None
+    source: Optional[
+        Literal[
+            "generic", "mcp", "slack", "s3", "gmail", "notion", "google_docs", "hubspot", "reddit", "google-calendar"
+        ]
+    ] = None
 
     status: Optional[Literal["pending", "processing", "completed", "failed"]] = None
 
@@ -96,5 +97,6 @@ class DocumentListResponse(BaseModel):
             "person",
             "company",
             "crm_contact",
+            "event",
         ]
     ] = None

@@ -53,7 +53,6 @@ class QueryResource(SyncAPIResource):
         query: str,
         collections: Union[str, List[str], None] | NotGiven = NOT_GIVEN,
         filter: query_search_params.Filter | NotGiven = NOT_GIVEN,
-        include_elements: bool | NotGiven = NOT_GIVEN,
         max_results: int | NotGiven = NOT_GIVEN,
         query_type: Literal["auto", "semantic", "keyword"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -74,8 +73,6 @@ class QueryResource(SyncAPIResource):
 
           filter: Filter the query results.
 
-          include_elements: Include the elements of a section in the results.
-
           max_results: Maximum number of results to return.
 
           query_type: Type of query to run.
@@ -95,7 +92,6 @@ class QueryResource(SyncAPIResource):
                     "query": query,
                     "collections": collections,
                     "filter": filter,
-                    "include_elements": include_elements,
                     "max_results": max_results,
                     "query_type": query_type,
                 },
@@ -134,7 +130,6 @@ class AsyncQueryResource(AsyncAPIResource):
         query: str,
         collections: Union[str, List[str], None] | NotGiven = NOT_GIVEN,
         filter: query_search_params.Filter | NotGiven = NOT_GIVEN,
-        include_elements: bool | NotGiven = NOT_GIVEN,
         max_results: int | NotGiven = NOT_GIVEN,
         query_type: Literal["auto", "semantic", "keyword"] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -155,8 +150,6 @@ class AsyncQueryResource(AsyncAPIResource):
 
           filter: Filter the query results.
 
-          include_elements: Include the elements of a section in the results.
-
           max_results: Maximum number of results to return.
 
           query_type: Type of query to run.
@@ -176,7 +169,6 @@ class AsyncQueryResource(AsyncAPIResource):
                     "query": query,
                     "collections": collections,
                     "filter": filter,
-                    "include_elements": include_elements,
                     "max_results": max_results,
                     "query_type": query_type,
                 },

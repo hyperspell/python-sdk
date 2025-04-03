@@ -3,13 +3,12 @@
 from __future__ import annotations
 
 from .token import Token as Token
-from .scores import Scores as Scores
-from .document import Document as Document
 from .collection import Collection as Collection
 from .document_status import DocumentStatus as DocumentStatus
 from .document_add_params import DocumentAddParams as DocumentAddParams
 from .query_search_params import QuerySearchParams as QuerySearchParams
 from .document_list_params import DocumentListParams as DocumentListParams
+from .document_get_response import DocumentGetResponse as DocumentGetResponse
 from .query_search_response import QuerySearchResponse as QuerySearchResponse
 from .auth_user_token_params import AuthUserTokenParams as AuthUserTokenParams
 from .collection_list_params import CollectionListParams as CollectionListParams
