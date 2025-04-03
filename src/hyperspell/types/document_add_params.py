@@ -31,7 +31,9 @@ class DocumentAddParams(TypedDict, total=False):
     range.
     """
 
-    source: Literal["generic", "mcp", "slack", "s3", "gmail", "notion", "google_docs", "hubspot"]
+    source: Literal[
+        "generic", "mcp", "slack", "s3", "gmail", "notion", "google_docs", "hubspot", "reddit", "google-calendar"
+    ]
     """Source of the document.
 
     This helps in parsing the document. Note that some sources require the document
