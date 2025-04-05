@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, Union
+from typing import List
 from typing_extensions import Literal
 
 import httpx
@@ -51,10 +51,23 @@ class QueryResource(SyncAPIResource):
         self,
         *,
         query: str,
-        collections: Union[str, List[str], None] | NotGiven = NOT_GIVEN,
         filter: query_search_params.Filter | NotGiven = NOT_GIVEN,
         max_results: int | NotGiven = NOT_GIVEN,
-        query_type: Literal["auto", "semantic", "keyword"] | NotGiven = NOT_GIVEN,
+        sources: List[
+            Literal[
+                "collections",
+                "mcp",
+                "slack",
+                "s3",
+                "gmail",
+                "notion",
+                "google_docs",
+                "hubspot",
+                "reddit",
+                "google-calendar",
+            ]
+        ]
+        | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -68,14 +81,11 @@ class QueryResource(SyncAPIResource):
         Args:
           query: Query to run.
 
-          collections: Only query documents in these collections. If not given, will query the user's
-              default collection
-
           filter: Filter the query results.
 
           max_results: Maximum number of results to return.
 
-          query_type: Type of query to run.
+          sources: Only query documents from these sources.
 
           extra_headers: Send extra headers
 
@@ -90,10 +100,9 @@ class QueryResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "query": query,
-                    "collections": collections,
                     "filter": filter,
                     "max_results": max_results,
-                    "query_type": query_type,
+                    "sources": sources,
                 },
                 query_search_params.QuerySearchParams,
             ),
@@ -128,10 +137,23 @@ class AsyncQueryResource(AsyncAPIResource):
         self,
         *,
         query: str,
-        collections: Union[str, List[str], None] | NotGiven = NOT_GIVEN,
         filter: query_search_params.Filter | NotGiven = NOT_GIVEN,
         max_results: int | NotGiven = NOT_GIVEN,
-        query_type: Literal["auto", "semantic", "keyword"] | NotGiven = NOT_GIVEN,
+        sources: List[
+            Literal[
+                "collections",
+                "mcp",
+                "slack",
+                "s3",
+                "gmail",
+                "notion",
+                "google_docs",
+                "hubspot",
+                "reddit",
+                "google-calendar",
+            ]
+        ]
+        | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -145,14 +167,11 @@ class AsyncQueryResource(AsyncAPIResource):
         Args:
           query: Query to run.
 
-          collections: Only query documents in these collections. If not given, will query the user's
-              default collection
-
           filter: Filter the query results.
 
           max_results: Maximum number of results to return.
 
-          query_type: Type of query to run.
+          sources: Only query documents from these sources.
 
           extra_headers: Send extra headers
 
@@ -167,10 +186,9 @@ class AsyncQueryResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "query": query,
-                    "collections": collections,
                     "filter": filter,
                     "max_results": max_results,
-                    "query_type": query_type,
+                    "sources": sources,
                 },
                 query_search_params.QuerySearchParams,
             ),
