@@ -29,15 +29,13 @@ class TestQuery:
     def test_method_search_with_all_params(self, client: Hyperspell) -> None:
         query = client.query.search(
             query="query",
-            collections="string",
             filter={
-                "end_date": parse_datetime("2019-12-27T18:11:19.117Z"),
-                "source": ["generic"],
-                "start_date": parse_datetime("2019-12-27T18:11:19.117Z"),
-                "types": ["generic"],
+                "after": parse_datetime("2019-12-27T18:11:19.117Z"),
+                "before": parse_datetime("2019-12-27T18:11:19.117Z"),
+                "collections": "string",
             },
             max_results=0,
-            query_type="auto",
+            sources=["collections"],
         )
         assert_matches_type(QuerySearchResponse, query, path=["response"])
 
@@ -80,15 +78,13 @@ class TestAsyncQuery:
     async def test_method_search_with_all_params(self, async_client: AsyncHyperspell) -> None:
         query = await async_client.query.search(
             query="query",
-            collections="string",
             filter={
-                "end_date": parse_datetime("2019-12-27T18:11:19.117Z"),
-                "source": ["generic"],
-                "start_date": parse_datetime("2019-12-27T18:11:19.117Z"),
-                "types": ["generic"],
+                "after": parse_datetime("2019-12-27T18:11:19.117Z"),
+                "before": parse_datetime("2019-12-27T18:11:19.117Z"),
+                "collections": "string",
             },
             max_results=0,
-            query_type="auto",
+            sources=["collections"],
         )
         assert_matches_type(QuerySearchResponse, query, path=["response"])
 

@@ -23,7 +23,7 @@ class DocumentGetResponse(BaseModel):
     resource_id: str
 
     source: Literal[
-        "generic", "mcp", "slack", "s3", "gmail", "notion", "google_docs", "hubspot", "reddit", "google-calendar"
+        "collections", "mcp", "slack", "s3", "gmail", "notion", "google_docs", "hubspot", "reddit", "google-calendar"
     ]
 
     id: Optional[int] = None

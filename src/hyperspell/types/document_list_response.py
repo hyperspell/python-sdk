@@ -64,7 +64,16 @@ class DocumentListResponse(BaseModel):
 
     source: Optional[
         Literal[
-            "generic", "mcp", "slack", "s3", "gmail", "notion", "google_docs", "hubspot", "reddit", "google-calendar"
+            "collections",
+            "mcp",
+            "slack",
+            "s3",
+            "gmail",
+            "notion",
+            "google_docs",
+            "hubspot",
+            "reddit",
+            "google-calendar",
         ]
     ] = None
 
