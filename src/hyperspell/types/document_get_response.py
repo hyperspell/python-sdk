@@ -1,12 +1,12 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import TYPE_CHECKING, List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["DocumentGetResponse", "Event"]
+__all__ = ["DocumentGetResponse", "Event", "Metadata"]
 
 
 class Event(BaseModel):
@@ -17,9 +17,21 @@ class Event(BaseModel):
     time: Optional[datetime] = None
 
 
-class DocumentGetResponse(BaseModel):
-    collection: str
+class Metadata(BaseModel):
+    created_at: Optional[datetime] = None
 
+    last_modified: Optional[datetime] = None
+
+    url: Optional[str] = None
+
+    if TYPE_CHECKING:
+        # Stub to indicate that arbitrary properties are accepted.
+        # To access properties that are not valid identifiers you can use `getattr`, e.g.
+        # `getattr(obj, '$type')`
+        def __getattr__(self, attr: str) -> object: ...
+
+
+class DocumentGetResponse(BaseModel):
     resource_id: str
 
     source: Literal[
@@ -28,13 +40,15 @@ class DocumentGetResponse(BaseModel):
 
     id: Optional[int] = None
 
+    collection: Optional[str] = None
+
     data: Optional[List[object]] = None
 
     events: Optional[List[Event]] = None
 
-    extra: Optional[object] = None
-
     highlights: Optional[List[object]] = None
+
+    metadata: Optional[Metadata] = None
 
     summary: Optional[str] = None
 
