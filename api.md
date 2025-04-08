@@ -11,7 +11,7 @@ Methods:
 - <code title="get /documents/list">client.documents.<a href="./src/hyperspell/resources/documents.py">list</a>(\*\*<a href="src/hyperspell/types/document_list_params.py">params</a>) -> <a href="./src/hyperspell/types/document_list_response.py">SyncCursorPage[DocumentListResponse]</a></code>
 - <code title="post /documents/add">client.documents.<a href="./src/hyperspell/resources/documents.py">add</a>(\*\*<a href="src/hyperspell/types/document_add_params.py">params</a>) -> <a href="./src/hyperspell/types/document_status.py">DocumentStatus</a></code>
 - <code title="post /documents/scrape">client.documents.<a href="./src/hyperspell/resources/documents.py">add_url</a>(\*\*<a href="src/hyperspell/types/document_add_url_params.py">params</a>) -> <a href="./src/hyperspell/types/document_status.py">DocumentStatus</a></code>
-- <code title="get /documents/get/{document_id}">client.documents.<a href="./src/hyperspell/resources/documents.py">get</a>(document_id) -> <a href="./src/hyperspell/types/document_get_response.py">DocumentGetResponse</a></code>
+- <code title="get /documents/get/{document_id}">client.documents.<a href="./src/hyperspell/resources/documents.py">get</a>(document_id) -> <a href="./src/hyperspell/types/document_get_response.py">object</a></code>
 - <code title="post /documents/upload">client.documents.<a href="./src/hyperspell/resources/documents.py">upload</a>(\*\*<a href="src/hyperspell/types/document_upload_params.py">params</a>) -> <a href="./src/hyperspell/types/document_status.py">DocumentStatus</a></code>
 
 # Collections
