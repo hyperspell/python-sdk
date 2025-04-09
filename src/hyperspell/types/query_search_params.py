@@ -15,6 +15,9 @@ class QuerySearchParams(TypedDict, total=False):
     query: Required[str]
     """Query to run."""
 
+    answer: bool
+    """If true, the query will be answered along with matching source documents."""
+
     filter: Filter
     """Filter the query results."""
 
