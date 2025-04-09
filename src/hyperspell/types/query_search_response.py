@@ -42,6 +42,9 @@ class Error(BaseModel):
 class QuerySearchResponse(BaseModel):
     documents: List[Document]
 
+    answer: Optional[str] = None
+    """The answer to the query, if the request was set to answer."""
+
     errors: Optional[List[Error]] = None
     """Errors that occurred during the query.
 

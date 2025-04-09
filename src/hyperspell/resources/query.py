@@ -51,6 +51,7 @@ class QueryResource(SyncAPIResource):
         self,
         *,
         query: str,
+        answer: bool | NotGiven = NOT_GIVEN,
         filter: query_search_params.Filter | NotGiven = NOT_GIVEN,
         max_results: int | NotGiven = NOT_GIVEN,
         sources: List[
@@ -81,6 +82,8 @@ class QueryResource(SyncAPIResource):
         Args:
           query: Query to run.
 
+          answer: If true, the query will be answered along with matching source documents.
+
           filter: Filter the query results.
 
           max_results: Maximum number of results to return.
@@ -100,6 +103,7 @@ class QueryResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "query": query,
+                    "answer": answer,
                     "filter": filter,
                     "max_results": max_results,
                     "sources": sources,
@@ -137,6 +141,7 @@ class AsyncQueryResource(AsyncAPIResource):
         self,
         *,
         query: str,
+        answer: bool | NotGiven = NOT_GIVEN,
         filter: query_search_params.Filter | NotGiven = NOT_GIVEN,
         max_results: int | NotGiven = NOT_GIVEN,
         sources: List[
@@ -167,6 +172,8 @@ class AsyncQueryResource(AsyncAPIResource):
         Args:
           query: Query to run.
 
+          answer: If true, the query will be answered along with matching source documents.
+
           filter: Filter the query results.
 
           max_results: Maximum number of results to return.
@@ -186,6 +193,7 @@ class AsyncQueryResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "query": query,
+                    "answer": answer,
                     "filter": filter,
                     "max_results": max_results,
                     "sources": sources,
