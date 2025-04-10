@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.9.0 (2025-04-10)
+
+Full Changelog: [v0.8.2...v0.9.0](https://github.com/hyperspell/python-sdk/compare/v0.8.2...v0.9.0)
+
+### Features
+
+* **api:** api update ([cd17269](https://github.com/hyperspell/python-sdk/commit/cd17269808efe9af49416acb84ae6e1eaa4ef1c4))
+* **api:** api update ([#77](https://github.com/hyperspell/python-sdk/issues/77)) ([5df0fc9](https://github.com/hyperspell/python-sdk/commit/5df0fc974b9990b3f00aec8e41822d418f0410ed))
+* **api:** api update ([#79](https://github.com/hyperspell/python-sdk/issues/79)) ([4bbaa8b](https://github.com/hyperspell/python-sdk/commit/4bbaa8b5ee05ad8794f838cbba09244639598f1f))
+* **api:** api update ([#81](https://github.com/hyperspell/python-sdk/issues/81)) ([816ced9](https://github.com/hyperspell/python-sdk/commit/816ced9a28f9f7d29488c54916f5166c53905a7b))
+* **api:** api update ([#82](https://github.com/hyperspell/python-sdk/issues/82)) ([2a12261](https://github.com/hyperspell/python-sdk/commit/2a12261f52ef6c38863f54c46007b31cb888b45e))
+* **api:** api update ([#83](https://github.com/hyperspell/python-sdk/issues/83)) ([e349d69](https://github.com/hyperspell/python-sdk/commit/e349d6919cf8bc3276b5da7e8aa3cfa8d4e23a67))
+* **api:** api update ([#86](https://github.com/hyperspell/python-sdk/issues/86)) ([9cfa06b](https://github.com/hyperspell/python-sdk/commit/9cfa06b7c4bfab15f9b2e973b767dc02c9961877))
+
+
+### Chores
+
+* **internal:** expand CI branch coverage ([f1427b7](https://github.com/hyperspell/python-sdk/commit/f1427b73328af89415877c97b15d65ba86fa8ca4))
+* **internal:** reduce CI branch coverage ([31cead5](https://github.com/hyperspell/python-sdk/commit/31cead5ba3df9609967a8f8f3f579b4c856fe649))
+* **internal:** remove trailing character ([#80](https://github.com/hyperspell/python-sdk/issues/80)) ([f28f2b7](https://github.com/hyperspell/python-sdk/commit/f28f2b705e253c8cb73b67eab20ed9e5c52a8f5d))
+* **internal:** slight transform perf improvement ([#84](https://github.com/hyperspell/python-sdk/issues/84)) ([1a6703c](https://github.com/hyperspell/python-sdk/commit/1a6703c8d4f3fe6dd8fc2111c2e3cfd0ade27377))
+* slight wording improvement in README ([#85](https://github.com/hyperspell/python-sdk/issues/85)) ([4597f85](https://github.com/hyperspell/python-sdk/commit/4597f85a79b9c4f8b3f1f05744c163aa0c837b73))
+
 ## 0.8.2 (2025-03-26)
 
 Full Changelog: [v0.8.1...v0.8.2](https://github.com/hyperspell/python-sdk/compare/v0.8.1...v0.8.2)
