@@ -32,6 +32,9 @@ class Document(BaseModel):
 
     metadata: Optional[DocumentMetadata] = None
 
+    score: Optional[float] = None
+    """The relevance of the resource to the query"""
+
 
 class Error(BaseModel):
     error: str
