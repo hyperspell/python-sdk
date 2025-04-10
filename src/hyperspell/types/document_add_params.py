@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Union, Optional
 from datetime import datetime
-from typing_extensions import Literal, Required, Annotated, TypedDict
+from typing_extensions import Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
@@ -29,13 +29,6 @@ class DocumentAddParams(TypedDict, total=False):
     was last updated (eg. for a chat transcript, this would be the date of the last
     message). This helps the ranking algorithm and allows you to filter by date
     range.
-    """
-
-    source: Literal["generic", "slack", "s3", "gmail", "notion", "google_docs", "hubspot"]
-    """Source of the document.
-
-    This helps in parsing the document. Note that some sources require the document
-    to be in a specific format.
     """
 
     title: Optional[str]

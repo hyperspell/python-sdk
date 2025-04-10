@@ -3,8 +3,6 @@
 from __future__ import annotations
 
 from .token import Token as Token
-from .scores import Scores as Scores
-from .document import Document as Document
 from .collection import Collection as Collection
 from .document_status import DocumentStatus as DocumentStatus
 from .document_add_params import DocumentAddParams as DocumentAddParams

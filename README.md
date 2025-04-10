@@ -163,10 +163,9 @@ client = Hyperspell()
 response = client.query.search(
     query="query",
     filter={
-        "end_date": parse_datetime("2019-12-27T18:11:19.117Z"),
-        "source": ["generic"],
-        "start_date": parse_datetime("2019-12-27T18:11:19.117Z"),
-        "types": ["generic"],
+        "after": parse_datetime("2019-12-27T18:11:19.117Z"),
+        "before": parse_datetime("2019-12-27T18:11:19.117Z"),
+        "collections": "string",
     },
 )
 print(response.filter)
@@ -174,7 +173,7 @@ print(response.filter)
 
 ## File uploads
 
-Request parameters that correspond to file uploads can be passed as `bytes`, a [`PathLike`](https://docs.python.org/3/library/os.html#os.PathLike) instance or a tuple of `(filename, contents, media type)`.
+Request parameters that correspond to file uploads can be passed as `bytes`, or a [`PathLike`](https://docs.python.org/3/library/os.html#os.PathLike) instance or a tuple of `(filename, contents, media type)`.
 
 ```python
 from pathlib import Path

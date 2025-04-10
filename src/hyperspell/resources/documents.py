@@ -4,7 +4,6 @@ from __future__ import annotations
 
 from typing import Union, Mapping, Optional, cast
 from datetime import datetime
-from typing_extensions import Literal
 
 import httpx
 
@@ -31,7 +30,6 @@ from .._response import (
 )
 from ..pagination import SyncCursorPage, AsyncCursorPage
 from .._base_client import AsyncPaginator, make_request_options
-from ..types.document import Document
 from ..types.document_status import DocumentStatus
 from ..types.document_list_response import DocumentListResponse
 
@@ -111,7 +109,6 @@ class DocumentsResource(SyncAPIResource):
         text: str,
         collection: Optional[str] | NotGiven = NOT_GIVEN,
         date: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        source: Literal["generic", "slack", "s3", "gmail", "notion", "google_docs", "hubspot"] | NotGiven = NOT_GIVEN,
         title: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -138,9 +135,6 @@ class DocumentsResource(SyncAPIResource):
               the date of the last message). This helps the ranking algorithm and allows you
               to filter by date range.
 
-          source: Source of the document. This helps in parsing the document. Note that some
-              sources require the document to be in a specific format.
-
           title: Title of the document.
 
           extra_headers: Send extra headers
@@ -158,7 +152,6 @@ class DocumentsResource(SyncAPIResource):
                     "text": text,
                     "collection": collection,
                     "date": date,
-                    "source": source,
                     "title": title,
                 },
                 document_add_params.DocumentAddParams,
@@ -227,7 +220,7 @@ class DocumentsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Document:
+    ) -> object:
         """
         Retrieves a document by ID, including its collection name and sections.
 
@@ -245,7 +238,7 @@ class DocumentsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Document,
+            cast_to=object,
         )
 
     def upload(
@@ -375,7 +368,6 @@ class AsyncDocumentsResource(AsyncAPIResource):
         text: str,
         collection: Optional[str] | NotGiven = NOT_GIVEN,
         date: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        source: Literal["generic", "slack", "s3", "gmail", "notion", "google_docs", "hubspot"] | NotGiven = NOT_GIVEN,
         title: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -402,9 +394,6 @@ class AsyncDocumentsResource(AsyncAPIResource):
               the date of the last message). This helps the ranking algorithm and allows you
               to filter by date range.
 
-          source: Source of the document. This helps in parsing the document. Note that some
-              sources require the document to be in a specific format.
-
           title: Title of the document.
 
           extra_headers: Send extra headers
@@ -422,7 +411,6 @@ class AsyncDocumentsResource(AsyncAPIResource):
                     "text": text,
                     "collection": collection,
                     "date": date,
-                    "source": source,
                     "title": title,
                 },
                 document_add_params.DocumentAddParams,
@@ -491,7 +479,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Document:
+    ) -> object:
         """
         Retrieves a document by ID, including its collection name and sections.
 
@@ -509,7 +497,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Document,
+            cast_to=object,
         )
 
     async def upload(
