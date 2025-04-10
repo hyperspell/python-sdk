@@ -62,20 +62,7 @@ class DocumentListResponse(BaseModel):
 
     sections_count: Optional[int] = None
 
-    source: Optional[
-        Literal[
-            "collections",
-            "mcp",
-            "slack",
-            "s3",
-            "gmail",
-            "notion",
-            "google_docs",
-            "hubspot",
-            "reddit",
-            "google-calendar",
-        ]
-    ] = None
+    source: Optional[Literal["collections", "notion", "slack", "hubspot", "google-calendar"]] = None
 
     status: Optional[Literal["pending", "processing", "completed", "failed"]] = None
 
