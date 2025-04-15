@@ -148,8 +148,7 @@ for document in first_page.items:
 # Remove `await` for non-async usage.
 ```
 
-from hyperspell.\_utils import parse_datetime
-from hyperspell.\_utils import parse_datetime
+from datetime import datetime
 
 ## Nested params
 
@@ -163,8 +162,8 @@ client = Hyperspell()
 response = client.query.search(
     query="query",
     filter={
-        "after": parse_datetime("2019-12-27T18:11:19.117Z"),
-        "before": parse_datetime("2019-12-27T18:11:19.117Z"),
+        "after": datetime.fromisoformat("2019-12-27T18:11:19.117"),
+        "before": datetime.fromisoformat("2019-12-27T18:11:19.117"),
         "collections": "string",
     },
 )
