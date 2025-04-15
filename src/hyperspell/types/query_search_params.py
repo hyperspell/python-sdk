@@ -24,7 +24,7 @@ class QuerySearchParams(TypedDict, total=False):
     max_results: int
     """Maximum number of results to return."""
 
-    sources: List[Literal["collections", "notion", "slack", "hubspot", "google-calendar"]]
+    sources: List[Literal["collections", "notion", "slack", "hubspot", "google-calendar", "reddit"]]
     """Only query documents from these sources."""
 
 
