@@ -148,8 +148,7 @@ for document in first_page.items:
 # Remove `await` for non-async usage.
 ```
 
-from hyperspell.\_utils import parse_datetime
-from hyperspell.\_utils import parse_datetime
+from datetime import datetime
 
 ## Nested params
 
@@ -163,9 +162,41 @@ client = Hyperspell()
 response = client.query.search(
     query="query",
     filter={
-        "after": parse_datetime("2019-12-27T18:11:19.117Z"),
-        "before": parse_datetime("2019-12-27T18:11:19.117Z"),
-        "collections": "string",
+        "after": datetime.fromisoformat("2019-12-27T18:11:19.117"),
+        "before": datetime.fromisoformat("2019-12-27T18:11:19.117"),
+        "collections": {
+            "after": datetime.fromisoformat("2019-12-27T18:11:19.117"),
+            "before": datetime.fromisoformat("2019-12-27T18:11:19.117"),
+            "collections": ["string"],
+        },
+        "google_calendar": {
+            "after": datetime.fromisoformat("2019-12-27T18:11:19.117"),
+            "before": datetime.fromisoformat("2019-12-27T18:11:19.117"),
+            "calendar_id": "calendar_id",
+        },
+        "notion": {
+            "after": datetime.fromisoformat("2019-12-27T18:11:19.117"),
+            "before": datetime.fromisoformat("2019-12-27T18:11:19.117"),
+            "notion_page_ids": ["string"],
+        },
+        "reddit": {
+            "after": datetime.fromisoformat("2019-12-27T18:11:19.117"),
+            "before": datetime.fromisoformat("2019-12-27T18:11:19.117"),
+            "period": "hour",
+            "sort": "relevance",
+            "subreddit": "subreddit",
+        },
+        "slack": {
+            "after": datetime.fromisoformat("2019-12-27T18:11:19.117"),
+            "before": datetime.fromisoformat("2019-12-27T18:11:19.117"),
+            "channels": ["string"],
+        },
+        "web_crawler": {
+            "after": datetime.fromisoformat("2019-12-27T18:11:19.117"),
+            "before": datetime.fromisoformat("2019-12-27T18:11:19.117"),
+            "max_depth": 0,
+            "url": "string",
+        },
     },
 )
 print(response.filter)

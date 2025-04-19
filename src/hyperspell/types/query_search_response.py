@@ -1,12 +1,12 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import TYPE_CHECKING, List, Optional
+from typing import TYPE_CHECKING, Dict, List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["QuerySearchResponse", "Document", "DocumentMetadata", "Error"]
+__all__ = ["QuerySearchResponse", "Document", "DocumentMetadata"]
 
 
 class DocumentMetadata(BaseModel):
@@ -26,20 +26,12 @@ class DocumentMetadata(BaseModel):
 class Document(BaseModel):
     resource_id: str
 
-    source: Literal[
-        "collections", "mcp", "slack", "s3", "gmail", "notion", "google_docs", "hubspot", "reddit", "google-calendar"
-    ]
+    source: Literal["collections", "notion", "slack", "hubspot", "google_calendar", "reddit", "web_crawler"]
 
     metadata: Optional[DocumentMetadata] = None
 
     score: Optional[float] = None
     """The relevance of the resource to the query"""
-
-
-class Error(BaseModel):
-    error: str
-
-    message: str
 
 
 class QuerySearchResponse(BaseModel):
@@ -48,7 +40,7 @@ class QuerySearchResponse(BaseModel):
     answer: Optional[str] = None
     """The answer to the query, if the request was set to answer."""
 
-    errors: Optional[List[Error]] = None
+    errors: Optional[List[Dict[str, str]]] = None
     """Errors that occurred during the query.
 
     These are meant to help the developer debug the query, and are not meant to be
