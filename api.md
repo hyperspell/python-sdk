@@ -39,7 +39,7 @@ Methods:
 Types:
 
 ```python
-from hyperspell.types import DocumentStatus, DocumentListResponse, DocumentGetResponse
+from hyperspell.types import Document, DocumentStatus, DocumentListResponse, DocumentGetResponse
 ```
 
 Methods:
