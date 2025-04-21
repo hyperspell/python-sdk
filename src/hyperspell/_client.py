@@ -33,6 +33,7 @@ from ._base_client import (
     SyncAPIClient,
     AsyncAPIClient,
 )
+from .resources.integrations import integrations
 
 __all__ = [
     "Timeout",
@@ -47,6 +48,7 @@ __all__ = [
 
 
 class Hyperspell(SyncAPIClient):
+    integrations: integrations.IntegrationsResource
     documents: documents.DocumentsResource
     collections: collections.CollectionsResource
     query: query.QueryResource
@@ -104,6 +106,7 @@ class Hyperspell(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
+        self.integrations = integrations.IntegrationsResource(self)
         self.documents = documents.DocumentsResource(self)
         self.collections = collections.CollectionsResource(self)
         self.query = query.QueryResource(self)
@@ -230,6 +233,7 @@ class Hyperspell(SyncAPIClient):
 
 
 class AsyncHyperspell(AsyncAPIClient):
+    integrations: integrations.AsyncIntegrationsResource
     documents: documents.AsyncDocumentsResource
     collections: collections.AsyncCollectionsResource
     query: query.AsyncQueryResource
@@ -287,6 +291,7 @@ class AsyncHyperspell(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
+        self.integrations = integrations.AsyncIntegrationsResource(self)
         self.documents = documents.AsyncDocumentsResource(self)
         self.collections = collections.AsyncCollectionsResource(self)
         self.query = query.AsyncQueryResource(self)
@@ -414,6 +419,7 @@ class AsyncHyperspell(AsyncAPIClient):
 
 class HyperspellWithRawResponse:
     def __init__(self, client: Hyperspell) -> None:
+        self.integrations = integrations.IntegrationsResourceWithRawResponse(client.integrations)
         self.documents = documents.DocumentsResourceWithRawResponse(client.documents)
         self.collections = collections.CollectionsResourceWithRawResponse(client.collections)
         self.query = query.QueryResourceWithRawResponse(client.query)
@@ -422,6 +428,7 @@ class HyperspellWithRawResponse:
 
 class AsyncHyperspellWithRawResponse:
     def __init__(self, client: AsyncHyperspell) -> None:
+        self.integrations = integrations.AsyncIntegrationsResourceWithRawResponse(client.integrations)
         self.documents = documents.AsyncDocumentsResourceWithRawResponse(client.documents)
         self.collections = collections.AsyncCollectionsResourceWithRawResponse(client.collections)
         self.query = query.AsyncQueryResourceWithRawResponse(client.query)
@@ -430,6 +437,7 @@ class AsyncHyperspellWithRawResponse:
 
 class HyperspellWithStreamedResponse:
     def __init__(self, client: Hyperspell) -> None:
+        self.integrations = integrations.IntegrationsResourceWithStreamingResponse(client.integrations)
         self.documents = documents.DocumentsResourceWithStreamingResponse(client.documents)
         self.collections = collections.CollectionsResourceWithStreamingResponse(client.collections)
         self.query = query.QueryResourceWithStreamingResponse(client.query)
@@ -438,6 +446,7 @@ class HyperspellWithStreamedResponse:
 
 class AsyncHyperspellWithStreamedResponse:
     def __init__(self, client: AsyncHyperspell) -> None:
+        self.integrations = integrations.AsyncIntegrationsResourceWithStreamingResponse(client.integrations)
         self.documents = documents.AsyncDocumentsResourceWithStreamingResponse(client.documents)
         self.collections = collections.AsyncCollectionsResourceWithStreamingResponse(client.collections)
         self.query = query.AsyncQueryResourceWithStreamingResponse(client.query)
