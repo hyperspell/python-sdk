@@ -20,6 +20,7 @@ from .._response import (
 )
 from ..types.token import Token
 from .._base_client import make_request_options
+from ..types.auth_me_response import AuthMeResponse
 
 __all__ = ["AuthResource", "AsyncAuthResource"]
 
@@ -43,6 +44,25 @@ class AuthResource(SyncAPIResource):
         For more information, see https://www.github.com/hyperspell/python-sdk#with_streaming_response
         """
         return AuthResourceWithStreamingResponse(self)
+
+    def me(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AuthMeResponse:
+        """Endpoint to get basic user data."""
+        return self._get(
+            "/auth/me",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AuthMeResponse,
+        )
 
     def user_token(
         self,
@@ -99,6 +119,25 @@ class AsyncAuthResource(AsyncAPIResource):
         """
         return AsyncAuthResourceWithStreamingResponse(self)
 
+    async def me(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AuthMeResponse:
+        """Endpoint to get basic user data."""
+        return await self._get(
+            "/auth/me",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AuthMeResponse,
+        )
+
     async def user_token(
         self,
         *,
@@ -138,6 +177,9 @@ class AuthResourceWithRawResponse:
     def __init__(self, auth: AuthResource) -> None:
         self._auth = auth
 
+        self.me = to_raw_response_wrapper(
+            auth.me,
+        )
         self.user_token = to_raw_response_wrapper(
             auth.user_token,
         )
@@ -147,6 +189,9 @@ class AsyncAuthResourceWithRawResponse:
     def __init__(self, auth: AsyncAuthResource) -> None:
         self._auth = auth
 
+        self.me = async_to_raw_response_wrapper(
+            auth.me,
+        )
         self.user_token = async_to_raw_response_wrapper(
             auth.user_token,
         )
@@ -156,6 +201,9 @@ class AuthResourceWithStreamingResponse:
     def __init__(self, auth: AuthResource) -> None:
         self._auth = auth
 
+        self.me = to_streamed_response_wrapper(
+            auth.me,
+        )
         self.user_token = to_streamed_response_wrapper(
             auth.user_token,
         )
@@ -165,6 +213,9 @@ class AsyncAuthResourceWithStreamingResponse:
     def __init__(self, auth: AsyncAuthResource) -> None:
         self._auth = auth
 
+        self.me = async_to_streamed_response_wrapper(
+            auth.me,
+        )
         self.user_token = async_to_streamed_response_wrapper(
             auth.user_token,
         )
