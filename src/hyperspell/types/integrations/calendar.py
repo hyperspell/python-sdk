@@ -4,7 +4,7 @@ from typing import List, Optional
 
 from ..._models import BaseModel
 
-__all__ = ["GoogleCalendarListResponse", "Item"]
+__all__ = ["Calendar", "Item"]
 
 
 class Item(BaseModel):
@@ -21,5 +21,5 @@ class Item(BaseModel):
     """Default timezone of the calendar"""
 
 
-class GoogleCalendarListResponse(BaseModel):
+class Calendar(BaseModel):
     items: List[Item]
