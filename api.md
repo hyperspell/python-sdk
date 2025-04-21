@@ -15,12 +15,12 @@ Methods:
 Types:
 
 ```python
-from hyperspell.types.integrations import GoogleCalendarListResponse
+from hyperspell.types.integrations import Calendar
 ```
 
 Methods:
 
-- <code title="get /integrations/google_calendar/list">client.integrations.google_calendar.<a href="./src/hyperspell/resources/integrations/google_calendar.py">list</a>() -> <a href="./src/hyperspell/types/integrations/google_calendar_list_response.py">GoogleCalendarListResponse</a></code>
+- <code title="get /integrations/google_calendar/list">client.integrations.google_calendar.<a href="./src/hyperspell/resources/integrations/google_calendar.py">list</a>() -> <a href="./src/hyperspell/types/integrations/calendar.py">Calendar</a></code>
 
 ## WebCrawler
 
