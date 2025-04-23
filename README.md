@@ -164,36 +164,16 @@ response = client.query.search(
     filter={
         "after": datetime.fromisoformat("2019-12-27T18:11:19.117"),
         "before": datetime.fromisoformat("2019-12-27T18:11:19.117"),
-        "collections": {
-            "after": datetime.fromisoformat("2019-12-27T18:11:19.117"),
-            "before": datetime.fromisoformat("2019-12-27T18:11:19.117"),
-            "collections": ["string"],
-        },
-        "google_calendar": {
-            "after": datetime.fromisoformat("2019-12-27T18:11:19.117"),
-            "before": datetime.fromisoformat("2019-12-27T18:11:19.117"),
-            "calendar_id": "calendar_id",
-        },
-        "notion": {
-            "after": datetime.fromisoformat("2019-12-27T18:11:19.117"),
-            "before": datetime.fromisoformat("2019-12-27T18:11:19.117"),
-            "notion_page_ids": ["string"],
-        },
+        "collections": {"collections": ["string"]},
+        "google_calendar": {"calendar_id": "calendar_id"},
+        "notion": {"notion_page_ids": ["string"]},
         "reddit": {
-            "after": datetime.fromisoformat("2019-12-27T18:11:19.117"),
-            "before": datetime.fromisoformat("2019-12-27T18:11:19.117"),
             "period": "hour",
             "sort": "relevance",
             "subreddit": "subreddit",
         },
-        "slack": {
-            "after": datetime.fromisoformat("2019-12-27T18:11:19.117"),
-            "before": datetime.fromisoformat("2019-12-27T18:11:19.117"),
-            "channels": ["string"],
-        },
+        "slack": {"channels": ["string"]},
         "web_crawler": {
-            "after": datetime.fromisoformat("2019-12-27T18:11:19.117"),
-            "before": datetime.fromisoformat("2019-12-27T18:11:19.117"),
             "max_depth": 0,
             "url": "string",
         },
