@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List
+from typing import List, Optional
 from typing_extensions import Literal
 
 import httpx
@@ -49,8 +49,9 @@ class QueryResource(SyncAPIResource):
         *,
         query: str,
         answer: bool | NotGiven = NOT_GIVEN,
-        filter: query_search_params.Filter | NotGiven = NOT_GIVEN,
+        filter: Optional[query_search_params.Filter] | NotGiven = NOT_GIVEN,
         max_results: int | NotGiven = NOT_GIVEN,
+        options: query_search_params.Options | NotGiven = NOT_GIVEN,
         sources: List[Literal["collections", "notion", "slack", "hubspot", "google_calendar", "reddit", "web_crawler"]]
         | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -68,9 +69,11 @@ class QueryResource(SyncAPIResource):
 
           answer: If true, the query will be answered along with matching source documents.
 
-          filter: Filter the query results.
+          filter: DEPRECATED: Use options instead. This field will be removed in a future version.
 
           max_results: Maximum number of results to return.
+
+          options: Search options for the query.
 
           sources: Only query documents from these sources.
 
@@ -90,6 +93,7 @@ class QueryResource(SyncAPIResource):
                     "answer": answer,
                     "filter": filter,
                     "max_results": max_results,
+                    "options": options,
                     "sources": sources,
                 },
                 query_search_params.QuerySearchParams,
@@ -126,8 +130,9 @@ class AsyncQueryResource(AsyncAPIResource):
         *,
         query: str,
         answer: bool | NotGiven = NOT_GIVEN,
-        filter: query_search_params.Filter | NotGiven = NOT_GIVEN,
+        filter: Optional[query_search_params.Filter] | NotGiven = NOT_GIVEN,
         max_results: int | NotGiven = NOT_GIVEN,
+        options: query_search_params.Options | NotGiven = NOT_GIVEN,
         sources: List[Literal["collections", "notion", "slack", "hubspot", "google_calendar", "reddit", "web_crawler"]]
         | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -145,9 +150,11 @@ class AsyncQueryResource(AsyncAPIResource):
 
           answer: If true, the query will be answered along with matching source documents.
 
-          filter: Filter the query results.
+          filter: DEPRECATED: Use options instead. This field will be removed in a future version.
 
           max_results: Maximum number of results to return.
+
+          options: Search options for the query.
 
           sources: Only query documents from these sources.
 
@@ -167,6 +174,7 @@ class AsyncQueryResource(AsyncAPIResource):
                     "answer": answer,
                     "filter": filter,
                     "max_results": max_results,
+                    "options": options,
                     "sources": sources,
                 },
                 query_search_params.QuerySearchParams,
