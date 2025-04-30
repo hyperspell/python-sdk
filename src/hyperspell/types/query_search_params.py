@@ -46,7 +46,9 @@ class QuerySearchParams(TypedDict, total=False):
     options: Options
     """Search options for the query."""
 
-    sources: List[Literal["collections", "notion", "slack", "hubspot", "google_calendar", "reddit", "web_crawler"]]
+    sources: List[
+        Literal["collections", "notion", "slack", "hubspot", "google_calendar", "reddit", "web_crawler", "box"]
+    ]
     """Only query documents from these sources."""
 
 
@@ -111,6 +113,9 @@ class Filter(TypedDict, total=False):
 
     before: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
     """Only query documents created before this date."""
+
+    box: object
+    """Search options for Box"""
 
     collections: FilterCollections
     """Search options for Collections"""
@@ -192,6 +197,9 @@ class Options(TypedDict, total=False):
 
     before: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
     """Only query documents created before this date."""
+
+    box: object
+    """Search options for Box"""
 
     collections: OptionsCollections
     """Search options for Collections"""

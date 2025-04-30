@@ -52,7 +52,9 @@ class QueryResource(SyncAPIResource):
         filter: Optional[query_search_params.Filter] | NotGiven = NOT_GIVEN,
         max_results: int | NotGiven = NOT_GIVEN,
         options: query_search_params.Options | NotGiven = NOT_GIVEN,
-        sources: List[Literal["collections", "notion", "slack", "hubspot", "google_calendar", "reddit", "web_crawler"]]
+        sources: List[
+            Literal["collections", "notion", "slack", "hubspot", "google_calendar", "reddit", "web_crawler", "box"]
+        ]
         | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -133,7 +135,9 @@ class AsyncQueryResource(AsyncAPIResource):
         filter: Optional[query_search_params.Filter] | NotGiven = NOT_GIVEN,
         max_results: int | NotGiven = NOT_GIVEN,
         options: query_search_params.Options | NotGiven = NOT_GIVEN,
-        sources: List[Literal["collections", "notion", "slack", "hubspot", "google_calendar", "reddit", "web_crawler"]]
+        sources: List[
+            Literal["collections", "notion", "slack", "hubspot", "google_calendar", "reddit", "web_crawler", "box"]
+        ]
         | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
