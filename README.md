@@ -164,6 +164,7 @@ response = client.query.search(
     filter={
         "after": datetime.fromisoformat("2019-12-27T18:11:19.117"),
         "before": datetime.fromisoformat("2019-12-27T18:11:19.117"),
+        "box": {},
         "collections": {"collections": ["string"]},
         "google_calendar": {"calendar_id": "calendar_id"},
         "notion": {"notion_page_ids": ["string"]},

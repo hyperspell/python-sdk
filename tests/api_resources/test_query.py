@@ -33,6 +33,7 @@ class TestQuery:
             filter={
                 "after": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "before": parse_datetime("2019-12-27T18:11:19.117Z"),
+                "box": {},
                 "collections": {"collections": ["string"]},
                 "google_calendar": {"calendar_id": "calendar_id"},
                 "notion": {"notion_page_ids": ["string"]},
@@ -51,6 +52,7 @@ class TestQuery:
             options={
                 "after": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "before": parse_datetime("2019-12-27T18:11:19.117Z"),
+                "box": {},
                 "collections": {"collections": ["string"]},
                 "google_calendar": {"calendar_id": "calendar_id"},
                 "notion": {"notion_page_ids": ["string"]},
@@ -112,6 +114,7 @@ class TestAsyncQuery:
             filter={
                 "after": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "before": parse_datetime("2019-12-27T18:11:19.117Z"),
+                "box": {},
                 "collections": {"collections": ["string"]},
                 "google_calendar": {"calendar_id": "calendar_id"},
                 "notion": {"notion_page_ids": ["string"]},
@@ -130,6 +133,7 @@ class TestAsyncQuery:
             options={
                 "after": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "before": parse_datetime("2019-12-27T18:11:19.117Z"),
+                "box": {},
                 "collections": {"collections": ["string"]},
                 "google_calendar": {"calendar_id": "calendar_id"},
                 "notion": {"notion_page_ids": ["string"]},
