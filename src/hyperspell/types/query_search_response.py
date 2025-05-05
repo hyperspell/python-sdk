@@ -26,7 +26,7 @@ class DocumentMetadata(BaseModel):
 class Document(BaseModel):
     resource_id: str
 
-    source: Literal["collections", "notion", "slack", "hubspot", "google_calendar", "reddit", "web_crawler"]
+    source: Literal["collections", "notion", "slack", "hubspot", "google_calendar", "reddit", "web_crawler", "box"]
 
     metadata: Optional[DocumentMetadata] = None
 

@@ -33,41 +33,40 @@ class TestQuery:
             filter={
                 "after": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "before": parse_datetime("2019-12-27T18:11:19.117Z"),
-                "collections": {
-                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "collections": ["string"],
-                },
-                "google_calendar": {
-                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "calendar_id": "calendar_id",
-                },
-                "notion": {
-                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "notion_page_ids": ["string"],
-                },
+                "box": {},
+                "collections": {"collections": ["string"]},
+                "google_calendar": {"calendar_id": "calendar_id"},
+                "notion": {"notion_page_ids": ["string"]},
                 "reddit": {
-                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
                     "period": "hour",
                     "sort": "relevance",
                     "subreddit": "subreddit",
                 },
-                "slack": {
-                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "channels": ["string"],
-                },
+                "slack": {"channels": ["string"]},
                 "web_crawler": {
-                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
                     "max_depth": 0,
                     "url": "string",
                 },
             },
             max_results=0,
+            options={
+                "after": parse_datetime("2019-12-27T18:11:19.117Z"),
+                "before": parse_datetime("2019-12-27T18:11:19.117Z"),
+                "box": {},
+                "collections": {"collections": ["string"]},
+                "google_calendar": {"calendar_id": "calendar_id"},
+                "notion": {"notion_page_ids": ["string"]},
+                "reddit": {
+                    "period": "hour",
+                    "sort": "relevance",
+                    "subreddit": "subreddit",
+                },
+                "slack": {"channels": ["string"]},
+                "web_crawler": {
+                    "max_depth": 0,
+                    "url": "string",
+                },
+            },
             sources=["collections"],
         )
         assert_matches_type(QuerySearchResponse, query, path=["response"])
@@ -115,41 +114,40 @@ class TestAsyncQuery:
             filter={
                 "after": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "before": parse_datetime("2019-12-27T18:11:19.117Z"),
-                "collections": {
-                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "collections": ["string"],
-                },
-                "google_calendar": {
-                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "calendar_id": "calendar_id",
-                },
-                "notion": {
-                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "notion_page_ids": ["string"],
-                },
+                "box": {},
+                "collections": {"collections": ["string"]},
+                "google_calendar": {"calendar_id": "calendar_id"},
+                "notion": {"notion_page_ids": ["string"]},
                 "reddit": {
-                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
                     "period": "hour",
                     "sort": "relevance",
                     "subreddit": "subreddit",
                 },
-                "slack": {
-                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "channels": ["string"],
-                },
+                "slack": {"channels": ["string"]},
                 "web_crawler": {
-                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
                     "max_depth": 0,
                     "url": "string",
                 },
             },
             max_results=0,
+            options={
+                "after": parse_datetime("2019-12-27T18:11:19.117Z"),
+                "before": parse_datetime("2019-12-27T18:11:19.117Z"),
+                "box": {},
+                "collections": {"collections": ["string"]},
+                "google_calendar": {"calendar_id": "calendar_id"},
+                "notion": {"notion_page_ids": ["string"]},
+                "reddit": {
+                    "period": "hour",
+                    "sort": "relevance",
+                    "subreddit": "subreddit",
+                },
+                "slack": {"channels": ["string"]},
+                "web_crawler": {
+                    "max_depth": 0,
+                    "url": "string",
+                },
+            },
             sources=["collections"],
         )
         assert_matches_type(QuerySearchResponse, query, path=["response"])
