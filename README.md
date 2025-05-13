@@ -28,7 +28,7 @@ import os
 from hyperspell import Hyperspell
 
 client = Hyperspell(
-    api_key=os.environ.get("HYPERSPELL_API_KEY"),  # This is the default and can be omitted
+    api_key=os.environ.get("HYPERSPELL_TOKEN"),  # This is the default and can be omitted
 )
 
 document_status = client.documents.add(
@@ -39,7 +39,7 @@ print(document_status.id)
 
 While you can provide an `api_key` keyword argument,
 we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
-to add `HYPERSPELL_API_KEY="My API Key"` to your `.env` file
+to add `HYPERSPELL_TOKEN="My API Key"` to your `.env` file
 so that your API Key is not stored in source control.
 
 ## Async usage
@@ -52,7 +52,7 @@ import asyncio
 from hyperspell import AsyncHyperspell
 
 client = AsyncHyperspell(
-    api_key=os.environ.get("HYPERSPELL_API_KEY"),  # This is the default and can be omitted
+    api_key=os.environ.get("HYPERSPELL_TOKEN"),  # This is the default and can be omitted
 )
 
 
