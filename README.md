@@ -167,6 +167,7 @@ response = client.query.search(
         "box": {},
         "collections": {"collections": ["string"]},
         "google_calendar": {"calendar_id": "calendar_id"},
+        "google_drive": {},
         "notion": {"notion_page_ids": ["string"]},
         "reddit": {
             "period": "hour",

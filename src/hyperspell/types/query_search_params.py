@@ -47,7 +47,17 @@ class QuerySearchParams(TypedDict, total=False):
     """Search options for the query."""
 
     sources: List[
-        Literal["collections", "notion", "slack", "hubspot", "google_calendar", "reddit", "web_crawler", "box"]
+        Literal[
+            "collections",
+            "notion",
+            "slack",
+            "hubspot",
+            "google_calendar",
+            "reddit",
+            "web_crawler",
+            "box",
+            "google_drive",
+        ]
     ]
     """Only query documents from these sources."""
 
@@ -122,6 +132,9 @@ class Filter(TypedDict, total=False):
 
     google_calendar: FilterGoogleCalendar
     """Search options for Google Calendar"""
+
+    google_drive: object
+    """Search options for Google Drive"""
 
     notion: FilterNotion
     """Search options for Notion"""
@@ -206,6 +219,9 @@ class Options(TypedDict, total=False):
 
     google_calendar: OptionsGoogleCalendar
     """Search options for Google Calendar"""
+
+    google_drive: object
+    """Search options for Google Drive"""
 
     notion: OptionsNotion
     """Search options for Notion"""
