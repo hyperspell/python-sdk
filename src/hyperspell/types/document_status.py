@@ -13,6 +13,8 @@ class DocumentStatus(BaseModel):
 
     resource_id: str
 
-    source: Literal["collections", "notion", "slack", "hubspot", "google_calendar", "reddit", "web_crawler", "box"]
+    source: Literal[
+        "collections", "notion", "slack", "hubspot", "google_calendar", "reddit", "web_crawler", "box", "google_drive"
+    ]
 
     status: Literal["pending", "processing", "completed", "failed"]

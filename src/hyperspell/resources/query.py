@@ -53,7 +53,17 @@ class QueryResource(SyncAPIResource):
         max_results: int | NotGiven = NOT_GIVEN,
         options: query_search_params.Options | NotGiven = NOT_GIVEN,
         sources: List[
-            Literal["collections", "notion", "slack", "hubspot", "google_calendar", "reddit", "web_crawler", "box"]
+            Literal[
+                "collections",
+                "notion",
+                "slack",
+                "hubspot",
+                "google_calendar",
+                "reddit",
+                "web_crawler",
+                "box",
+                "google_drive",
+            ]
         ]
         | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -136,7 +146,17 @@ class AsyncQueryResource(AsyncAPIResource):
         max_results: int | NotGiven = NOT_GIVEN,
         options: query_search_params.Options | NotGiven = NOT_GIVEN,
         sources: List[
-            Literal["collections", "notion", "slack", "hubspot", "google_calendar", "reddit", "web_crawler", "box"]
+            Literal[
+                "collections",
+                "notion",
+                "slack",
+                "hubspot",
+                "google_calendar",
+                "reddit",
+                "web_crawler",
+                "box",
+                "google_drive",
+            ]
         ]
         | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
