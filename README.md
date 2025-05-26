@@ -143,7 +143,7 @@ first_page = await client.documents.list(
 
 print(f"next page cursor: {first_page.next_cursor}")  # => "next page cursor: ..."
 for document in first_page.items:
-    print(document.id)
+    print(document.resource_id)
 
 # Remove `await` for non-async usage.
 ```
@@ -165,7 +165,7 @@ response = client.query.search(
         "after": datetime.fromisoformat("2019-12-27T18:11:19.117"),
         "before": datetime.fromisoformat("2019-12-27T18:11:19.117"),
         "box": {},
-        "collections": {"collections": ["string"]},
+        "collections": {},
         "google_calendar": {"calendar_id": "calendar_id"},
         "google_drive": {},
         "notion": {"notion_page_ids": ["string"]},
@@ -195,7 +195,6 @@ from hyperspell import Hyperspell
 client = Hyperspell()
 
 client.documents.upload(
-    collection="collection",
     file=Path("/path/to/file"),
 )
 ```

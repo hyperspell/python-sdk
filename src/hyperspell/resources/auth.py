@@ -72,7 +72,7 @@ class AuthResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> Token:
-        """Use this endpoing to create a user token for a specific user.
+        """Use this endpoint to create a user token for a specific user.
 
         This token can be
         safely passed to your user-facing front-end.
@@ -146,7 +146,7 @@ class AsyncAuthResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> Token:
-        """Use this endpoing to create a user token for a specific user.
+        """Use this endpoint to create a user token for a specific user.
 
         This token can be
         safely passed to your user-facing front-end.
