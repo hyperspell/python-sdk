@@ -2,6 +2,7 @@
 
 from typing import List, Optional
 from datetime import datetime
+from typing_extensions import Literal
 
 from .._models import BaseModel
 
@@ -15,10 +16,34 @@ class AuthMeResponse(BaseModel):
     app: str
     """The Hyperspell app's id this user belongs to"""
 
-    available_integrations: List[str]
+    available_integrations: List[
+        Literal[
+            "collections",
+            "notion",
+            "slack",
+            "hubspot",
+            "google_calendar",
+            "reddit",
+            "web_crawler",
+            "box",
+            "google_drive",
+        ]
+    ]
     """All integrations available for the app"""
 
-    installed_integrations: List[str]
+    installed_integrations: List[
+        Literal[
+            "collections",
+            "notion",
+            "slack",
+            "hubspot",
+            "google_calendar",
+            "reddit",
+            "web_crawler",
+            "box",
+            "google_drive",
+        ]
+    ]
     """All integrations installed for the user"""
 
     token_expiration: Optional[datetime] = None

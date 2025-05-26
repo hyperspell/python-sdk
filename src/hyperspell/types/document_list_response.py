@@ -1,110 +1,36 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Dict, List, Optional
+from typing import TYPE_CHECKING, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["DocumentListResponse", "Event", "Section"]
+__all__ = ["DocumentListResponse", "Metadata"]
 
 
-class Event(BaseModel):
-    message: str
+class Metadata(BaseModel):
+    created_at: Optional[datetime] = None
 
-    type: Literal["error", "warning", "info"]
+    last_modified: Optional[datetime] = None
 
-    time: Optional[datetime] = None
+    url: Optional[str] = None
 
-
-class Section(BaseModel):
-    document_id: int
-
-    text: str
-    """Summary of the section"""
-
-    id: Optional[int] = None
-
-    content: Optional[str] = None
-
-    elements: Optional[List[object]] = None
-
-    embedding_e5_large: Optional[List[float]] = None
-
-    embedding_ts: Optional[str] = None
-
-    metadata: Optional[Dict[str, object]] = None
+    if TYPE_CHECKING:
+        # Stub to indicate that arbitrary properties are accepted.
+        # To access properties that are not valid identifiers you can use `getattr`, e.g.
+        # `getattr(obj, '$type')`
+        def __getattr__(self, attr: str) -> object: ...
 
 
 class DocumentListResponse(BaseModel):
-    data: List[object]
-    """Summary of the document"""
+    resource_id: str
 
-    summary: str
-    """Summary of the document"""
+    source: Literal[
+        "collections", "notion", "slack", "hubspot", "google_calendar", "reddit", "web_crawler", "box", "google_drive"
+    ]
 
-    id: Optional[int] = None
+    metadata: Optional[Metadata] = None
 
-    collection: Optional[str] = None
-
-    created_at: Optional[datetime] = None
-
-    events: Optional[List[Event]] = None
-
-    ingested_at: Optional[datetime] = None
-
-    metadata: Optional[Dict[str, object]] = None
-
-    resource_id: Optional[str] = None
-    """Along with service, uniquely identifies the source document"""
-
-    sections: Optional[List[Section]] = None
-
-    sections_count: Optional[int] = None
-
-    source: Optional[
-        Literal[
-            "collections",
-            "notion",
-            "slack",
-            "hubspot",
-            "google_calendar",
-            "reddit",
-            "web_crawler",
-            "box",
-            "google_drive",
-        ]
-    ] = None
-
-    status: Optional[Literal["pending", "processing", "completed", "failed"]] = None
-
-    title: Optional[str] = None
-
-    type: Optional[
-        Literal[
-            "generic",
-            "memory",
-            "markdown",
-            "chat",
-            "email",
-            "transcript",
-            "legal",
-            "website",
-            "image",
-            "pdf",
-            "audio",
-            "spreadsheet",
-            "archive",
-            "book",
-            "video",
-            "code",
-            "calendar",
-            "json",
-            "presentation",
-            "unsupported",
-            "person",
-            "company",
-            "crm_contact",
-            "event",
-        ]
-    ] = None
+    score: Optional[float] = None
+    """The relevance of the resource to the query"""

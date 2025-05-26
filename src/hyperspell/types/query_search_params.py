@@ -11,14 +11,12 @@ from .._utils import PropertyInfo
 __all__ = [
     "QuerySearchParams",
     "Filter",
-    "FilterCollections",
     "FilterGoogleCalendar",
     "FilterNotion",
     "FilterReddit",
     "FilterSlack",
     "FilterWebCrawler",
     "Options",
-    "OptionsCollections",
     "OptionsGoogleCalendar",
     "OptionsNotion",
     "OptionsReddit",
@@ -60,14 +58,6 @@ class QuerySearchParams(TypedDict, total=False):
         ]
     ]
     """Only query documents from these sources."""
-
-
-class FilterCollections(TypedDict, total=False):
-    collections: Optional[List[str]]
-    """List of collections to search.
-
-    If not provided, only the user's default collection will be searched.
-    """
 
 
 class FilterGoogleCalendar(TypedDict, total=False):
@@ -127,8 +117,8 @@ class Filter(TypedDict, total=False):
     box: object
     """Search options for Box"""
 
-    collections: FilterCollections
-    """Search options for Collections"""
+    collections: object
+    """Search options for Collection"""
 
     google_calendar: FilterGoogleCalendar
     """Search options for Google Calendar"""
@@ -147,14 +137,6 @@ class Filter(TypedDict, total=False):
 
     web_crawler: FilterWebCrawler
     """Search options for Web Crawler"""
-
-
-class OptionsCollections(TypedDict, total=False):
-    collections: Optional[List[str]]
-    """List of collections to search.
-
-    If not provided, only the user's default collection will be searched.
-    """
 
 
 class OptionsGoogleCalendar(TypedDict, total=False):
@@ -214,8 +196,8 @@ class Options(TypedDict, total=False):
     box: object
     """Search options for Box"""
 
-    collections: OptionsCollections
-    """Search options for Collections"""
+    collections: object
+    """Search options for Collection"""
 
     google_calendar: OptionsGoogleCalendar
     """Search options for Google Calendar"""
