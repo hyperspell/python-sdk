@@ -56,10 +56,10 @@ class CollectionsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> SyncCursorPage[CollectionListResponse]:
-        """This endpoint allows you to paginate through all documents in the index.
-
-        You can
-        filter the documents by title, date, metadata, etc.
+        """
+        This endpoint lists all collections, and how many documents are in each
+        collection. All documents that do not have a collection assigned are in the
+        `null` collection.
 
         Args:
           extra_headers: Send extra headers
@@ -122,10 +122,10 @@ class AsyncCollectionsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> AsyncPaginator[CollectionListResponse, AsyncCursorPage[CollectionListResponse]]:
-        """This endpoint allows you to paginate through all documents in the index.
-
-        You can
-        filter the documents by title, date, metadata, etc.
+        """
+        This endpoint lists all collections, and how many documents are in each
+        collection. All documents that do not have a collection assigned are in the
+        `null` collection.
 
         Args:
           extra_headers: Send extra headers
