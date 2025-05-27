@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from typing import Union, Mapping, Optional, cast
 from datetime import datetime
+from typing_extensions import Literal
 
 import httpx
 
@@ -20,8 +21,8 @@ from .._response import (
 )
 from ..pagination import SyncCursorPage, AsyncCursorPage
 from .._base_client import AsyncPaginator, make_request_options
+from ..types.document import Document
 from ..types.document_status import DocumentStatus
-from ..types.document_list_response import DocumentListResponse
 
 __all__ = ["DocumentsResource", "AsyncDocumentsResource"]
 
@@ -58,7 +59,7 @@ class DocumentsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncCursorPage[DocumentListResponse]:
+    ) -> SyncCursorPage[Document]:
         """This endpoint allows you to paginate through all documents in the index.
 
         You can
@@ -77,7 +78,7 @@ class DocumentsResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/documents/list",
-            page=SyncCursorPage[DocumentListResponse],
+            page=SyncCursorPage[Document],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -92,7 +93,7 @@ class DocumentsResource(SyncAPIResource):
                     document_list_params.DocumentListParams,
                 ),
             ),
-            model=DocumentListResponse,
+            model=Document,
         )
 
     def add(
@@ -150,6 +151,88 @@ class DocumentsResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=DocumentStatus,
+        )
+
+    def get(
+        self,
+        resource_id: str,
+        *,
+        source: Literal[
+            "collections",
+            "web_crawler",
+            "notion",
+            "slack",
+            "google_calendar",
+            "reddit",
+            "box",
+            "google_drive",
+            "airtable",
+            "algolia",
+            "amplitude",
+            "asana",
+            "ashby",
+            "bamboohr",
+            "basecamp",
+            "bubbles",
+            "calendly",
+            "confluence",
+            "clickup",
+            "datadog",
+            "deel",
+            "discord",
+            "dropbox",
+            "exa",
+            "facebook",
+            "front",
+            "github",
+            "gitlab",
+            "google_docs",
+            "google_mail",
+            "google_sheet",
+            "hubspot",
+            "jira",
+            "linear",
+            "microsoft_teams",
+            "mixpanel",
+            "monday",
+            "outlook",
+            "perplexity",
+            "rippling",
+            "salesforce",
+            "segment",
+            "todoist",
+            "twitter",
+            "zoom",
+        ],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> Document:
+        """
+        Retrieves a document by provider and resource_id.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not source:
+            raise ValueError(f"Expected a non-empty value for `source` but received {source!r}")
+        if not resource_id:
+            raise ValueError(f"Expected a non-empty value for `resource_id` but received {resource_id!r}")
+        return self._get(
+            f"/documents/get/{source}/{resource_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Document,
         )
 
     def upload(
@@ -238,7 +321,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[DocumentListResponse, AsyncCursorPage[DocumentListResponse]]:
+    ) -> AsyncPaginator[Document, AsyncCursorPage[Document]]:
         """This endpoint allows you to paginate through all documents in the index.
 
         You can
@@ -257,7 +340,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/documents/list",
-            page=AsyncCursorPage[DocumentListResponse],
+            page=AsyncCursorPage[Document],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -272,7 +355,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
                     document_list_params.DocumentListParams,
                 ),
             ),
-            model=DocumentListResponse,
+            model=Document,
         )
 
     async def add(
@@ -330,6 +413,88 @@ class AsyncDocumentsResource(AsyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=DocumentStatus,
+        )
+
+    async def get(
+        self,
+        resource_id: str,
+        *,
+        source: Literal[
+            "collections",
+            "web_crawler",
+            "notion",
+            "slack",
+            "google_calendar",
+            "reddit",
+            "box",
+            "google_drive",
+            "airtable",
+            "algolia",
+            "amplitude",
+            "asana",
+            "ashby",
+            "bamboohr",
+            "basecamp",
+            "bubbles",
+            "calendly",
+            "confluence",
+            "clickup",
+            "datadog",
+            "deel",
+            "discord",
+            "dropbox",
+            "exa",
+            "facebook",
+            "front",
+            "github",
+            "gitlab",
+            "google_docs",
+            "google_mail",
+            "google_sheet",
+            "hubspot",
+            "jira",
+            "linear",
+            "microsoft_teams",
+            "mixpanel",
+            "monday",
+            "outlook",
+            "perplexity",
+            "rippling",
+            "salesforce",
+            "segment",
+            "todoist",
+            "twitter",
+            "zoom",
+        ],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> Document:
+        """
+        Retrieves a document by provider and resource_id.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not source:
+            raise ValueError(f"Expected a non-empty value for `source` but received {source!r}")
+        if not resource_id:
+            raise ValueError(f"Expected a non-empty value for `resource_id` but received {resource_id!r}")
+        return await self._get(
+            f"/documents/get/{source}/{resource_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=Document,
         )
 
     async def upload(
@@ -396,6 +561,9 @@ class DocumentsResourceWithRawResponse:
         self.add = to_raw_response_wrapper(
             documents.add,
         )
+        self.get = to_raw_response_wrapper(
+            documents.get,
+        )
         self.upload = to_raw_response_wrapper(
             documents.upload,
         )
@@ -410,6 +578,9 @@ class AsyncDocumentsResourceWithRawResponse:
         )
         self.add = async_to_raw_response_wrapper(
             documents.add,
+        )
+        self.get = async_to_raw_response_wrapper(
+            documents.get,
         )
         self.upload = async_to_raw_response_wrapper(
             documents.upload,
@@ -426,6 +597,9 @@ class DocumentsResourceWithStreamingResponse:
         self.add = to_streamed_response_wrapper(
             documents.add,
         )
+        self.get = to_streamed_response_wrapper(
+            documents.get,
+        )
         self.upload = to_streamed_response_wrapper(
             documents.upload,
         )
@@ -440,6 +614,9 @@ class AsyncDocumentsResourceWithStreamingResponse:
         )
         self.add = async_to_streamed_response_wrapper(
             documents.add,
+        )
+        self.get = async_to_streamed_response_wrapper(
+            documents.get,
         )
         self.upload = async_to_streamed_response_wrapper(
             documents.upload,

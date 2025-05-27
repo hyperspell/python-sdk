@@ -6,7 +6,7 @@ from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["DocumentListResponse", "Metadata"]
+__all__ = ["Document", "Metadata"]
 
 
 class Metadata(BaseModel):
@@ -23,7 +23,7 @@ class Metadata(BaseModel):
         def __getattr__(self, attr: str) -> object: ...
 
 
-class DocumentListResponse(BaseModel):
+class Document(BaseModel):
     resource_id: str
 
     source: Literal[

@@ -39,13 +39,14 @@ Methods:
 Types:
 
 ```python
-from hyperspell.types import DocumentStatus, DocumentListResponse
+from hyperspell.types import Document, DocumentStatus
 ```
 
 Methods:
 
-- <code title="get /documents/list">client.documents.<a href="./src/hyperspell/resources/documents.py">list</a>(\*\*<a href="src/hyperspell/types/document_list_params.py">params</a>) -> <a href="./src/hyperspell/types/document_list_response.py">SyncCursorPage[DocumentListResponse]</a></code>
+- <code title="get /documents/list">client.documents.<a href="./src/hyperspell/resources/documents.py">list</a>(\*\*<a href="src/hyperspell/types/document_list_params.py">params</a>) -> <a href="./src/hyperspell/types/document.py">SyncCursorPage[Document]</a></code>
 - <code title="post /documents/add">client.documents.<a href="./src/hyperspell/resources/documents.py">add</a>(\*\*<a href="src/hyperspell/types/document_add_params.py">params</a>) -> <a href="./src/hyperspell/types/document_status.py">DocumentStatus</a></code>
+- <code title="get /documents/get/{source}/{resource_id}">client.documents.<a href="./src/hyperspell/resources/documents.py">get</a>(resource_id, \*, source) -> <a href="./src/hyperspell/types/document.py">Document</a></code>
 - <code title="post /documents/upload">client.documents.<a href="./src/hyperspell/resources/documents.py">upload</a>(\*\*<a href="src/hyperspell/types/document_upload_params.py">params</a>) -> <a href="./src/hyperspell/types/document_status.py">DocumentStatus</a></code>
 
 # Collections
