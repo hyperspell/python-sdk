@@ -34,8 +34,9 @@ class TestQuery:
                 "after": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "before": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "box": {},
-                "collections": {"collections": ["string"]},
+                "collections": {},
                 "google_calendar": {"calendar_id": "calendar_id"},
+                "google_drive": {},
                 "notion": {"notion_page_ids": ["string"]},
                 "reddit": {
                     "period": "hour",
@@ -53,8 +54,9 @@ class TestQuery:
                 "after": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "before": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "box": {},
-                "collections": {"collections": ["string"]},
+                "collections": {},
                 "google_calendar": {"calendar_id": "calendar_id"},
+                "google_drive": {},
                 "notion": {"notion_page_ids": ["string"]},
                 "reddit": {
                     "period": "hour",
@@ -115,8 +117,9 @@ class TestAsyncQuery:
                 "after": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "before": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "box": {},
-                "collections": {"collections": ["string"]},
+                "collections": {},
                 "google_calendar": {"calendar_id": "calendar_id"},
+                "google_drive": {},
                 "notion": {"notion_page_ids": ["string"]},
                 "reddit": {
                     "period": "hour",
@@ -134,8 +137,9 @@ class TestAsyncQuery:
                 "after": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "before": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "box": {},
-                "collections": {"collections": ["string"]},
+                "collections": {},
                 "google_calendar": {"calendar_id": "calendar_id"},
+                "google_drive": {},
                 "notion": {"notion_page_ids": ["string"]},
                 "reddit": {
                     "period": "hour",

@@ -98,87 +98,23 @@ class TestDocuments:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_method_add_url(self, client: Hyperspell) -> None:
-        document = client.documents.add_url(
-            url="url",
-        )
-        assert_matches_type(DocumentStatus, document, path=["response"])
-
-    @parametrize
-    def test_method_add_url_with_all_params(self, client: Hyperspell) -> None:
-        document = client.documents.add_url(
-            url="url",
-            collection="collection",
-        )
-        assert_matches_type(DocumentStatus, document, path=["response"])
-
-    @parametrize
-    def test_raw_response_add_url(self, client: Hyperspell) -> None:
-        response = client.documents.with_raw_response.add_url(
-            url="url",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        document = response.parse()
-        assert_matches_type(DocumentStatus, document, path=["response"])
-
-    @parametrize
-    def test_streaming_response_add_url(self, client: Hyperspell) -> None:
-        with client.documents.with_streaming_response.add_url(
-            url="url",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            document = response.parse()
-            assert_matches_type(DocumentStatus, document, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    def test_method_get(self, client: Hyperspell) -> None:
-        document = client.documents.get(
-            0,
-        )
-        assert_matches_type(object, document, path=["response"])
-
-    @parametrize
-    def test_raw_response_get(self, client: Hyperspell) -> None:
-        response = client.documents.with_raw_response.get(
-            0,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        document = response.parse()
-        assert_matches_type(object, document, path=["response"])
-
-    @parametrize
-    def test_streaming_response_get(self, client: Hyperspell) -> None:
-        with client.documents.with_streaming_response.get(
-            0,
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            document = response.parse()
-            assert_matches_type(object, document, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
     def test_method_upload(self, client: Hyperspell) -> None:
         document = client.documents.upload(
-            collection="collection",
             file=b"raw file contents",
+        )
+        assert_matches_type(DocumentStatus, document, path=["response"])
+
+    @parametrize
+    def test_method_upload_with_all_params(self, client: Hyperspell) -> None:
+        document = client.documents.upload(
+            file=b"raw file contents",
+            collection="collection",
         )
         assert_matches_type(DocumentStatus, document, path=["response"])
 
     @parametrize
     def test_raw_response_upload(self, client: Hyperspell) -> None:
         response = client.documents.with_raw_response.upload(
-            collection="collection",
             file=b"raw file contents",
         )
 
@@ -190,7 +126,6 @@ class TestDocuments:
     @parametrize
     def test_streaming_response_upload(self, client: Hyperspell) -> None:
         with client.documents.with_streaming_response.upload(
-            collection="collection",
             file=b"raw file contents",
         ) as response:
             assert not response.is_closed
@@ -281,87 +216,23 @@ class TestAsyncDocuments:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_method_add_url(self, async_client: AsyncHyperspell) -> None:
-        document = await async_client.documents.add_url(
-            url="url",
-        )
-        assert_matches_type(DocumentStatus, document, path=["response"])
-
-    @parametrize
-    async def test_method_add_url_with_all_params(self, async_client: AsyncHyperspell) -> None:
-        document = await async_client.documents.add_url(
-            url="url",
-            collection="collection",
-        )
-        assert_matches_type(DocumentStatus, document, path=["response"])
-
-    @parametrize
-    async def test_raw_response_add_url(self, async_client: AsyncHyperspell) -> None:
-        response = await async_client.documents.with_raw_response.add_url(
-            url="url",
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        document = await response.parse()
-        assert_matches_type(DocumentStatus, document, path=["response"])
-
-    @parametrize
-    async def test_streaming_response_add_url(self, async_client: AsyncHyperspell) -> None:
-        async with async_client.documents.with_streaming_response.add_url(
-            url="url",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            document = await response.parse()
-            assert_matches_type(DocumentStatus, document, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
-    async def test_method_get(self, async_client: AsyncHyperspell) -> None:
-        document = await async_client.documents.get(
-            0,
-        )
-        assert_matches_type(object, document, path=["response"])
-
-    @parametrize
-    async def test_raw_response_get(self, async_client: AsyncHyperspell) -> None:
-        response = await async_client.documents.with_raw_response.get(
-            0,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        document = await response.parse()
-        assert_matches_type(object, document, path=["response"])
-
-    @parametrize
-    async def test_streaming_response_get(self, async_client: AsyncHyperspell) -> None:
-        async with async_client.documents.with_streaming_response.get(
-            0,
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            document = await response.parse()
-            assert_matches_type(object, document, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @parametrize
     async def test_method_upload(self, async_client: AsyncHyperspell) -> None:
         document = await async_client.documents.upload(
-            collection="collection",
             file=b"raw file contents",
+        )
+        assert_matches_type(DocumentStatus, document, path=["response"])
+
+    @parametrize
+    async def test_method_upload_with_all_params(self, async_client: AsyncHyperspell) -> None:
+        document = await async_client.documents.upload(
+            file=b"raw file contents",
+            collection="collection",
         )
         assert_matches_type(DocumentStatus, document, path=["response"])
 
     @parametrize
     async def test_raw_response_upload(self, async_client: AsyncHyperspell) -> None:
         response = await async_client.documents.with_raw_response.upload(
-            collection="collection",
             file=b"raw file contents",
         )
 
@@ -373,7 +244,6 @@ class TestAsyncDocuments:
     @parametrize
     async def test_streaming_response_upload(self, async_client: AsyncHyperspell) -> None:
         async with async_client.documents.with_streaming_response.upload(
-            collection="collection",
             file=b"raw file contents",
         ) as response:
             assert not response.is_closed

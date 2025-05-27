@@ -81,10 +81,10 @@ class Hyperspell(SyncAPIClient):
     ) -> None:
         """Construct a new synchronous Hyperspell client instance.
 
-        This automatically infers the `api_key` argument from the `HYPERSPELL_API_KEY` environment variable if it is not provided.
+        This automatically infers the `api_key` argument from the `HYPERSPELL_TOKEN` environment variable if it is not provided.
         """
         if api_key is None:
-            api_key = os.environ.get("HYPERSPELL_API_KEY")
+            api_key = os.environ.get("HYPERSPELL_TOKEN")
         self.api_key = api_key
 
         if base_url is None:
@@ -266,10 +266,10 @@ class AsyncHyperspell(AsyncAPIClient):
     ) -> None:
         """Construct a new async AsyncHyperspell client instance.
 
-        This automatically infers the `api_key` argument from the `HYPERSPELL_API_KEY` environment variable if it is not provided.
+        This automatically infers the `api_key` argument from the `HYPERSPELL_TOKEN` environment variable if it is not provided.
         """
         if api_key is None:
-            api_key = os.environ.get("HYPERSPELL_API_KEY")
+            api_key = os.environ.get("HYPERSPELL_TOKEN")
         self.api_key = api_key
 
         if base_url is None:

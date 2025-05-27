@@ -10,6 +10,7 @@ __all__ = ["DocumentListParams"]
 
 class DocumentListParams(TypedDict, total=False):
     collection: Optional[str]
+    """Filter documents by collection."""
 
     cursor: Optional[str]
 

@@ -39,15 +39,13 @@ Methods:
 Types:
 
 ```python
-from hyperspell.types import Document, DocumentStatus, DocumentListResponse, DocumentGetResponse
+from hyperspell.types import DocumentStatus, DocumentListResponse
 ```
 
 Methods:
 
 - <code title="get /documents/list">client.documents.<a href="./src/hyperspell/resources/documents.py">list</a>(\*\*<a href="src/hyperspell/types/document_list_params.py">params</a>) -> <a href="./src/hyperspell/types/document_list_response.py">SyncCursorPage[DocumentListResponse]</a></code>
 - <code title="post /documents/add">client.documents.<a href="./src/hyperspell/resources/documents.py">add</a>(\*\*<a href="src/hyperspell/types/document_add_params.py">params</a>) -> <a href="./src/hyperspell/types/document_status.py">DocumentStatus</a></code>
-- <code title="post /documents/scrape">client.documents.<a href="./src/hyperspell/resources/documents.py">add_url</a>(\*\*<a href="src/hyperspell/types/document_add_url_params.py">params</a>) -> <a href="./src/hyperspell/types/document_status.py">DocumentStatus</a></code>
-- <code title="get /documents/get/{document_id}">client.documents.<a href="./src/hyperspell/resources/documents.py">get</a>(document_id) -> <a href="./src/hyperspell/types/document_get_response.py">object</a></code>
 - <code title="post /documents/upload">client.documents.<a href="./src/hyperspell/resources/documents.py">upload</a>(\*\*<a href="src/hyperspell/types/document_upload_params.py">params</a>) -> <a href="./src/hyperspell/types/document_status.py">DocumentStatus</a></code>
 
 # Collections
@@ -55,14 +53,12 @@ Methods:
 Types:
 
 ```python
-from hyperspell.types import Collection, CollectionListResponse
+from hyperspell.types import CollectionListResponse
 ```
 
 Methods:
 
-- <code title="post /collections/add">client.collections.<a href="./src/hyperspell/resources/collections.py">create</a>(\*\*<a href="src/hyperspell/types/collection_create_params.py">params</a>) -> <a href="./src/hyperspell/types/collection.py">Collection</a></code>
 - <code title="get /collections/list">client.collections.<a href="./src/hyperspell/resources/collections.py">list</a>(\*\*<a href="src/hyperspell/types/collection_list_params.py">params</a>) -> <a href="./src/hyperspell/types/collection_list_response.py">SyncCursorPage[CollectionListResponse]</a></code>
-- <code title="get /collections/get/{name}">client.collections.<a href="./src/hyperspell/resources/collections.py">get</a>(name) -> <a href="./src/hyperspell/types/collection.py">Collection</a></code>
 
 # Query
 

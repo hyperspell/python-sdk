@@ -28,7 +28,7 @@ import os
 from hyperspell import Hyperspell
 
 client = Hyperspell(
-    api_key=os.environ.get("HYPERSPELL_API_KEY"),  # This is the default and can be omitted
+    api_key=os.environ.get("HYPERSPELL_TOKEN"),  # This is the default and can be omitted
 )
 
 document_status = client.documents.add(
@@ -39,7 +39,7 @@ print(document_status.id)
 
 While you can provide an `api_key` keyword argument,
 we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
-to add `HYPERSPELL_API_KEY="My API Key"` to your `.env` file
+to add `HYPERSPELL_TOKEN="My API Key"` to your `.env` file
 so that your API Key is not stored in source control.
 
 ## Async usage
@@ -52,7 +52,7 @@ import asyncio
 from hyperspell import AsyncHyperspell
 
 client = AsyncHyperspell(
-    api_key=os.environ.get("HYPERSPELL_API_KEY"),  # This is the default and can be omitted
+    api_key=os.environ.get("HYPERSPELL_TOKEN"),  # This is the default and can be omitted
 )
 
 
@@ -143,7 +143,7 @@ first_page = await client.documents.list(
 
 print(f"next page cursor: {first_page.next_cursor}")  # => "next page cursor: ..."
 for document in first_page.items:
-    print(document.id)
+    print(document.resource_id)
 
 # Remove `await` for non-async usage.
 ```
@@ -165,8 +165,9 @@ response = client.query.search(
         "after": datetime.fromisoformat("2019-12-27T18:11:19.117"),
         "before": datetime.fromisoformat("2019-12-27T18:11:19.117"),
         "box": {},
-        "collections": {"collections": ["string"]},
+        "collections": {},
         "google_calendar": {"calendar_id": "calendar_id"},
+        "google_drive": {},
         "notion": {"notion_page_ids": ["string"]},
         "reddit": {
             "period": "hour",
@@ -194,7 +195,6 @@ from hyperspell import Hyperspell
 client = Hyperspell()
 
 client.documents.upload(
-    collection="collection",
     file=Path("/path/to/file"),
 )
 ```

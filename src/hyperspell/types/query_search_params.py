@@ -11,14 +11,12 @@ from .._utils import PropertyInfo
 __all__ = [
     "QuerySearchParams",
     "Filter",
-    "FilterCollections",
     "FilterGoogleCalendar",
     "FilterNotion",
     "FilterReddit",
     "FilterSlack",
     "FilterWebCrawler",
     "Options",
-    "OptionsCollections",
     "OptionsGoogleCalendar",
     "OptionsNotion",
     "OptionsReddit",
@@ -47,17 +45,55 @@ class QuerySearchParams(TypedDict, total=False):
     """Search options for the query."""
 
     sources: List[
-        Literal["collections", "notion", "slack", "hubspot", "google_calendar", "reddit", "web_crawler", "box"]
+        Literal[
+            "collections",
+            "web_crawler",
+            "notion",
+            "slack",
+            "google_calendar",
+            "reddit",
+            "box",
+            "google_drive",
+            "airtable",
+            "algolia",
+            "amplitude",
+            "asana",
+            "ashby",
+            "bamboohr",
+            "basecamp",
+            "bubbles",
+            "calendly",
+            "confluence",
+            "clickup",
+            "datadog",
+            "deel",
+            "discord",
+            "dropbox",
+            "exa",
+            "facebook",
+            "front",
+            "github",
+            "gitlab",
+            "google_docs",
+            "google_mail",
+            "google_sheet",
+            "hubspot",
+            "jira",
+            "linear",
+            "microsoft_teams",
+            "mixpanel",
+            "monday",
+            "outlook",
+            "perplexity",
+            "rippling",
+            "salesforce",
+            "segment",
+            "todoist",
+            "twitter",
+            "zoom",
+        ]
     ]
     """Only query documents from these sources."""
-
-
-class FilterCollections(TypedDict, total=False):
-    collections: Optional[List[str]]
-    """List of collections to search.
-
-    If not provided, only the user's default collection will be searched.
-    """
 
 
 class FilterGoogleCalendar(TypedDict, total=False):
@@ -117,11 +153,14 @@ class Filter(TypedDict, total=False):
     box: object
     """Search options for Box"""
 
-    collections: FilterCollections
-    """Search options for Collections"""
+    collections: object
+    """Search options for Collection"""
 
     google_calendar: FilterGoogleCalendar
     """Search options for Google Calendar"""
+
+    google_drive: object
+    """Search options for Google Drive"""
 
     notion: FilterNotion
     """Search options for Notion"""
@@ -134,14 +173,6 @@ class Filter(TypedDict, total=False):
 
     web_crawler: FilterWebCrawler
     """Search options for Web Crawler"""
-
-
-class OptionsCollections(TypedDict, total=False):
-    collections: Optional[List[str]]
-    """List of collections to search.
-
-    If not provided, only the user's default collection will be searched.
-    """
 
 
 class OptionsGoogleCalendar(TypedDict, total=False):
@@ -201,11 +232,14 @@ class Options(TypedDict, total=False):
     box: object
     """Search options for Box"""
 
-    collections: OptionsCollections
-    """Search options for Collections"""
+    collections: object
+    """Search options for Collection"""
 
     google_calendar: OptionsGoogleCalendar
     """Search options for Google Calendar"""
+
+    google_drive: object
+    """Search options for Google Drive"""
 
     notion: OptionsNotion
     """Search options for Notion"""

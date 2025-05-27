@@ -7,7 +7,7 @@ from datetime import datetime
 
 import httpx
 
-from ..types import document_add_params, document_list_params, document_upload_params, document_add_url_params
+from ..types import document_add_params, document_list_params, document_upload_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven, FileTypes
 from .._utils import extract_files, maybe_transform, deepcopy_minimal, async_maybe_transform
 from .._compat import cached_property
@@ -65,6 +65,8 @@ class DocumentsResource(SyncAPIResource):
         filter the documents by title, date, metadata, etc.
 
         Args:
+          collection: Filter documents by collection.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -116,9 +118,7 @@ class DocumentsResource(SyncAPIResource):
         Args:
           text: Full text of the document.
 
-          collection: Name of the collection to add the document to. If the collection does not exist,
-              it will be created. If not given, the document will be added to the user's
-              default collection.
+          collection: The collection to add the document to for easier retrieval.
 
           date: Date of the document. Depending on the document, this could be the creation date
               or date the document was last updated (eg. for a chat transcript, this would be
@@ -152,90 +152,11 @@ class DocumentsResource(SyncAPIResource):
             cast_to=DocumentStatus,
         )
 
-    def add_url(
-        self,
-        *,
-        url: str,
-        collection: Optional[str] | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DocumentStatus:
-        """Adds an arbitrary document to the index.
-
-        This can be any text, email, call
-        transcript, etc. The document will be processed and made available for querying
-        once the processing is complete.
-
-        Args:
-          url: Source URL of the document.
-
-          collection: Name of the collection to add the document to. If the collection does not exist,
-              it will be created. If not given, the document will be added to the user's
-              default collection.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._post(
-            "/documents/scrape",
-            body=maybe_transform(
-                {
-                    "url": url,
-                    "collection": collection,
-                },
-                document_add_url_params.DocumentAddURLParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=DocumentStatus,
-        )
-
-    def get(
-        self,
-        document_id: int,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
-        """
-        Retrieves a document by ID, including its collection name and sections.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return self._get(
-            f"/documents/get/{document_id}",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=object,
-        )
-
     def upload(
         self,
         *,
-        collection: str,
         file: FileTypes,
+        collection: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -251,9 +172,9 @@ class DocumentsResource(SyncAPIResource):
         the document later, and check the status of the document.
 
         Args:
-          collection: The collection to add the document to.
-
           file: The file to ingest.
+
+          collection: The collection to add the document to.
 
           extra_headers: Send extra headers
 
@@ -265,8 +186,8 @@ class DocumentsResource(SyncAPIResource):
         """
         body = deepcopy_minimal(
             {
-                "collection": collection,
                 "file": file,
+                "collection": collection,
             }
         )
         files = extract_files(cast(Mapping[str, object], body), paths=[["file"]])
@@ -324,6 +245,8 @@ class AsyncDocumentsResource(AsyncAPIResource):
         filter the documents by title, date, metadata, etc.
 
         Args:
+          collection: Filter documents by collection.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -375,9 +298,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         Args:
           text: Full text of the document.
 
-          collection: Name of the collection to add the document to. If the collection does not exist,
-              it will be created. If not given, the document will be added to the user's
-              default collection.
+          collection: The collection to add the document to for easier retrieval.
 
           date: Date of the document. Depending on the document, this could be the creation date
               or date the document was last updated (eg. for a chat transcript, this would be
@@ -411,90 +332,11 @@ class AsyncDocumentsResource(AsyncAPIResource):
             cast_to=DocumentStatus,
         )
 
-    async def add_url(
-        self,
-        *,
-        url: str,
-        collection: Optional[str] | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DocumentStatus:
-        """Adds an arbitrary document to the index.
-
-        This can be any text, email, call
-        transcript, etc. The document will be processed and made available for querying
-        once the processing is complete.
-
-        Args:
-          url: Source URL of the document.
-
-          collection: Name of the collection to add the document to. If the collection does not exist,
-              it will be created. If not given, the document will be added to the user's
-              default collection.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return await self._post(
-            "/documents/scrape",
-            body=await async_maybe_transform(
-                {
-                    "url": url,
-                    "collection": collection,
-                },
-                document_add_url_params.DocumentAddURLParams,
-            ),
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=DocumentStatus,
-        )
-
-    async def get(
-        self,
-        document_id: int,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> object:
-        """
-        Retrieves a document by ID, including its collection name and sections.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        return await self._get(
-            f"/documents/get/{document_id}",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=object,
-        )
-
     async def upload(
         self,
         *,
-        collection: str,
         file: FileTypes,
+        collection: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -510,9 +352,9 @@ class AsyncDocumentsResource(AsyncAPIResource):
         the document later, and check the status of the document.
 
         Args:
-          collection: The collection to add the document to.
-
           file: The file to ingest.
+
+          collection: The collection to add the document to.
 
           extra_headers: Send extra headers
 
@@ -524,8 +366,8 @@ class AsyncDocumentsResource(AsyncAPIResource):
         """
         body = deepcopy_minimal(
             {
-                "collection": collection,
                 "file": file,
+                "collection": collection,
             }
         )
         files = extract_files(cast(Mapping[str, object], body), paths=[["file"]])
@@ -554,12 +396,6 @@ class DocumentsResourceWithRawResponse:
         self.add = to_raw_response_wrapper(
             documents.add,
         )
-        self.add_url = to_raw_response_wrapper(
-            documents.add_url,
-        )
-        self.get = to_raw_response_wrapper(
-            documents.get,
-        )
         self.upload = to_raw_response_wrapper(
             documents.upload,
         )
@@ -574,12 +410,6 @@ class AsyncDocumentsResourceWithRawResponse:
         )
         self.add = async_to_raw_response_wrapper(
             documents.add,
-        )
-        self.add_url = async_to_raw_response_wrapper(
-            documents.add_url,
-        )
-        self.get = async_to_raw_response_wrapper(
-            documents.get,
         )
         self.upload = async_to_raw_response_wrapper(
             documents.upload,
@@ -596,12 +426,6 @@ class DocumentsResourceWithStreamingResponse:
         self.add = to_streamed_response_wrapper(
             documents.add,
         )
-        self.add_url = to_streamed_response_wrapper(
-            documents.add_url,
-        )
-        self.get = to_streamed_response_wrapper(
-            documents.get,
-        )
         self.upload = to_streamed_response_wrapper(
             documents.upload,
         )
@@ -616,12 +440,6 @@ class AsyncDocumentsResourceWithStreamingResponse:
         )
         self.add = async_to_streamed_response_wrapper(
             documents.add,
-        )
-        self.add_url = async_to_streamed_response_wrapper(
-            documents.add_url,
-        )
-        self.get = async_to_streamed_response_wrapper(
-            documents.get,
         )
         self.upload = async_to_streamed_response_wrapper(
             documents.upload,

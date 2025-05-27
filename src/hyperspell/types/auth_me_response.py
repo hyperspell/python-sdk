@@ -2,6 +2,7 @@
 
 from typing import List, Optional
 from datetime import datetime
+from typing_extensions import Literal
 
 from .._models import BaseModel
 
@@ -15,10 +16,106 @@ class AuthMeResponse(BaseModel):
     app: str
     """The Hyperspell app's id this user belongs to"""
 
-    available_integrations: List[str]
+    available_integrations: List[
+        Literal[
+            "collections",
+            "web_crawler",
+            "notion",
+            "slack",
+            "google_calendar",
+            "reddit",
+            "box",
+            "google_drive",
+            "airtable",
+            "algolia",
+            "amplitude",
+            "asana",
+            "ashby",
+            "bamboohr",
+            "basecamp",
+            "bubbles",
+            "calendly",
+            "confluence",
+            "clickup",
+            "datadog",
+            "deel",
+            "discord",
+            "dropbox",
+            "exa",
+            "facebook",
+            "front",
+            "github",
+            "gitlab",
+            "google_docs",
+            "google_mail",
+            "google_sheet",
+            "hubspot",
+            "jira",
+            "linear",
+            "microsoft_teams",
+            "mixpanel",
+            "monday",
+            "outlook",
+            "perplexity",
+            "rippling",
+            "salesforce",
+            "segment",
+            "todoist",
+            "twitter",
+            "zoom",
+        ]
+    ]
     """All integrations available for the app"""
 
-    installed_integrations: List[str]
+    installed_integrations: List[
+        Literal[
+            "collections",
+            "web_crawler",
+            "notion",
+            "slack",
+            "google_calendar",
+            "reddit",
+            "box",
+            "google_drive",
+            "airtable",
+            "algolia",
+            "amplitude",
+            "asana",
+            "ashby",
+            "bamboohr",
+            "basecamp",
+            "bubbles",
+            "calendly",
+            "confluence",
+            "clickup",
+            "datadog",
+            "deel",
+            "discord",
+            "dropbox",
+            "exa",
+            "facebook",
+            "front",
+            "github",
+            "gitlab",
+            "google_docs",
+            "google_mail",
+            "google_sheet",
+            "hubspot",
+            "jira",
+            "linear",
+            "microsoft_teams",
+            "mixpanel",
+            "monday",
+            "outlook",
+            "perplexity",
+            "rippling",
+            "salesforce",
+            "segment",
+            "todoist",
+            "twitter",
+            "zoom",
+        ]
+    ]
     """All integrations installed for the user"""
 
     token_expiration: Optional[datetime] = None

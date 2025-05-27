@@ -16,11 +16,7 @@ class DocumentAddParams(TypedDict, total=False):
     """Full text of the document."""
 
     collection: Optional[str]
-    """Name of the collection to add the document to.
-
-    If the collection does not exist, it will be created. If not given, the document
-    will be added to the user's default collection.
-    """
+    """The collection to add the document to for easier retrieval."""
 
     date: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
     """Date of the document.

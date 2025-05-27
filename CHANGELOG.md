@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.13.0 (2025-05-26)
+
+Full Changelog: [v0.12.0...v0.13.0](https://github.com/hyperspell/python-sdk/compare/v0.12.0...v0.13.0)
+
+### Features
+
+* **api:** api update ([74e46e9](https://github.com/hyperspell/python-sdk/commit/74e46e9fc6e453ec408fc2641f8e3526df13927e))
+* **api:** api update ([bccb2cc](https://github.com/hyperspell/python-sdk/commit/bccb2cc8cac69ba61476aa224a753b5c88f14eca))
+* **api:** api update ([c05d86e](https://github.com/hyperspell/python-sdk/commit/c05d86eac76104c1a6b312663dd6b973070b51ce))
+* **api:** api update ([b20e5b5](https://github.com/hyperspell/python-sdk/commit/b20e5b5bf8b894faf515d9ca770d757078d265d9))
+* **api:** update via SDK Studio ([5512870](https://github.com/hyperspell/python-sdk/commit/55128707104ac90ebcefe72795161d98c1790e6c))
+
+
+### Bug Fixes
+
+* **package:** support direct resource imports ([d8b54e0](https://github.com/hyperspell/python-sdk/commit/d8b54e020764be85d1fd2de167deb1e825e6aceb))
+
+
+### Chores
+
+* **ci:** fix installation instructions ([3567715](https://github.com/hyperspell/python-sdk/commit/3567715ff2540fa63cc0feed569a98d42af731a6))
+* **ci:** upload sdks to package manager ([733ed75](https://github.com/hyperspell/python-sdk/commit/733ed759b06612d5da69c9fd241240c951ef1964))
+* **docs:** grammar improvements ([5e2a523](https://github.com/hyperspell/python-sdk/commit/5e2a523d1c080c7254e9b2f0e3bc112c0bbfbe09))
+* **internal:** avoid errors for isinstance checks on proxies ([c86a164](https://github.com/hyperspell/python-sdk/commit/c86a164ba1bdecfc7db3c4d12c9753d8c99ec232))
+
 ## 0.12.0 (2025-04-30)
 
 Full Changelog: [v0.11.0...v0.12.0](https://github.com/hyperspell/python-sdk/compare/v0.11.0...v0.12.0)
