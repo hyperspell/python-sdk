@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Optional
+
 import httpx
 
 from ..types import auth_user_token_params
@@ -65,6 +67,7 @@ class AuthResource(SyncAPIResource):
         self,
         *,
         user_id: str,
+        expires_in: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -78,6 +81,8 @@ class AuthResource(SyncAPIResource):
         safely passed to your user-facing front-end.
 
         Args:
+          expires_in: Token lifetime, e.g., '30m', '2h', '1d'. Defaults to 24 hours if not provided.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -88,7 +93,13 @@ class AuthResource(SyncAPIResource):
         """
         return self._post(
             "/auth/user_token",
-            body=maybe_transform({"user_id": user_id}, auth_user_token_params.AuthUserTokenParams),
+            body=maybe_transform(
+                {
+                    "user_id": user_id,
+                    "expires_in": expires_in,
+                },
+                auth_user_token_params.AuthUserTokenParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -139,6 +150,7 @@ class AsyncAuthResource(AsyncAPIResource):
         self,
         *,
         user_id: str,
+        expires_in: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -152,6 +164,8 @@ class AsyncAuthResource(AsyncAPIResource):
         safely passed to your user-facing front-end.
 
         Args:
+          expires_in: Token lifetime, e.g., '30m', '2h', '1d'. Defaults to 24 hours if not provided.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -162,7 +176,13 @@ class AsyncAuthResource(AsyncAPIResource):
         """
         return await self._post(
             "/auth/user_token",
-            body=await async_maybe_transform({"user_id": user_id}, auth_user_token_params.AuthUserTokenParams),
+            body=await async_maybe_transform(
+                {
+                    "user_id": user_id,
+                    "expires_in": expires_in,
+                },
+                auth_user_token_params.AuthUserTokenParams,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
