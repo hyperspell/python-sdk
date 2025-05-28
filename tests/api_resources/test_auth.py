@@ -50,6 +50,14 @@ class TestAuth:
         assert_matches_type(Token, auth, path=["response"])
 
     @parametrize
+    def test_method_user_token_with_all_params(self, client: Hyperspell) -> None:
+        auth = client.auth.user_token(
+            user_id="user_id",
+            expires_in="30m",
+        )
+        assert_matches_type(Token, auth, path=["response"])
+
+    @parametrize
     def test_raw_response_user_token(self, client: Hyperspell) -> None:
         response = client.auth.with_raw_response.user_token(
             user_id="user_id",
@@ -106,6 +114,14 @@ class TestAsyncAuth:
     async def test_method_user_token(self, async_client: AsyncHyperspell) -> None:
         auth = await async_client.auth.user_token(
             user_id="user_id",
+        )
+        assert_matches_type(Token, auth, path=["response"])
+
+    @parametrize
+    async def test_method_user_token_with_all_params(self, async_client: AsyncHyperspell) -> None:
+        auth = await async_client.auth.user_token(
+            user_id="user_id",
+            expires_in="30m",
         )
         assert_matches_type(Token, auth, path=["response"])
 
