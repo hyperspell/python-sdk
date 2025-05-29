@@ -23,6 +23,7 @@ from ..pagination import SyncCursorPage, AsyncCursorPage
 from .._base_client import AsyncPaginator, make_request_options
 from ..types.document import Document
 from ..types.document_status import DocumentStatus
+from ..types.document_status_response import DocumentStatusResponse
 
 __all__ = ["DocumentsResource", "AsyncDocumentsResource"]
 
@@ -53,6 +54,56 @@ class DocumentsResource(SyncAPIResource):
         collection: Optional[str] | NotGiven = NOT_GIVEN,
         cursor: Optional[str] | NotGiven = NOT_GIVEN,
         size: int | NotGiven = NOT_GIVEN,
+        source: Optional[
+            Literal[
+                "collections",
+                "web_crawler",
+                "notion",
+                "slack",
+                "google_calendar",
+                "reddit",
+                "box",
+                "google_drive",
+                "airtable",
+                "algolia",
+                "amplitude",
+                "asana",
+                "ashby",
+                "bamboohr",
+                "basecamp",
+                "bubbles",
+                "calendly",
+                "confluence",
+                "clickup",
+                "datadog",
+                "deel",
+                "discord",
+                "dropbox",
+                "exa",
+                "facebook",
+                "front",
+                "github",
+                "gitlab",
+                "google_docs",
+                "google_mail",
+                "google_sheet",
+                "hubspot",
+                "jira",
+                "linear",
+                "microsoft_teams",
+                "mixpanel",
+                "monday",
+                "outlook",
+                "perplexity",
+                "rippling",
+                "salesforce",
+                "segment",
+                "todoist",
+                "twitter",
+                "zoom",
+            ]
+        ]
+        | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -67,6 +118,8 @@ class DocumentsResource(SyncAPIResource):
 
         Args:
           collection: Filter documents by collection.
+
+          source: Filter documents by source.
 
           extra_headers: Send extra headers
 
@@ -89,6 +142,7 @@ class DocumentsResource(SyncAPIResource):
                         "collection": collection,
                         "cursor": cursor,
                         "size": size,
+                        "source": source,
                     },
                     document_list_params.DocumentListParams,
                 ),
@@ -235,6 +289,28 @@ class DocumentsResource(SyncAPIResource):
             cast_to=Document,
         )
 
+    def status(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> DocumentStatusResponse:
+        """
+        This endpoint shows the indexing progress of documents, both by provider and
+        total.
+        """
+        return self._get(
+            "/documents/status",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=DocumentStatusResponse,
+        )
+
     def upload(
         self,
         *,
@@ -315,6 +391,56 @@ class AsyncDocumentsResource(AsyncAPIResource):
         collection: Optional[str] | NotGiven = NOT_GIVEN,
         cursor: Optional[str] | NotGiven = NOT_GIVEN,
         size: int | NotGiven = NOT_GIVEN,
+        source: Optional[
+            Literal[
+                "collections",
+                "web_crawler",
+                "notion",
+                "slack",
+                "google_calendar",
+                "reddit",
+                "box",
+                "google_drive",
+                "airtable",
+                "algolia",
+                "amplitude",
+                "asana",
+                "ashby",
+                "bamboohr",
+                "basecamp",
+                "bubbles",
+                "calendly",
+                "confluence",
+                "clickup",
+                "datadog",
+                "deel",
+                "discord",
+                "dropbox",
+                "exa",
+                "facebook",
+                "front",
+                "github",
+                "gitlab",
+                "google_docs",
+                "google_mail",
+                "google_sheet",
+                "hubspot",
+                "jira",
+                "linear",
+                "microsoft_teams",
+                "mixpanel",
+                "monday",
+                "outlook",
+                "perplexity",
+                "rippling",
+                "salesforce",
+                "segment",
+                "todoist",
+                "twitter",
+                "zoom",
+            ]
+        ]
+        | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -329,6 +455,8 @@ class AsyncDocumentsResource(AsyncAPIResource):
 
         Args:
           collection: Filter documents by collection.
+
+          source: Filter documents by source.
 
           extra_headers: Send extra headers
 
@@ -351,6 +479,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
                         "collection": collection,
                         "cursor": cursor,
                         "size": size,
+                        "source": source,
                     },
                     document_list_params.DocumentListParams,
                 ),
@@ -497,6 +626,28 @@ class AsyncDocumentsResource(AsyncAPIResource):
             cast_to=Document,
         )
 
+    async def status(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> DocumentStatusResponse:
+        """
+        This endpoint shows the indexing progress of documents, both by provider and
+        total.
+        """
+        return await self._get(
+            "/documents/status",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=DocumentStatusResponse,
+        )
+
     async def upload(
         self,
         *,
@@ -564,6 +715,9 @@ class DocumentsResourceWithRawResponse:
         self.get = to_raw_response_wrapper(
             documents.get,
         )
+        self.status = to_raw_response_wrapper(
+            documents.status,
+        )
         self.upload = to_raw_response_wrapper(
             documents.upload,
         )
@@ -581,6 +735,9 @@ class AsyncDocumentsResourceWithRawResponse:
         )
         self.get = async_to_raw_response_wrapper(
             documents.get,
+        )
+        self.status = async_to_raw_response_wrapper(
+            documents.status,
         )
         self.upload = async_to_raw_response_wrapper(
             documents.upload,
@@ -600,6 +757,9 @@ class DocumentsResourceWithStreamingResponse:
         self.get = to_streamed_response_wrapper(
             documents.get,
         )
+        self.status = to_streamed_response_wrapper(
+            documents.status,
+        )
         self.upload = to_streamed_response_wrapper(
             documents.upload,
         )
@@ -617,6 +777,9 @@ class AsyncDocumentsResourceWithStreamingResponse:
         )
         self.get = async_to_streamed_response_wrapper(
             documents.get,
+        )
+        self.status = async_to_streamed_response_wrapper(
+            documents.status,
         )
         self.upload = async_to_streamed_response_wrapper(
             documents.upload,

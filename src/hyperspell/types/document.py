@@ -1,20 +1,30 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import TYPE_CHECKING, Optional
+from typing import TYPE_CHECKING, List, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["Document", "Metadata"]
+__all__ = ["Document", "Metadata", "MetadataEvent"]
+
+
+class MetadataEvent(BaseModel):
+    message: str
+
+    type: Literal["error", "warning", "info", "success"]
+
+    time: Optional[datetime] = None
 
 
 class Metadata(BaseModel):
-    created_at: Optional[datetime] = None
+    events: Optional[List[MetadataEvent]] = None
+
+    indexed_at: Optional[datetime] = None
 
     last_modified: Optional[datetime] = None
 
-    url: Optional[str] = None
+    status: Optional[Literal["pending", "processing", "completed", "failed"]] = None
 
     if TYPE_CHECKING:
         # Stub to indicate that arbitrary properties are accepted.
