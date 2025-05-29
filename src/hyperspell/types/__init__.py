@@ -14,4 +14,5 @@ from .auth_user_token_params import AuthUserTokenParams as AuthUserTokenParams
 from .collection_list_params import CollectionListParams as CollectionListParams
 from .document_upload_params import DocumentUploadParams as DocumentUploadParams
 from .collection_list_response import CollectionListResponse as CollectionListResponse
+from .document_status_response import DocumentStatusResponse as DocumentStatusResponse
 from .integration_revoke_response import IntegrationRevokeResponse as IntegrationRevokeResponse
