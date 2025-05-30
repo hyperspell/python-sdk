@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from typing import Optional
 from typing_extensions import Required, TypedDict
 
 __all__ = ["AuthUserTokenParams"]
@@ -9,3 +10,6 @@ __all__ = ["AuthUserTokenParams"]
 
 class AuthUserTokenParams(TypedDict, total=False):
     user_id: Required[str]
+
+    expires_in: Optional[str]
+    """Token lifetime, e.g., '30m', '2h', '1d'. Defaults to 24 hours if not provided."""
