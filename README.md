@@ -148,8 +148,6 @@ for document in first_page.items:
 # Remove `await` for non-async usage.
 ```
 
-from datetime import datetime
-
 ## Nested params
 
 Nested parameters are dictionaries, typed using `TypedDict`, for example:
@@ -161,25 +159,7 @@ client = Hyperspell()
 
 response = client.query.search(
     query="query",
-    filter={
-        "after": datetime.fromisoformat("2019-12-27T18:11:19.117"),
-        "before": datetime.fromisoformat("2019-12-27T18:11:19.117"),
-        "box": {},
-        "collections": {},
-        "google_calendar": {"calendar_id": "calendar_id"},
-        "google_drive": {},
-        "notion": {"notion_page_ids": ["string"]},
-        "reddit": {
-            "period": "hour",
-            "sort": "relevance",
-            "subreddit": "subreddit",
-        },
-        "slack": {"channels": ["string"]},
-        "web_crawler": {
-            "max_depth": 0,
-            "url": "string",
-        },
-    },
+    filter={},
 )
 print(response.filter)
 ```
