@@ -156,6 +156,7 @@ class DocumentsResource(SyncAPIResource):
         text: str,
         collection: Optional[str] | NotGiven = NOT_GIVEN,
         date: Union[str, datetime] | NotGiven = NOT_GIVEN,
+        resource_id: str | NotGiven = NOT_GIVEN,
         title: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -180,6 +181,9 @@ class DocumentsResource(SyncAPIResource):
               the date of the last message). This helps the ranking algorithm and allows you
               to filter by date range.
 
+          resource_id: The resource ID to add the document to. If not provided, a new resource ID will
+              be generated. If provided, the document will be updated if it already exists.
+
           title: Title of the document.
 
           extra_headers: Send extra headers
@@ -197,6 +201,7 @@ class DocumentsResource(SyncAPIResource):
                     "text": text,
                     "collection": collection,
                     "date": date,
+                    "resource_id": resource_id,
                     "title": title,
                 },
                 document_add_params.DocumentAddParams,
@@ -493,6 +498,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         text: str,
         collection: Optional[str] | NotGiven = NOT_GIVEN,
         date: Union[str, datetime] | NotGiven = NOT_GIVEN,
+        resource_id: str | NotGiven = NOT_GIVEN,
         title: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -517,6 +523,9 @@ class AsyncDocumentsResource(AsyncAPIResource):
               the date of the last message). This helps the ranking algorithm and allows you
               to filter by date range.
 
+          resource_id: The resource ID to add the document to. If not provided, a new resource ID will
+              be generated. If provided, the document will be updated if it already exists.
+
           title: Title of the document.
 
           extra_headers: Send extra headers
@@ -534,6 +543,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
                     "text": text,
                     "collection": collection,
                     "date": date,
+                    "resource_id": resource_id,
                     "title": title,
                 },
                 document_add_params.DocumentAddParams,

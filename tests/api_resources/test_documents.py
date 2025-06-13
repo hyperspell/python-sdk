@@ -71,6 +71,7 @@ class TestDocuments:
             text="text",
             collection="collection",
             date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            resource_id="resource_id",
             title="title",
         )
         assert_matches_type(DocumentStatus, document, path=["response"])
@@ -257,6 +258,7 @@ class TestAsyncDocuments:
             text="text",
             collection="collection",
             date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            resource_id="resource_id",
             title="title",
         )
         assert_matches_type(DocumentStatus, document, path=["response"])
