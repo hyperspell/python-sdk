@@ -23,9 +23,7 @@ from pydantic import ValidationError
 
 from hyperspell import Hyperspell, AsyncHyperspell, APIResponseValidationError
 from hyperspell._types import Omit
-from hyperspell._utils import maybe_transform
 from hyperspell._models import BaseModel, FinalRequestOptions
-from hyperspell._constants import RAW_RESPONSE_HEADER
 from hyperspell._exceptions import APIStatusError, APITimeoutError, APIResponseValidationError
 from hyperspell._base_client import (
     DEFAULT_TIMEOUT,
@@ -35,7 +33,6 @@ from hyperspell._base_client import (
     DefaultAsyncHttpxClient,
     make_request_options,
 )
-from hyperspell.types.document_add_params import DocumentAddParams
 
 from .utils import update_env
 
@@ -732,32 +729,21 @@ class TestHyperspell:
 
     @mock.patch("hyperspell._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
+    def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter, client: Hyperspell) -> None:
         respx_mock.post("/documents/add").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            self.client.post(
-                "/documents/add",
-                body=cast(object, maybe_transform(dict(text="text"), DocumentAddParams)),
-                cast_to=httpx.Response,
-                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
-            )
+            client.documents.with_streaming_response.add(text="text").__enter__()
 
         assert _get_open_connections(self.client) == 0
 
     @mock.patch("hyperspell._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
+    def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter, client: Hyperspell) -> None:
         respx_mock.post("/documents/add").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            self.client.post(
-                "/documents/add",
-                body=cast(object, maybe_transform(dict(text="text"), DocumentAddParams)),
-                cast_to=httpx.Response,
-                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
-            )
-
+            client.documents.with_streaming_response.add(text="text").__enter__()
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
@@ -1568,32 +1554,25 @@ class TestAsyncHyperspell:
 
     @mock.patch("hyperspell._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    async def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
+    async def test_retrying_timeout_errors_doesnt_leak(
+        self, respx_mock: MockRouter, async_client: AsyncHyperspell
+    ) -> None:
         respx_mock.post("/documents/add").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            await self.client.post(
-                "/documents/add",
-                body=cast(object, maybe_transform(dict(text="text"), DocumentAddParams)),
-                cast_to=httpx.Response,
-                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
-            )
+            await async_client.documents.with_streaming_response.add(text="text").__aenter__()
 
         assert _get_open_connections(self.client) == 0
 
     @mock.patch("hyperspell._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    async def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
+    async def test_retrying_status_errors_doesnt_leak(
+        self, respx_mock: MockRouter, async_client: AsyncHyperspell
+    ) -> None:
         respx_mock.post("/documents/add").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            await self.client.post(
-                "/documents/add",
-                body=cast(object, maybe_transform(dict(text="text"), DocumentAddParams)),
-                cast_to=httpx.Response,
-                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
-            )
-
+            await async_client.documents.with_streaming_response.add(text="text").__aenter__()
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
