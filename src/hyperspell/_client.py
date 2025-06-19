@@ -13,7 +13,6 @@ from ._qs import Querystring
 from ._types import (
     NOT_GIVEN,
     Omit,
-    Headers,
     Timeout,
     NotGiven,
     Transport,
@@ -24,7 +23,7 @@ from ._utils import is_given, get_async_library
 from ._version import __version__
 from .resources import auth, query, documents, collections
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
-from ._exceptions import APIStatusError
+from ._exceptions import APIStatusError, HyperspellError
 from ._base_client import (
     DEFAULT_MAX_RETRIES,
     SyncAPIClient,
@@ -54,12 +53,14 @@ class Hyperspell(SyncAPIClient):
     with_streaming_response: HyperspellWithStreamedResponse
 
     # client options
-    api_key: str | None
+    api_key: str
+    user_id: str | None
 
     def __init__(
         self,
         *,
         api_key: str | None = None,
+        user_id: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
@@ -85,7 +86,13 @@ class Hyperspell(SyncAPIClient):
         """
         if api_key is None:
             api_key = os.environ.get("HYPERSPELL_TOKEN")
+        if api_key is None:
+            raise HyperspellError(
+                "The api_key client option must be set either by passing api_key to the client or by setting the HYPERSPELL_TOKEN environment variable"
+            )
         self.api_key = api_key
+
+        self.user_id = user_id
 
         if base_url is None:
             base_url = os.environ.get("HYPERSPELL_BASE_URL")
@@ -120,8 +127,6 @@ class Hyperspell(SyncAPIClient):
     @override
     def auth_headers(self) -> dict[str, str]:
         api_key = self.api_key
-        if api_key is None:
-            return {}
         return {"Authorization": f"Bearer {api_key}"}
 
     @property
@@ -133,21 +138,11 @@ class Hyperspell(SyncAPIClient):
             **self._custom_headers,
         }
 
-    @override
-    def _validate_headers(self, headers: Headers, custom_headers: Headers) -> None:
-        if self.api_key and headers.get("Authorization"):
-            return
-        if isinstance(custom_headers.get("Authorization"), Omit):
-            return
-
-        raise TypeError(
-            '"Could not resolve authentication method. Expected the api_key to be set. Or for the `Authorization` headers to be explicitly omitted"'
-        )
-
     def copy(
         self,
         *,
         api_key: str | None = None,
+        user_id: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
         http_client: httpx.Client | None = None,
@@ -182,6 +177,7 @@ class Hyperspell(SyncAPIClient):
         http_client = http_client or self._client
         return self.__class__(
             api_key=api_key or self.api_key,
+            user_id=user_id or self.user_id,
             base_url=base_url or self.base_url,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
@@ -239,12 +235,14 @@ class AsyncHyperspell(AsyncAPIClient):
     with_streaming_response: AsyncHyperspellWithStreamedResponse
 
     # client options
-    api_key: str | None
+    api_key: str
+    user_id: str | None
 
     def __init__(
         self,
         *,
         api_key: str | None = None,
+        user_id: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
@@ -270,7 +268,13 @@ class AsyncHyperspell(AsyncAPIClient):
         """
         if api_key is None:
             api_key = os.environ.get("HYPERSPELL_TOKEN")
+        if api_key is None:
+            raise HyperspellError(
+                "The api_key client option must be set either by passing api_key to the client or by setting the HYPERSPELL_TOKEN environment variable"
+            )
         self.api_key = api_key
+
+        self.user_id = user_id
 
         if base_url is None:
             base_url = os.environ.get("HYPERSPELL_BASE_URL")
@@ -305,8 +309,6 @@ class AsyncHyperspell(AsyncAPIClient):
     @override
     def auth_headers(self) -> dict[str, str]:
         api_key = self.api_key
-        if api_key is None:
-            return {}
         return {"Authorization": f"Bearer {api_key}"}
 
     @property
@@ -318,21 +320,11 @@ class AsyncHyperspell(AsyncAPIClient):
             **self._custom_headers,
         }
 
-    @override
-    def _validate_headers(self, headers: Headers, custom_headers: Headers) -> None:
-        if self.api_key and headers.get("Authorization"):
-            return
-        if isinstance(custom_headers.get("Authorization"), Omit):
-            return
-
-        raise TypeError(
-            '"Could not resolve authentication method. Expected the api_key to be set. Or for the `Authorization` headers to be explicitly omitted"'
-        )
-
     def copy(
         self,
         *,
         api_key: str | None = None,
+        user_id: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
         http_client: httpx.AsyncClient | None = None,
@@ -367,6 +359,7 @@ class AsyncHyperspell(AsyncAPIClient):
         http_client = http_client or self._client
         return self.__class__(
             api_key=api_key or self.api_key,
+            user_id=user_id or self.user_id,
             base_url=base_url or self.base_url,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
