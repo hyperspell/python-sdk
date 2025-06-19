@@ -23,22 +23,22 @@ from pydantic import ValidationError
 
 from hyperspell import Hyperspell, AsyncHyperspell, APIResponseValidationError
 from hyperspell._types import Omit
-from hyperspell._utils import maybe_transform
 from hyperspell._models import BaseModel, FinalRequestOptions
-from hyperspell._constants import RAW_RESPONSE_HEADER
-from hyperspell._exceptions import APIStatusError, APITimeoutError, APIResponseValidationError
+from hyperspell._exceptions import APIStatusError, APITimeoutError, HyperspellError, APIResponseValidationError
 from hyperspell._base_client import (
     DEFAULT_TIMEOUT,
     HTTPX_DEFAULT_TIMEOUT,
     BaseClient,
+    DefaultHttpxClient,
+    DefaultAsyncHttpxClient,
     make_request_options,
 )
-from hyperspell.types.document_add_params import DocumentAddParams
 
 from .utils import update_env
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 api_key = "My API Key"
+user_id = "My User ID"
 
 
 def _get_params(client: BaseClient[Any, Any]) -> dict[str, str]:
@@ -60,7 +60,7 @@ def _get_open_connections(client: Hyperspell | AsyncHyperspell) -> int:
 
 
 class TestHyperspell:
-    client = Hyperspell(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+    client = Hyperspell(base_url=base_url, api_key=api_key, user_id=user_id, _strict_response_validation=True)
 
     @pytest.mark.respx(base_url=base_url)
     def test_raw_response(self, respx_mock: MockRouter) -> None:
@@ -90,6 +90,10 @@ class TestHyperspell:
         assert copied.api_key == "another My API Key"
         assert self.client.api_key == "My API Key"
 
+        copied = self.client.copy(user_id="another My User ID")
+        assert copied.user_id == "another My User ID"
+        assert self.client.user_id == "My User ID"
+
     def test_copy_default_options(self) -> None:
         # options that have a default are overridden correctly
         copied = self.client.copy(max_retries=7)
@@ -108,7 +112,11 @@ class TestHyperspell:
 
     def test_copy_default_headers(self) -> None:
         client = Hyperspell(
-            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
+            base_url=base_url,
+            api_key=api_key,
+            user_id=user_id,
+            _strict_response_validation=True,
+            default_headers={"X-Foo": "bar"},
         )
         assert client.default_headers["X-Foo"] == "bar"
 
@@ -142,7 +150,11 @@ class TestHyperspell:
 
     def test_copy_default_query(self) -> None:
         client = Hyperspell(
-            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"foo": "bar"}
+            base_url=base_url,
+            api_key=api_key,
+            user_id=user_id,
+            _strict_response_validation=True,
+            default_query={"foo": "bar"},
         )
         assert _get_params(client)["foo"] == "bar"
 
@@ -267,7 +279,11 @@ class TestHyperspell:
 
     def test_client_timeout_option(self) -> None:
         client = Hyperspell(
-            base_url=base_url, api_key=api_key, _strict_response_validation=True, timeout=httpx.Timeout(0)
+            base_url=base_url,
+            api_key=api_key,
+            user_id=user_id,
+            _strict_response_validation=True,
+            timeout=httpx.Timeout(0),
         )
 
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -278,7 +294,11 @@ class TestHyperspell:
         # custom timeout given to the httpx client should be used
         with httpx.Client(timeout=None) as http_client:
             client = Hyperspell(
-                base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
+                base_url=base_url,
+                api_key=api_key,
+                user_id=user_id,
+                _strict_response_validation=True,
+                http_client=http_client,
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -288,7 +308,11 @@ class TestHyperspell:
         # no timeout given to the httpx client should not use the httpx default
         with httpx.Client() as http_client:
             client = Hyperspell(
-                base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
+                base_url=base_url,
+                api_key=api_key,
+                user_id=user_id,
+                _strict_response_validation=True,
+                http_client=http_client,
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -298,7 +322,11 @@ class TestHyperspell:
         # explicitly passing the default timeout currently results in it being ignored
         with httpx.Client(timeout=HTTPX_DEFAULT_TIMEOUT) as http_client:
             client = Hyperspell(
-                base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
+                base_url=base_url,
+                api_key=api_key,
+                user_id=user_id,
+                _strict_response_validation=True,
+                http_client=http_client,
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -311,13 +339,18 @@ class TestHyperspell:
                 Hyperspell(
                     base_url=base_url,
                     api_key=api_key,
+                    user_id=user_id,
                     _strict_response_validation=True,
                     http_client=cast(Any, http_client),
                 )
 
     def test_default_headers_option(self) -> None:
         client = Hyperspell(
-            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
+            base_url=base_url,
+            api_key=api_key,
+            user_id=user_id,
+            _strict_response_validation=True,
+            default_headers={"X-Foo": "bar"},
         )
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("x-foo") == "bar"
@@ -326,6 +359,7 @@ class TestHyperspell:
         client2 = Hyperspell(
             base_url=base_url,
             api_key=api_key,
+            user_id=user_id,
             _strict_response_validation=True,
             default_headers={
                 "X-Foo": "stainless",
@@ -337,27 +371,24 @@ class TestHyperspell:
         assert request.headers.get("x-stainless-lang") == "my-overriding-header"
 
     def test_validate_headers(self) -> None:
-        client = Hyperspell(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        client = Hyperspell(base_url=base_url, api_key=api_key, user_id=user_id, _strict_response_validation=True)
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("Authorization") == f"Bearer {api_key}"
+        request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
+        assert request.headers.get("X-As-User") == user_id
 
-        with update_env(**{"HYPERSPELL_TOKEN": Omit()}):
-            client2 = Hyperspell(base_url=base_url, api_key=None, _strict_response_validation=True)
-
-        with pytest.raises(
-            TypeError,
-            match="Could not resolve authentication method. Expected the api_key to be set. Or for the `Authorization` headers to be explicitly omitted",
-        ):
-            client2._build_request(FinalRequestOptions(method="get", url="/foo"))
-
-        request2 = client2._build_request(
-            FinalRequestOptions(method="get", url="/foo", headers={"Authorization": Omit()})
-        )
-        assert request2.headers.get("Authorization") is None
+        with pytest.raises(HyperspellError):
+            with update_env(**{"HYPERSPELL_TOKEN": Omit()}):
+                client2 = Hyperspell(base_url=base_url, api_key=None, user_id=None, _strict_response_validation=True)
+            _ = client2
 
     def test_default_query_option(self) -> None:
         client = Hyperspell(
-            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"query_param": "bar"}
+            base_url=base_url,
+            api_key=api_key,
+            user_id=user_id,
+            _strict_response_validation=True,
+            default_query={"query_param": "bar"},
         )
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         url = httpx.URL(request.url)
@@ -557,7 +588,9 @@ class TestHyperspell:
         assert response.foo == 2
 
     def test_base_url_setter(self) -> None:
-        client = Hyperspell(base_url="https://example.com/from_init", api_key=api_key, _strict_response_validation=True)
+        client = Hyperspell(
+            base_url="https://example.com/from_init", api_key=api_key, user_id=user_id, _strict_response_validation=True
+        )
         assert client.base_url == "https://example.com/from_init/"
 
         client.base_url = "https://example.com/from_setter"  # type: ignore[assignment]
@@ -566,18 +599,22 @@ class TestHyperspell:
 
     def test_base_url_env(self) -> None:
         with update_env(HYPERSPELL_BASE_URL="http://localhost:5000/from/env"):
-            client = Hyperspell(api_key=api_key, _strict_response_validation=True)
+            client = Hyperspell(api_key=api_key, user_id=user_id, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
 
     @pytest.mark.parametrize(
         "client",
         [
             Hyperspell(
-                base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
+                base_url="http://localhost:5000/custom/path/",
+                api_key=api_key,
+                user_id=user_id,
+                _strict_response_validation=True,
             ),
             Hyperspell(
                 base_url="http://localhost:5000/custom/path/",
                 api_key=api_key,
+                user_id=user_id,
                 _strict_response_validation=True,
                 http_client=httpx.Client(),
             ),
@@ -598,11 +635,15 @@ class TestHyperspell:
         "client",
         [
             Hyperspell(
-                base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
+                base_url="http://localhost:5000/custom/path/",
+                api_key=api_key,
+                user_id=user_id,
+                _strict_response_validation=True,
             ),
             Hyperspell(
                 base_url="http://localhost:5000/custom/path/",
                 api_key=api_key,
+                user_id=user_id,
                 _strict_response_validation=True,
                 http_client=httpx.Client(),
             ),
@@ -623,11 +664,15 @@ class TestHyperspell:
         "client",
         [
             Hyperspell(
-                base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
+                base_url="http://localhost:5000/custom/path/",
+                api_key=api_key,
+                user_id=user_id,
+                _strict_response_validation=True,
             ),
             Hyperspell(
                 base_url="http://localhost:5000/custom/path/",
                 api_key=api_key,
+                user_id=user_id,
                 _strict_response_validation=True,
                 http_client=httpx.Client(),
             ),
@@ -645,7 +690,7 @@ class TestHyperspell:
         assert request.url == "https://myapi.com/foo"
 
     def test_copied_client_does_not_close_http(self) -> None:
-        client = Hyperspell(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        client = Hyperspell(base_url=base_url, api_key=api_key, user_id=user_id, _strict_response_validation=True)
         assert not client.is_closed()
 
         copied = client.copy()
@@ -656,7 +701,7 @@ class TestHyperspell:
         assert not client.is_closed()
 
     def test_client_context_manager(self) -> None:
-        client = Hyperspell(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        client = Hyperspell(base_url=base_url, api_key=api_key, user_id=user_id, _strict_response_validation=True)
         with client as c2:
             assert c2 is client
             assert not c2.is_closed()
@@ -678,7 +723,11 @@ class TestHyperspell:
     def test_client_max_retries_validation(self) -> None:
         with pytest.raises(TypeError, match=r"max_retries cannot be None"):
             Hyperspell(
-                base_url=base_url, api_key=api_key, _strict_response_validation=True, max_retries=cast(Any, None)
+                base_url=base_url,
+                api_key=api_key,
+                user_id=user_id,
+                _strict_response_validation=True,
+                max_retries=cast(Any, None),
             )
 
     @pytest.mark.respx(base_url=base_url)
@@ -688,12 +737,14 @@ class TestHyperspell:
 
         respx_mock.get("/foo").mock(return_value=httpx.Response(200, text="my-custom-format"))
 
-        strict_client = Hyperspell(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        strict_client = Hyperspell(
+            base_url=base_url, api_key=api_key, user_id=user_id, _strict_response_validation=True
+        )
 
         with pytest.raises(APIResponseValidationError):
             strict_client.get("/foo", cast_to=Model)
 
-        client = Hyperspell(base_url=base_url, api_key=api_key, _strict_response_validation=False)
+        client = Hyperspell(base_url=base_url, api_key=api_key, user_id=user_id, _strict_response_validation=False)
 
         response = client.get("/foo", cast_to=Model)
         assert isinstance(response, str)  # type: ignore[unreachable]
@@ -721,7 +772,7 @@ class TestHyperspell:
     )
     @mock.patch("time.time", mock.MagicMock(return_value=1696004797))
     def test_parse_retry_after_header(self, remaining_retries: int, retry_after: str, timeout: float) -> None:
-        client = Hyperspell(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        client = Hyperspell(base_url=base_url, api_key=api_key, user_id=user_id, _strict_response_validation=True)
 
         headers = httpx.Headers({"retry-after": retry_after})
         options = FinalRequestOptions(method="get", url="/foo", max_retries=3)
@@ -730,32 +781,21 @@ class TestHyperspell:
 
     @mock.patch("hyperspell._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
+    def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter, client: Hyperspell) -> None:
         respx_mock.post("/documents/add").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            self.client.post(
-                "/documents/add",
-                body=cast(object, maybe_transform(dict(text="text"), DocumentAddParams)),
-                cast_to=httpx.Response,
-                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
-            )
+            client.documents.with_streaming_response.add(text="text").__enter__()
 
         assert _get_open_connections(self.client) == 0
 
     @mock.patch("hyperspell._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
+    def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter, client: Hyperspell) -> None:
         respx_mock.post("/documents/add").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            self.client.post(
-                "/documents/add",
-                body=cast(object, maybe_transform(dict(text="text"), DocumentAddParams)),
-                cast_to=httpx.Response,
-                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
-            )
-
+            client.documents.with_streaming_response.add(text="text").__enter__()
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
@@ -837,9 +877,58 @@ class TestHyperspell:
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
 
+    def test_proxy_environment_variables(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        # Test that the proxy environment variables are set correctly
+        monkeypatch.setenv("HTTPS_PROXY", "https://example.org")
+
+        client = DefaultHttpxClient()
+
+        mounts = tuple(client._mounts.items())
+        assert len(mounts) == 1
+        assert mounts[0][0].pattern == "https://"
+
+    @pytest.mark.filterwarnings("ignore:.*deprecated.*:DeprecationWarning")
+    def test_default_client_creation(self) -> None:
+        # Ensure that the client can be initialized without any exceptions
+        DefaultHttpxClient(
+            verify=True,
+            cert=None,
+            trust_env=True,
+            http1=True,
+            http2=False,
+            limits=httpx.Limits(max_connections=100, max_keepalive_connections=20),
+        )
+
+    @pytest.mark.respx(base_url=base_url)
+    def test_follow_redirects(self, respx_mock: MockRouter) -> None:
+        # Test that the default follow_redirects=True allows following redirects
+        respx_mock.post("/redirect").mock(
+            return_value=httpx.Response(302, headers={"Location": f"{base_url}/redirected"})
+        )
+        respx_mock.get("/redirected").mock(return_value=httpx.Response(200, json={"status": "ok"}))
+
+        response = self.client.post("/redirect", body={"key": "value"}, cast_to=httpx.Response)
+        assert response.status_code == 200
+        assert response.json() == {"status": "ok"}
+
+    @pytest.mark.respx(base_url=base_url)
+    def test_follow_redirects_disabled(self, respx_mock: MockRouter) -> None:
+        # Test that follow_redirects=False prevents following redirects
+        respx_mock.post("/redirect").mock(
+            return_value=httpx.Response(302, headers={"Location": f"{base_url}/redirected"})
+        )
+
+        with pytest.raises(APIStatusError) as exc_info:
+            self.client.post(
+                "/redirect", body={"key": "value"}, options={"follow_redirects": False}, cast_to=httpx.Response
+            )
+
+        assert exc_info.value.response.status_code == 302
+        assert exc_info.value.response.headers["Location"] == f"{base_url}/redirected"
+
 
 class TestAsyncHyperspell:
-    client = AsyncHyperspell(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+    client = AsyncHyperspell(base_url=base_url, api_key=api_key, user_id=user_id, _strict_response_validation=True)
 
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.asyncio
@@ -871,6 +960,10 @@ class TestAsyncHyperspell:
         assert copied.api_key == "another My API Key"
         assert self.client.api_key == "My API Key"
 
+        copied = self.client.copy(user_id="another My User ID")
+        assert copied.user_id == "another My User ID"
+        assert self.client.user_id == "My User ID"
+
     def test_copy_default_options(self) -> None:
         # options that have a default are overridden correctly
         copied = self.client.copy(max_retries=7)
@@ -889,7 +982,11 @@ class TestAsyncHyperspell:
 
     def test_copy_default_headers(self) -> None:
         client = AsyncHyperspell(
-            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
+            base_url=base_url,
+            api_key=api_key,
+            user_id=user_id,
+            _strict_response_validation=True,
+            default_headers={"X-Foo": "bar"},
         )
         assert client.default_headers["X-Foo"] == "bar"
 
@@ -923,7 +1020,11 @@ class TestAsyncHyperspell:
 
     def test_copy_default_query(self) -> None:
         client = AsyncHyperspell(
-            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"foo": "bar"}
+            base_url=base_url,
+            api_key=api_key,
+            user_id=user_id,
+            _strict_response_validation=True,
+            default_query={"foo": "bar"},
         )
         assert _get_params(client)["foo"] == "bar"
 
@@ -1048,7 +1149,11 @@ class TestAsyncHyperspell:
 
     async def test_client_timeout_option(self) -> None:
         client = AsyncHyperspell(
-            base_url=base_url, api_key=api_key, _strict_response_validation=True, timeout=httpx.Timeout(0)
+            base_url=base_url,
+            api_key=api_key,
+            user_id=user_id,
+            _strict_response_validation=True,
+            timeout=httpx.Timeout(0),
         )
 
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -1059,7 +1164,11 @@ class TestAsyncHyperspell:
         # custom timeout given to the httpx client should be used
         async with httpx.AsyncClient(timeout=None) as http_client:
             client = AsyncHyperspell(
-                base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
+                base_url=base_url,
+                api_key=api_key,
+                user_id=user_id,
+                _strict_response_validation=True,
+                http_client=http_client,
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -1069,7 +1178,11 @@ class TestAsyncHyperspell:
         # no timeout given to the httpx client should not use the httpx default
         async with httpx.AsyncClient() as http_client:
             client = AsyncHyperspell(
-                base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
+                base_url=base_url,
+                api_key=api_key,
+                user_id=user_id,
+                _strict_response_validation=True,
+                http_client=http_client,
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -1079,7 +1192,11 @@ class TestAsyncHyperspell:
         # explicitly passing the default timeout currently results in it being ignored
         async with httpx.AsyncClient(timeout=HTTPX_DEFAULT_TIMEOUT) as http_client:
             client = AsyncHyperspell(
-                base_url=base_url, api_key=api_key, _strict_response_validation=True, http_client=http_client
+                base_url=base_url,
+                api_key=api_key,
+                user_id=user_id,
+                _strict_response_validation=True,
+                http_client=http_client,
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -1092,13 +1209,18 @@ class TestAsyncHyperspell:
                 AsyncHyperspell(
                     base_url=base_url,
                     api_key=api_key,
+                    user_id=user_id,
                     _strict_response_validation=True,
                     http_client=cast(Any, http_client),
                 )
 
     def test_default_headers_option(self) -> None:
         client = AsyncHyperspell(
-            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_headers={"X-Foo": "bar"}
+            base_url=base_url,
+            api_key=api_key,
+            user_id=user_id,
+            _strict_response_validation=True,
+            default_headers={"X-Foo": "bar"},
         )
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("x-foo") == "bar"
@@ -1107,6 +1229,7 @@ class TestAsyncHyperspell:
         client2 = AsyncHyperspell(
             base_url=base_url,
             api_key=api_key,
+            user_id=user_id,
             _strict_response_validation=True,
             default_headers={
                 "X-Foo": "stainless",
@@ -1118,27 +1241,26 @@ class TestAsyncHyperspell:
         assert request.headers.get("x-stainless-lang") == "my-overriding-header"
 
     def test_validate_headers(self) -> None:
-        client = AsyncHyperspell(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        client = AsyncHyperspell(base_url=base_url, api_key=api_key, user_id=user_id, _strict_response_validation=True)
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("Authorization") == f"Bearer {api_key}"
+        request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
+        assert request.headers.get("X-As-User") == user_id
 
-        with update_env(**{"HYPERSPELL_TOKEN": Omit()}):
-            client2 = AsyncHyperspell(base_url=base_url, api_key=None, _strict_response_validation=True)
-
-        with pytest.raises(
-            TypeError,
-            match="Could not resolve authentication method. Expected the api_key to be set. Or for the `Authorization` headers to be explicitly omitted",
-        ):
-            client2._build_request(FinalRequestOptions(method="get", url="/foo"))
-
-        request2 = client2._build_request(
-            FinalRequestOptions(method="get", url="/foo", headers={"Authorization": Omit()})
-        )
-        assert request2.headers.get("Authorization") is None
+        with pytest.raises(HyperspellError):
+            with update_env(**{"HYPERSPELL_TOKEN": Omit()}):
+                client2 = AsyncHyperspell(
+                    base_url=base_url, api_key=None, user_id=None, _strict_response_validation=True
+                )
+            _ = client2
 
     def test_default_query_option(self) -> None:
         client = AsyncHyperspell(
-            base_url=base_url, api_key=api_key, _strict_response_validation=True, default_query={"query_param": "bar"}
+            base_url=base_url,
+            api_key=api_key,
+            user_id=user_id,
+            _strict_response_validation=True,
+            default_query={"query_param": "bar"},
         )
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         url = httpx.URL(request.url)
@@ -1339,7 +1461,7 @@ class TestAsyncHyperspell:
 
     def test_base_url_setter(self) -> None:
         client = AsyncHyperspell(
-            base_url="https://example.com/from_init", api_key=api_key, _strict_response_validation=True
+            base_url="https://example.com/from_init", api_key=api_key, user_id=user_id, _strict_response_validation=True
         )
         assert client.base_url == "https://example.com/from_init/"
 
@@ -1349,18 +1471,22 @@ class TestAsyncHyperspell:
 
     def test_base_url_env(self) -> None:
         with update_env(HYPERSPELL_BASE_URL="http://localhost:5000/from/env"):
-            client = AsyncHyperspell(api_key=api_key, _strict_response_validation=True)
+            client = AsyncHyperspell(api_key=api_key, user_id=user_id, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
 
     @pytest.mark.parametrize(
         "client",
         [
             AsyncHyperspell(
-                base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
+                base_url="http://localhost:5000/custom/path/",
+                api_key=api_key,
+                user_id=user_id,
+                _strict_response_validation=True,
             ),
             AsyncHyperspell(
                 base_url="http://localhost:5000/custom/path/",
                 api_key=api_key,
+                user_id=user_id,
                 _strict_response_validation=True,
                 http_client=httpx.AsyncClient(),
             ),
@@ -1381,11 +1507,15 @@ class TestAsyncHyperspell:
         "client",
         [
             AsyncHyperspell(
-                base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
+                base_url="http://localhost:5000/custom/path/",
+                api_key=api_key,
+                user_id=user_id,
+                _strict_response_validation=True,
             ),
             AsyncHyperspell(
                 base_url="http://localhost:5000/custom/path/",
                 api_key=api_key,
+                user_id=user_id,
                 _strict_response_validation=True,
                 http_client=httpx.AsyncClient(),
             ),
@@ -1406,11 +1536,15 @@ class TestAsyncHyperspell:
         "client",
         [
             AsyncHyperspell(
-                base_url="http://localhost:5000/custom/path/", api_key=api_key, _strict_response_validation=True
+                base_url="http://localhost:5000/custom/path/",
+                api_key=api_key,
+                user_id=user_id,
+                _strict_response_validation=True,
             ),
             AsyncHyperspell(
                 base_url="http://localhost:5000/custom/path/",
                 api_key=api_key,
+                user_id=user_id,
                 _strict_response_validation=True,
                 http_client=httpx.AsyncClient(),
             ),
@@ -1428,7 +1562,7 @@ class TestAsyncHyperspell:
         assert request.url == "https://myapi.com/foo"
 
     async def test_copied_client_does_not_close_http(self) -> None:
-        client = AsyncHyperspell(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        client = AsyncHyperspell(base_url=base_url, api_key=api_key, user_id=user_id, _strict_response_validation=True)
         assert not client.is_closed()
 
         copied = client.copy()
@@ -1440,7 +1574,7 @@ class TestAsyncHyperspell:
         assert not client.is_closed()
 
     async def test_client_context_manager(self) -> None:
-        client = AsyncHyperspell(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        client = AsyncHyperspell(base_url=base_url, api_key=api_key, user_id=user_id, _strict_response_validation=True)
         async with client as c2:
             assert c2 is client
             assert not c2.is_closed()
@@ -1463,7 +1597,11 @@ class TestAsyncHyperspell:
     async def test_client_max_retries_validation(self) -> None:
         with pytest.raises(TypeError, match=r"max_retries cannot be None"):
             AsyncHyperspell(
-                base_url=base_url, api_key=api_key, _strict_response_validation=True, max_retries=cast(Any, None)
+                base_url=base_url,
+                api_key=api_key,
+                user_id=user_id,
+                _strict_response_validation=True,
+                max_retries=cast(Any, None),
             )
 
     @pytest.mark.respx(base_url=base_url)
@@ -1474,12 +1612,14 @@ class TestAsyncHyperspell:
 
         respx_mock.get("/foo").mock(return_value=httpx.Response(200, text="my-custom-format"))
 
-        strict_client = AsyncHyperspell(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        strict_client = AsyncHyperspell(
+            base_url=base_url, api_key=api_key, user_id=user_id, _strict_response_validation=True
+        )
 
         with pytest.raises(APIResponseValidationError):
             await strict_client.get("/foo", cast_to=Model)
 
-        client = AsyncHyperspell(base_url=base_url, api_key=api_key, _strict_response_validation=False)
+        client = AsyncHyperspell(base_url=base_url, api_key=api_key, user_id=user_id, _strict_response_validation=False)
 
         response = await client.get("/foo", cast_to=Model)
         assert isinstance(response, str)  # type: ignore[unreachable]
@@ -1508,7 +1648,7 @@ class TestAsyncHyperspell:
     @mock.patch("time.time", mock.MagicMock(return_value=1696004797))
     @pytest.mark.asyncio
     async def test_parse_retry_after_header(self, remaining_retries: int, retry_after: str, timeout: float) -> None:
-        client = AsyncHyperspell(base_url=base_url, api_key=api_key, _strict_response_validation=True)
+        client = AsyncHyperspell(base_url=base_url, api_key=api_key, user_id=user_id, _strict_response_validation=True)
 
         headers = httpx.Headers({"retry-after": retry_after})
         options = FinalRequestOptions(method="get", url="/foo", max_retries=3)
@@ -1517,32 +1657,25 @@ class TestAsyncHyperspell:
 
     @mock.patch("hyperspell._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    async def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
+    async def test_retrying_timeout_errors_doesnt_leak(
+        self, respx_mock: MockRouter, async_client: AsyncHyperspell
+    ) -> None:
         respx_mock.post("/documents/add").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            await self.client.post(
-                "/documents/add",
-                body=cast(object, maybe_transform(dict(text="text"), DocumentAddParams)),
-                cast_to=httpx.Response,
-                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
-            )
+            await async_client.documents.with_streaming_response.add(text="text").__aenter__()
 
         assert _get_open_connections(self.client) == 0
 
     @mock.patch("hyperspell._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
-    async def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter) -> None:
+    async def test_retrying_status_errors_doesnt_leak(
+        self, respx_mock: MockRouter, async_client: AsyncHyperspell
+    ) -> None:
         respx_mock.post("/documents/add").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            await self.client.post(
-                "/documents/add",
-                body=cast(object, maybe_transform(dict(text="text"), DocumentAddParams)),
-                cast_to=httpx.Response,
-                options={"headers": {RAW_RESPONSE_HEADER: "stream"}},
-            )
-
+            await async_client.documents.with_streaming_response.add(text="text").__aenter__()
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
@@ -1673,3 +1806,52 @@ class TestAsyncHyperspell:
                     raise AssertionError("calling get_platform using asyncify resulted in a hung process")
 
                 time.sleep(0.1)
+
+    async def test_proxy_environment_variables(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        # Test that the proxy environment variables are set correctly
+        monkeypatch.setenv("HTTPS_PROXY", "https://example.org")
+
+        client = DefaultAsyncHttpxClient()
+
+        mounts = tuple(client._mounts.items())
+        assert len(mounts) == 1
+        assert mounts[0][0].pattern == "https://"
+
+    @pytest.mark.filterwarnings("ignore:.*deprecated.*:DeprecationWarning")
+    async def test_default_client_creation(self) -> None:
+        # Ensure that the client can be initialized without any exceptions
+        DefaultAsyncHttpxClient(
+            verify=True,
+            cert=None,
+            trust_env=True,
+            http1=True,
+            http2=False,
+            limits=httpx.Limits(max_connections=100, max_keepalive_connections=20),
+        )
+
+    @pytest.mark.respx(base_url=base_url)
+    async def test_follow_redirects(self, respx_mock: MockRouter) -> None:
+        # Test that the default follow_redirects=True allows following redirects
+        respx_mock.post("/redirect").mock(
+            return_value=httpx.Response(302, headers={"Location": f"{base_url}/redirected"})
+        )
+        respx_mock.get("/redirected").mock(return_value=httpx.Response(200, json={"status": "ok"}))
+
+        response = await self.client.post("/redirect", body={"key": "value"}, cast_to=httpx.Response)
+        assert response.status_code == 200
+        assert response.json() == {"status": "ok"}
+
+    @pytest.mark.respx(base_url=base_url)
+    async def test_follow_redirects_disabled(self, respx_mock: MockRouter) -> None:
+        # Test that follow_redirects=False prevents following redirects
+        respx_mock.post("/redirect").mock(
+            return_value=httpx.Response(302, headers={"Location": f"{base_url}/redirected"})
+        )
+
+        with pytest.raises(APIStatusError) as exc_info:
+            await self.client.post(
+                "/redirect", body={"key": "value"}, options={"follow_redirects": False}, cast_to=httpx.Response
+            )
+
+        assert exc_info.value.response.status_code == 302
+        assert exc_info.value.response.headers["Location"] == f"{base_url}/redirected"

@@ -27,5 +27,12 @@ class DocumentAddParams(TypedDict, total=False):
     range.
     """
 
+    resource_id: str
+    """The resource ID to add the document to.
+
+    If not provided, a new resource ID will be generated. If provided, the document
+    will be updated if it already exists.
+    """
+
     title: Optional[str]
     """Title of the document."""

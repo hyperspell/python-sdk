@@ -1,6 +1,6 @@
 # Hyperspell Python API library
 
-[![PyPI version](https://img.shields.io/pypi/v/hyperspell.svg)](https://pypi.org/project/hyperspell/)
+[![PyPI version](<https://img.shields.io/pypi/v/hyperspell.svg?label=pypi%20(stable)>)](https://pypi.org/project/hyperspell/)
 
 The Hyperspell Python library provides convenient access to the Hyperspell REST API from any Python 3.8+
 application. The library includes type definitions for all request params and response fields,
@@ -148,8 +148,6 @@ for document in first_page.items:
 # Remove `await` for non-async usage.
 ```
 
-from datetime import datetime
-
 ## Nested params
 
 Nested parameters are dictionaries, typed using `TypedDict`, for example:
@@ -161,25 +159,7 @@ client = Hyperspell()
 
 response = client.query.search(
     query="query",
-    filter={
-        "after": datetime.fromisoformat("2019-12-27T18:11:19.117"),
-        "before": datetime.fromisoformat("2019-12-27T18:11:19.117"),
-        "box": {},
-        "collections": {},
-        "google_calendar": {"calendar_id": "calendar_id"},
-        "google_drive": {},
-        "notion": {"notion_page_ids": ["string"]},
-        "reddit": {
-            "period": "hour",
-            "sort": "relevance",
-            "subreddit": "subreddit",
-        },
-        "slack": {"channels": ["string"]},
-        "web_crawler": {
-            "max_depth": 0,
-            "url": "string",
-        },
-    },
+    filter={},
 )
 print(response.filter)
 ```
@@ -270,7 +250,7 @@ client.with_options(max_retries=5).documents.add(
 ### Timeouts
 
 By default requests time out after 1 minute. You can configure this with a `timeout` option,
-which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/#fine-tuning-the-configuration) object:
+which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/timeouts/#fine-tuning-the-configuration) object:
 
 ```python
 from hyperspell import Hyperspell
