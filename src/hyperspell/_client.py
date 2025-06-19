@@ -126,8 +126,19 @@ class Hyperspell(SyncAPIClient):
     @property
     @override
     def auth_headers(self) -> dict[str, str]:
+        return {**self._api_key, **self._as_user}
+
+    @property
+    def _api_key(self) -> dict[str, str]:
         api_key = self.api_key
         return {"Authorization": f"Bearer {api_key}"}
+
+    @property
+    def _as_user(self) -> dict[str, str]:
+        user_id = self.user_id
+        if user_id is None:
+            return {}
+        return {"X-As-User": user_id}
 
     @property
     @override
@@ -308,8 +319,19 @@ class AsyncHyperspell(AsyncAPIClient):
     @property
     @override
     def auth_headers(self) -> dict[str, str]:
+        return {**self._api_key, **self._as_user}
+
+    @property
+    def _api_key(self) -> dict[str, str]:
         api_key = self.api_key
         return {"Authorization": f"Bearer {api_key}"}
+
+    @property
+    def _as_user(self) -> dict[str, str]:
+        user_id = self.user_id
+        if user_id is None:
+            return {}
+        return {"X-As-User": user_id}
 
     @property
     @override
