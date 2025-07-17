@@ -21,7 +21,7 @@ from ._types import (
 )
 from ._utils import is_given, get_async_library
 from ._version import __version__
-from .resources import auth, query, documents, collections
+from .resources import auth
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import APIStatusError, HyperspellError
 from ._base_client import (
@@ -45,9 +45,6 @@ __all__ = [
 
 class Hyperspell(SyncAPIClient):
     integrations: integrations.IntegrationsResource
-    documents: documents.DocumentsResource
-    collections: collections.CollectionsResource
-    query: query.QueryResource
     auth: auth.AuthResource
     with_raw_response: HyperspellWithRawResponse
     with_streaming_response: HyperspellWithStreamedResponse
@@ -111,9 +108,6 @@ class Hyperspell(SyncAPIClient):
         )
 
         self.integrations = integrations.IntegrationsResource(self)
-        self.documents = documents.DocumentsResource(self)
-        self.collections = collections.CollectionsResource(self)
-        self.query = query.QueryResource(self)
         self.auth = auth.AuthResource(self)
         self.with_raw_response = HyperspellWithRawResponse(self)
         self.with_streaming_response = HyperspellWithStreamedResponse(self)
@@ -238,9 +232,6 @@ class Hyperspell(SyncAPIClient):
 
 class AsyncHyperspell(AsyncAPIClient):
     integrations: integrations.AsyncIntegrationsResource
-    documents: documents.AsyncDocumentsResource
-    collections: collections.AsyncCollectionsResource
-    query: query.AsyncQueryResource
     auth: auth.AsyncAuthResource
     with_raw_response: AsyncHyperspellWithRawResponse
     with_streaming_response: AsyncHyperspellWithStreamedResponse
@@ -304,9 +295,6 @@ class AsyncHyperspell(AsyncAPIClient):
         )
 
         self.integrations = integrations.AsyncIntegrationsResource(self)
-        self.documents = documents.AsyncDocumentsResource(self)
-        self.collections = collections.AsyncCollectionsResource(self)
-        self.query = query.AsyncQueryResource(self)
         self.auth = auth.AsyncAuthResource(self)
         self.with_raw_response = AsyncHyperspellWithRawResponse(self)
         self.with_streaming_response = AsyncHyperspellWithStreamedResponse(self)
@@ -432,36 +420,24 @@ class AsyncHyperspell(AsyncAPIClient):
 class HyperspellWithRawResponse:
     def __init__(self, client: Hyperspell) -> None:
         self.integrations = integrations.IntegrationsResourceWithRawResponse(client.integrations)
-        self.documents = documents.DocumentsResourceWithRawResponse(client.documents)
-        self.collections = collections.CollectionsResourceWithRawResponse(client.collections)
-        self.query = query.QueryResourceWithRawResponse(client.query)
         self.auth = auth.AuthResourceWithRawResponse(client.auth)
 
 
 class AsyncHyperspellWithRawResponse:
     def __init__(self, client: AsyncHyperspell) -> None:
         self.integrations = integrations.AsyncIntegrationsResourceWithRawResponse(client.integrations)
-        self.documents = documents.AsyncDocumentsResourceWithRawResponse(client.documents)
-        self.collections = collections.AsyncCollectionsResourceWithRawResponse(client.collections)
-        self.query = query.AsyncQueryResourceWithRawResponse(client.query)
         self.auth = auth.AsyncAuthResourceWithRawResponse(client.auth)
 
 
 class HyperspellWithStreamedResponse:
     def __init__(self, client: Hyperspell) -> None:
         self.integrations = integrations.IntegrationsResourceWithStreamingResponse(client.integrations)
-        self.documents = documents.DocumentsResourceWithStreamingResponse(client.documents)
-        self.collections = collections.CollectionsResourceWithStreamingResponse(client.collections)
-        self.query = query.QueryResourceWithStreamingResponse(client.query)
         self.auth = auth.AuthResourceWithStreamingResponse(client.auth)
 
 
 class AsyncHyperspellWithStreamedResponse:
     def __init__(self, client: AsyncHyperspell) -> None:
         self.integrations = integrations.AsyncIntegrationsResourceWithStreamingResponse(client.integrations)
-        self.documents = documents.AsyncDocumentsResourceWithStreamingResponse(client.documents)
-        self.collections = collections.AsyncCollectionsResourceWithStreamingResponse(client.collections)
-        self.query = query.AsyncQueryResourceWithStreamingResponse(client.query)
         self.auth = auth.AsyncAuthResourceWithStreamingResponse(client.auth)
 
 

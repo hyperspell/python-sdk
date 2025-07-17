@@ -39,40 +39,8 @@ Methods:
 Types:
 
 ```python
-from hyperspell.types import Document, DocumentStatus, DocumentStatusResponse
+from hyperspell.types import Document, DocumentStatus
 ```
-
-Methods:
-
-- <code title="get /documents/list">client.documents.<a href="./src/hyperspell/resources/documents.py">list</a>(\*\*<a href="src/hyperspell/types/document_list_params.py">params</a>) -> <a href="./src/hyperspell/types/document.py">SyncCursorPage[Document]</a></code>
-- <code title="post /documents/add">client.documents.<a href="./src/hyperspell/resources/documents.py">add</a>(\*\*<a href="src/hyperspell/types/document_add_params.py">params</a>) -> <a href="./src/hyperspell/types/document_status.py">DocumentStatus</a></code>
-- <code title="get /documents/get/{source}/{resource_id}">client.documents.<a href="./src/hyperspell/resources/documents.py">get</a>(resource_id, \*, source) -> <a href="./src/hyperspell/types/document.py">Document</a></code>
-- <code title="get /documents/status">client.documents.<a href="./src/hyperspell/resources/documents.py">status</a>() -> <a href="./src/hyperspell/types/document_status_response.py">DocumentStatusResponse</a></code>
-- <code title="post /documents/upload">client.documents.<a href="./src/hyperspell/resources/documents.py">upload</a>(\*\*<a href="src/hyperspell/types/document_upload_params.py">params</a>) -> <a href="./src/hyperspell/types/document_status.py">DocumentStatus</a></code>
-
-# Collections
-
-Types:
-
-```python
-from hyperspell.types import CollectionListResponse
-```
-
-Methods:
-
-- <code title="get /collections/list">client.collections.<a href="./src/hyperspell/resources/collections.py">list</a>(\*\*<a href="src/hyperspell/types/collection_list_params.py">params</a>) -> <a href="./src/hyperspell/types/collection_list_response.py">SyncCursorPage[CollectionListResponse]</a></code>
-
-# Query
-
-Types:
-
-```python
-from hyperspell.types import QuerySearchResponse
-```
-
-Methods:
-
-- <code title="post /query">client.query.<a href="./src/hyperspell/resources/query.py">search</a>(\*\*<a href="src/hyperspell/types/query_search_params.py">params</a>) -> <a href="./src/hyperspell/types/query_search_response.py">QuerySearchResponse</a></code>
 
 # Auth
 
