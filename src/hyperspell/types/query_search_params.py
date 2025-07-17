@@ -12,12 +12,14 @@ __all__ = [
     "QuerySearchParams",
     "Filter",
     "FilterGoogleCalendar",
+    "FilterGoogleMail",
     "FilterNotion",
     "FilterReddit",
     "FilterSlack",
     "FilterWebCrawler",
     "Options",
     "OptionsGoogleCalendar",
+    "OptionsGoogleMail",
     "OptionsNotion",
     "OptionsReddit",
     "OptionsSlack",
@@ -105,6 +107,16 @@ class FilterGoogleCalendar(TypedDict, total=False):
     """
 
 
+class FilterGoogleMail(TypedDict, total=False):
+    label_ids: List[str]
+    """List of label IDs to filter messages (e.g., ['INBOX', 'SENT', 'DRAFT']).
+
+    Multiple labels are combined with OR logic - messages matching ANY specified
+    label will be returned. If empty, no label filtering is applied (searches all
+    accessible messages).
+    """
+
+
 class FilterNotion(TypedDict, total=False):
     notion_page_ids: List[str]
     """List of Notion page IDs to search.
@@ -162,6 +174,9 @@ class Filter(TypedDict, total=False):
     google_drive: object
     """Search options for Google Drive"""
 
+    google_mail: FilterGoogleMail
+    """Search options for Gmail"""
+
     notion: FilterNotion
     """Search options for Notion"""
 
@@ -181,6 +196,16 @@ class OptionsGoogleCalendar(TypedDict, total=False):
 
     If not provided, it will use the ID of the default calendar. You can get the
     list of calendars with the `/integrations/google_calendar/list` endpoint.
+    """
+
+
+class OptionsGoogleMail(TypedDict, total=False):
+    label_ids: List[str]
+    """List of label IDs to filter messages (e.g., ['INBOX', 'SENT', 'DRAFT']).
+
+    Multiple labels are combined with OR logic - messages matching ANY specified
+    label will be returned. If empty, no label filtering is applied (searches all
+    accessible messages).
     """
 
 
@@ -240,6 +265,9 @@ class Options(TypedDict, total=False):
 
     google_drive: object
     """Search options for Google Drive"""
+
+    google_mail: OptionsGoogleMail
+    """Search options for Gmail"""
 
     notion: OptionsNotion
     """Search options for Notion"""

@@ -76,7 +76,7 @@ class IntegrationsResource(SyncAPIResource):
     ) -> IntegrationRevokeResponse:
         """
         Revokes Hyperspell's access the given provider and deletes all stored
-        credentials. It does not delete any cached or synced data.
+        credentials and indexed data.
 
         Args:
           extra_headers: Send extra headers
@@ -139,7 +139,7 @@ class AsyncIntegrationsResource(AsyncAPIResource):
     ) -> IntegrationRevokeResponse:
         """
         Revokes Hyperspell's access the given provider and deletes all stored
-        credentials. It does not delete any cached or synced data.
+        credentials and indexed data.
 
         Args:
           extra_headers: Send extra headers
