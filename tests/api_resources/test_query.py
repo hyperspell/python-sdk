@@ -37,6 +37,7 @@ class TestQuery:
                 "collections": {},
                 "google_calendar": {"calendar_id": "calendar_id"},
                 "google_drive": {},
+                "google_mail": {"label_ids": ["string"]},
                 "notion": {"notion_page_ids": ["string"]},
                 "reddit": {
                     "period": "hour",
@@ -57,6 +58,7 @@ class TestQuery:
                 "collections": {},
                 "google_calendar": {"calendar_id": "calendar_id"},
                 "google_drive": {},
+                "google_mail": {"label_ids": ["string"]},
                 "notion": {"notion_page_ids": ["string"]},
                 "reddit": {
                     "period": "hour",
@@ -122,6 +124,7 @@ class TestAsyncQuery:
                 "collections": {},
                 "google_calendar": {"calendar_id": "calendar_id"},
                 "google_drive": {},
+                "google_mail": {"label_ids": ["string"]},
                 "notion": {"notion_page_ids": ["string"]},
                 "reddit": {
                     "period": "hour",
@@ -142,6 +145,7 @@ class TestAsyncQuery:
                 "collections": {},
                 "google_calendar": {"calendar_id": "calendar_id"},
                 "google_drive": {},
+                "google_mail": {"label_ids": ["string"]},
                 "notion": {"notion_page_ids": ["string"]},
                 "reddit": {
                     "period": "hour",
