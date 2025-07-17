@@ -32,10 +32,10 @@ client = Hyperspell(
     api_key=os.environ.get("HYPERSPELL_TOKEN"),  # This is the default and can be omitted
 )
 
-document_status = client.documents.add(
-    text="text",
+response = client.integrations.revoke(
+    "provider",
 )
-print(document_status.id)
+print(response.message)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -58,10 +58,10 @@ client = AsyncHyperspell(
 
 
 async def main() -> None:
-    document_status = await client.documents.add(
-        text="text",
+    response = await client.integrations.revoke(
+        "provider",
     )
-    print(document_status.id)
+    print(response.message)
 
 
 asyncio.run(main())
@@ -93,10 +93,10 @@ async def main() -> None:
         api_key="My API Key",
         http_client=DefaultAioHttpClient(),
     ) as client:
-        document_status = await client.documents.add(
-            text="text",
+        response = await client.integrations.revoke(
+            "provider",
         )
-        print(document_status.id)
+        print(response.message)
 
 
 asyncio.run(main())
@@ -110,110 +110,6 @@ Nested request parameters are [TypedDicts](https://docs.python.org/3/library/typ
 - Converting to a dictionary, `model.to_dict()`
 
 Typed requests and responses provide autocomplete and documentation within your editor. If you would like to see type errors in VS Code to help catch bugs earlier, set `python.analysis.typeCheckingMode` to `basic`.
-
-## Pagination
-
-List methods in the Hyperspell API are paginated.
-
-This library provides auto-paginating iterators with each list response, so you do not have to request successive pages manually:
-
-```python
-from hyperspell import Hyperspell
-
-client = Hyperspell()
-
-all_documents = []
-# Automatically fetches more pages as needed.
-for document in client.documents.list(
-    collection="REPLACE_ME",
-):
-    # Do something with document here
-    all_documents.append(document)
-print(all_documents)
-```
-
-Or, asynchronously:
-
-```python
-import asyncio
-from hyperspell import AsyncHyperspell
-
-client = AsyncHyperspell()
-
-
-async def main() -> None:
-    all_documents = []
-    # Iterate through items across all pages, issuing requests as needed.
-    async for document in client.documents.list(
-        collection="REPLACE_ME",
-    ):
-        all_documents.append(document)
-    print(all_documents)
-
-
-asyncio.run(main())
-```
-
-Alternatively, you can use the `.has_next_page()`, `.next_page_info()`, or `.get_next_page()` methods for more granular control working with pages:
-
-```python
-first_page = await client.documents.list(
-    collection="REPLACE_ME",
-)
-if first_page.has_next_page():
-    print(f"will fetch next page using these details: {first_page.next_page_info()}")
-    next_page = await first_page.get_next_page()
-    print(f"number of items we just fetched: {len(next_page.items)}")
-
-# Remove `await` for non-async usage.
-```
-
-Or just work directly with the returned data:
-
-```python
-first_page = await client.documents.list(
-    collection="REPLACE_ME",
-)
-
-print(f"next page cursor: {first_page.next_cursor}")  # => "next page cursor: ..."
-for document in first_page.items:
-    print(document.resource_id)
-
-# Remove `await` for non-async usage.
-```
-
-## Nested params
-
-Nested parameters are dictionaries, typed using `TypedDict`, for example:
-
-```python
-from hyperspell import Hyperspell
-
-client = Hyperspell()
-
-response = client.query.search(
-    query="query",
-    filter={},
-)
-print(response.filter)
-```
-
-## File uploads
-
-Request parameters that correspond to file uploads can be passed as `bytes`, or a [`PathLike`](https://docs.python.org/3/library/os.html#os.PathLike) instance or a tuple of `(filename, contents, media type)`.
-
-```python
-from pathlib import Path
-from hyperspell import Hyperspell
-
-client = Hyperspell()
-
-client.documents.upload(
-    file=Path("/path/to/file"),
-)
-```
-
-The async client uses the exact same interface. If you pass a [`PathLike`](https://docs.python.org/3/library/os.html#os.PathLike) instance, the file contents will be read asynchronously automatically.
 
 ## Handling errors
 
@@ -231,8 +127,8 @@ from hyperspell import Hyperspell
 client = Hyperspell()
 
 try:
-    client.documents.add(
-        text="text",
+    client.integrations.revoke(
+        "provider",
     )
 except hyperspell.APIConnectionError as e:
     print("The server could not be reached")
@@ -276,8 +172,8 @@ client = Hyperspell(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).documents.add(
-    text="text",
+client.with_options(max_retries=5).integrations.revoke(
+    "provider",
 )
 ```
 
@@ -301,8 +197,8 @@ client = Hyperspell(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).documents.add(
-    text="text",
+client.with_options(timeout=5.0).integrations.revoke(
+    "provider",
 )
 ```
 
@@ -344,13 +240,13 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from hyperspell import Hyperspell
 
 client = Hyperspell()
-response = client.documents.with_raw_response.add(
-    text="text",
+response = client.integrations.with_raw_response.revoke(
+    "provider",
 )
 print(response.headers.get('X-My-Header'))
 
-document = response.parse()  # get the object that `documents.add()` would have returned
-print(document.id)
+integration = response.parse()  # get the object that `integrations.revoke()` would have returned
+print(integration.message)
 ```
 
 These methods return an [`APIResponse`](https://github.com/hyperspell/python-sdk/tree/main/src/hyperspell/_response.py) object.
@@ -364,8 +260,8 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.documents.with_streaming_response.add(
-    text="text",
+with client.integrations.with_streaming_response.revoke(
+    "provider",
 ) as response:
     print(response.headers.get("X-My-Header"))
 

@@ -19,6 +19,7 @@ class AuthMeResponse(BaseModel):
     available_integrations: List[
         Literal[
             "collections",
+            "vault",
             "web_crawler",
             "notion",
             "slack",
@@ -70,6 +71,7 @@ class AuthMeResponse(BaseModel):
     installed_integrations: List[
         Literal[
             "collections",
+            "vault",
             "web_crawler",
             "notion",
             "slack",
