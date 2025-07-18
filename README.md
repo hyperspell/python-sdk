@@ -32,10 +32,10 @@ client = Hyperspell(
     api_key=os.environ.get("HYPERSPELL_TOKEN"),  # This is the default and can be omitted
 )
 
-response = client.integrations.revoke(
-    "provider",
+document_status = client.memories.add(
+    text="text",
 )
-print(response.message)
+print(document_status.id)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -58,10 +58,10 @@ client = AsyncHyperspell(
 
 
 async def main() -> None:
-    response = await client.integrations.revoke(
-        "provider",
+    document_status = await client.memories.add(
+        text="text",
     )
-    print(response.message)
+    print(document_status.id)
 
 
 asyncio.run(main())
@@ -93,10 +93,10 @@ async def main() -> None:
         api_key="My API Key",
         http_client=DefaultAioHttpClient(),
     ) as client:
-        response = await client.integrations.revoke(
-            "provider",
+        document_status = await client.memories.add(
+            text="text",
         )
-        print(response.message)
+        print(document_status.id)
 
 
 asyncio.run(main())
@@ -110,6 +110,77 @@ Nested request parameters are [TypedDicts](https://docs.python.org/3/library/typ
 - Converting to a dictionary, `model.to_dict()`
 
 Typed requests and responses provide autocomplete and documentation within your editor. If you would like to see type errors in VS Code to help catch bugs earlier, set `python.analysis.typeCheckingMode` to `basic`.
+
+## Pagination
+
+List methods in the Hyperspell API are paginated.
+
+This library provides auto-paginating iterators with each list response, so you do not have to request successive pages manually:
+
+```python
+from hyperspell import Hyperspell
+
+client = Hyperspell()
+
+all_memories = []
+# Automatically fetches more pages as needed.
+for memory in client.memories.list(
+    collection="REPLACE_ME",
+):
+    # Do something with memory here
+    all_memories.append(memory)
+print(all_memories)
+```
+
+Or, asynchronously:
+
+```python
+import asyncio
+from hyperspell import AsyncHyperspell
+
+client = AsyncHyperspell()
+
+
+async def main() -> None:
+    all_memories = []
+    # Iterate through items across all pages, issuing requests as needed.
+    async for memory in client.memories.list(
+        collection="REPLACE_ME",
+    ):
+        all_memories.append(memory)
+    print(all_memories)
+
+
+asyncio.run(main())
+```
+
+Alternatively, you can use the `.has_next_page()`, `.next_page_info()`, or `.get_next_page()` methods for more granular control working with pages:
+
+```python
+first_page = await client.memories.list(
+    collection="REPLACE_ME",
+)
+if first_page.has_next_page():
+    print(f"will fetch next page using these details: {first_page.next_page_info()}")
+    next_page = await first_page.get_next_page()
+    print(f"number of items we just fetched: {len(next_page.items)}")
+
+# Remove `await` for non-async usage.
+```
+
+Or just work directly with the returned data:
+
+```python
+first_page = await client.memories.list(
+    collection="REPLACE_ME",
+)
+
+print(f"next page cursor: {first_page.next_cursor}")  # => "next page cursor: ..."
+for memory in first_page.items:
+    print(memory.resource_id)
+
+# Remove `await` for non-async usage.
+```
 
 ## Nested params
 
@@ -160,8 +231,8 @@ from hyperspell import Hyperspell
 client = Hyperspell()
 
 try:
-    client.integrations.revoke(
-        "provider",
+    client.memories.add(
+        text="text",
     )
 except hyperspell.APIConnectionError as e:
     print("The server could not be reached")
@@ -205,8 +276,8 @@ client = Hyperspell(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).integrations.revoke(
-    "provider",
+client.with_options(max_retries=5).memories.add(
+    text="text",
 )
 ```
 
@@ -230,8 +301,8 @@ client = Hyperspell(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).integrations.revoke(
-    "provider",
+client.with_options(timeout=5.0).memories.add(
+    text="text",
 )
 ```
 
@@ -273,13 +344,13 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from hyperspell import Hyperspell
 
 client = Hyperspell()
-response = client.integrations.with_raw_response.revoke(
-    "provider",
+response = client.memories.with_raw_response.add(
+    text="text",
 )
 print(response.headers.get('X-My-Header'))
 
-integration = response.parse()  # get the object that `integrations.revoke()` would have returned
-print(integration.message)
+memory = response.parse()  # get the object that `memories.add()` would have returned
+print(memory.id)
 ```
 
 These methods return an [`APIResponse`](https://github.com/hyperspell/python-sdk/tree/main/src/hyperspell/_response.py) object.
@@ -293,8 +364,8 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.integrations.with_streaming_response.revoke(
-    "provider",
+with client.memories.with_streaming_response.add(
+    text="text",
 ) as response:
     print(response.headers.get("X-My-Header"))
 
