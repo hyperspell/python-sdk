@@ -783,20 +783,20 @@ class TestHyperspell:
     @mock.patch("hyperspell._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter, client: Hyperspell) -> None:
-        respx_mock.get("/integrations/provider/revoke").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.post("/memories/add").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            client.integrations.with_streaming_response.revoke("provider").__enter__()
+            client.memories.with_streaming_response.add(text="text").__enter__()
 
         assert _get_open_connections(self.client) == 0
 
     @mock.patch("hyperspell._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter, client: Hyperspell) -> None:
-        respx_mock.get("/integrations/provider/revoke").mock(return_value=httpx.Response(500))
+        respx_mock.post("/memories/add").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            client.integrations.with_streaming_response.revoke("provider").__enter__()
+            client.memories.with_streaming_response.add(text="text").__enter__()
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
@@ -823,9 +823,9 @@ class TestHyperspell:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/integrations/provider/revoke").mock(side_effect=retry_handler)
+        respx_mock.post("/memories/add").mock(side_effect=retry_handler)
 
-        response = client.integrations.with_raw_response.revoke("provider")
+        response = client.memories.with_raw_response.add(text="text")
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -847,11 +847,9 @@ class TestHyperspell:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/integrations/provider/revoke").mock(side_effect=retry_handler)
+        respx_mock.post("/memories/add").mock(side_effect=retry_handler)
 
-        response = client.integrations.with_raw_response.revoke(
-            "provider", extra_headers={"x-stainless-retry-count": Omit()}
-        )
+        response = client.memories.with_raw_response.add(text="text", extra_headers={"x-stainless-retry-count": Omit()})
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
@@ -872,11 +870,9 @@ class TestHyperspell:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/integrations/provider/revoke").mock(side_effect=retry_handler)
+        respx_mock.post("/memories/add").mock(side_effect=retry_handler)
 
-        response = client.integrations.with_raw_response.revoke(
-            "provider", extra_headers={"x-stainless-retry-count": "42"}
-        )
+        response = client.memories.with_raw_response.add(text="text", extra_headers={"x-stainless-retry-count": "42"})
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
 
@@ -1664,10 +1660,10 @@ class TestAsyncHyperspell:
     async def test_retrying_timeout_errors_doesnt_leak(
         self, respx_mock: MockRouter, async_client: AsyncHyperspell
     ) -> None:
-        respx_mock.get("/integrations/provider/revoke").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.post("/memories/add").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            await async_client.integrations.with_streaming_response.revoke("provider").__aenter__()
+            await async_client.memories.with_streaming_response.add(text="text").__aenter__()
 
         assert _get_open_connections(self.client) == 0
 
@@ -1676,10 +1672,10 @@ class TestAsyncHyperspell:
     async def test_retrying_status_errors_doesnt_leak(
         self, respx_mock: MockRouter, async_client: AsyncHyperspell
     ) -> None:
-        respx_mock.get("/integrations/provider/revoke").mock(return_value=httpx.Response(500))
+        respx_mock.post("/memories/add").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            await async_client.integrations.with_streaming_response.revoke("provider").__aenter__()
+            await async_client.memories.with_streaming_response.add(text="text").__aenter__()
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
@@ -1707,9 +1703,9 @@ class TestAsyncHyperspell:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/integrations/provider/revoke").mock(side_effect=retry_handler)
+        respx_mock.post("/memories/add").mock(side_effect=retry_handler)
 
-        response = await client.integrations.with_raw_response.revoke("provider")
+        response = await client.memories.with_raw_response.add(text="text")
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -1732,10 +1728,10 @@ class TestAsyncHyperspell:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/integrations/provider/revoke").mock(side_effect=retry_handler)
+        respx_mock.post("/memories/add").mock(side_effect=retry_handler)
 
-        response = await client.integrations.with_raw_response.revoke(
-            "provider", extra_headers={"x-stainless-retry-count": Omit()}
+        response = await client.memories.with_raw_response.add(
+            text="text", extra_headers={"x-stainless-retry-count": Omit()}
         )
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
@@ -1758,10 +1754,10 @@ class TestAsyncHyperspell:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/integrations/provider/revoke").mock(side_effect=retry_handler)
+        respx_mock.post("/memories/add").mock(side_effect=retry_handler)
 
-        response = await client.integrations.with_raw_response.revoke(
-            "provider", extra_headers={"x-stainless-retry-count": "42"}
+        response = await client.memories.with_raw_response.add(
+            text="text", extra_headers={"x-stainless-retry-count": "42"}
         )
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
