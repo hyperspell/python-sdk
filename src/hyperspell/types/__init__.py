@@ -3,8 +3,8 @@
 from __future__ import annotations
 
 from .token import Token as Token
-from .document import Document as Document
-from .document_status import DocumentStatus as DocumentStatus
+from .memory import Memory as Memory
+from .memory_status import MemoryStatus as MemoryStatus
 from .auth_me_response import AuthMeResponse as AuthMeResponse
 from .memory_add_params import MemoryAddParams as MemoryAddParams
 from .vault_list_params import VaultListParams as VaultListParams
