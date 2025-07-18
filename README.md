@@ -32,10 +32,10 @@ client = Hyperspell(
     api_key=os.environ.get("HYPERSPELL_TOKEN"),  # This is the default and can be omitted
 )
 
-document_status = client.memories.add(
+memory_status = client.memories.add(
     text="text",
 )
-print(document_status.id)
+print(memory_status.id)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -58,10 +58,10 @@ client = AsyncHyperspell(
 
 
 async def main() -> None:
-    document_status = await client.memories.add(
+    memory_status = await client.memories.add(
         text="text",
     )
-    print(document_status.id)
+    print(memory_status.id)
 
 
 asyncio.run(main())
@@ -93,10 +93,10 @@ async def main() -> None:
         api_key="My API Key",
         http_client=DefaultAioHttpClient(),
     ) as client:
-        document_status = await client.memories.add(
+        memory_status = await client.memories.add(
             text="text",
         )
-        print(document_status.id)
+        print(memory_status.id)
 
 
 asyncio.run(main())

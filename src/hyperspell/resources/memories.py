@@ -21,8 +21,8 @@ from .._response import (
 )
 from ..pagination import SyncCursorPage, AsyncCursorPage
 from .._base_client import AsyncPaginator, make_request_options
-from ..types.document import Document
-from ..types.document_status import DocumentStatus
+from ..types.memory import Memory
+from ..types.memory_status import MemoryStatus
 from ..types.memory_search_response import MemorySearchResponse
 from ..types.memory_status_response import MemoryStatusResponse
 
@@ -112,7 +112,7 @@ class MemoriesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncCursorPage[Document]:
+    ) -> SyncCursorPage[Memory]:
         """This endpoint allows you to paginate through all documents in the index.
 
         You can
@@ -133,7 +133,7 @@ class MemoriesResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/memories/list",
-            page=SyncCursorPage[Document],
+            page=SyncCursorPage[Memory],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -149,7 +149,7 @@ class MemoriesResource(SyncAPIResource):
                     memory_list_params.MemoryListParams,
                 ),
             ),
-            model=Document,
+            model=Memory,
         )
 
     def add(
@@ -166,7 +166,7 @@ class MemoriesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DocumentStatus:
+    ) -> MemoryStatus:
         """Adds an arbitrary document to the index.
 
         This can be any text, email, call
@@ -211,7 +211,7 @@ class MemoriesResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=DocumentStatus,
+            cast_to=MemoryStatus,
         )
 
     def get(
@@ -272,7 +272,7 @@ class MemoriesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Document:
+    ) -> Memory:
         """
         Retrieves a document by provider and resource_id.
 
@@ -294,7 +294,7 @@ class MemoriesResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Document,
+            cast_to=Memory,
         )
 
     def search(
@@ -439,7 +439,7 @@ class MemoriesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DocumentStatus:
+    ) -> MemoryStatus:
         """This endpoint will upload a file to the index and return a document ID.
 
         The file
@@ -478,7 +478,7 @@ class MemoriesResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=DocumentStatus,
+            cast_to=MemoryStatus,
         )
 
 
@@ -565,7 +565,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[Document, AsyncCursorPage[Document]]:
+    ) -> AsyncPaginator[Memory, AsyncCursorPage[Memory]]:
         """This endpoint allows you to paginate through all documents in the index.
 
         You can
@@ -586,7 +586,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/memories/list",
-            page=AsyncCursorPage[Document],
+            page=AsyncCursorPage[Memory],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -602,7 +602,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
                     memory_list_params.MemoryListParams,
                 ),
             ),
-            model=Document,
+            model=Memory,
         )
 
     async def add(
@@ -619,7 +619,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DocumentStatus:
+    ) -> MemoryStatus:
         """Adds an arbitrary document to the index.
 
         This can be any text, email, call
@@ -664,7 +664,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=DocumentStatus,
+            cast_to=MemoryStatus,
         )
 
     async def get(
@@ -725,7 +725,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Document:
+    ) -> Memory:
         """
         Retrieves a document by provider and resource_id.
 
@@ -747,7 +747,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Document,
+            cast_to=Memory,
         )
 
     async def search(
@@ -892,7 +892,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DocumentStatus:
+    ) -> MemoryStatus:
         """This endpoint will upload a file to the index and return a document ID.
 
         The file
@@ -931,7 +931,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=DocumentStatus,
+            cast_to=MemoryStatus,
         )
 
 

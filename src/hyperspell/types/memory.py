@@ -1,16 +1,39 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from typing import TYPE_CHECKING, List, Optional
+from datetime import datetime
 from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["DocumentStatus"]
+__all__ = ["Memory", "Metadata", "MetadataEvent"]
 
 
-class DocumentStatus(BaseModel):
-    id: int
-    """Deprecated: refer to documents by source and resource_id instead"""
+class MetadataEvent(BaseModel):
+    message: str
 
+    type: Literal["error", "warning", "info", "success"]
+
+    time: Optional[datetime] = None
+
+
+class Metadata(BaseModel):
+    events: Optional[List[MetadataEvent]] = None
+
+    indexed_at: Optional[datetime] = None
+
+    last_modified: Optional[datetime] = None
+
+    status: Optional[Literal["pending", "processing", "completed", "failed"]] = None
+
+    if TYPE_CHECKING:
+        # Stub to indicate that arbitrary properties are accepted.
+        # To access properties that are not valid identifiers you can use `getattr`, e.g.
+        # `getattr(obj, '$type')`
+        def __getattr__(self, attr: str) -> object: ...
+
+
+class Memory(BaseModel):
     resource_id: str
 
     source: Literal[
@@ -62,4 +85,7 @@ class DocumentStatus(BaseModel):
         "zoom",
     ]
 
-    status: Literal["pending", "processing", "completed", "failed"]
+    metadata: Optional[Metadata] = None
+
+    score: Optional[float] = None
+    """The relevance of the resource to the query"""
