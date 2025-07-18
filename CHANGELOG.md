@@ -1,5 +1,38 @@
 # Changelog
 
+## 0.19.0 (2025-07-18)
+
+Full Changelog: [v0.18.0...v0.19.0](https://github.com/hyperspell/python-sdk/compare/v0.18.0...v0.19.0)
+
+### Features
+
+* **api:** api update ([e4edf05](https://github.com/hyperspell/python-sdk/commit/e4edf05d2e2700fef1e70250204aee103ac54686))
+* **api:** api update ([7248ff5](https://github.com/hyperspell/python-sdk/commit/7248ff5db8bbc8708f8dfe8afb78d519401ee7f2))
+* **api:** update via SDK Studio ([20bf1bb](https://github.com/hyperspell/python-sdk/commit/20bf1bbf36b4b5aa984cd6f405eb98fb6a743dba))
+* **api:** update via SDK Studio ([21036b0](https://github.com/hyperspell/python-sdk/commit/21036b0a3b626fa41925b58b24616484158b9361))
+* **api:** update via SDK Studio ([bf294db](https://github.com/hyperspell/python-sdk/commit/bf294db204ddb25338ab2370d78d6c378c78686a))
+* clean up environment call outs ([e99844e](https://github.com/hyperspell/python-sdk/commit/e99844ee29928beeed51cd47d53e3ababe33e608))
+* **client:** add support for aiohttp ([c0845dc](https://github.com/hyperspell/python-sdk/commit/c0845dc8133eb74e72f18651e9da53102609d833))
+
+
+### Bug Fixes
+
+* **ci:** correct conditional ([980b910](https://github.com/hyperspell/python-sdk/commit/980b910eaa78cf84de10c0521e4ed2f142689ae0))
+* **ci:** release-doctor — report correct token name ([6ddb78b](https://github.com/hyperspell/python-sdk/commit/6ddb78b355f8e36a85fcfaf1592618bae5c67473))
+* **client:** don't send Content-Type header on GET requests ([f7a04b5](https://github.com/hyperspell/python-sdk/commit/f7a04b5a47aa9a6fc338498a34db4074824c198e))
+* **parsing:** correctly handle nested discriminated unions ([f4e309d](https://github.com/hyperspell/python-sdk/commit/f4e309d6a8d85f5aa0cb3fee3e41bf9c6487b5b1))
+
+
+### Chores
+
+* **ci:** change upload type ([c01d519](https://github.com/hyperspell/python-sdk/commit/c01d519131a2c4620c9454c4e634c2e39053b00c))
+* **ci:** only run for pushes and fork pull requests ([991d685](https://github.com/hyperspell/python-sdk/commit/991d6859286e86aa022eb83aab8ecc6e337798f4))
+* **internal:** bump pinned h11 dep ([1ce5781](https://github.com/hyperspell/python-sdk/commit/1ce57814e1d392b0c6a51b75c1dd92550f9399c3))
+* **internal:** codegen related update ([f7cd6c7](https://github.com/hyperspell/python-sdk/commit/f7cd6c7b1feafef059ecdf6be0bb9adbd5f28929))
+* **package:** mark python 3.13 as supported ([b04d1e6](https://github.com/hyperspell/python-sdk/commit/b04d1e6c7d2dbd8852963ee8f08596ed332e04ec))
+* **readme:** fix version rendering on pypi ([a109225](https://github.com/hyperspell/python-sdk/commit/a1092259c98715d17ce95259420baf3c3d325db8))
+* **tests:** skip some failing tests on the latest python versions ([9eebf62](https://github.com/hyperspell/python-sdk/commit/9eebf628b254b4f463ea7b899dcef53af5362228))
+
 ## 0.18.0 (2025-06-19)
 
 Full Changelog: [v0.16.0...v0.18.0](https://github.com/hyperspell/python-sdk/compare/v0.16.0...v0.18.0)
