@@ -2,13 +2,13 @@
 
 from __future__ import annotations
 
-from typing import Union, Mapping, Optional, cast
+from typing import List, Union, Mapping, Optional, cast
 from datetime import datetime
 from typing_extensions import Literal
 
 import httpx
 
-from ..types import document_add_params, document_list_params, document_upload_params
+from ..types import memory_add_params, memory_list_params, memory_search_params, memory_upload_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven, FileTypes
 from .._utils import extract_files, maybe_transform, deepcopy_minimal, async_maybe_transform
 from .._compat import cached_property
@@ -21,32 +21,33 @@ from .._response import (
 )
 from ..pagination import SyncCursorPage, AsyncCursorPage
 from .._base_client import AsyncPaginator, make_request_options
-from ..types.document import Document
-from ..types.document_status import DocumentStatus
-from ..types.document_status_response import DocumentStatusResponse
+from ..types.memory import Memory
+from ..types.memory_status import MemoryStatus
+from ..types.memory_search_response import MemorySearchResponse
+from ..types.memory_status_response import MemoryStatusResponse
 
-__all__ = ["DocumentsResource", "AsyncDocumentsResource"]
+__all__ = ["MemoriesResource", "AsyncMemoriesResource"]
 
 
-class DocumentsResource(SyncAPIResource):
+class MemoriesResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> DocumentsResourceWithRawResponse:
+    def with_raw_response(self) -> MemoriesResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/hyperspell/python-sdk#accessing-raw-response-data-eg-headers
         """
-        return DocumentsResourceWithRawResponse(self)
+        return MemoriesResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> DocumentsResourceWithStreamingResponse:
+    def with_streaming_response(self) -> MemoriesResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/hyperspell/python-sdk#with_streaming_response
         """
-        return DocumentsResourceWithStreamingResponse(self)
+        return MemoriesResourceWithStreamingResponse(self)
 
     def list(
         self,
@@ -57,6 +58,7 @@ class DocumentsResource(SyncAPIResource):
         source: Optional[
             Literal[
                 "collections",
+                "vault",
                 "web_crawler",
                 "notion",
                 "slack",
@@ -110,7 +112,7 @@ class DocumentsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncCursorPage[Document]:
+    ) -> SyncCursorPage[Memory]:
         """This endpoint allows you to paginate through all documents in the index.
 
         You can
@@ -130,8 +132,8 @@ class DocumentsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/documents/list",
-            page=SyncCursorPage[Document],
+            "/memories/list",
+            page=SyncCursorPage[Memory],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -144,10 +146,10 @@ class DocumentsResource(SyncAPIResource):
                         "size": size,
                         "source": source,
                     },
-                    document_list_params.DocumentListParams,
+                    memory_list_params.MemoryListParams,
                 ),
             ),
-            model=Document,
+            model=Memory,
         )
 
     def add(
@@ -164,7 +166,7 @@ class DocumentsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DocumentStatus:
+    ) -> MemoryStatus:
         """Adds an arbitrary document to the index.
 
         This can be any text, email, call
@@ -195,7 +197,7 @@ class DocumentsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            "/documents/add",
+            "/memories/add",
             body=maybe_transform(
                 {
                     "text": text,
@@ -204,12 +206,12 @@ class DocumentsResource(SyncAPIResource):
                     "resource_id": resource_id,
                     "title": title,
                 },
-                document_add_params.DocumentAddParams,
+                memory_add_params.MemoryAddParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=DocumentStatus,
+            cast_to=MemoryStatus,
         )
 
     def get(
@@ -218,6 +220,7 @@ class DocumentsResource(SyncAPIResource):
         *,
         source: Literal[
             "collections",
+            "vault",
             "web_crawler",
             "notion",
             "slack",
@@ -269,7 +272,7 @@ class DocumentsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Document:
+    ) -> Memory:
         """
         Retrieves a document by provider and resource_id.
 
@@ -287,118 +290,25 @@ class DocumentsResource(SyncAPIResource):
         if not resource_id:
             raise ValueError(f"Expected a non-empty value for `resource_id` but received {resource_id!r}")
         return self._get(
-            f"/documents/get/{source}/{resource_id}",
+            f"/memories/get/{source}/{resource_id}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Document,
+            cast_to=Memory,
         )
 
-    def status(
+    def search(
         self,
         *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DocumentStatusResponse:
-        """
-        This endpoint shows the indexing progress of documents, both by provider and
-        total.
-        """
-        return self._get(
-            "/documents/status",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=DocumentStatusResponse,
-        )
-
-    def upload(
-        self,
-        *,
-        file: FileTypes,
-        collection: Optional[str] | NotGiven = NOT_GIVEN,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DocumentStatus:
-        """This endpoint will upload a file to the index and return a document ID.
-
-        The file
-        will be processed in the background and the document will be available for
-        querying once the processing is complete. You can use the `document_id` to query
-        the document later, and check the status of the document.
-
-        Args:
-          file: The file to ingest.
-
-          collection: The collection to add the document to.
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        body = deepcopy_minimal(
-            {
-                "file": file,
-                "collection": collection,
-            }
-        )
-        files = extract_files(cast(Mapping[str, object], body), paths=[["file"]])
-        # It should be noted that the actual Content-Type header that will be
-        # sent to the server will contain a `boundary` parameter, e.g.
-        # multipart/form-data; boundary=---abc--
-        extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
-        return self._post(
-            "/documents/upload",
-            body=maybe_transform(body, document_upload_params.DocumentUploadParams),
-            files=files,
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=DocumentStatus,
-        )
-
-
-class AsyncDocumentsResource(AsyncAPIResource):
-    @cached_property
-    def with_raw_response(self) -> AsyncDocumentsResourceWithRawResponse:
-        """
-        This property can be used as a prefix for any HTTP method call to return
-        the raw response object instead of the parsed content.
-
-        For more information, see https://www.github.com/hyperspell/python-sdk#accessing-raw-response-data-eg-headers
-        """
-        return AsyncDocumentsResourceWithRawResponse(self)
-
-    @cached_property
-    def with_streaming_response(self) -> AsyncDocumentsResourceWithStreamingResponse:
-        """
-        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
-
-        For more information, see https://www.github.com/hyperspell/python-sdk#with_streaming_response
-        """
-        return AsyncDocumentsResourceWithStreamingResponse(self)
-
-    def list(
-        self,
-        *,
-        collection: Optional[str] | NotGiven = NOT_GIVEN,
-        cursor: Optional[str] | NotGiven = NOT_GIVEN,
-        size: int | NotGiven = NOT_GIVEN,
-        source: Optional[
+        query: str,
+        answer: bool | NotGiven = NOT_GIVEN,
+        filter: Optional[memory_search_params.Filter] | NotGiven = NOT_GIVEN,
+        max_results: int | NotGiven = NOT_GIVEN,
+        options: memory_search_params.Options | NotGiven = NOT_GIVEN,
+        sources: List[
             Literal[
                 "collections",
+                "vault",
                 "web_crawler",
                 "notion",
                 "slack",
@@ -452,7 +362,210 @@ class AsyncDocumentsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[Document, AsyncCursorPage[Document]]:
+    ) -> MemorySearchResponse:
+        """
+        Retrieves documents matching the query.
+
+        Args:
+          query: Query to run.
+
+          answer: If true, the query will be answered along with matching source documents.
+
+          filter: DEPRECATED: Use options instead. This field will be removed in a future version.
+
+          max_results: Maximum number of results to return.
+
+          options: Search options for the query.
+
+          sources: Only query documents from these sources.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/memories/query",
+            body=maybe_transform(
+                {
+                    "query": query,
+                    "answer": answer,
+                    "filter": filter,
+                    "max_results": max_results,
+                    "options": options,
+                    "sources": sources,
+                },
+                memory_search_params.MemorySearchParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=MemorySearchResponse,
+        )
+
+    def status(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> MemoryStatusResponse:
+        """
+        This endpoint shows the indexing progress of documents, both by provider and
+        total.
+        """
+        return self._get(
+            "/memories/status",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=MemoryStatusResponse,
+        )
+
+    def upload(
+        self,
+        *,
+        file: FileTypes,
+        collection: Optional[str] | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> MemoryStatus:
+        """This endpoint will upload a file to the index and return a document ID.
+
+        The file
+        will be processed in the background and the document will be available for
+        querying once the processing is complete. You can use the `document_id` to query
+        the document later, and check the status of the document.
+
+        Args:
+          file: The file to ingest.
+
+          collection: The collection to add the document to.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        body = deepcopy_minimal(
+            {
+                "file": file,
+                "collection": collection,
+            }
+        )
+        files = extract_files(cast(Mapping[str, object], body), paths=[["file"]])
+        # It should be noted that the actual Content-Type header that will be
+        # sent to the server will contain a `boundary` parameter, e.g.
+        # multipart/form-data; boundary=---abc--
+        extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
+        return self._post(
+            "/memories/upload",
+            body=maybe_transform(body, memory_upload_params.MemoryUploadParams),
+            files=files,
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=MemoryStatus,
+        )
+
+
+class AsyncMemoriesResource(AsyncAPIResource):
+    @cached_property
+    def with_raw_response(self) -> AsyncMemoriesResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/hyperspell/python-sdk#accessing-raw-response-data-eg-headers
+        """
+        return AsyncMemoriesResourceWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncMemoriesResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/hyperspell/python-sdk#with_streaming_response
+        """
+        return AsyncMemoriesResourceWithStreamingResponse(self)
+
+    def list(
+        self,
+        *,
+        collection: Optional[str] | NotGiven = NOT_GIVEN,
+        cursor: Optional[str] | NotGiven = NOT_GIVEN,
+        size: int | NotGiven = NOT_GIVEN,
+        source: Optional[
+            Literal[
+                "collections",
+                "vault",
+                "web_crawler",
+                "notion",
+                "slack",
+                "google_calendar",
+                "reddit",
+                "box",
+                "google_drive",
+                "airtable",
+                "algolia",
+                "amplitude",
+                "asana",
+                "ashby",
+                "bamboohr",
+                "basecamp",
+                "bubbles",
+                "calendly",
+                "confluence",
+                "clickup",
+                "datadog",
+                "deel",
+                "discord",
+                "dropbox",
+                "exa",
+                "facebook",
+                "front",
+                "github",
+                "gitlab",
+                "google_docs",
+                "google_mail",
+                "google_sheet",
+                "hubspot",
+                "jira",
+                "linear",
+                "microsoft_teams",
+                "mixpanel",
+                "monday",
+                "outlook",
+                "perplexity",
+                "rippling",
+                "salesforce",
+                "segment",
+                "todoist",
+                "twitter",
+                "zoom",
+            ]
+        ]
+        | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AsyncPaginator[Memory, AsyncCursorPage[Memory]]:
         """This endpoint allows you to paginate through all documents in the index.
 
         You can
@@ -472,8 +585,8 @@ class AsyncDocumentsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/documents/list",
-            page=AsyncCursorPage[Document],
+            "/memories/list",
+            page=AsyncCursorPage[Memory],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -486,10 +599,10 @@ class AsyncDocumentsResource(AsyncAPIResource):
                         "size": size,
                         "source": source,
                     },
-                    document_list_params.DocumentListParams,
+                    memory_list_params.MemoryListParams,
                 ),
             ),
-            model=Document,
+            model=Memory,
         )
 
     async def add(
@@ -506,7 +619,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DocumentStatus:
+    ) -> MemoryStatus:
         """Adds an arbitrary document to the index.
 
         This can be any text, email, call
@@ -537,7 +650,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            "/documents/add",
+            "/memories/add",
             body=await async_maybe_transform(
                 {
                     "text": text,
@@ -546,12 +659,12 @@ class AsyncDocumentsResource(AsyncAPIResource):
                     "resource_id": resource_id,
                     "title": title,
                 },
-                document_add_params.DocumentAddParams,
+                memory_add_params.MemoryAddParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=DocumentStatus,
+            cast_to=MemoryStatus,
         )
 
     async def get(
@@ -560,6 +673,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         *,
         source: Literal[
             "collections",
+            "vault",
             "web_crawler",
             "notion",
             "slack",
@@ -611,7 +725,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> Document:
+    ) -> Memory:
         """
         Retrieves a document by provider and resource_id.
 
@@ -629,11 +743,120 @@ class AsyncDocumentsResource(AsyncAPIResource):
         if not resource_id:
             raise ValueError(f"Expected a non-empty value for `resource_id` but received {resource_id!r}")
         return await self._get(
-            f"/documents/get/{source}/{resource_id}",
+            f"/memories/get/{source}/{resource_id}",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Document,
+            cast_to=Memory,
+        )
+
+    async def search(
+        self,
+        *,
+        query: str,
+        answer: bool | NotGiven = NOT_GIVEN,
+        filter: Optional[memory_search_params.Filter] | NotGiven = NOT_GIVEN,
+        max_results: int | NotGiven = NOT_GIVEN,
+        options: memory_search_params.Options | NotGiven = NOT_GIVEN,
+        sources: List[
+            Literal[
+                "collections",
+                "vault",
+                "web_crawler",
+                "notion",
+                "slack",
+                "google_calendar",
+                "reddit",
+                "box",
+                "google_drive",
+                "airtable",
+                "algolia",
+                "amplitude",
+                "asana",
+                "ashby",
+                "bamboohr",
+                "basecamp",
+                "bubbles",
+                "calendly",
+                "confluence",
+                "clickup",
+                "datadog",
+                "deel",
+                "discord",
+                "dropbox",
+                "exa",
+                "facebook",
+                "front",
+                "github",
+                "gitlab",
+                "google_docs",
+                "google_mail",
+                "google_sheet",
+                "hubspot",
+                "jira",
+                "linear",
+                "microsoft_teams",
+                "mixpanel",
+                "monday",
+                "outlook",
+                "perplexity",
+                "rippling",
+                "salesforce",
+                "segment",
+                "todoist",
+                "twitter",
+                "zoom",
+            ]
+        ]
+        | NotGiven = NOT_GIVEN,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> MemorySearchResponse:
+        """
+        Retrieves documents matching the query.
+
+        Args:
+          query: Query to run.
+
+          answer: If true, the query will be answered along with matching source documents.
+
+          filter: DEPRECATED: Use options instead. This field will be removed in a future version.
+
+          max_results: Maximum number of results to return.
+
+          options: Search options for the query.
+
+          sources: Only query documents from these sources.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/memories/query",
+            body=await async_maybe_transform(
+                {
+                    "query": query,
+                    "answer": answer,
+                    "filter": filter,
+                    "max_results": max_results,
+                    "options": options,
+                    "sources": sources,
+                },
+                memory_search_params.MemorySearchParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=MemorySearchResponse,
         )
 
     async def status(
@@ -645,17 +868,17 @@ class AsyncDocumentsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DocumentStatusResponse:
+    ) -> MemoryStatusResponse:
         """
         This endpoint shows the indexing progress of documents, both by provider and
         total.
         """
         return await self._get(
-            "/documents/status",
+            "/memories/status",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=DocumentStatusResponse,
+            cast_to=MemoryStatusResponse,
         )
 
     async def upload(
@@ -669,7 +892,7 @@ class AsyncDocumentsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> DocumentStatus:
+    ) -> MemoryStatus:
         """This endpoint will upload a file to the index and return a document ID.
 
         The file
@@ -702,95 +925,107 @@ class AsyncDocumentsResource(AsyncAPIResource):
         # multipart/form-data; boundary=---abc--
         extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
         return await self._post(
-            "/documents/upload",
-            body=await async_maybe_transform(body, document_upload_params.DocumentUploadParams),
+            "/memories/upload",
+            body=await async_maybe_transform(body, memory_upload_params.MemoryUploadParams),
             files=files,
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=DocumentStatus,
+            cast_to=MemoryStatus,
         )
 
 
-class DocumentsResourceWithRawResponse:
-    def __init__(self, documents: DocumentsResource) -> None:
-        self._documents = documents
+class MemoriesResourceWithRawResponse:
+    def __init__(self, memories: MemoriesResource) -> None:
+        self._memories = memories
 
         self.list = to_raw_response_wrapper(
-            documents.list,
+            memories.list,
         )
         self.add = to_raw_response_wrapper(
-            documents.add,
+            memories.add,
         )
         self.get = to_raw_response_wrapper(
-            documents.get,
+            memories.get,
+        )
+        self.search = to_raw_response_wrapper(
+            memories.search,
         )
         self.status = to_raw_response_wrapper(
-            documents.status,
+            memories.status,
         )
         self.upload = to_raw_response_wrapper(
-            documents.upload,
+            memories.upload,
         )
 
 
-class AsyncDocumentsResourceWithRawResponse:
-    def __init__(self, documents: AsyncDocumentsResource) -> None:
-        self._documents = documents
+class AsyncMemoriesResourceWithRawResponse:
+    def __init__(self, memories: AsyncMemoriesResource) -> None:
+        self._memories = memories
 
         self.list = async_to_raw_response_wrapper(
-            documents.list,
+            memories.list,
         )
         self.add = async_to_raw_response_wrapper(
-            documents.add,
+            memories.add,
         )
         self.get = async_to_raw_response_wrapper(
-            documents.get,
+            memories.get,
+        )
+        self.search = async_to_raw_response_wrapper(
+            memories.search,
         )
         self.status = async_to_raw_response_wrapper(
-            documents.status,
+            memories.status,
         )
         self.upload = async_to_raw_response_wrapper(
-            documents.upload,
+            memories.upload,
         )
 
 
-class DocumentsResourceWithStreamingResponse:
-    def __init__(self, documents: DocumentsResource) -> None:
-        self._documents = documents
+class MemoriesResourceWithStreamingResponse:
+    def __init__(self, memories: MemoriesResource) -> None:
+        self._memories = memories
 
         self.list = to_streamed_response_wrapper(
-            documents.list,
+            memories.list,
         )
         self.add = to_streamed_response_wrapper(
-            documents.add,
+            memories.add,
         )
         self.get = to_streamed_response_wrapper(
-            documents.get,
+            memories.get,
+        )
+        self.search = to_streamed_response_wrapper(
+            memories.search,
         )
         self.status = to_streamed_response_wrapper(
-            documents.status,
+            memories.status,
         )
         self.upload = to_streamed_response_wrapper(
-            documents.upload,
+            memories.upload,
         )
 
 
-class AsyncDocumentsResourceWithStreamingResponse:
-    def __init__(self, documents: AsyncDocumentsResource) -> None:
-        self._documents = documents
+class AsyncMemoriesResourceWithStreamingResponse:
+    def __init__(self, memories: AsyncMemoriesResource) -> None:
+        self._memories = memories
 
         self.list = async_to_streamed_response_wrapper(
-            documents.list,
+            memories.list,
         )
         self.add = async_to_streamed_response_wrapper(
-            documents.add,
+            memories.add,
         )
         self.get = async_to_streamed_response_wrapper(
-            documents.get,
+            memories.get,
+        )
+        self.search = async_to_streamed_response_wrapper(
+            memories.search,
         )
         self.status = async_to_streamed_response_wrapper(
-            documents.status,
+            memories.status,
         )
         self.upload = async_to_streamed_response_wrapper(
-            documents.upload,
+            memories.upload,
         )

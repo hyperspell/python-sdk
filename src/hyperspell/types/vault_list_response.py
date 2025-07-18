@@ -4,10 +4,10 @@ from typing import Optional
 
 from .._models import BaseModel
 
-__all__ = ["CollectionListResponse"]
+__all__ = ["VaultListResponse"]
 
 
-class CollectionListResponse(BaseModel):
+class VaultListResponse(BaseModel):
     collection: Optional[str] = None
 
     document_count: int

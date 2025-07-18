@@ -5,10 +5,10 @@ from __future__ import annotations
 from typing import Optional
 from typing_extensions import TypedDict
 
-__all__ = ["CollectionListParams"]
+__all__ = ["VaultListParams"]
 
 
-class CollectionListParams(TypedDict, total=False):
+class VaultListParams(TypedDict, total=False):
     cursor: Optional[str]
 
     size: int

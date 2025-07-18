@@ -2,14 +2,14 @@
 
 from typing import Dict, List, Optional
 
+from .memory import Memory
 from .._models import BaseModel
-from .document import Document
 
-__all__ = ["QuerySearchResponse"]
+__all__ = ["MemorySearchResponse"]
 
 
-class QuerySearchResponse(BaseModel):
-    documents: List[Document]
+class MemorySearchResponse(BaseModel):
+    documents: List[Memory]
 
     answer: Optional[str] = None
     """The answer to the query, if the request was set to answer."""

@@ -1,6 +1,7 @@
 # Hyperspell Python API library
 
-[![PyPI version](<https://img.shields.io/pypi/v/hyperspell.svg?label=pypi%20(stable)>)](https://pypi.org/project/hyperspell/)
+<!-- prettier-ignore -->
+[![PyPI version](https://img.shields.io/pypi/v/hyperspell.svg?label=pypi%20(stable))](https://pypi.org/project/hyperspell/)
 
 The Hyperspell Python library provides convenient access to the Hyperspell REST API from any Python 3.8+
 application. The library includes type definitions for all request params and response fields,
@@ -31,10 +32,10 @@ client = Hyperspell(
     api_key=os.environ.get("HYPERSPELL_TOKEN"),  # This is the default and can be omitted
 )
 
-document_status = client.documents.add(
+memory_status = client.memories.add(
     text="text",
 )
-print(document_status.id)
+print(memory_status.id)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -57,16 +58,49 @@ client = AsyncHyperspell(
 
 
 async def main() -> None:
-    document_status = await client.documents.add(
+    memory_status = await client.memories.add(
         text="text",
     )
-    print(document_status.id)
+    print(memory_status.id)
 
 
 asyncio.run(main())
 ```
 
 Functionality between the synchronous and asynchronous clients is otherwise identical.
+
+### With aiohttp
+
+By default, the async client uses `httpx` for HTTP requests. However, for improved concurrency performance you may also use `aiohttp` as the HTTP backend.
+
+You can enable this by installing `aiohttp`:
+
+```sh
+# install from PyPI
+pip install hyperspell[aiohttp]
+```
+
+Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
+
+```python
+import asyncio
+from hyperspell import DefaultAioHttpClient
+from hyperspell import AsyncHyperspell
+
+
+async def main() -> None:
+    async with AsyncHyperspell(
+        api_key="My API Key",
+        http_client=DefaultAioHttpClient(),
+    ) as client:
+        memory_status = await client.memories.add(
+            text="text",
+        )
+        print(memory_status.id)
+
+
+asyncio.run(main())
+```
 
 ## Using types
 
@@ -88,14 +122,14 @@ from hyperspell import Hyperspell
 
 client = Hyperspell()
 
-all_documents = []
+all_memories = []
 # Automatically fetches more pages as needed.
-for document in client.documents.list(
+for memory in client.memories.list(
     collection="REPLACE_ME",
 ):
-    # Do something with document here
-    all_documents.append(document)
-print(all_documents)
+    # Do something with memory here
+    all_memories.append(memory)
+print(all_memories)
 ```
 
 Or, asynchronously:
@@ -108,13 +142,13 @@ client = AsyncHyperspell()
 
 
 async def main() -> None:
-    all_documents = []
+    all_memories = []
     # Iterate through items across all pages, issuing requests as needed.
-    async for document in client.documents.list(
+    async for memory in client.memories.list(
         collection="REPLACE_ME",
     ):
-        all_documents.append(document)
-    print(all_documents)
+        all_memories.append(memory)
+    print(all_memories)
 
 
 asyncio.run(main())
@@ -123,7 +157,7 @@ asyncio.run(main())
 Alternatively, you can use the `.has_next_page()`, `.next_page_info()`, or `.get_next_page()` methods for more granular control working with pages:
 
 ```python
-first_page = await client.documents.list(
+first_page = await client.memories.list(
     collection="REPLACE_ME",
 )
 if first_page.has_next_page():
@@ -137,13 +171,13 @@ if first_page.has_next_page():
 Or just work directly with the returned data:
 
 ```python
-first_page = await client.documents.list(
+first_page = await client.memories.list(
     collection="REPLACE_ME",
 )
 
 print(f"next page cursor: {first_page.next_cursor}")  # => "next page cursor: ..."
-for document in first_page.items:
-    print(document.resource_id)
+for memory in first_page.items:
+    print(memory.resource_id)
 
 # Remove `await` for non-async usage.
 ```
@@ -157,7 +191,7 @@ from hyperspell import Hyperspell
 
 client = Hyperspell()
 
-response = client.query.search(
+response = client.memories.search(
     query="query",
     filter={},
 )
@@ -174,7 +208,7 @@ from hyperspell import Hyperspell
 
 client = Hyperspell()
 
-client.documents.upload(
+client.memories.upload(
     file=Path("/path/to/file"),
 )
 ```
@@ -197,7 +231,7 @@ from hyperspell import Hyperspell
 client = Hyperspell()
 
 try:
-    client.documents.add(
+    client.memories.add(
         text="text",
     )
 except hyperspell.APIConnectionError as e:
@@ -242,7 +276,7 @@ client = Hyperspell(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).documents.add(
+client.with_options(max_retries=5).memories.add(
     text="text",
 )
 ```
@@ -267,7 +301,7 @@ client = Hyperspell(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).documents.add(
+client.with_options(timeout=5.0).memories.add(
     text="text",
 )
 ```
@@ -310,13 +344,13 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from hyperspell import Hyperspell
 
 client = Hyperspell()
-response = client.documents.with_raw_response.add(
+response = client.memories.with_raw_response.add(
     text="text",
 )
 print(response.headers.get('X-My-Header'))
 
-document = response.parse()  # get the object that `documents.add()` would have returned
-print(document.id)
+memory = response.parse()  # get the object that `memories.add()` would have returned
+print(memory.id)
 ```
 
 These methods return an [`APIResponse`](https://github.com/hyperspell/python-sdk/tree/main/src/hyperspell/_response.py) object.
@@ -330,7 +364,7 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.documents.with_streaming_response.add(
+with client.memories.with_streaming_response.add(
     text="text",
 ) as response:
     print(response.headers.get("X-My-Header"))

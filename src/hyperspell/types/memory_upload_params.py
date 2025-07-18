@@ -7,10 +7,10 @@ from typing_extensions import Required, TypedDict
 
 from .._types import FileTypes
 
-__all__ = ["DocumentUploadParams"]
+__all__ = ["MemoryUploadParams"]
 
 
-class DocumentUploadParams(TypedDict, total=False):
+class MemoryUploadParams(TypedDict, total=False):
     file: Required[FileTypes]
     """The file to ingest."""
 

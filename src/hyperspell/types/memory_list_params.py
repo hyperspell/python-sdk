@@ -5,10 +5,10 @@ from __future__ import annotations
 from typing import Optional
 from typing_extensions import Literal, TypedDict
 
-__all__ = ["DocumentListParams"]
+__all__ = ["MemoryListParams"]
 
 
-class DocumentListParams(TypedDict, total=False):
+class MemoryListParams(TypedDict, total=False):
     collection: Optional[str]
     """Filter documents by collection."""
 
@@ -19,6 +19,7 @@ class DocumentListParams(TypedDict, total=False):
     source: Optional[
         Literal[
             "collections",
+            "vault",
             "web_crawler",
             "notion",
             "slack",

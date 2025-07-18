@@ -6,7 +6,7 @@ from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["Document", "Metadata", "MetadataEvent"]
+__all__ = ["Memory", "Metadata", "MetadataEvent"]
 
 
 class MetadataEvent(BaseModel):
@@ -33,11 +33,12 @@ class Metadata(BaseModel):
         def __getattr__(self, attr: str) -> object: ...
 
 
-class Document(BaseModel):
+class Memory(BaseModel):
     resource_id: str
 
     source: Literal[
         "collections",
+        "vault",
         "web_crawler",
         "notion",
         "slack",

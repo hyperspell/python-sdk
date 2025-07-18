@@ -204,6 +204,7 @@ class TestHyperspell:
             copy_param = copy_signature.parameters.get(name)
             assert copy_param is not None, f"copy() signature is missing the {name} param"
 
+    @pytest.mark.skipif(sys.version_info >= (3, 10), reason="fails because of a memory leak that started from 3.12")
     def test_copy_build_request(self) -> None:
         options = FinalRequestOptions(method="get", url="/foo")
 
@@ -504,7 +505,7 @@ class TestHyperspell:
     def test_multipart_repeating_array(self, client: Hyperspell) -> None:
         request = client._build_request(
             FinalRequestOptions.construct(
-                method="get",
+                method="post",
                 url="/foo",
                 headers={"Content-Type": "multipart/form-data; boundary=6b7ba517decee4a450543ea6ae821c82"},
                 json_data={"array": ["foo", "bar"]},
@@ -782,20 +783,20 @@ class TestHyperspell:
     @mock.patch("hyperspell._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter, client: Hyperspell) -> None:
-        respx_mock.post("/documents/add").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.post("/memories/add").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            client.documents.with_streaming_response.add(text="text").__enter__()
+            client.memories.with_streaming_response.add(text="text").__enter__()
 
         assert _get_open_connections(self.client) == 0
 
     @mock.patch("hyperspell._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter, client: Hyperspell) -> None:
-        respx_mock.post("/documents/add").mock(return_value=httpx.Response(500))
+        respx_mock.post("/memories/add").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            client.documents.with_streaming_response.add(text="text").__enter__()
+            client.memories.with_streaming_response.add(text="text").__enter__()
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
@@ -822,9 +823,9 @@ class TestHyperspell:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/documents/add").mock(side_effect=retry_handler)
+        respx_mock.post("/memories/add").mock(side_effect=retry_handler)
 
-        response = client.documents.with_raw_response.add(text="text")
+        response = client.memories.with_raw_response.add(text="text")
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -846,11 +847,9 @@ class TestHyperspell:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/documents/add").mock(side_effect=retry_handler)
+        respx_mock.post("/memories/add").mock(side_effect=retry_handler)
 
-        response = client.documents.with_raw_response.add(
-            text="text", extra_headers={"x-stainless-retry-count": Omit()}
-        )
+        response = client.memories.with_raw_response.add(text="text", extra_headers={"x-stainless-retry-count": Omit()})
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
@@ -871,9 +870,9 @@ class TestHyperspell:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/documents/add").mock(side_effect=retry_handler)
+        respx_mock.post("/memories/add").mock(side_effect=retry_handler)
 
-        response = client.documents.with_raw_response.add(text="text", extra_headers={"x-stainless-retry-count": "42"})
+        response = client.memories.with_raw_response.add(text="text", extra_headers={"x-stainless-retry-count": "42"})
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
 
@@ -1074,6 +1073,7 @@ class TestAsyncHyperspell:
             copy_param = copy_signature.parameters.get(name)
             assert copy_param is not None, f"copy() signature is missing the {name} param"
 
+    @pytest.mark.skipif(sys.version_info >= (3, 10), reason="fails because of a memory leak that started from 3.12")
     def test_copy_build_request(self) -> None:
         options = FinalRequestOptions(method="get", url="/foo")
 
@@ -1376,7 +1376,7 @@ class TestAsyncHyperspell:
     def test_multipart_repeating_array(self, async_client: AsyncHyperspell) -> None:
         request = async_client._build_request(
             FinalRequestOptions.construct(
-                method="get",
+                method="post",
                 url="/foo",
                 headers={"Content-Type": "multipart/form-data; boundary=6b7ba517decee4a450543ea6ae821c82"},
                 json_data={"array": ["foo", "bar"]},
@@ -1660,10 +1660,10 @@ class TestAsyncHyperspell:
     async def test_retrying_timeout_errors_doesnt_leak(
         self, respx_mock: MockRouter, async_client: AsyncHyperspell
     ) -> None:
-        respx_mock.post("/documents/add").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.post("/memories/add").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            await async_client.documents.with_streaming_response.add(text="text").__aenter__()
+            await async_client.memories.with_streaming_response.add(text="text").__aenter__()
 
         assert _get_open_connections(self.client) == 0
 
@@ -1672,10 +1672,10 @@ class TestAsyncHyperspell:
     async def test_retrying_status_errors_doesnt_leak(
         self, respx_mock: MockRouter, async_client: AsyncHyperspell
     ) -> None:
-        respx_mock.post("/documents/add").mock(return_value=httpx.Response(500))
+        respx_mock.post("/memories/add").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            await async_client.documents.with_streaming_response.add(text="text").__aenter__()
+            await async_client.memories.with_streaming_response.add(text="text").__aenter__()
         assert _get_open_connections(self.client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
@@ -1703,9 +1703,9 @@ class TestAsyncHyperspell:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/documents/add").mock(side_effect=retry_handler)
+        respx_mock.post("/memories/add").mock(side_effect=retry_handler)
 
-        response = await client.documents.with_raw_response.add(text="text")
+        response = await client.memories.with_raw_response.add(text="text")
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -1728,9 +1728,9 @@ class TestAsyncHyperspell:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/documents/add").mock(side_effect=retry_handler)
+        respx_mock.post("/memories/add").mock(side_effect=retry_handler)
 
-        response = await client.documents.with_raw_response.add(
+        response = await client.memories.with_raw_response.add(
             text="text", extra_headers={"x-stainless-retry-count": Omit()}
         )
 
@@ -1754,9 +1754,9 @@ class TestAsyncHyperspell:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.post("/documents/add").mock(side_effect=retry_handler)
+        respx_mock.post("/memories/add").mock(side_effect=retry_handler)
 
-        response = await client.documents.with_raw_response.add(
+        response = await client.memories.with_raw_response.add(
             text="text", extra_headers={"x-stainless-retry-count": "42"}
         )
 

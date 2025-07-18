@@ -9,81 +9,83 @@ import pytest
 
 from hyperspell import Hyperspell, AsyncHyperspell
 from tests.utils import assert_matches_type
-from hyperspell.types import CollectionListResponse
+from hyperspell.types import VaultListResponse
 from hyperspell.pagination import SyncCursorPage, AsyncCursorPage
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
 
-class TestCollections:
+class TestVaults:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
     def test_method_list(self, client: Hyperspell) -> None:
-        collection = client.collections.list()
-        assert_matches_type(SyncCursorPage[CollectionListResponse], collection, path=["response"])
+        vault = client.vaults.list()
+        assert_matches_type(SyncCursorPage[VaultListResponse], vault, path=["response"])
 
     @parametrize
     def test_method_list_with_all_params(self, client: Hyperspell) -> None:
-        collection = client.collections.list(
+        vault = client.vaults.list(
             cursor="cursor",
             size=0,
         )
-        assert_matches_type(SyncCursorPage[CollectionListResponse], collection, path=["response"])
+        assert_matches_type(SyncCursorPage[VaultListResponse], vault, path=["response"])
 
     @parametrize
     def test_raw_response_list(self, client: Hyperspell) -> None:
-        response = client.collections.with_raw_response.list()
+        response = client.vaults.with_raw_response.list()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        collection = response.parse()
-        assert_matches_type(SyncCursorPage[CollectionListResponse], collection, path=["response"])
+        vault = response.parse()
+        assert_matches_type(SyncCursorPage[VaultListResponse], vault, path=["response"])
 
     @parametrize
     def test_streaming_response_list(self, client: Hyperspell) -> None:
-        with client.collections.with_streaming_response.list() as response:
+        with client.vaults.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            collection = response.parse()
-            assert_matches_type(SyncCursorPage[CollectionListResponse], collection, path=["response"])
+            vault = response.parse()
+            assert_matches_type(SyncCursorPage[VaultListResponse], vault, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
 
-class TestAsyncCollections:
-    parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
+class TestAsyncVaults:
+    parametrize = pytest.mark.parametrize(
+        "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
+    )
 
     @parametrize
     async def test_method_list(self, async_client: AsyncHyperspell) -> None:
-        collection = await async_client.collections.list()
-        assert_matches_type(AsyncCursorPage[CollectionListResponse], collection, path=["response"])
+        vault = await async_client.vaults.list()
+        assert_matches_type(AsyncCursorPage[VaultListResponse], vault, path=["response"])
 
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncHyperspell) -> None:
-        collection = await async_client.collections.list(
+        vault = await async_client.vaults.list(
             cursor="cursor",
             size=0,
         )
-        assert_matches_type(AsyncCursorPage[CollectionListResponse], collection, path=["response"])
+        assert_matches_type(AsyncCursorPage[VaultListResponse], vault, path=["response"])
 
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncHyperspell) -> None:
-        response = await async_client.collections.with_raw_response.list()
+        response = await async_client.vaults.with_raw_response.list()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        collection = await response.parse()
-        assert_matches_type(AsyncCursorPage[CollectionListResponse], collection, path=["response"])
+        vault = await response.parse()
+        assert_matches_type(AsyncCursorPage[VaultListResponse], vault, path=["response"])
 
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncHyperspell) -> None:
-        async with async_client.collections.with_streaming_response.list() as response:
+        async with async_client.vaults.with_streaming_response.list() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            collection = await response.parse()
-            assert_matches_type(AsyncCursorPage[CollectionListResponse], collection, path=["response"])
+            vault = await response.parse()
+            assert_matches_type(AsyncCursorPage[VaultListResponse], vault, path=["response"])
 
         assert cast(Any, response.is_closed) is True

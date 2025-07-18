@@ -6,7 +6,7 @@ from typing import Optional
 
 import httpx
 
-from ..types import collection_list_params
+from ..types import vault_list_params
 from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
 from .._utils import maybe_transform
 from .._compat import cached_property
@@ -19,30 +19,30 @@ from .._response import (
 )
 from ..pagination import SyncCursorPage, AsyncCursorPage
 from .._base_client import AsyncPaginator, make_request_options
-from ..types.collection_list_response import CollectionListResponse
+from ..types.vault_list_response import VaultListResponse
 
-__all__ = ["CollectionsResource", "AsyncCollectionsResource"]
+__all__ = ["VaultsResource", "AsyncVaultsResource"]
 
 
-class CollectionsResource(SyncAPIResource):
+class VaultsResource(SyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> CollectionsResourceWithRawResponse:
+    def with_raw_response(self) -> VaultsResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/hyperspell/python-sdk#accessing-raw-response-data-eg-headers
         """
-        return CollectionsResourceWithRawResponse(self)
+        return VaultsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> CollectionsResourceWithStreamingResponse:
+    def with_streaming_response(self) -> VaultsResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/hyperspell/python-sdk#with_streaming_response
         """
-        return CollectionsResourceWithStreamingResponse(self)
+        return VaultsResourceWithStreamingResponse(self)
 
     def list(
         self,
@@ -55,7 +55,7 @@ class CollectionsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> SyncCursorPage[CollectionListResponse]:
+    ) -> SyncCursorPage[VaultListResponse]:
         """
         This endpoint lists all collections, and how many documents are in each
         collection. All documents that do not have a collection assigned are in the
@@ -71,8 +71,8 @@ class CollectionsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/collections/list",
-            page=SyncCursorPage[CollectionListResponse],
+            "/vault/list",
+            page=SyncCursorPage[VaultListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -83,32 +83,32 @@ class CollectionsResource(SyncAPIResource):
                         "cursor": cursor,
                         "size": size,
                     },
-                    collection_list_params.CollectionListParams,
+                    vault_list_params.VaultListParams,
                 ),
             ),
-            model=CollectionListResponse,
+            model=VaultListResponse,
         )
 
 
-class AsyncCollectionsResource(AsyncAPIResource):
+class AsyncVaultsResource(AsyncAPIResource):
     @cached_property
-    def with_raw_response(self) -> AsyncCollectionsResourceWithRawResponse:
+    def with_raw_response(self) -> AsyncVaultsResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/hyperspell/python-sdk#accessing-raw-response-data-eg-headers
         """
-        return AsyncCollectionsResourceWithRawResponse(self)
+        return AsyncVaultsResourceWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncCollectionsResourceWithStreamingResponse:
+    def with_streaming_response(self) -> AsyncVaultsResourceWithStreamingResponse:
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
         For more information, see https://www.github.com/hyperspell/python-sdk#with_streaming_response
         """
-        return AsyncCollectionsResourceWithStreamingResponse(self)
+        return AsyncVaultsResourceWithStreamingResponse(self)
 
     def list(
         self,
@@ -121,7 +121,7 @@ class AsyncCollectionsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
-    ) -> AsyncPaginator[CollectionListResponse, AsyncCursorPage[CollectionListResponse]]:
+    ) -> AsyncPaginator[VaultListResponse, AsyncCursorPage[VaultListResponse]]:
         """
         This endpoint lists all collections, and how many documents are in each
         collection. All documents that do not have a collection assigned are in the
@@ -137,8 +137,8 @@ class AsyncCollectionsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get_api_list(
-            "/collections/list",
-            page=AsyncCursorPage[CollectionListResponse],
+            "/vault/list",
+            page=AsyncCursorPage[VaultListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -149,44 +149,44 @@ class AsyncCollectionsResource(AsyncAPIResource):
                         "cursor": cursor,
                         "size": size,
                     },
-                    collection_list_params.CollectionListParams,
+                    vault_list_params.VaultListParams,
                 ),
             ),
-            model=CollectionListResponse,
+            model=VaultListResponse,
         )
 
 
-class CollectionsResourceWithRawResponse:
-    def __init__(self, collections: CollectionsResource) -> None:
-        self._collections = collections
+class VaultsResourceWithRawResponse:
+    def __init__(self, vaults: VaultsResource) -> None:
+        self._vaults = vaults
 
         self.list = to_raw_response_wrapper(
-            collections.list,
+            vaults.list,
         )
 
 
-class AsyncCollectionsResourceWithRawResponse:
-    def __init__(self, collections: AsyncCollectionsResource) -> None:
-        self._collections = collections
+class AsyncVaultsResourceWithRawResponse:
+    def __init__(self, vaults: AsyncVaultsResource) -> None:
+        self._vaults = vaults
 
         self.list = async_to_raw_response_wrapper(
-            collections.list,
+            vaults.list,
         )
 
 
-class CollectionsResourceWithStreamingResponse:
-    def __init__(self, collections: CollectionsResource) -> None:
-        self._collections = collections
+class VaultsResourceWithStreamingResponse:
+    def __init__(self, vaults: VaultsResource) -> None:
+        self._vaults = vaults
 
         self.list = to_streamed_response_wrapper(
-            collections.list,
+            vaults.list,
         )
 
 
-class AsyncCollectionsResourceWithStreamingResponse:
-    def __init__(self, collections: AsyncCollectionsResource) -> None:
-        self._collections = collections
+class AsyncVaultsResourceWithStreamingResponse:
+    def __init__(self, vaults: AsyncVaultsResource) -> None:
+        self._vaults = vaults
 
         self.list = async_to_streamed_response_wrapper(
-            collections.list,
+            vaults.list,
         )

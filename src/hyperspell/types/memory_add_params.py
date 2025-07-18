@@ -8,10 +8,10 @@ from typing_extensions import Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
-__all__ = ["DocumentAddParams"]
+__all__ = ["MemoryAddParams"]
 
 
-class DocumentAddParams(TypedDict, total=False):
+class MemoryAddParams(TypedDict, total=False):
     text: Required[str]
     """Full text of the document."""
 

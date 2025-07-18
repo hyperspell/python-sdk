@@ -4,10 +4,10 @@ from typing import Dict
 
 from .._models import BaseModel
 
-__all__ = ["DocumentStatusResponse"]
+__all__ = ["MemoryStatusResponse"]
 
 
-class DocumentStatusResponse(BaseModel):
+class MemoryStatusResponse(BaseModel):
     providers: Dict[str, Dict[str, int]]
 
     total: Dict[str, int]

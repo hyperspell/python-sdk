@@ -12,6 +12,7 @@ class WebCrawlerIndexResponse(BaseModel):
 
     source: Literal[
         "collections",
+        "vault",
         "web_crawler",
         "notion",
         "slack",

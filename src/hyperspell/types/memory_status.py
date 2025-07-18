@@ -4,10 +4,10 @@ from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["DocumentStatus"]
+__all__ = ["MemoryStatus"]
 
 
-class DocumentStatus(BaseModel):
+class MemoryStatus(BaseModel):
     id: int
     """Deprecated: refer to documents by source and resource_id instead"""
 
@@ -15,6 +15,7 @@ class DocumentStatus(BaseModel):
 
     source: Literal[
         "collections",
+        "vault",
         "web_crawler",
         "notion",
         "slack",
