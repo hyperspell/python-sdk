@@ -8,6 +8,22 @@ from .auth import (
     AuthResourceWithStreamingResponse,
     AsyncAuthResourceWithStreamingResponse,
 )
+from .vaults import (
+    VaultsResource,
+    AsyncVaultsResource,
+    VaultsResourceWithRawResponse,
+    AsyncVaultsResourceWithRawResponse,
+    VaultsResourceWithStreamingResponse,
+    AsyncVaultsResourceWithStreamingResponse,
+)
+from .memories import (
+    MemoriesResource,
+    AsyncMemoriesResource,
+    MemoriesResourceWithRawResponse,
+    AsyncMemoriesResourceWithRawResponse,
+    MemoriesResourceWithStreamingResponse,
+    AsyncMemoriesResourceWithStreamingResponse,
+)
 from .integrations import (
     IntegrationsResource,
     AsyncIntegrationsResource,
@@ -24,6 +40,18 @@ __all__ = [
     "AsyncIntegrationsResourceWithRawResponse",
     "IntegrationsResourceWithStreamingResponse",
     "AsyncIntegrationsResourceWithStreamingResponse",
+    "MemoriesResource",
+    "AsyncMemoriesResource",
+    "MemoriesResourceWithRawResponse",
+    "AsyncMemoriesResourceWithRawResponse",
+    "MemoriesResourceWithStreamingResponse",
+    "AsyncMemoriesResourceWithStreamingResponse",
+    "VaultsResource",
+    "AsyncVaultsResource",
+    "VaultsResourceWithRawResponse",
+    "AsyncVaultsResourceWithRawResponse",
+    "VaultsResourceWithStreamingResponse",
+    "AsyncVaultsResourceWithStreamingResponse",
     "AuthResource",
     "AsyncAuthResource",
     "AuthResourceWithRawResponse",
