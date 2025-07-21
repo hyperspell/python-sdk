@@ -18,6 +18,8 @@ class MetadataEvent(BaseModel):
 
 
 class Metadata(BaseModel):
+    created_at: Optional[datetime] = None
+
     events: Optional[List[MetadataEvent]] = None
 
     indexed_at: Optional[datetime] = None
@@ -25,6 +27,8 @@ class Metadata(BaseModel):
     last_modified: Optional[datetime] = None
 
     status: Optional[Literal["pending", "processing", "completed", "failed"]] = None
+
+    url: Optional[str] = None
 
     if TYPE_CHECKING:
         # Stub to indicate that arbitrary properties are accepted.
