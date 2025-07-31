@@ -302,7 +302,6 @@ class MemoriesResource(SyncAPIResource):
         *,
         query: str,
         answer: bool | NotGiven = NOT_GIVEN,
-        filter: Optional[memory_search_params.Filter] | NotGiven = NOT_GIVEN,
         max_results: int | NotGiven = NOT_GIVEN,
         options: memory_search_params.Options | NotGiven = NOT_GIVEN,
         sources: List[
@@ -371,8 +370,6 @@ class MemoriesResource(SyncAPIResource):
 
           answer: If true, the query will be answered along with matching source documents.
 
-          filter: DEPRECATED: Use options instead. This field will be removed in a future version.
-
           max_results: Maximum number of results to return.
 
           options: Search options for the query.
@@ -393,7 +390,6 @@ class MemoriesResource(SyncAPIResource):
                 {
                     "query": query,
                     "answer": answer,
-                    "filter": filter,
                     "max_results": max_results,
                     "options": options,
                     "sources": sources,
@@ -755,7 +751,6 @@ class AsyncMemoriesResource(AsyncAPIResource):
         *,
         query: str,
         answer: bool | NotGiven = NOT_GIVEN,
-        filter: Optional[memory_search_params.Filter] | NotGiven = NOT_GIVEN,
         max_results: int | NotGiven = NOT_GIVEN,
         options: memory_search_params.Options | NotGiven = NOT_GIVEN,
         sources: List[
@@ -824,8 +819,6 @@ class AsyncMemoriesResource(AsyncAPIResource):
 
           answer: If true, the query will be answered along with matching source documents.
 
-          filter: DEPRECATED: Use options instead. This field will be removed in a future version.
-
           max_results: Maximum number of results to return.
 
           options: Search options for the query.
@@ -846,7 +839,6 @@ class AsyncMemoriesResource(AsyncAPIResource):
                 {
                     "query": query,
                     "answer": answer,
-                    "filter": filter,
                     "max_results": max_results,
                     "options": options,
                     "sources": sources,
