@@ -12,6 +12,7 @@ from tests.utils import assert_matches_type
 from hyperspell.types import (
     Memory,
     MemoryStatus,
+    MemoryDeleteResponse,
     MemorySearchResponse,
     MemoryStatusResponse,
 )
@@ -58,6 +59,48 @@ class TestMemories:
             assert_matches_type(SyncCursorPage[Memory], memory, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_method_delete(self, client: Hyperspell) -> None:
+        memory = client.memories.delete(
+            resource_id="resource_id",
+            source="collections",
+        )
+        assert_matches_type(MemoryDeleteResponse, memory, path=["response"])
+
+    @parametrize
+    def test_raw_response_delete(self, client: Hyperspell) -> None:
+        response = client.memories.with_raw_response.delete(
+            resource_id="resource_id",
+            source="collections",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        memory = response.parse()
+        assert_matches_type(MemoryDeleteResponse, memory, path=["response"])
+
+    @parametrize
+    def test_streaming_response_delete(self, client: Hyperspell) -> None:
+        with client.memories.with_streaming_response.delete(
+            resource_id="resource_id",
+            source="collections",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            memory = response.parse()
+            assert_matches_type(MemoryDeleteResponse, memory, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_delete(self, client: Hyperspell) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `resource_id` but received ''"):
+            client.memories.with_raw_response.delete(
+                resource_id="",
+                source="collections",
+            )
 
     @parametrize
     def test_method_add(self, client: Hyperspell) -> None:
@@ -348,6 +391,48 @@ class TestAsyncMemories:
             assert_matches_type(AsyncCursorPage[Memory], memory, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_method_delete(self, async_client: AsyncHyperspell) -> None:
+        memory = await async_client.memories.delete(
+            resource_id="resource_id",
+            source="collections",
+        )
+        assert_matches_type(MemoryDeleteResponse, memory, path=["response"])
+
+    @parametrize
+    async def test_raw_response_delete(self, async_client: AsyncHyperspell) -> None:
+        response = await async_client.memories.with_raw_response.delete(
+            resource_id="resource_id",
+            source="collections",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        memory = await response.parse()
+        assert_matches_type(MemoryDeleteResponse, memory, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_delete(self, async_client: AsyncHyperspell) -> None:
+        async with async_client.memories.with_streaming_response.delete(
+            resource_id="resource_id",
+            source="collections",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            memory = await response.parse()
+            assert_matches_type(MemoryDeleteResponse, memory, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_delete(self, async_client: AsyncHyperspell) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `resource_id` but received ''"):
+            await async_client.memories.with_raw_response.delete(
+                resource_id="",
+                source="collections",
+            )
 
     @parametrize
     async def test_method_add(self, async_client: AsyncHyperspell) -> None:
