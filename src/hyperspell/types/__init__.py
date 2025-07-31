@@ -13,6 +13,7 @@ from .vault_list_response import VaultListResponse as VaultListResponse
 from .memory_search_params import MemorySearchParams as MemorySearchParams
 from .memory_upload_params import MemoryUploadParams as MemoryUploadParams
 from .auth_user_token_params import AuthUserTokenParams as AuthUserTokenParams
+from .memory_delete_response import MemoryDeleteResponse as MemoryDeleteResponse
 from .memory_search_response import MemorySearchResponse as MemorySearchResponse
 from .memory_status_response import MemoryStatusResponse as MemoryStatusResponse
 from .integration_revoke_response import IntegrationRevokeResponse as IntegrationRevokeResponse
