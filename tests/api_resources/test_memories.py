@@ -12,6 +12,7 @@ from tests.utils import assert_matches_type
 from hyperspell.types import (
     Memory,
     MemoryStatus,
+    MemoryDeleteResponse,
     MemorySearchResponse,
     MemoryStatusResponse,
 )
@@ -58,6 +59,48 @@ class TestMemories:
             assert_matches_type(SyncCursorPage[Memory], memory, path=["response"])
 
         assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_method_delete(self, client: Hyperspell) -> None:
+        memory = client.memories.delete(
+            resource_id="resource_id",
+            source="collections",
+        )
+        assert_matches_type(MemoryDeleteResponse, memory, path=["response"])
+
+    @parametrize
+    def test_raw_response_delete(self, client: Hyperspell) -> None:
+        response = client.memories.with_raw_response.delete(
+            resource_id="resource_id",
+            source="collections",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        memory = response.parse()
+        assert_matches_type(MemoryDeleteResponse, memory, path=["response"])
+
+    @parametrize
+    def test_streaming_response_delete(self, client: Hyperspell) -> None:
+        with client.memories.with_streaming_response.delete(
+            resource_id="resource_id",
+            source="collections",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            memory = response.parse()
+            assert_matches_type(MemoryDeleteResponse, memory, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_delete(self, client: Hyperspell) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `resource_id` but received ''"):
+            client.memories.with_raw_response.delete(
+                resource_id="",
+                source="collections",
+            )
 
     @parametrize
     def test_method_add(self, client: Hyperspell) -> None:
@@ -155,47 +198,65 @@ class TestMemories:
         memory = client.memories.search(
             query="query",
             answer=True,
-            filter={
-                "after": parse_datetime("2019-12-27T18:11:19.117Z"),
-                "answer_model": "llama-3.1",
-                "before": parse_datetime("2019-12-27T18:11:19.117Z"),
-                "box": {},
-                "collections": {},
-                "google_calendar": {"calendar_id": "calendar_id"},
-                "google_drive": {},
-                "google_mail": {"label_ids": ["string"]},
-                "notion": {"notion_page_ids": ["string"]},
-                "reddit": {
-                    "period": "hour",
-                    "sort": "relevance",
-                    "subreddit": "subreddit",
-                },
-                "slack": {"channels": ["string"]},
-                "web_crawler": {
-                    "max_depth": 0,
-                    "url": "string",
-                },
-            },
             max_results=0,
             options={
                 "after": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "answer_model": "llama-3.1",
                 "before": parse_datetime("2019-12-27T18:11:19.117Z"),
-                "box": {},
-                "collections": {},
-                "google_calendar": {"calendar_id": "calendar_id"},
-                "google_drive": {},
-                "google_mail": {"label_ids": ["string"]},
-                "notion": {"notion_page_ids": ["string"]},
+                "box": {
+                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "weight": 0,
+                },
+                "collections": {
+                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "weight": 0,
+                },
+                "google_calendar": {
+                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "calendar_id": "calendar_id",
+                    "weight": 0,
+                },
+                "google_drive": {
+                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "weight": 0,
+                },
+                "google_mail": {
+                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "label_ids": ["string"],
+                    "weight": 0,
+                },
+                "max_results": 0,
+                "notion": {
+                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "notion_page_ids": ["string"],
+                    "weight": 0,
+                },
                 "reddit": {
+                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
                     "period": "hour",
                     "sort": "relevance",
                     "subreddit": "subreddit",
+                    "weight": 0,
                 },
-                "slack": {"channels": ["string"]},
+                "slack": {
+                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "channels": ["string"],
+                    "weight": 0,
+                },
                 "web_crawler": {
+                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
                     "max_depth": 0,
                     "url": "string",
+                    "weight": 0,
                 },
             },
             sources=["collections"],
@@ -332,6 +393,48 @@ class TestAsyncMemories:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
+    async def test_method_delete(self, async_client: AsyncHyperspell) -> None:
+        memory = await async_client.memories.delete(
+            resource_id="resource_id",
+            source="collections",
+        )
+        assert_matches_type(MemoryDeleteResponse, memory, path=["response"])
+
+    @parametrize
+    async def test_raw_response_delete(self, async_client: AsyncHyperspell) -> None:
+        response = await async_client.memories.with_raw_response.delete(
+            resource_id="resource_id",
+            source="collections",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        memory = await response.parse()
+        assert_matches_type(MemoryDeleteResponse, memory, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_delete(self, async_client: AsyncHyperspell) -> None:
+        async with async_client.memories.with_streaming_response.delete(
+            resource_id="resource_id",
+            source="collections",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            memory = await response.parse()
+            assert_matches_type(MemoryDeleteResponse, memory, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_delete(self, async_client: AsyncHyperspell) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `resource_id` but received ''"):
+            await async_client.memories.with_raw_response.delete(
+                resource_id="",
+                source="collections",
+            )
+
+    @parametrize
     async def test_method_add(self, async_client: AsyncHyperspell) -> None:
         memory = await async_client.memories.add(
             text="text",
@@ -427,47 +530,65 @@ class TestAsyncMemories:
         memory = await async_client.memories.search(
             query="query",
             answer=True,
-            filter={
-                "after": parse_datetime("2019-12-27T18:11:19.117Z"),
-                "answer_model": "llama-3.1",
-                "before": parse_datetime("2019-12-27T18:11:19.117Z"),
-                "box": {},
-                "collections": {},
-                "google_calendar": {"calendar_id": "calendar_id"},
-                "google_drive": {},
-                "google_mail": {"label_ids": ["string"]},
-                "notion": {"notion_page_ids": ["string"]},
-                "reddit": {
-                    "period": "hour",
-                    "sort": "relevance",
-                    "subreddit": "subreddit",
-                },
-                "slack": {"channels": ["string"]},
-                "web_crawler": {
-                    "max_depth": 0,
-                    "url": "string",
-                },
-            },
             max_results=0,
             options={
                 "after": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "answer_model": "llama-3.1",
                 "before": parse_datetime("2019-12-27T18:11:19.117Z"),
-                "box": {},
-                "collections": {},
-                "google_calendar": {"calendar_id": "calendar_id"},
-                "google_drive": {},
-                "google_mail": {"label_ids": ["string"]},
-                "notion": {"notion_page_ids": ["string"]},
+                "box": {
+                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "weight": 0,
+                },
+                "collections": {
+                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "weight": 0,
+                },
+                "google_calendar": {
+                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "calendar_id": "calendar_id",
+                    "weight": 0,
+                },
+                "google_drive": {
+                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "weight": 0,
+                },
+                "google_mail": {
+                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "label_ids": ["string"],
+                    "weight": 0,
+                },
+                "max_results": 0,
+                "notion": {
+                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "notion_page_ids": ["string"],
+                    "weight": 0,
+                },
                 "reddit": {
+                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
                     "period": "hour",
                     "sort": "relevance",
                     "subreddit": "subreddit",
+                    "weight": 0,
                 },
-                "slack": {"channels": ["string"]},
+                "slack": {
+                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "channels": ["string"],
+                    "weight": 0,
+                },
                 "web_crawler": {
+                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
                     "max_depth": 0,
                     "url": "string",
+                    "weight": 0,
                 },
             },
             sources=["collections"],

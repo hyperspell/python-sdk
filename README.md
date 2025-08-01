@@ -193,9 +193,9 @@ client = Hyperspell()
 
 response = client.memories.search(
     query="query",
-    filter={},
+    options={},
 )
-print(response.filter)
+print(response.options)
 ```
 
 ## File uploads

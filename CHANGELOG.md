@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.20.0 (2025-08-01)
+
+Full Changelog: [v0.19.0...v0.20.0](https://github.com/hyperspell/python-sdk/compare/v0.19.0...v0.20.0)
+
+### Features
+
+* **api:** api update ([6b411be](https://github.com/hyperspell/python-sdk/commit/6b411be3d85dbc3106741cfbfa08454ce443b173))
+* **api:** api update ([0789efa](https://github.com/hyperspell/python-sdk/commit/0789efa8c1e2762ce8bf5329a7411dba886709dd))
+* **api:** update via SDK Studio ([fd10b3b](https://github.com/hyperspell/python-sdk/commit/fd10b3b4b26774c5fcd033481712fda2cb77cc80))
+* **api:** update via SDK Studio ([a92de5a](https://github.com/hyperspell/python-sdk/commit/a92de5a8dbc7c6b516b58d159840657c356cf423))
+* **client:** support file upload requests ([98a9c26](https://github.com/hyperspell/python-sdk/commit/98a9c26c10636926fb05844b3494707e5d64babf))
+
+
+### Bug Fixes
+
+* **parsing:** ignore empty metadata ([01e34f8](https://github.com/hyperspell/python-sdk/commit/01e34f8e8697e5380884a0d93dd6b2d248f578d0))
+* **parsing:** parse extra field types ([167331c](https://github.com/hyperspell/python-sdk/commit/167331c90f0001fa4165d2cafa185c6017383dad))
+
+
+### Chores
+
+* **project:** add settings file for vscode ([f597f95](https://github.com/hyperspell/python-sdk/commit/f597f9542a2572674dfc0a97fd94950cee114edf))
+
 ## 0.19.0 (2025-07-18)
 
 Full Changelog: [v0.18.0...v0.19.0](https://github.com/hyperspell/python-sdk/compare/v0.18.0...v0.19.0)

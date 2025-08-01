@@ -1,9 +1,9 @@
 [project]
 name = "hyperspell"
-version = "0.19.0"
+version = "0.20.0"
 description = "The official Python library for the hyperspell API"
 dynamic = ["readme"]
-license = "Apache-2.0"
+license = "MIT"
 authors = [
 { name = "Hyperspell", email = "hello@hyperspell.com" },
 ]
@@ -31,7 +31,7 @@ classifiers = [
   "Operating System :: POSIX :: Linux",
   "Operating System :: Microsoft :: Windows",
   "Topic :: Software Development :: Libraries :: Python Modules",
-  "License :: OSI Approved :: Apache Software License"
+  "License :: OSI Approved :: MIT License"
 ]
 
 [project.urls]

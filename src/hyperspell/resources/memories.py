@@ -23,6 +23,7 @@ from ..pagination import SyncCursorPage, AsyncCursorPage
 from .._base_client import AsyncPaginator, make_request_options
 from ..types.memory import Memory
 from ..types.memory_status import MemoryStatus
+from ..types.memory_delete_response import MemoryDeleteResponse
 from ..types.memory_search_response import MemorySearchResponse
 from ..types.memory_status_response import MemoryStatusResponse
 
@@ -150,6 +151,103 @@ class MemoriesResource(SyncAPIResource):
                 ),
             ),
             model=Memory,
+        )
+
+    def delete(
+        self,
+        resource_id: str,
+        *,
+        source: Literal[
+            "collections",
+            "vault",
+            "web_crawler",
+            "notion",
+            "slack",
+            "google_calendar",
+            "reddit",
+            "box",
+            "google_drive",
+            "airtable",
+            "algolia",
+            "amplitude",
+            "asana",
+            "ashby",
+            "bamboohr",
+            "basecamp",
+            "bubbles",
+            "calendly",
+            "confluence",
+            "clickup",
+            "datadog",
+            "deel",
+            "discord",
+            "dropbox",
+            "exa",
+            "facebook",
+            "front",
+            "github",
+            "gitlab",
+            "google_docs",
+            "google_mail",
+            "google_sheet",
+            "hubspot",
+            "jira",
+            "linear",
+            "microsoft_teams",
+            "mixpanel",
+            "monday",
+            "outlook",
+            "perplexity",
+            "rippling",
+            "salesforce",
+            "segment",
+            "todoist",
+            "twitter",
+            "zoom",
+        ],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> MemoryDeleteResponse:
+        """
+        Delete a memory and its associated chunks from the index.
+
+        This removes the memory completely from the vector index and database. The
+        operation deletes:
+
+        1. All chunks associated with the resource (including embeddings)
+        2. The resource record itself
+
+        Args: source: The document provider (e.g., gmail, notion, vault) resource_id:
+        The unique identifier of the resource to delete api_token: Authentication token
+
+        Returns: MemoryDeletionResponse with deletion details
+
+        Raises: DocumentNotFound: If the resource doesn't exist or user doesn't have
+        access
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not source:
+            raise ValueError(f"Expected a non-empty value for `source` but received {source!r}")
+        if not resource_id:
+            raise ValueError(f"Expected a non-empty value for `resource_id` but received {resource_id!r}")
+        return self._delete(
+            f"/memories/delete/{source}/{resource_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=MemoryDeleteResponse,
         )
 
     def add(
@@ -302,7 +400,6 @@ class MemoriesResource(SyncAPIResource):
         *,
         query: str,
         answer: bool | NotGiven = NOT_GIVEN,
-        filter: Optional[memory_search_params.Filter] | NotGiven = NOT_GIVEN,
         max_results: int | NotGiven = NOT_GIVEN,
         options: memory_search_params.Options | NotGiven = NOT_GIVEN,
         sources: List[
@@ -371,8 +468,6 @@ class MemoriesResource(SyncAPIResource):
 
           answer: If true, the query will be answered along with matching source documents.
 
-          filter: DEPRECATED: Use options instead. This field will be removed in a future version.
-
           max_results: Maximum number of results to return.
 
           options: Search options for the query.
@@ -393,7 +488,6 @@ class MemoriesResource(SyncAPIResource):
                 {
                     "query": query,
                     "answer": answer,
-                    "filter": filter,
                     "max_results": max_results,
                     "options": options,
                     "sources": sources,
@@ -605,6 +699,103 @@ class AsyncMemoriesResource(AsyncAPIResource):
             model=Memory,
         )
 
+    async def delete(
+        self,
+        resource_id: str,
+        *,
+        source: Literal[
+            "collections",
+            "vault",
+            "web_crawler",
+            "notion",
+            "slack",
+            "google_calendar",
+            "reddit",
+            "box",
+            "google_drive",
+            "airtable",
+            "algolia",
+            "amplitude",
+            "asana",
+            "ashby",
+            "bamboohr",
+            "basecamp",
+            "bubbles",
+            "calendly",
+            "confluence",
+            "clickup",
+            "datadog",
+            "deel",
+            "discord",
+            "dropbox",
+            "exa",
+            "facebook",
+            "front",
+            "github",
+            "gitlab",
+            "google_docs",
+            "google_mail",
+            "google_sheet",
+            "hubspot",
+            "jira",
+            "linear",
+            "microsoft_teams",
+            "mixpanel",
+            "monday",
+            "outlook",
+            "perplexity",
+            "rippling",
+            "salesforce",
+            "segment",
+            "todoist",
+            "twitter",
+            "zoom",
+        ],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> MemoryDeleteResponse:
+        """
+        Delete a memory and its associated chunks from the index.
+
+        This removes the memory completely from the vector index and database. The
+        operation deletes:
+
+        1. All chunks associated with the resource (including embeddings)
+        2. The resource record itself
+
+        Args: source: The document provider (e.g., gmail, notion, vault) resource_id:
+        The unique identifier of the resource to delete api_token: Authentication token
+
+        Returns: MemoryDeletionResponse with deletion details
+
+        Raises: DocumentNotFound: If the resource doesn't exist or user doesn't have
+        access
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not source:
+            raise ValueError(f"Expected a non-empty value for `source` but received {source!r}")
+        if not resource_id:
+            raise ValueError(f"Expected a non-empty value for `resource_id` but received {resource_id!r}")
+        return await self._delete(
+            f"/memories/delete/{source}/{resource_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=MemoryDeleteResponse,
+        )
+
     async def add(
         self,
         *,
@@ -755,7 +946,6 @@ class AsyncMemoriesResource(AsyncAPIResource):
         *,
         query: str,
         answer: bool | NotGiven = NOT_GIVEN,
-        filter: Optional[memory_search_params.Filter] | NotGiven = NOT_GIVEN,
         max_results: int | NotGiven = NOT_GIVEN,
         options: memory_search_params.Options | NotGiven = NOT_GIVEN,
         sources: List[
@@ -824,8 +1014,6 @@ class AsyncMemoriesResource(AsyncAPIResource):
 
           answer: If true, the query will be answered along with matching source documents.
 
-          filter: DEPRECATED: Use options instead. This field will be removed in a future version.
-
           max_results: Maximum number of results to return.
 
           options: Search options for the query.
@@ -846,7 +1034,6 @@ class AsyncMemoriesResource(AsyncAPIResource):
                 {
                     "query": query,
                     "answer": answer,
-                    "filter": filter,
                     "max_results": max_results,
                     "options": options,
                     "sources": sources,
@@ -942,6 +1129,9 @@ class MemoriesResourceWithRawResponse:
         self.list = to_raw_response_wrapper(
             memories.list,
         )
+        self.delete = to_raw_response_wrapper(
+            memories.delete,
+        )
         self.add = to_raw_response_wrapper(
             memories.add,
         )
@@ -965,6 +1155,9 @@ class AsyncMemoriesResourceWithRawResponse:
 
         self.list = async_to_raw_response_wrapper(
             memories.list,
+        )
+        self.delete = async_to_raw_response_wrapper(
+            memories.delete,
         )
         self.add = async_to_raw_response_wrapper(
             memories.add,
@@ -990,6 +1183,9 @@ class MemoriesResourceWithStreamingResponse:
         self.list = to_streamed_response_wrapper(
             memories.list,
         )
+        self.delete = to_streamed_response_wrapper(
+            memories.delete,
+        )
         self.add = to_streamed_response_wrapper(
             memories.add,
         )
@@ -1013,6 +1209,9 @@ class AsyncMemoriesResourceWithStreamingResponse:
 
         self.list = async_to_streamed_response_wrapper(
             memories.list,
+        )
+        self.delete = async_to_streamed_response_wrapper(
+            memories.delete,
         )
         self.add = async_to_streamed_response_wrapper(
             memories.add,
