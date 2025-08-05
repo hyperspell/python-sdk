@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.21.0 (2025-08-05)
+
+Full Changelog: [v0.20.0...v0.21.0](https://github.com/hyperspell/python-sdk/compare/v0.20.0...v0.21.0)
+
+### Features
+
+* **api:** api update ([ec5f973](https://github.com/hyperspell/python-sdk/commit/ec5f97338107ae64be0e174dda3ec4dda5903918))
+
 ## 0.20.0 (2025-08-01)
 
 Full Changelog: [v0.19.0...v0.20.0](https://github.com/hyperspell/python-sdk/compare/v0.19.0...v0.20.0)
