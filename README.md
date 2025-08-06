@@ -35,7 +35,7 @@ client = Hyperspell(
 memory_status = client.memories.add(
     text="text",
 )
-print(memory_status.resource_id)
+print(memory_status.id)
 ```
 
 While you can provide an `api_key` keyword argument,
@@ -61,7 +61,7 @@ async def main() -> None:
     memory_status = await client.memories.add(
         text="text",
     )
-    print(memory_status.resource_id)
+    print(memory_status.id)
 
 
 asyncio.run(main())
@@ -96,7 +96,7 @@ async def main() -> None:
         memory_status = await client.memories.add(
             text="text",
         )
-        print(memory_status.resource_id)
+        print(memory_status.id)
 
 
 asyncio.run(main())
@@ -350,7 +350,7 @@ response = client.memories.with_raw_response.add(
 print(response.headers.get('X-My-Header'))
 
 memory = response.parse()  # get the object that `memories.add()` would have returned
-print(memory.resource_id)
+print(memory.id)
 ```
 
 These methods return an [`APIResponse`](https://github.com/hyperspell/python-sdk/tree/main/src/hyperspell/_response.py) object.

@@ -96,5 +96,3 @@ class Memory(BaseModel):
 
     score: Optional[float] = None
     """The relevance of the resource to the query"""
-
-    title: Optional[str] = None

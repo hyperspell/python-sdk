@@ -8,6 +8,9 @@ __all__ = ["MemoryStatus"]
 
 
 class MemoryStatus(BaseModel):
+    id: int
+    """Deprecated: refer to documents by source and resource_id instead"""
+
     resource_id: str
 
     source: Literal[
