@@ -20,6 +20,7 @@ from .._response import (
 from ..types.token import Token
 from .._base_client import make_request_options
 from ..types.auth_me_response import AuthMeResponse
+from ..types.auth_delete_user_response import AuthDeleteUserResponse
 
 __all__ = ["AuthResource", "AsyncAuthResource"]
 
@@ -43,6 +44,25 @@ class AuthResource(SyncAPIResource):
         For more information, see https://www.github.com/hyperspell/python-sdk#with_streaming_response
         """
         return AuthResourceWithStreamingResponse(self)
+
+    def delete_user(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AuthDeleteUserResponse:
+        """Endpoint to delete user."""
+        return self._delete(
+            "/auth/delete",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AuthDeleteUserResponse,
+        )
 
     def me(
         self,
@@ -127,6 +147,25 @@ class AsyncAuthResource(AsyncAPIResource):
         """
         return AsyncAuthResourceWithStreamingResponse(self)
 
+    async def delete_user(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+    ) -> AuthDeleteUserResponse:
+        """Endpoint to delete user."""
+        return await self._delete(
+            "/auth/delete",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=AuthDeleteUserResponse,
+        )
+
     async def me(
         self,
         *,
@@ -194,6 +233,9 @@ class AuthResourceWithRawResponse:
     def __init__(self, auth: AuthResource) -> None:
         self._auth = auth
 
+        self.delete_user = to_raw_response_wrapper(
+            auth.delete_user,
+        )
         self.me = to_raw_response_wrapper(
             auth.me,
         )
@@ -206,6 +248,9 @@ class AsyncAuthResourceWithRawResponse:
     def __init__(self, auth: AsyncAuthResource) -> None:
         self._auth = auth
 
+        self.delete_user = async_to_raw_response_wrapper(
+            auth.delete_user,
+        )
         self.me = async_to_raw_response_wrapper(
             auth.me,
         )
@@ -218,6 +263,9 @@ class AuthResourceWithStreamingResponse:
     def __init__(self, auth: AuthResource) -> None:
         self._auth = auth
 
+        self.delete_user = to_streamed_response_wrapper(
+            auth.delete_user,
+        )
         self.me = to_streamed_response_wrapper(
             auth.me,
         )
@@ -230,6 +278,9 @@ class AsyncAuthResourceWithStreamingResponse:
     def __init__(self, auth: AsyncAuthResource) -> None:
         self._auth = auth
 
+        self.delete_user = async_to_streamed_response_wrapper(
+            auth.delete_user,
+        )
         self.me = async_to_streamed_response_wrapper(
             auth.me,
         )

@@ -75,10 +75,11 @@ Methods:
 Types:
 
 ```python
-from hyperspell.types import Token, AuthMeResponse
+from hyperspell.types import Token, AuthDeleteUserResponse, AuthMeResponse
 ```
 
 Methods:
 
+- <code title="delete /auth/delete">client.auth.<a href="./src/hyperspell/resources/auth.py">delete_user</a>() -> <a href="./src/hyperspell/types/auth_delete_user_response.py">AuthDeleteUserResponse</a></code>
 - <code title="get /auth/me">client.auth.<a href="./src/hyperspell/resources/auth.py">me</a>() -> <a href="./src/hyperspell/types/auth_me_response.py">AuthMeResponse</a></code>
 - <code title="post /auth/user_token">client.auth.<a href="./src/hyperspell/resources/auth.py">user_token</a>(\*\*<a href="src/hyperspell/types/auth_user_token_params.py">params</a>) -> <a href="./src/hyperspell/types/token.py">Token</a></code>

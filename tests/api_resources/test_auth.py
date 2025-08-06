@@ -9,13 +9,38 @@ import pytest
 
 from hyperspell import Hyperspell, AsyncHyperspell
 from tests.utils import assert_matches_type
-from hyperspell.types import Token, AuthMeResponse
+from hyperspell.types import Token, AuthMeResponse, AuthDeleteUserResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
 
 class TestAuth:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
+
+    @parametrize
+    def test_method_delete_user(self, client: Hyperspell) -> None:
+        auth = client.auth.delete_user()
+        assert_matches_type(AuthDeleteUserResponse, auth, path=["response"])
+
+    @parametrize
+    def test_raw_response_delete_user(self, client: Hyperspell) -> None:
+        response = client.auth.with_raw_response.delete_user()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        auth = response.parse()
+        assert_matches_type(AuthDeleteUserResponse, auth, path=["response"])
+
+    @parametrize
+    def test_streaming_response_delete_user(self, client: Hyperspell) -> None:
+        with client.auth.with_streaming_response.delete_user() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            auth = response.parse()
+            assert_matches_type(AuthDeleteUserResponse, auth, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_method_me(self, client: Hyperspell) -> None:
@@ -86,6 +111,31 @@ class TestAsyncAuth:
     parametrize = pytest.mark.parametrize(
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
+
+    @parametrize
+    async def test_method_delete_user(self, async_client: AsyncHyperspell) -> None:
+        auth = await async_client.auth.delete_user()
+        assert_matches_type(AuthDeleteUserResponse, auth, path=["response"])
+
+    @parametrize
+    async def test_raw_response_delete_user(self, async_client: AsyncHyperspell) -> None:
+        response = await async_client.auth.with_raw_response.delete_user()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        auth = await response.parse()
+        assert_matches_type(AuthDeleteUserResponse, auth, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_delete_user(self, async_client: AsyncHyperspell) -> None:
+        async with async_client.auth.with_streaming_response.delete_user() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            auth = await response.parse()
+            assert_matches_type(AuthDeleteUserResponse, auth, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_method_me(self, async_client: AsyncHyperspell) -> None:

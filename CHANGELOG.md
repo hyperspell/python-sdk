@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.22.0 (2025-08-06)
+
+Full Changelog: [v0.21.0...v0.22.0](https://github.com/hyperspell/python-sdk/compare/v0.21.0...v0.22.0)
+
+### Features
+
+* **api:** api update ([853645f](https://github.com/hyperspell/python-sdk/commit/853645f31184d6be577afe6ef7e872bca5198b3c))
+* **api:** api update ([e6c05cd](https://github.com/hyperspell/python-sdk/commit/e6c05cd496db6e9df09da720bd74e6c2f0f853b7))
+* **api:** update via SDK Studio ([5d3bc9c](https://github.com/hyperspell/python-sdk/commit/5d3bc9c68523ff572bb27e8d77e24a2819f6e6be))
+* **api:** update via SDK Studio ([37def01](https://github.com/hyperspell/python-sdk/commit/37def01e5290efee8228c0e81f6ef2c9e7fb2b0b))
+
+
+### Chores
+
+* **internal:** fix ruff target version ([9454556](https://github.com/hyperspell/python-sdk/commit/945455659b4896b89be368476adeb8c062e8d520))
+
 ## 0.21.0 (2025-08-05)
 
 Full Changelog: [v0.20.0...v0.21.0](https://github.com/hyperspell/python-sdk/compare/v0.20.0...v0.21.0)
