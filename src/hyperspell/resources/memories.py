@@ -534,12 +534,12 @@ class MemoriesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> MemoryStatus:
-        """This endpoint will upload a file to the index and return a document ID.
+        """This endpoint will upload a file to the index and return a resource_id.
 
         The file
-        will be processed in the background and the document will be available for
-        querying once the processing is complete. You can use the `document_id` to query
-        the document later, and check the status of the document.
+        will be processed in the background and the memory will be available for
+        querying once the processing is complete. You can use the `resource_id` to query
+        the memory later, and check the status of the memory.
 
         Args:
           file: The file to ingest.
@@ -1080,12 +1080,12 @@ class AsyncMemoriesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
     ) -> MemoryStatus:
-        """This endpoint will upload a file to the index and return a document ID.
+        """This endpoint will upload a file to the index and return a resource_id.
 
         The file
-        will be processed in the background and the document will be available for
-        querying once the processing is complete. You can use the `document_id` to query
-        the document later, and check the status of the document.
+        will be processed in the background and the memory will be available for
+        querying once the processing is complete. You can use the `resource_id` to query
+        the memory later, and check the status of the memory.
 
         Args:
           file: The file to ingest.
