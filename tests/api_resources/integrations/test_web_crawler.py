@@ -25,6 +25,15 @@ class TestWebCrawler:
         assert_matches_type(WebCrawlerIndexResponse, web_crawler, path=["response"])
 
     @parametrize
+    def test_method_index_with_all_params(self, client: Hyperspell) -> None:
+        web_crawler = client.integrations.web_crawler.index(
+            url="url",
+            limit=1,
+            max_depth=0,
+        )
+        assert_matches_type(WebCrawlerIndexResponse, web_crawler, path=["response"])
+
+    @parametrize
     def test_raw_response_index(self, client: Hyperspell) -> None:
         response = client.integrations.web_crawler.with_raw_response.index(
             url="url",
@@ -58,6 +67,15 @@ class TestAsyncWebCrawler:
     async def test_method_index(self, async_client: AsyncHyperspell) -> None:
         web_crawler = await async_client.integrations.web_crawler.index(
             url="url",
+        )
+        assert_matches_type(WebCrawlerIndexResponse, web_crawler, path=["response"])
+
+    @parametrize
+    async def test_method_index_with_all_params(self, async_client: AsyncHyperspell) -> None:
+        web_crawler = await async_client.integrations.web_crawler.index(
+            url="url",
+            limit=1,
+            max_depth=0,
         )
         assert_matches_type(WebCrawlerIndexResponse, web_crawler, path=["response"])
 
