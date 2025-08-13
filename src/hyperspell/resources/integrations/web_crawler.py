@@ -45,6 +45,8 @@ class WebCrawlerResource(SyncAPIResource):
         self,
         *,
         url: str,
+        limit: int | NotGiven = NOT_GIVEN,
+        max_depth: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -56,6 +58,12 @@ class WebCrawlerResource(SyncAPIResource):
         Recursively crawl a website to make it available for indexed search.
 
         Args:
+          url: The base URL of the website to crawl
+
+          limit: Maximum number of pages to crawl in total
+
+          max_depth: Maximum depth of links to follow during crawling
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -71,7 +79,14 @@ class WebCrawlerResource(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform({"url": url}, web_crawler_index_params.WebCrawlerIndexParams),
+                query=maybe_transform(
+                    {
+                        "url": url,
+                        "limit": limit,
+                        "max_depth": max_depth,
+                    },
+                    web_crawler_index_params.WebCrawlerIndexParams,
+                ),
             ),
             cast_to=WebCrawlerIndexResponse,
         )
@@ -101,6 +116,8 @@ class AsyncWebCrawlerResource(AsyncAPIResource):
         self,
         *,
         url: str,
+        limit: int | NotGiven = NOT_GIVEN,
+        max_depth: int | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -112,6 +129,12 @@ class AsyncWebCrawlerResource(AsyncAPIResource):
         Recursively crawl a website to make it available for indexed search.
 
         Args:
+          url: The base URL of the website to crawl
+
+          limit: Maximum number of pages to crawl in total
+
+          max_depth: Maximum depth of links to follow during crawling
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -127,7 +150,14 @@ class AsyncWebCrawlerResource(AsyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=await async_maybe_transform({"url": url}, web_crawler_index_params.WebCrawlerIndexParams),
+                query=await async_maybe_transform(
+                    {
+                        "url": url,
+                        "limit": limit,
+                        "max_depth": max_depth,
+                    },
+                    web_crawler_index_params.WebCrawlerIndexParams,
+                ),
             ),
             cast_to=WebCrawlerIndexResponse,
         )

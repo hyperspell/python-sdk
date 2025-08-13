@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.22.1 (2025-08-13)
+
+Full Changelog: [v0.22.0...v0.22.1](https://github.com/hyperspell/python-sdk/compare/v0.22.0...v0.22.1)
+
+### Features
+
+* **api:** api update ([d2c231b](https://github.com/hyperspell/python-sdk/commit/d2c231b07652d05a03e545078b17da80d425a072))
+* **api:** api update ([ac37961](https://github.com/hyperspell/python-sdk/commit/ac3796155df478f984b59d18b81e0ab8a0b20a36))
+
+
+### Chores
+
+* **internal:** update comment in script ([3f74f9d](https://github.com/hyperspell/python-sdk/commit/3f74f9ded72572e20d6839d14c34713d75c83d4c))
+* update @stainless-api/prism-cli to v5.15.0 ([37e8a3f](https://github.com/hyperspell/python-sdk/commit/37e8a3f52aff75d78adc6ba7a0a51107cc9e0fe1))
+
 ## 0.22.0 (2025-08-06)
 
 Full Changelog: [v0.21.0...v0.22.0](https://github.com/hyperspell/python-sdk/compare/v0.21.0...v0.22.0)
