@@ -79,6 +79,7 @@ class TestAuth:
         auth = client.auth.user_token(
             user_id="user_id",
             expires_in="30m",
+            origin="origin",
         )
         assert_matches_type(Token, auth, path=["response"])
 
@@ -174,6 +175,7 @@ class TestAsyncAuth:
         auth = await async_client.auth.user_token(
             user_id="user_id",
             expires_in="30m",
+            origin="origin",
         )
         assert_matches_type(Token, auth, path=["response"])
 
