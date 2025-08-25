@@ -88,6 +88,7 @@ class AuthResource(SyncAPIResource):
         *,
         user_id: str,
         expires_in: Optional[str] | NotGiven = NOT_GIVEN,
+        origin: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -103,6 +104,9 @@ class AuthResource(SyncAPIResource):
         Args:
           expires_in: Token lifetime, e.g., '30m', '2h', '1d'. Defaults to 24 hours if not provided.
 
+          origin: Origin of the request, used for CSRF protection. If set, the token will only be
+              valid for requests originating from this origin.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -117,6 +121,7 @@ class AuthResource(SyncAPIResource):
                 {
                     "user_id": user_id,
                     "expires_in": expires_in,
+                    "origin": origin,
                 },
                 auth_user_token_params.AuthUserTokenParams,
             ),
@@ -190,6 +195,7 @@ class AsyncAuthResource(AsyncAPIResource):
         *,
         user_id: str,
         expires_in: Optional[str] | NotGiven = NOT_GIVEN,
+        origin: Optional[str] | NotGiven = NOT_GIVEN,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -205,6 +211,9 @@ class AsyncAuthResource(AsyncAPIResource):
         Args:
           expires_in: Token lifetime, e.g., '30m', '2h', '1d'. Defaults to 24 hours if not provided.
 
+          origin: Origin of the request, used for CSRF protection. If set, the token will only be
+              valid for requests originating from this origin.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -219,6 +228,7 @@ class AsyncAuthResource(AsyncAPIResource):
                 {
                     "user_id": user_id,
                     "expires_in": expires_in,
+                    "origin": origin,
                 },
                 auth_user_token_params.AuthUserTokenParams,
             ),
