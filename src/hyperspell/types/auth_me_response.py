@@ -6,14 +6,28 @@ from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["AuthMeResponse"]
+__all__ = ["AuthMeResponse", "App"]
+
+
+class App(BaseModel):
+    id: str
+    """The Hyperspell app's id this user belongs to"""
+
+    icon_url: Optional[str] = None
+    """The app's icon"""
+
+    name: str
+    """The app's name"""
+
+    redirect_url: Optional[str] = None
+    """The app's redirect URL"""
 
 
 class AuthMeResponse(BaseModel):
     id: str
     """The user's id"""
 
-    app: str
+    app: App
     """The Hyperspell app's id this user belongs to"""
 
     available_integrations: List[
