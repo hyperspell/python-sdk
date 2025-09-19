@@ -9,7 +9,7 @@ from typing_extensions import Literal
 import httpx
 
 from ..types import memory_add_params, memory_list_params, memory_search_params, memory_upload_params
-from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven, FileTypes
+from .._types import Body, Omit, Query, Headers, NotGiven, FileTypes, omit, not_given
 from .._utils import extract_files, maybe_transform, deepcopy_minimal, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -53,9 +53,9 @@ class MemoriesResource(SyncAPIResource):
     def list(
         self,
         *,
-        collection: Optional[str] | NotGiven = NOT_GIVEN,
-        cursor: Optional[str] | NotGiven = NOT_GIVEN,
-        size: int | NotGiven = NOT_GIVEN,
+        collection: Optional[str] | Omit = omit,
+        cursor: Optional[str] | Omit = omit,
+        size: int | Omit = omit,
         source: Optional[
             Literal[
                 "collections",
@@ -106,13 +106,13 @@ class MemoriesResource(SyncAPIResource):
                 "zoom",
             ]
         ]
-        | NotGiven = NOT_GIVEN,
+        | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SyncCursorPage[Memory]:
         """This endpoint allows you to paginate through all documents in the index.
 
@@ -210,7 +210,7 @@ class MemoriesResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MemoryDeleteResponse:
         """
         Delete a memory and its associated chunks from the index.
@@ -254,16 +254,16 @@ class MemoriesResource(SyncAPIResource):
         self,
         *,
         text: str,
-        collection: Optional[str] | NotGiven = NOT_GIVEN,
-        date: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        resource_id: str | NotGiven = NOT_GIVEN,
-        title: Optional[str] | NotGiven = NOT_GIVEN,
+        collection: Optional[str] | Omit = omit,
+        date: Union[str, datetime] | Omit = omit,
+        resource_id: str | Omit = omit,
+        title: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MemoryStatus:
         """Adds an arbitrary document to the index.
 
@@ -369,7 +369,7 @@ class MemoriesResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Memory:
         """
         Retrieves a document by provider and resource_id.
@@ -399,9 +399,9 @@ class MemoriesResource(SyncAPIResource):
         self,
         *,
         query: str,
-        answer: bool | NotGiven = NOT_GIVEN,
-        max_results: int | NotGiven = NOT_GIVEN,
-        options: memory_search_params.Options | NotGiven = NOT_GIVEN,
+        answer: bool | Omit = omit,
+        max_results: int | Omit = omit,
+        options: memory_search_params.Options | Omit = omit,
         sources: List[
             Literal[
                 "collections",
@@ -452,13 +452,13 @@ class MemoriesResource(SyncAPIResource):
                 "zoom",
             ]
         ]
-        | NotGiven = NOT_GIVEN,
+        | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MemorySearchResponse:
         """
         Retrieves documents matching the query.
@@ -508,7 +508,7 @@ class MemoriesResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MemoryStatusResponse:
         """
         This endpoint shows the indexing progress of documents, both by provider and
@@ -526,13 +526,13 @@ class MemoriesResource(SyncAPIResource):
         self,
         *,
         file: FileTypes,
-        collection: Optional[str] | NotGiven = NOT_GIVEN,
+        collection: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MemoryStatus:
         """This endpoint will upload a file to the index and return a resource_id.
 
@@ -599,9 +599,9 @@ class AsyncMemoriesResource(AsyncAPIResource):
     def list(
         self,
         *,
-        collection: Optional[str] | NotGiven = NOT_GIVEN,
-        cursor: Optional[str] | NotGiven = NOT_GIVEN,
-        size: int | NotGiven = NOT_GIVEN,
+        collection: Optional[str] | Omit = omit,
+        cursor: Optional[str] | Omit = omit,
+        size: int | Omit = omit,
         source: Optional[
             Literal[
                 "collections",
@@ -652,13 +652,13 @@ class AsyncMemoriesResource(AsyncAPIResource):
                 "zoom",
             ]
         ]
-        | NotGiven = NOT_GIVEN,
+        | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AsyncPaginator[Memory, AsyncCursorPage[Memory]]:
         """This endpoint allows you to paginate through all documents in the index.
 
@@ -756,7 +756,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MemoryDeleteResponse:
         """
         Delete a memory and its associated chunks from the index.
@@ -800,16 +800,16 @@ class AsyncMemoriesResource(AsyncAPIResource):
         self,
         *,
         text: str,
-        collection: Optional[str] | NotGiven = NOT_GIVEN,
-        date: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        resource_id: str | NotGiven = NOT_GIVEN,
-        title: Optional[str] | NotGiven = NOT_GIVEN,
+        collection: Optional[str] | Omit = omit,
+        date: Union[str, datetime] | Omit = omit,
+        resource_id: str | Omit = omit,
+        title: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MemoryStatus:
         """Adds an arbitrary document to the index.
 
@@ -915,7 +915,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Memory:
         """
         Retrieves a document by provider and resource_id.
@@ -945,9 +945,9 @@ class AsyncMemoriesResource(AsyncAPIResource):
         self,
         *,
         query: str,
-        answer: bool | NotGiven = NOT_GIVEN,
-        max_results: int | NotGiven = NOT_GIVEN,
-        options: memory_search_params.Options | NotGiven = NOT_GIVEN,
+        answer: bool | Omit = omit,
+        max_results: int | Omit = omit,
+        options: memory_search_params.Options | Omit = omit,
         sources: List[
             Literal[
                 "collections",
@@ -998,13 +998,13 @@ class AsyncMemoriesResource(AsyncAPIResource):
                 "zoom",
             ]
         ]
-        | NotGiven = NOT_GIVEN,
+        | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MemorySearchResponse:
         """
         Retrieves documents matching the query.
@@ -1054,7 +1054,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MemoryStatusResponse:
         """
         This endpoint shows the indexing progress of documents, both by provider and
@@ -1072,13 +1072,13 @@ class AsyncMemoriesResource(AsyncAPIResource):
         self,
         *,
         file: FileTypes,
-        collection: Optional[str] | NotGiven = NOT_GIVEN,
+        collection: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MemoryStatus:
         """This endpoint will upload a file to the index and return a resource_id.
 
