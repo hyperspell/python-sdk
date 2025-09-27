@@ -249,6 +249,10 @@ class TestMemories:
                     "after": parse_datetime("2019-12-27T18:11:19.117Z"),
                     "before": parse_datetime("2019-12-27T18:11:19.117Z"),
                     "channels": ["string"],
+                    "exclude_archived": True,
+                    "include_dms": True,
+                    "include_group_dms": True,
+                    "include_private": True,
                     "weight": 0,
                 },
                 "web_crawler": {
@@ -581,6 +585,10 @@ class TestAsyncMemories:
                     "after": parse_datetime("2019-12-27T18:11:19.117Z"),
                     "before": parse_datetime("2019-12-27T18:11:19.117Z"),
                     "channels": ["string"],
+                    "exclude_archived": True,
+                    "include_dms": True,
+                    "include_group_dms": True,
+                    "include_private": True,
                     "weight": 0,
                 },
                 "web_crawler": {
