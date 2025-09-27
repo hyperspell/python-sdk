@@ -243,9 +243,21 @@ class OptionsSlack(TypedDict, total=False):
     """Only query documents created before this date."""
 
     channels: SequenceNotStr[str]
-    """List of Slack channels to search.
+    """List of Slack channels to include (by id, name, or #name)."""
 
-    If not provided, all channels in the workspace will be searched.
+    exclude_archived: Optional[bool]
+    """If set, pass 'exclude_archived' to Slack. If None, omit the param."""
+
+    include_dms: bool
+    """Include direct messages (im) when listing conversations."""
+
+    include_group_dms: bool
+    """Include group DMs (mpim) when listing conversations."""
+
+    include_private: bool
+    """Include private channels when constructing Slack 'types'.
+
+    Defaults to False to preserve existing cassette query params.
     """
 
     weight: float
