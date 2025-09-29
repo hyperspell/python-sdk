@@ -63,12 +63,13 @@ Methods:
 Types:
 
 ```python
-from hyperspell.types import Query, EvaluateScoreQueryResponse
+from hyperspell.types import Query, EvaluateScoreHighlightResponse, EvaluateScoreQueryResponse
 ```
 
 Methods:
 
 - <code title="get /memories/query/{query_id}">client.evaluate.<a href="./src/hyperspell/resources/evaluate.py">get_query</a>(query_id) -> <a href="./src/hyperspell/types/query.py">Query</a></code>
+- <code title="post /memories/highlights/feedback">client.evaluate.<a href="./src/hyperspell/resources/evaluate.py">score_highlight</a>(\*\*<a href="src/hyperspell/types/evaluate_score_highlight_params.py">params</a>) -> <a href="./src/hyperspell/types/evaluate_score_highlight_response.py">EvaluateScoreHighlightResponse</a></code>
 - <code title="post /memories/query/feedback">client.evaluate.<a href="./src/hyperspell/resources/evaluate.py">score_query</a>(\*\*<a href="src/hyperspell/types/evaluate_score_query_params.py">params</a>) -> <a href="./src/hyperspell/types/evaluate_score_query_response.py">EvaluateScoreQueryResponse</a></code>
 
 # Vaults

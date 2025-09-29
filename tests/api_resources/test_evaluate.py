@@ -9,7 +9,11 @@ import pytest
 
 from hyperspell import Hyperspell, AsyncHyperspell
 from tests.utils import assert_matches_type
-from hyperspell.types import Query, EvaluateScoreQueryResponse
+from hyperspell.types import (
+    Query,
+    EvaluateScoreQueryResponse,
+    EvaluateScoreHighlightResponse,
+)
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -54,6 +58,46 @@ class TestEvaluate:
             client.evaluate.with_raw_response.get_query(
                 "",
             )
+
+    @parametrize
+    def test_method_score_highlight(self, client: Hyperspell) -> None:
+        evaluate = client.evaluate.score_highlight(
+            highlight_id="highlight_id",
+        )
+        assert_matches_type(EvaluateScoreHighlightResponse, evaluate, path=["response"])
+
+    @parametrize
+    def test_method_score_highlight_with_all_params(self, client: Hyperspell) -> None:
+        evaluate = client.evaluate.score_highlight(
+            highlight_id="highlight_id",
+            comment="comment",
+            score=-1,
+        )
+        assert_matches_type(EvaluateScoreHighlightResponse, evaluate, path=["response"])
+
+    @parametrize
+    def test_raw_response_score_highlight(self, client: Hyperspell) -> None:
+        response = client.evaluate.with_raw_response.score_highlight(
+            highlight_id="highlight_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        evaluate = response.parse()
+        assert_matches_type(EvaluateScoreHighlightResponse, evaluate, path=["response"])
+
+    @parametrize
+    def test_streaming_response_score_highlight(self, client: Hyperspell) -> None:
+        with client.evaluate.with_streaming_response.score_highlight(
+            highlight_id="highlight_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            evaluate = response.parse()
+            assert_matches_type(EvaluateScoreHighlightResponse, evaluate, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_method_score_query(self, client: Hyperspell) -> None:
@@ -137,6 +181,46 @@ class TestAsyncEvaluate:
             await async_client.evaluate.with_raw_response.get_query(
                 "",
             )
+
+    @parametrize
+    async def test_method_score_highlight(self, async_client: AsyncHyperspell) -> None:
+        evaluate = await async_client.evaluate.score_highlight(
+            highlight_id="highlight_id",
+        )
+        assert_matches_type(EvaluateScoreHighlightResponse, evaluate, path=["response"])
+
+    @parametrize
+    async def test_method_score_highlight_with_all_params(self, async_client: AsyncHyperspell) -> None:
+        evaluate = await async_client.evaluate.score_highlight(
+            highlight_id="highlight_id",
+            comment="comment",
+            score=-1,
+        )
+        assert_matches_type(EvaluateScoreHighlightResponse, evaluate, path=["response"])
+
+    @parametrize
+    async def test_raw_response_score_highlight(self, async_client: AsyncHyperspell) -> None:
+        response = await async_client.evaluate.with_raw_response.score_highlight(
+            highlight_id="highlight_id",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        evaluate = await response.parse()
+        assert_matches_type(EvaluateScoreHighlightResponse, evaluate, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_score_highlight(self, async_client: AsyncHyperspell) -> None:
+        async with async_client.evaluate.with_streaming_response.score_highlight(
+            highlight_id="highlight_id",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            evaluate = await response.parse()
+            assert_matches_type(EvaluateScoreHighlightResponse, evaluate, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_method_score_query(self, async_client: AsyncHyperspell) -> None:
