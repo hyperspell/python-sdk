@@ -17,4 +17,6 @@ from .auth_user_token_params import AuthUserTokenParams as AuthUserTokenParams
 from .memory_delete_response import MemoryDeleteResponse as MemoryDeleteResponse
 from .memory_status_response import MemoryStatusResponse as MemoryStatusResponse
 from .auth_delete_user_response import AuthDeleteUserResponse as AuthDeleteUserResponse
+from .evaluate_score_query_params import EvaluateScoreQueryParams as EvaluateScoreQueryParams
 from .integration_revoke_response import IntegrationRevokeResponse as IntegrationRevokeResponse
+from .evaluate_score_query_response import EvaluateScoreQueryResponse as EvaluateScoreQueryResponse
