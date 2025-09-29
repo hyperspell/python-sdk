@@ -16,14 +16,6 @@ from .vaults import (
     VaultsResourceWithStreamingResponse,
     AsyncVaultsResourceWithStreamingResponse,
 )
-from .evaluate import (
-    EvaluateResource,
-    AsyncEvaluateResource,
-    EvaluateResourceWithRawResponse,
-    AsyncEvaluateResourceWithRawResponse,
-    EvaluateResourceWithStreamingResponse,
-    AsyncEvaluateResourceWithStreamingResponse,
-)
 from .memories import (
     MemoriesResource,
     AsyncMemoriesResource,
@@ -54,12 +46,6 @@ __all__ = [
     "AsyncMemoriesResourceWithRawResponse",
     "MemoriesResourceWithStreamingResponse",
     "AsyncMemoriesResourceWithStreamingResponse",
-    "EvaluateResource",
-    "AsyncEvaluateResource",
-    "EvaluateResourceWithRawResponse",
-    "AsyncEvaluateResourceWithRawResponse",
-    "EvaluateResourceWithStreamingResponse",
-    "AsyncEvaluateResourceWithStreamingResponse",
     "VaultsResource",
     "AsyncVaultsResource",
     "VaultsResourceWithRawResponse",
