@@ -10,10 +10,10 @@ import pytest
 from hyperspell import Hyperspell, AsyncHyperspell
 from tests.utils import assert_matches_type
 from hyperspell.types import (
-    Query,
     EvaluateScoreQueryResponse,
     EvaluateScoreHighlightResponse,
 )
+from hyperspell.types.shared import QueryResult
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -26,7 +26,7 @@ class TestEvaluate:
         evaluate = client.evaluate.get_query(
             "query_id",
         )
-        assert_matches_type(Query, evaluate, path=["response"])
+        assert_matches_type(QueryResult, evaluate, path=["response"])
 
     @parametrize
     def test_raw_response_get_query(self, client: Hyperspell) -> None:
@@ -37,7 +37,7 @@ class TestEvaluate:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         evaluate = response.parse()
-        assert_matches_type(Query, evaluate, path=["response"])
+        assert_matches_type(QueryResult, evaluate, path=["response"])
 
     @parametrize
     def test_streaming_response_get_query(self, client: Hyperspell) -> None:
@@ -48,7 +48,7 @@ class TestEvaluate:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             evaluate = response.parse()
-            assert_matches_type(Query, evaluate, path=["response"])
+            assert_matches_type(QueryResult, evaluate, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -163,7 +163,7 @@ class TestAsyncEvaluate:
         evaluate = await async_client.evaluate.get_query(
             "query_id",
         )
-        assert_matches_type(Query, evaluate, path=["response"])
+        assert_matches_type(QueryResult, evaluate, path=["response"])
 
     @parametrize
     async def test_raw_response_get_query(self, async_client: AsyncHyperspell) -> None:
@@ -174,7 +174,7 @@ class TestAsyncEvaluate:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         evaluate = await response.parse()
-        assert_matches_type(Query, evaluate, path=["response"])
+        assert_matches_type(QueryResult, evaluate, path=["response"])
 
     @parametrize
     async def test_streaming_response_get_query(self, async_client: AsyncHyperspell) -> None:
@@ -185,7 +185,7 @@ class TestAsyncEvaluate:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             evaluate = await response.parse()
-            assert_matches_type(Query, evaluate, path=["response"])
+            assert_matches_type(QueryResult, evaluate, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

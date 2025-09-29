@@ -10,7 +10,6 @@ import pytest
 from hyperspell import Hyperspell, AsyncHyperspell
 from tests.utils import assert_matches_type
 from hyperspell.types import (
-    Query,
     Memory,
     MemoryStatus,
     MemoryDeleteResponse,
@@ -18,6 +17,7 @@ from hyperspell.types import (
 )
 from hyperspell._utils import parse_datetime
 from hyperspell.pagination import SyncCursorPage, AsyncCursorPage
+from hyperspell.types.shared import QueryResult
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -191,7 +191,7 @@ class TestMemories:
         memory = client.memories.search(
             query="query",
         )
-        assert_matches_type(Query, memory, path=["response"])
+        assert_matches_type(QueryResult, memory, path=["response"])
 
     @parametrize
     def test_method_search_with_all_params(self, client: Hyperspell) -> None:
@@ -265,7 +265,7 @@ class TestMemories:
             },
             sources=["collections"],
         )
-        assert_matches_type(Query, memory, path=["response"])
+        assert_matches_type(QueryResult, memory, path=["response"])
 
     @parametrize
     def test_raw_response_search(self, client: Hyperspell) -> None:
@@ -276,7 +276,7 @@ class TestMemories:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         memory = response.parse()
-        assert_matches_type(Query, memory, path=["response"])
+        assert_matches_type(QueryResult, memory, path=["response"])
 
     @parametrize
     def test_streaming_response_search(self, client: Hyperspell) -> None:
@@ -287,7 +287,7 @@ class TestMemories:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             memory = response.parse()
-            assert_matches_type(Query, memory, path=["response"])
+            assert_matches_type(QueryResult, memory, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -527,7 +527,7 @@ class TestAsyncMemories:
         memory = await async_client.memories.search(
             query="query",
         )
-        assert_matches_type(Query, memory, path=["response"])
+        assert_matches_type(QueryResult, memory, path=["response"])
 
     @parametrize
     async def test_method_search_with_all_params(self, async_client: AsyncHyperspell) -> None:
@@ -601,7 +601,7 @@ class TestAsyncMemories:
             },
             sources=["collections"],
         )
-        assert_matches_type(Query, memory, path=["response"])
+        assert_matches_type(QueryResult, memory, path=["response"])
 
     @parametrize
     async def test_raw_response_search(self, async_client: AsyncHyperspell) -> None:
@@ -612,7 +612,7 @@ class TestAsyncMemories:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         memory = await response.parse()
-        assert_matches_type(Query, memory, path=["response"])
+        assert_matches_type(QueryResult, memory, path=["response"])
 
     @parametrize
     async def test_streaming_response_search(self, async_client: AsyncHyperspell) -> None:
@@ -623,7 +623,7 @@ class TestAsyncMemories:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             memory = await response.parse()
-            assert_matches_type(Query, memory, path=["response"])
+            assert_matches_type(QueryResult, memory, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

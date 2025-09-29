@@ -2,13 +2,13 @@
 
 from typing import Dict, List, Optional
 
-from .memory import Memory
-from .._models import BaseModel
+from ..memory import Memory
+from ..._models import BaseModel
 
-__all__ = ["Query"]
+__all__ = ["QueryResult"]
 
 
-class Query(BaseModel):
+class QueryResult(BaseModel):
     documents: List[Memory]
 
     answer: Optional[str] = None
