@@ -34,6 +34,12 @@ Methods:
 
 - <code title="get /integrations/web_crawler/index">client.integrations.web_crawler.<a href="./src/hyperspell/resources/integrations/web_crawler.py">index</a>(\*\*<a href="src/hyperspell/types/integrations/web_crawler_index_params.py">params</a>) -> <a href="./src/hyperspell/types/integrations/web_crawler_index_response.py">WebCrawlerIndexResponse</a></code>
 
+## Slack
+
+Methods:
+
+- <code title="get /integrations/slack/list">client.integrations.slack.<a href="./src/hyperspell/resources/integrations/slack.py">list</a>(\*\*<a href="src/hyperspell/types/integrations/slack_list_params.py">params</a>) -> object</code>
+
 # Memories
 
 Types:

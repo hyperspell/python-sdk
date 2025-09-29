@@ -4,6 +4,14 @@ from __future__ import annotations
 
 import httpx
 
+from .slack import (
+    SlackResource,
+    AsyncSlackResource,
+    SlackResourceWithRawResponse,
+    AsyncSlackResourceWithRawResponse,
+    SlackResourceWithStreamingResponse,
+    AsyncSlackResourceWithStreamingResponse,
+)
 from ..._types import Body, Query, Headers, NotGiven, not_given
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -43,6 +51,10 @@ class IntegrationsResource(SyncAPIResource):
     @cached_property
     def web_crawler(self) -> WebCrawlerResource:
         return WebCrawlerResource(self._client)
+
+    @cached_property
+    def slack(self) -> SlackResource:
+        return SlackResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> IntegrationsResourceWithRawResponse:
@@ -106,6 +118,10 @@ class AsyncIntegrationsResource(AsyncAPIResource):
     @cached_property
     def web_crawler(self) -> AsyncWebCrawlerResource:
         return AsyncWebCrawlerResource(self._client)
+
+    @cached_property
+    def slack(self) -> AsyncSlackResource:
+        return AsyncSlackResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncIntegrationsResourceWithRawResponse:
@@ -177,6 +193,10 @@ class IntegrationsResourceWithRawResponse:
     def web_crawler(self) -> WebCrawlerResourceWithRawResponse:
         return WebCrawlerResourceWithRawResponse(self._integrations.web_crawler)
 
+    @cached_property
+    def slack(self) -> SlackResourceWithRawResponse:
+        return SlackResourceWithRawResponse(self._integrations.slack)
+
 
 class AsyncIntegrationsResourceWithRawResponse:
     def __init__(self, integrations: AsyncIntegrationsResource) -> None:
@@ -193,6 +213,10 @@ class AsyncIntegrationsResourceWithRawResponse:
     @cached_property
     def web_crawler(self) -> AsyncWebCrawlerResourceWithRawResponse:
         return AsyncWebCrawlerResourceWithRawResponse(self._integrations.web_crawler)
+
+    @cached_property
+    def slack(self) -> AsyncSlackResourceWithRawResponse:
+        return AsyncSlackResourceWithRawResponse(self._integrations.slack)
 
 
 class IntegrationsResourceWithStreamingResponse:
@@ -211,6 +235,10 @@ class IntegrationsResourceWithStreamingResponse:
     def web_crawler(self) -> WebCrawlerResourceWithStreamingResponse:
         return WebCrawlerResourceWithStreamingResponse(self._integrations.web_crawler)
 
+    @cached_property
+    def slack(self) -> SlackResourceWithStreamingResponse:
+        return SlackResourceWithStreamingResponse(self._integrations.slack)
+
 
 class AsyncIntegrationsResourceWithStreamingResponse:
     def __init__(self, integrations: AsyncIntegrationsResource) -> None:
@@ -227,3 +255,7 @@ class AsyncIntegrationsResourceWithStreamingResponse:
     @cached_property
     def web_crawler(self) -> AsyncWebCrawlerResourceWithStreamingResponse:
         return AsyncWebCrawlerResourceWithStreamingResponse(self._integrations.web_crawler)
+
+    @cached_property
+    def slack(self) -> AsyncSlackResourceWithStreamingResponse:
+        return AsyncSlackResourceWithStreamingResponse(self._integrations.slack)
