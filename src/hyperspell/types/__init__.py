@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-from .query import Query as Query
 from .token import Token as Token
 from .memory import Memory as Memory
+from .shared import QueryResult as QueryResult
 from .memory_status import MemoryStatus as MemoryStatus
 from .auth_me_response import AuthMeResponse as AuthMeResponse
 from .memory_add_params import MemoryAddParams as MemoryAddParams

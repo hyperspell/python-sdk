@@ -17,8 +17,8 @@ from .._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ..types.query import Query
 from .._base_client import make_request_options
+from ..types.shared.query_result import QueryResult
 from ..types.evaluate_score_query_response import EvaluateScoreQueryResponse
 from ..types.evaluate_score_highlight_response import EvaluateScoreHighlightResponse
 
@@ -55,7 +55,7 @@ class EvaluateResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Query:
+    ) -> QueryResult:
         """
         Retrieve the result of a previous query.
 
@@ -75,7 +75,7 @@ class EvaluateResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Query,
+            cast_to=QueryResult,
         )
 
     def score_highlight(
@@ -192,7 +192,7 @@ class AsyncEvaluateResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> Query:
+    ) -> QueryResult:
         """
         Retrieve the result of a previous query.
 
@@ -212,7 +212,7 @@ class AsyncEvaluateResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=Query,
+            cast_to=QueryResult,
         )
 
     async def score_highlight(
