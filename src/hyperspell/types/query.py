@@ -5,10 +5,10 @@ from typing import Dict, List, Optional
 from .memory import Memory
 from .._models import BaseModel
 
-__all__ = ["MemorySearchResponse"]
+__all__ = ["Query"]
 
 
-class MemorySearchResponse(BaseModel):
+class Query(BaseModel):
     documents: List[Memory]
 
     answer: Optional[str] = None

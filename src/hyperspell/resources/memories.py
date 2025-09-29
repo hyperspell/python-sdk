@@ -20,11 +20,11 @@ from .._response import (
     async_to_streamed_response_wrapper,
 )
 from ..pagination import SyncCursorPage, AsyncCursorPage
+from ..types.query import Query
 from .._base_client import AsyncPaginator, make_request_options
 from ..types.memory import Memory
 from ..types.memory_status import MemoryStatus
 from ..types.memory_delete_response import MemoryDeleteResponse
-from ..types.memory_search_response import MemorySearchResponse
 from ..types.memory_status_response import MemoryStatusResponse
 
 __all__ = ["MemoriesResource", "AsyncMemoriesResource"]
@@ -459,7 +459,7 @@ class MemoriesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> MemorySearchResponse:
+    ) -> Query:
         """
         Retrieves documents matching the query.
 
@@ -497,7 +497,7 @@ class MemoriesResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=MemorySearchResponse,
+            cast_to=Query,
         )
 
     def status(
@@ -1005,7 +1005,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> MemorySearchResponse:
+    ) -> Query:
         """
         Retrieves documents matching the query.
 
@@ -1043,7 +1043,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=MemorySearchResponse,
+            cast_to=Query,
         )
 
     async def status(
