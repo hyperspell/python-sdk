@@ -45,13 +45,7 @@ Methods:
 Types:
 
 ```python
-from hyperspell.types import (
-    Memory,
-    MemoryStatus,
-    MemoryDeleteResponse,
-    MemorySearchResponse,
-    MemoryStatusResponse,
-)
+from hyperspell.types import Memory, MemoryStatus, MemoryDeleteResponse, MemoryStatusResponse
 ```
 
 Methods:
@@ -60,9 +54,17 @@ Methods:
 - <code title="delete /memories/delete/{source}/{resource_id}">client.memories.<a href="./src/hyperspell/resources/memories.py">delete</a>(resource_id, \*, source) -> <a href="./src/hyperspell/types/memory_delete_response.py">MemoryDeleteResponse</a></code>
 - <code title="post /memories/add">client.memories.<a href="./src/hyperspell/resources/memories.py">add</a>(\*\*<a href="src/hyperspell/types/memory_add_params.py">params</a>) -> <a href="./src/hyperspell/types/memory_status.py">MemoryStatus</a></code>
 - <code title="get /memories/get/{source}/{resource_id}">client.memories.<a href="./src/hyperspell/resources/memories.py">get</a>(resource_id, \*, source) -> <a href="./src/hyperspell/types/memory.py">Memory</a></code>
-- <code title="post /memories/query">client.memories.<a href="./src/hyperspell/resources/memories.py">search</a>(\*\*<a href="src/hyperspell/types/memory_search_params.py">params</a>) -> <a href="./src/hyperspell/types/memory_search_response.py">MemorySearchResponse</a></code>
+- <code title="post /memories/query">client.memories.<a href="./src/hyperspell/resources/memories.py">search</a>(\*\*<a href="src/hyperspell/types/memory_search_params.py">params</a>) -> <a href="./src/hyperspell/types/query.py">Query</a></code>
 - <code title="get /memories/status">client.memories.<a href="./src/hyperspell/resources/memories.py">status</a>() -> <a href="./src/hyperspell/types/memory_status_response.py">MemoryStatusResponse</a></code>
 - <code title="post /memories/upload">client.memories.<a href="./src/hyperspell/resources/memories.py">upload</a>(\*\*<a href="src/hyperspell/types/memory_upload_params.py">params</a>) -> <a href="./src/hyperspell/types/memory_status.py">MemoryStatus</a></code>
+
+# Evaluate
+
+Types:
+
+```python
+from hyperspell.types import Query
+```
 
 # Vaults
 
