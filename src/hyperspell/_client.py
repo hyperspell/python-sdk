@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from typing import Any, Union, Mapping
+from typing import Any, Mapping
 from typing_extensions import Self, override
 
 import httpx
@@ -11,17 +11,17 @@ import httpx
 from . import _exceptions
 from ._qs import Querystring
 from ._types import (
-    NOT_GIVEN,
     Omit,
     Timeout,
     NotGiven,
     Transport,
     ProxiesTypes,
     RequestOptions,
+    not_given,
 )
 from ._utils import is_given, get_async_library
 from ._version import __version__
-from .resources import auth, vaults, memories
+from .resources import auth, vaults, evaluate, memories
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import APIStatusError, HyperspellError
 from ._base_client import (
@@ -46,6 +46,7 @@ __all__ = [
 class Hyperspell(SyncAPIClient):
     integrations: integrations.IntegrationsResource
     memories: memories.MemoriesResource
+    evaluate: evaluate.EvaluateResource
     vaults: vaults.VaultsResource
     auth: auth.AuthResource
     with_raw_response: HyperspellWithRawResponse
@@ -61,7 +62,7 @@ class Hyperspell(SyncAPIClient):
         api_key: str | None = None,
         user_id: str | None = None,
         base_url: str | httpx.URL | None = None,
-        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        timeout: float | Timeout | None | NotGiven = not_given,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
         default_query: Mapping[str, object] | None = None,
@@ -111,6 +112,7 @@ class Hyperspell(SyncAPIClient):
 
         self.integrations = integrations.IntegrationsResource(self)
         self.memories = memories.MemoriesResource(self)
+        self.evaluate = evaluate.EvaluateResource(self)
         self.vaults = vaults.VaultsResource(self)
         self.auth = auth.AuthResource(self)
         self.with_raw_response = HyperspellWithRawResponse(self)
@@ -153,9 +155,9 @@ class Hyperspell(SyncAPIClient):
         api_key: str | None = None,
         user_id: str | None = None,
         base_url: str | httpx.URL | None = None,
-        timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.Client | None = None,
-        max_retries: int | NotGiven = NOT_GIVEN,
+        max_retries: int | NotGiven = not_given,
         default_headers: Mapping[str, str] | None = None,
         set_default_headers: Mapping[str, str] | None = None,
         default_query: Mapping[str, object] | None = None,
@@ -237,6 +239,7 @@ class Hyperspell(SyncAPIClient):
 class AsyncHyperspell(AsyncAPIClient):
     integrations: integrations.AsyncIntegrationsResource
     memories: memories.AsyncMemoriesResource
+    evaluate: evaluate.AsyncEvaluateResource
     vaults: vaults.AsyncVaultsResource
     auth: auth.AsyncAuthResource
     with_raw_response: AsyncHyperspellWithRawResponse
@@ -252,7 +255,7 @@ class AsyncHyperspell(AsyncAPIClient):
         api_key: str | None = None,
         user_id: str | None = None,
         base_url: str | httpx.URL | None = None,
-        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        timeout: float | Timeout | None | NotGiven = not_given,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
         default_query: Mapping[str, object] | None = None,
@@ -302,6 +305,7 @@ class AsyncHyperspell(AsyncAPIClient):
 
         self.integrations = integrations.AsyncIntegrationsResource(self)
         self.memories = memories.AsyncMemoriesResource(self)
+        self.evaluate = evaluate.AsyncEvaluateResource(self)
         self.vaults = vaults.AsyncVaultsResource(self)
         self.auth = auth.AsyncAuthResource(self)
         self.with_raw_response = AsyncHyperspellWithRawResponse(self)
@@ -344,9 +348,9 @@ class AsyncHyperspell(AsyncAPIClient):
         api_key: str | None = None,
         user_id: str | None = None,
         base_url: str | httpx.URL | None = None,
-        timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.AsyncClient | None = None,
-        max_retries: int | NotGiven = NOT_GIVEN,
+        max_retries: int | NotGiven = not_given,
         default_headers: Mapping[str, str] | None = None,
         set_default_headers: Mapping[str, str] | None = None,
         default_query: Mapping[str, object] | None = None,
@@ -429,6 +433,7 @@ class HyperspellWithRawResponse:
     def __init__(self, client: Hyperspell) -> None:
         self.integrations = integrations.IntegrationsResourceWithRawResponse(client.integrations)
         self.memories = memories.MemoriesResourceWithRawResponse(client.memories)
+        self.evaluate = evaluate.EvaluateResourceWithRawResponse(client.evaluate)
         self.vaults = vaults.VaultsResourceWithRawResponse(client.vaults)
         self.auth = auth.AuthResourceWithRawResponse(client.auth)
 
@@ -437,6 +442,7 @@ class AsyncHyperspellWithRawResponse:
     def __init__(self, client: AsyncHyperspell) -> None:
         self.integrations = integrations.AsyncIntegrationsResourceWithRawResponse(client.integrations)
         self.memories = memories.AsyncMemoriesResourceWithRawResponse(client.memories)
+        self.evaluate = evaluate.AsyncEvaluateResourceWithRawResponse(client.evaluate)
         self.vaults = vaults.AsyncVaultsResourceWithRawResponse(client.vaults)
         self.auth = auth.AsyncAuthResourceWithRawResponse(client.auth)
 
@@ -445,6 +451,7 @@ class HyperspellWithStreamedResponse:
     def __init__(self, client: Hyperspell) -> None:
         self.integrations = integrations.IntegrationsResourceWithStreamingResponse(client.integrations)
         self.memories = memories.MemoriesResourceWithStreamingResponse(client.memories)
+        self.evaluate = evaluate.EvaluateResourceWithStreamingResponse(client.evaluate)
         self.vaults = vaults.VaultsResourceWithStreamingResponse(client.vaults)
         self.auth = auth.AuthResourceWithStreamingResponse(client.auth)
 
@@ -453,6 +460,7 @@ class AsyncHyperspellWithStreamedResponse:
     def __init__(self, client: AsyncHyperspell) -> None:
         self.integrations = integrations.AsyncIntegrationsResourceWithStreamingResponse(client.integrations)
         self.memories = memories.AsyncMemoriesResourceWithStreamingResponse(client.memories)
+        self.evaluate = evaluate.AsyncEvaluateResourceWithStreamingResponse(client.evaluate)
         self.vaults = vaults.AsyncVaultsResourceWithStreamingResponse(client.vaults)
         self.auth = auth.AsyncAuthResourceWithStreamingResponse(client.auth)
 

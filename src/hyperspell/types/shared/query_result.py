@@ -2,13 +2,13 @@
 
 from typing import Dict, List, Optional
 
-from .memory import Memory
-from .._models import BaseModel
+from ..memory import Memory
+from ..._models import BaseModel
 
-__all__ = ["MemorySearchResponse"]
+__all__ = ["QueryResult"]
 
 
-class MemorySearchResponse(BaseModel):
+class QueryResult(BaseModel):
     documents: List[Memory]
 
     answer: Optional[str] = None
@@ -20,3 +20,13 @@ class MemorySearchResponse(BaseModel):
     These are meant to help the developer debug the query, and are not meant to be
     shown to the user.
     """
+
+    query_id: Optional[str] = None
+    """The ID of the query.
+
+    This can be used to retrieve the query later, or add feedback to it. If the
+    query failed, this will be None.
+    """
+
+    score: Optional[float] = None
+    """The average score of the query feedback, if any."""

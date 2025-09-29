@@ -13,3 +13,9 @@ class AuthUserTokenParams(TypedDict, total=False):
 
     expires_in: Optional[str]
     """Token lifetime, e.g., '30m', '2h', '1d'. Defaults to 24 hours if not provided."""
+
+    origin: Optional[str]
+    """Origin of the request, used for CSRF protection.
+
+    If set, the token will only be valid for requests originating from this origin.
+    """

@@ -191,11 +191,11 @@ from hyperspell import Hyperspell
 
 client = Hyperspell()
 
-response = client.memories.search(
+query_result = client.memories.search(
     query="query",
     options={},
 )
-print(response.options)
+print(query_result.options)
 ```
 
 ## File uploads

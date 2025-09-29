@@ -6,6 +6,7 @@ from typing import List, Union, Optional
 from datetime import datetime
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
+from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 
 __all__ = [
@@ -167,7 +168,7 @@ class OptionsGoogleMail(TypedDict, total=False):
     before: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
     """Only query documents created before this date."""
 
-    label_ids: List[str]
+    label_ids: SequenceNotStr[str]
     """List of label IDs to filter messages (e.g., ['INBOX', 'SENT', 'DRAFT']).
 
     Multiple labels are combined with OR logic - messages matching ANY specified
@@ -191,7 +192,7 @@ class OptionsNotion(TypedDict, total=False):
     before: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
     """Only query documents created before this date."""
 
-    notion_page_ids: List[str]
+    notion_page_ids: SequenceNotStr[str]
     """List of Notion page IDs to search.
 
     If not provided, all pages in the workspace will be searched.
@@ -241,10 +242,22 @@ class OptionsSlack(TypedDict, total=False):
     before: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
     """Only query documents created before this date."""
 
-    channels: List[str]
-    """List of Slack channels to search.
+    channels: SequenceNotStr[str]
+    """List of Slack channels to include (by id, name, or #name)."""
 
-    If not provided, all channels in the workspace will be searched.
+    exclude_archived: Optional[bool]
+    """If set, pass 'exclude_archived' to Slack. If None, omit the param."""
+
+    include_dms: bool
+    """Include direct messages (im) when listing conversations."""
+
+    include_group_dms: bool
+    """Include group DMs (mpim) when listing conversations."""
+
+    include_private: bool
+    """Include private channels when constructing Slack 'types'.
+
+    Defaults to False to preserve existing cassette query params.
     """
 
     weight: float

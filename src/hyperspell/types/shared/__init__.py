@@ -1,4 +1,3 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-__title__ = "hyperspell"
-__version__ = "0.25.0"  # x-release-please-version
+from .query_result import QueryResult as QueryResult

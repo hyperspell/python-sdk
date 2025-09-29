@@ -7,7 +7,7 @@ from typing import Optional
 import httpx
 
 from ..types import auth_user_token_params
-from .._types import NOT_GIVEN, Body, Query, Headers, NotGiven
+from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
@@ -53,7 +53,7 @@ class AuthResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AuthDeleteUserResponse:
         """Endpoint to delete user."""
         return self._delete(
@@ -72,7 +72,7 @@ class AuthResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AuthMeResponse:
         """Endpoint to get basic user data."""
         return self._get(
@@ -87,13 +87,14 @@ class AuthResource(SyncAPIResource):
         self,
         *,
         user_id: str,
-        expires_in: Optional[str] | NotGiven = NOT_GIVEN,
+        expires_in: Optional[str] | Omit = omit,
+        origin: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Token:
         """Use this endpoint to create a user token for a specific user.
 
@@ -102,6 +103,9 @@ class AuthResource(SyncAPIResource):
 
         Args:
           expires_in: Token lifetime, e.g., '30m', '2h', '1d'. Defaults to 24 hours if not provided.
+
+          origin: Origin of the request, used for CSRF protection. If set, the token will only be
+              valid for requests originating from this origin.
 
           extra_headers: Send extra headers
 
@@ -117,6 +121,7 @@ class AuthResource(SyncAPIResource):
                 {
                     "user_id": user_id,
                     "expires_in": expires_in,
+                    "origin": origin,
                 },
                 auth_user_token_params.AuthUserTokenParams,
             ),
@@ -155,7 +160,7 @@ class AsyncAuthResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AuthDeleteUserResponse:
         """Endpoint to delete user."""
         return await self._delete(
@@ -174,7 +179,7 @@ class AsyncAuthResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AuthMeResponse:
         """Endpoint to get basic user data."""
         return await self._get(
@@ -189,13 +194,14 @@ class AsyncAuthResource(AsyncAPIResource):
         self,
         *,
         user_id: str,
-        expires_in: Optional[str] | NotGiven = NOT_GIVEN,
+        expires_in: Optional[str] | Omit = omit,
+        origin: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Token:
         """Use this endpoint to create a user token for a specific user.
 
@@ -204,6 +210,9 @@ class AsyncAuthResource(AsyncAPIResource):
 
         Args:
           expires_in: Token lifetime, e.g., '30m', '2h', '1d'. Defaults to 24 hours if not provided.
+
+          origin: Origin of the request, used for CSRF protection. If set, the token will only be
+              valid for requests originating from this origin.
 
           extra_headers: Send extra headers
 
@@ -219,6 +228,7 @@ class AsyncAuthResource(AsyncAPIResource):
                 {
                     "user_id": user_id,
                     "expires_in": expires_in,
+                    "origin": origin,
                 },
                 auth_user_token_params.AuthUserTokenParams,
             ),
