@@ -2,9 +2,11 @@
 
 from __future__ import annotations
 
+from typing import Optional
+
 import httpx
 
-from ..types import evaluate_score_query_params
+from ..types import evaluate_score_query_params, evaluate_score_highlight_params
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -18,6 +20,7 @@ from .._response import (
 from ..types.query import Query
 from .._base_client import make_request_options
 from ..types.evaluate_score_query_response import EvaluateScoreQueryResponse
+from ..types.evaluate_score_highlight_response import EvaluateScoreHighlightResponse
 
 __all__ = ["EvaluateResource", "AsyncEvaluateResource"]
 
@@ -73,6 +76,53 @@ class EvaluateResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=Query,
+        )
+
+    def score_highlight(
+        self,
+        *,
+        highlight_id: str,
+        comment: Optional[str] | Omit = omit,
+        score: float | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> EvaluateScoreHighlightResponse:
+        """
+        Provide feedback on a query result.
+
+        Args:
+          highlight_id: The ID of the chunk to provide feedback on.
+
+          comment: Comment on the chunk
+
+          score: Rating of the chunk from -1 (bad) to +1 (good).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/memories/highlights/feedback",
+            body=maybe_transform(
+                {
+                    "highlight_id": highlight_id,
+                    "comment": comment,
+                    "score": score,
+                },
+                evaluate_score_highlight_params.EvaluateScoreHighlightParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=EvaluateScoreHighlightResponse,
         )
 
     def score_query(
@@ -172,6 +222,53 @@ class AsyncEvaluateResource(AsyncAPIResource):
             cast_to=Query,
         )
 
+    async def score_highlight(
+        self,
+        *,
+        highlight_id: str,
+        comment: Optional[str] | Omit = omit,
+        score: float | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> EvaluateScoreHighlightResponse:
+        """
+        Provide feedback on a query result.
+
+        Args:
+          highlight_id: The ID of the chunk to provide feedback on.
+
+          comment: Comment on the chunk
+
+          score: Rating of the chunk from -1 (bad) to +1 (good).
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/memories/highlights/feedback",
+            body=await async_maybe_transform(
+                {
+                    "highlight_id": highlight_id,
+                    "comment": comment,
+                    "score": score,
+                },
+                evaluate_score_highlight_params.EvaluateScoreHighlightParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=EvaluateScoreHighlightResponse,
+        )
+
     async def score_query(
         self,
         *,
@@ -223,6 +320,9 @@ class EvaluateResourceWithRawResponse:
         self.get_query = to_raw_response_wrapper(
             evaluate.get_query,
         )
+        self.score_highlight = to_raw_response_wrapper(
+            evaluate.score_highlight,
+        )
         self.score_query = to_raw_response_wrapper(
             evaluate.score_query,
         )
@@ -234,6 +334,9 @@ class AsyncEvaluateResourceWithRawResponse:
 
         self.get_query = async_to_raw_response_wrapper(
             evaluate.get_query,
+        )
+        self.score_highlight = async_to_raw_response_wrapper(
+            evaluate.score_highlight,
         )
         self.score_query = async_to_raw_response_wrapper(
             evaluate.score_query,
@@ -247,6 +350,9 @@ class EvaluateResourceWithStreamingResponse:
         self.get_query = to_streamed_response_wrapper(
             evaluate.get_query,
         )
+        self.score_highlight = to_streamed_response_wrapper(
+            evaluate.score_highlight,
+        )
         self.score_query = to_streamed_response_wrapper(
             evaluate.score_query,
         )
@@ -258,6 +364,9 @@ class AsyncEvaluateResourceWithStreamingResponse:
 
         self.get_query = async_to_streamed_response_wrapper(
             evaluate.get_query,
+        )
+        self.score_highlight = async_to_streamed_response_wrapper(
+            evaluate.score_highlight,
         )
         self.score_query = async_to_streamed_response_wrapper(
             evaluate.score_query,
