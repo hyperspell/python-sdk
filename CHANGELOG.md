@@ -1,5 +1,47 @@
 # Changelog
 
+## 0.25.0 (2025-09-29)
+
+Full Changelog: [v0.22.1...v0.25.0](https://github.com/hyperspell/python-sdk/compare/v0.22.1...v0.25.0)
+
+### Features
+
+* **api:** api update ([f7a4696](https://github.com/hyperspell/python-sdk/commit/f7a4696dec30ab24f9d9679aa2108db7eee54eea))
+* **api:** api update ([8cc8137](https://github.com/hyperspell/python-sdk/commit/8cc8137a2d6d7f31ff0b700d5e0785fedeae3548))
+* **api:** api update ([d2f69a5](https://github.com/hyperspell/python-sdk/commit/d2f69a5441b2257818f1dcf7332eac31b4717123))
+* **api:** api update ([508ad7e](https://github.com/hyperspell/python-sdk/commit/508ad7ed7ad9dc387996a63727da6db1f929d22c))
+* **api:** api update ([7c260a4](https://github.com/hyperspell/python-sdk/commit/7c260a44ab0c326018ec50fdda6d87d8e9322ded))
+* **api:** api update ([796beb0](https://github.com/hyperspell/python-sdk/commit/796beb01090fbd33bf769e2917c14e8c9d2b5087))
+* **api:** api update ([1158074](https://github.com/hyperspell/python-sdk/commit/11580746b95550270c9aa0b5a358c26a1dd6888c))
+* **api:** api update ([77b1d4c](https://github.com/hyperspell/python-sdk/commit/77b1d4c16f9f01827d2ef9a886b85c2b2e41829b))
+* **api:** update via SDK Studio ([adcbd19](https://github.com/hyperspell/python-sdk/commit/adcbd194629860d4af7c85720938dd26dd47e026))
+* **api:** update via SDK Studio ([4929e75](https://github.com/hyperspell/python-sdk/commit/4929e750336a8d43d9d8d54dc7d1d44f58d12071))
+* **api:** update via SDK Studio ([743c857](https://github.com/hyperspell/python-sdk/commit/743c85738f9beeb8f493d3bf88c7db53184eab1c))
+* **api:** update via SDK Studio ([b6dd141](https://github.com/hyperspell/python-sdk/commit/b6dd141ce233e2835fa1b3dd9ffd0a582cc39db1))
+* **api:** update via SDK Studio ([4161ff3](https://github.com/hyperspell/python-sdk/commit/4161ff335fa76ce6ed7ca86f9aec446ebe71b227))
+* **api:** update via SDK Studio ([e7a6bd1](https://github.com/hyperspell/python-sdk/commit/e7a6bd18157bfaa267da257f3248da9173bf83f6))
+* improve future compat with pydantic v3 ([ebc041e](https://github.com/hyperspell/python-sdk/commit/ebc041e9c7389c11d5f2049232fa84b1b4188668))
+* **types:** replace List[str] with SequenceNotStr in params ([3682734](https://github.com/hyperspell/python-sdk/commit/3682734864bd6767b30a2a57c85a49df45fcdcfe))
+
+
+### Bug Fixes
+
+* avoid newer type syntax ([7658b38](https://github.com/hyperspell/python-sdk/commit/7658b3838b534fe2a3d65c18da254eef6436e736))
+* **compat:** compat with `pydantic&lt;2.8.0` when using additional fields ([d792335](https://github.com/hyperspell/python-sdk/commit/d79233578d0271e5de5b16043341565a8224bcf6))
+
+
+### Chores
+
+* do not install brew dependencies in ./scripts/bootstrap by default ([d9de5e4](https://github.com/hyperspell/python-sdk/commit/d9de5e46c7d49ed75cf7bb9ddc5451ed00576260))
+* **internal:** add Sequence related utils ([9cbe921](https://github.com/hyperspell/python-sdk/commit/9cbe921b91aacb926a8b5020ed935b9c5ea3773d))
+* **internal:** change ci workflow machines ([c9d8d8d](https://github.com/hyperspell/python-sdk/commit/c9d8d8d6b2d49b53307ed4a99042b01cdc44e089))
+* **internal:** move mypy configurations to `pyproject.toml` file ([116ded2](https://github.com/hyperspell/python-sdk/commit/116ded251332fdfa7366f5b0beb98f1c76aac4d2))
+* **internal:** update pydantic dependency ([a83362d](https://github.com/hyperspell/python-sdk/commit/a83362dc7319cfb8837d99efda10025857b21347))
+* **internal:** update pyright exclude list ([ccfaa5f](https://github.com/hyperspell/python-sdk/commit/ccfaa5f283c0f2cd5966fd1996ae65afa49bef0b))
+* **tests:** simplify `get_platform` test ([7364d6f](https://github.com/hyperspell/python-sdk/commit/7364d6f85d7849ac24377552f31a9d7b4d622565))
+* **types:** change optional parameter type from NotGiven to Omit ([59fe8c6](https://github.com/hyperspell/python-sdk/commit/59fe8c67a542f707d1867b8786baafbc018c7de2))
+* update github action ([c2227bb](https://github.com/hyperspell/python-sdk/commit/c2227bbbca9210c1156bd219d6eea4c9d8a56376))
+
 ## 0.22.1 (2025-08-13)
 
 Full Changelog: [v0.22.0...v0.22.1](https://github.com/hyperspell/python-sdk/compare/v0.22.0...v0.22.1)
