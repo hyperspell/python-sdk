@@ -57,7 +57,7 @@ class EvaluateResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Query:
         """
-        Retrieve an existing query
+        Retrieve the result of a previous query.
 
         Args:
           extra_headers: Send extra headers
@@ -92,7 +92,7 @@ class EvaluateResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> EvaluateScoreHighlightResponse:
         """
-        Provide feedback on a query result.
+        Score an individual highlight.
 
         Args:
           comment: Comment on the chunk
@@ -137,7 +137,7 @@ class EvaluateResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> EvaluateScoreQueryResponse:
         """
-        Provide feedback on a query result.
+        Score the result of a query.
 
         Args:
           score: Rating of the query result from -1 (bad) to +1 (good).
@@ -194,7 +194,7 @@ class AsyncEvaluateResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Query:
         """
-        Retrieve an existing query
+        Retrieve the result of a previous query.
 
         Args:
           extra_headers: Send extra headers
@@ -229,7 +229,7 @@ class AsyncEvaluateResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> EvaluateScoreHighlightResponse:
         """
-        Provide feedback on a query result.
+        Score an individual highlight.
 
         Args:
           comment: Comment on the chunk
@@ -274,7 +274,7 @@ class AsyncEvaluateResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> EvaluateScoreQueryResponse:
         """
-        Provide feedback on a query result.
+        Score the result of a query.
 
         Args:
           score: Rating of the query result from -1 (bad) to +1 (good).
