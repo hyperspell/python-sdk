@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Optional
+
 import httpx
 
 from .slack import (
@@ -12,7 +14,9 @@ from .slack import (
     SlackResourceWithStreamingResponse,
     AsyncSlackResourceWithStreamingResponse,
 )
-from ..._types import Body, Query, Headers, NotGiven, not_given
+from ...types import integration_connect_params
+from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
+from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -38,7 +42,9 @@ from .google_calendar import (
     GoogleCalendarResourceWithStreamingResponse,
     AsyncGoogleCalendarResourceWithStreamingResponse,
 )
+from ...types.integration_list_response import IntegrationListResponse
 from ...types.integration_revoke_response import IntegrationRevokeResponse
+from ...types.integration_connect_response import IntegrationConnectResponse
 
 __all__ = ["IntegrationsResource", "AsyncIntegrationsResource"]
 
@@ -75,9 +81,68 @@ class IntegrationsResource(SyncAPIResource):
         """
         return IntegrationsResourceWithStreamingResponse(self)
 
+    def list(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> IntegrationListResponse:
+        """List all integrations for the user."""
+        return self._get(
+            "/integrations/list",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=IntegrationListResponse,
+        )
+
+    def connect(
+        self,
+        integration_id: str,
+        *,
+        redirect_url: Optional[str] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> IntegrationConnectResponse:
+        """
+        Redirects to the connect URL to link an integration.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not integration_id:
+            raise ValueError(f"Expected a non-empty value for `integration_id` but received {integration_id!r}")
+        return self._get(
+            f"/integrations/{integration_id}/connect",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {"redirect_url": redirect_url}, integration_connect_params.IntegrationConnectParams
+                ),
+            ),
+            cast_to=IntegrationConnectResponse,
+        )
+
     def revoke(
         self,
-        provider: str,
+        integration_id: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -99,10 +164,10 @@ class IntegrationsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not provider:
-            raise ValueError(f"Expected a non-empty value for `provider` but received {provider!r}")
+        if not integration_id:
+            raise ValueError(f"Expected a non-empty value for `integration_id` but received {integration_id!r}")
         return self._get(
-            f"/integrations/{provider}/revoke",
+            f"/integrations/{integration_id}/revoke",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -142,9 +207,68 @@ class AsyncIntegrationsResource(AsyncAPIResource):
         """
         return AsyncIntegrationsResourceWithStreamingResponse(self)
 
+    async def list(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> IntegrationListResponse:
+        """List all integrations for the user."""
+        return await self._get(
+            "/integrations/list",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=IntegrationListResponse,
+        )
+
+    async def connect(
+        self,
+        integration_id: str,
+        *,
+        redirect_url: Optional[str] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> IntegrationConnectResponse:
+        """
+        Redirects to the connect URL to link an integration.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not integration_id:
+            raise ValueError(f"Expected a non-empty value for `integration_id` but received {integration_id!r}")
+        return await self._get(
+            f"/integrations/{integration_id}/connect",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {"redirect_url": redirect_url}, integration_connect_params.IntegrationConnectParams
+                ),
+            ),
+            cast_to=IntegrationConnectResponse,
+        )
+
     async def revoke(
         self,
-        provider: str,
+        integration_id: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -166,10 +290,10 @@ class AsyncIntegrationsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
-        if not provider:
-            raise ValueError(f"Expected a non-empty value for `provider` but received {provider!r}")
+        if not integration_id:
+            raise ValueError(f"Expected a non-empty value for `integration_id` but received {integration_id!r}")
         return await self._get(
-            f"/integrations/{provider}/revoke",
+            f"/integrations/{integration_id}/revoke",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -181,6 +305,12 @@ class IntegrationsResourceWithRawResponse:
     def __init__(self, integrations: IntegrationsResource) -> None:
         self._integrations = integrations
 
+        self.list = to_raw_response_wrapper(
+            integrations.list,
+        )
+        self.connect = to_raw_response_wrapper(
+            integrations.connect,
+        )
         self.revoke = to_raw_response_wrapper(
             integrations.revoke,
         )
@@ -202,6 +332,12 @@ class AsyncIntegrationsResourceWithRawResponse:
     def __init__(self, integrations: AsyncIntegrationsResource) -> None:
         self._integrations = integrations
 
+        self.list = async_to_raw_response_wrapper(
+            integrations.list,
+        )
+        self.connect = async_to_raw_response_wrapper(
+            integrations.connect,
+        )
         self.revoke = async_to_raw_response_wrapper(
             integrations.revoke,
         )
@@ -223,6 +359,12 @@ class IntegrationsResourceWithStreamingResponse:
     def __init__(self, integrations: IntegrationsResource) -> None:
         self._integrations = integrations
 
+        self.list = to_streamed_response_wrapper(
+            integrations.list,
+        )
+        self.connect = to_streamed_response_wrapper(
+            integrations.connect,
+        )
         self.revoke = to_streamed_response_wrapper(
             integrations.revoke,
         )
@@ -244,6 +386,12 @@ class AsyncIntegrationsResourceWithStreamingResponse:
     def __init__(self, integrations: AsyncIntegrationsResource) -> None:
         self._integrations = integrations
 
+        self.list = async_to_streamed_response_wrapper(
+            integrations.list,
+        )
+        self.connect = async_to_streamed_response_wrapper(
+            integrations.connect,
+        )
         self.revoke = async_to_streamed_response_wrapper(
             integrations.revoke,
         )

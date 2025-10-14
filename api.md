@@ -9,12 +9,18 @@ from hyperspell.types import QueryResult
 Types:
 
 ```python
-from hyperspell.types import IntegrationRevokeResponse
+from hyperspell.types import (
+    IntegrationListResponse,
+    IntegrationConnectResponse,
+    IntegrationRevokeResponse,
+)
 ```
 
 Methods:
 
-- <code title="get /integrations/{provider}/revoke">client.integrations.<a href="./src/hyperspell/resources/integrations/integrations.py">revoke</a>(provider) -> <a href="./src/hyperspell/types/integration_revoke_response.py">IntegrationRevokeResponse</a></code>
+- <code title="get /integrations/list">client.integrations.<a href="./src/hyperspell/resources/integrations/integrations.py">list</a>() -> <a href="./src/hyperspell/types/integration_list_response.py">IntegrationListResponse</a></code>
+- <code title="get /integrations/{integration_id}/connect">client.integrations.<a href="./src/hyperspell/resources/integrations/integrations.py">connect</a>(integration_id, \*\*<a href="src/hyperspell/types/integration_connect_params.py">params</a>) -> <a href="./src/hyperspell/types/integration_connect_response.py">IntegrationConnectResponse</a></code>
+- <code title="get /integrations/{integration_id}/revoke">client.integrations.<a href="./src/hyperspell/resources/integrations/integrations.py">revoke</a>(integration_id) -> <a href="./src/hyperspell/types/integration_revoke_response.py">IntegrationRevokeResponse</a></code>
 
 ## GoogleCalendar
 
