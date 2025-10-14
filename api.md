@@ -6,16 +6,6 @@ from hyperspell.types import QueryResult
 
 # Integrations
 
-Types:
-
-```python
-from hyperspell.types import IntegrationRevokeResponse
-```
-
-Methods:
-
-- <code title="get /integrations/{provider}/revoke">client.integrations.<a href="./src/hyperspell/resources/integrations/integrations.py">revoke</a>(provider) -> <a href="./src/hyperspell/types/integration_revoke_response.py">IntegrationRevokeResponse</a></code>
-
 ## GoogleCalendar
 
 Types:
