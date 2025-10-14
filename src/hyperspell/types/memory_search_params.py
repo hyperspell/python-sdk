@@ -8,6 +8,7 @@ from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from .._types import SequenceNotStr
 from .._utils import PropertyInfo
+from .integrations.not_given_param import NotGivenParam
 
 __all__ = [
     "MemorySearchParams",
@@ -279,7 +280,7 @@ class OptionsWebCrawler(TypedDict, total=False):
     max_depth: int
     """Maximum depth to crawl from the starting URL"""
 
-    url: Union[str, object]
+    url: Union[str, NotGivenParam]
     """The URL to crawl"""
 
     weight: float
