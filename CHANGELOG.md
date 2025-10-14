@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.26.0 (2025-10-14)
+
+Full Changelog: [v0.25.0...v0.26.0](https://github.com/hyperspell/python-sdk/compare/v0.25.0...v0.26.0)
+
+### Features
+
+* **api:** api update ([9f27d7f](https://github.com/hyperspell/python-sdk/commit/9f27d7f462d15b54cf1aa62e962da1d34a03e616))
+* **api:** api update ([476c23d](https://github.com/hyperspell/python-sdk/commit/476c23d01aae74bc13013d71e32430264d45bab1))
+* **api:** update via SDK Studio ([634025a](https://github.com/hyperspell/python-sdk/commit/634025ac77ffe7b2691e53800ee0915dae55e486))
+* **api:** update via SDK Studio ([1f502f0](https://github.com/hyperspell/python-sdk/commit/1f502f0278a7c35e76cbdd8b18b0bb3ab8f69287))
+* **api:** update via SDK Studio ([df1dc5d](https://github.com/hyperspell/python-sdk/commit/df1dc5d547313a241604e554cf515d904ad196a6))
+
+
+### Chores
+
+* **internal:** detect missing future annotations with ruff ([210e641](https://github.com/hyperspell/python-sdk/commit/210e641ade71c871f0f80f1c0a0cc043169be302))
+
 ## 0.25.0 (2025-09-29)
 
 Full Changelog: [v0.22.1...v0.25.0](https://github.com/hyperspell/python-sdk/compare/v0.22.1...v0.25.0)
