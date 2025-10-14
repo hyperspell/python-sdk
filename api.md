@@ -39,7 +39,7 @@ Methods:
 Types:
 
 ```python
-from hyperspell.types.integrations import WebCrawlerIndexResponse
+from hyperspell.types.integrations import NotGiven, WebCrawlerIndexResponse
 ```
 
 Methods:
