@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-import httpx
-
 from .slack import (
     SlackResource,
     AsyncSlackResource,
@@ -12,15 +10,8 @@ from .slack import (
     SlackResourceWithStreamingResponse,
     AsyncSlackResourceWithStreamingResponse,
 )
-from ..._types import Body, Query, Headers, NotGiven, not_given
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
-from ..._response import (
-    to_raw_response_wrapper,
-    to_streamed_response_wrapper,
-    async_to_raw_response_wrapper,
-    async_to_streamed_response_wrapper,
-)
 from .web_crawler import (
     WebCrawlerResource,
     AsyncWebCrawlerResource,
@@ -29,7 +20,6 @@ from .web_crawler import (
     WebCrawlerResourceWithStreamingResponse,
     AsyncWebCrawlerResourceWithStreamingResponse,
 )
-from ..._base_client import make_request_options
 from .google_calendar import (
     GoogleCalendarResource,
     AsyncGoogleCalendarResource,
@@ -38,7 +28,6 @@ from .google_calendar import (
     GoogleCalendarResourceWithStreamingResponse,
     AsyncGoogleCalendarResourceWithStreamingResponse,
 )
-from ...types.integration_revoke_response import IntegrationRevokeResponse
 
 __all__ = ["IntegrationsResource", "AsyncIntegrationsResource"]
 
@@ -75,40 +64,6 @@ class IntegrationsResource(SyncAPIResource):
         """
         return IntegrationsResourceWithStreamingResponse(self)
 
-    def revoke(
-        self,
-        provider: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> IntegrationRevokeResponse:
-        """
-        Revokes Hyperspell's access the given provider and deletes all stored
-        credentials and indexed data.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not provider:
-            raise ValueError(f"Expected a non-empty value for `provider` but received {provider!r}")
-        return self._get(
-            f"/integrations/{provider}/revoke",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=IntegrationRevokeResponse,
-        )
-
 
 class AsyncIntegrationsResource(AsyncAPIResource):
     @cached_property
@@ -142,48 +97,10 @@ class AsyncIntegrationsResource(AsyncAPIResource):
         """
         return AsyncIntegrationsResourceWithStreamingResponse(self)
 
-    async def revoke(
-        self,
-        provider: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> IntegrationRevokeResponse:
-        """
-        Revokes Hyperspell's access the given provider and deletes all stored
-        credentials and indexed data.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not provider:
-            raise ValueError(f"Expected a non-empty value for `provider` but received {provider!r}")
-        return await self._get(
-            f"/integrations/{provider}/revoke",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=IntegrationRevokeResponse,
-        )
-
 
 class IntegrationsResourceWithRawResponse:
     def __init__(self, integrations: IntegrationsResource) -> None:
         self._integrations = integrations
-
-        self.revoke = to_raw_response_wrapper(
-            integrations.revoke,
-        )
 
     @cached_property
     def google_calendar(self) -> GoogleCalendarResourceWithRawResponse:
@@ -202,10 +119,6 @@ class AsyncIntegrationsResourceWithRawResponse:
     def __init__(self, integrations: AsyncIntegrationsResource) -> None:
         self._integrations = integrations
 
-        self.revoke = async_to_raw_response_wrapper(
-            integrations.revoke,
-        )
-
     @cached_property
     def google_calendar(self) -> AsyncGoogleCalendarResourceWithRawResponse:
         return AsyncGoogleCalendarResourceWithRawResponse(self._integrations.google_calendar)
@@ -223,10 +136,6 @@ class IntegrationsResourceWithStreamingResponse:
     def __init__(self, integrations: IntegrationsResource) -> None:
         self._integrations = integrations
 
-        self.revoke = to_streamed_response_wrapper(
-            integrations.revoke,
-        )
-
     @cached_property
     def google_calendar(self) -> GoogleCalendarResourceWithStreamingResponse:
         return GoogleCalendarResourceWithStreamingResponse(self._integrations.google_calendar)
@@ -243,10 +152,6 @@ class IntegrationsResourceWithStreamingResponse:
 class AsyncIntegrationsResourceWithStreamingResponse:
     def __init__(self, integrations: AsyncIntegrationsResource) -> None:
         self._integrations = integrations
-
-        self.revoke = async_to_streamed_response_wrapper(
-            integrations.revoke,
-        )
 
     @cached_property
     def google_calendar(self) -> AsyncGoogleCalendarResourceWithStreamingResponse:
