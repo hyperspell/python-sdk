@@ -4,6 +4,19 @@
 from hyperspell.types import QueryResult
 ```
 
+# Connections
+
+Types:
+
+```python
+from hyperspell.types import ConnectionListResponse, ConnectionRevokeResponse
+```
+
+Methods:
+
+- <code title="get /connections/list">client.connections.<a href="./src/hyperspell/resources/connections.py">list</a>() -> <a href="./src/hyperspell/types/connection_list_response.py">ConnectionListResponse</a></code>
+- <code title="delete /connections/{connection_id}/revoke">client.connections.<a href="./src/hyperspell/resources/connections.py">revoke</a>(connection_id) -> <a href="./src/hyperspell/types/connection_revoke_response.py">ConnectionRevokeResponse</a></code>
+
 # Integrations
 
 Types:
