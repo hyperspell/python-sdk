@@ -32,6 +32,14 @@ from .memories import (
     MemoriesResourceWithStreamingResponse,
     AsyncMemoriesResourceWithStreamingResponse,
 )
+from .connections import (
+    ConnectionsResource,
+    AsyncConnectionsResource,
+    ConnectionsResourceWithRawResponse,
+    AsyncConnectionsResourceWithRawResponse,
+    ConnectionsResourceWithStreamingResponse,
+    AsyncConnectionsResourceWithStreamingResponse,
+)
 from .integrations import (
     IntegrationsResource,
     AsyncIntegrationsResource,
@@ -42,6 +50,12 @@ from .integrations import (
 )
 
 __all__ = [
+    "ConnectionsResource",
+    "AsyncConnectionsResource",
+    "ConnectionsResourceWithRawResponse",
+    "AsyncConnectionsResourceWithRawResponse",
+    "ConnectionsResourceWithStreamingResponse",
+    "AsyncConnectionsResourceWithStreamingResponse",
     "IntegrationsResource",
     "AsyncIntegrationsResource",
     "IntegrationsResourceWithRawResponse",

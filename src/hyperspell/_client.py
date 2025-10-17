@@ -21,7 +21,7 @@ from ._types import (
 )
 from ._utils import is_given, get_async_library
 from ._version import __version__
-from .resources import auth, vaults, evaluate, memories
+from .resources import auth, vaults, evaluate, memories, connections
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import APIStatusError, HyperspellError
 from ._base_client import (
@@ -44,6 +44,7 @@ __all__ = [
 
 
 class Hyperspell(SyncAPIClient):
+    connections: connections.ConnectionsResource
     integrations: integrations.IntegrationsResource
     memories: memories.MemoriesResource
     evaluate: evaluate.EvaluateResource
@@ -110,6 +111,7 @@ class Hyperspell(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
+        self.connections = connections.ConnectionsResource(self)
         self.integrations = integrations.IntegrationsResource(self)
         self.memories = memories.MemoriesResource(self)
         self.evaluate = evaluate.EvaluateResource(self)
@@ -237,6 +239,7 @@ class Hyperspell(SyncAPIClient):
 
 
 class AsyncHyperspell(AsyncAPIClient):
+    connections: connections.AsyncConnectionsResource
     integrations: integrations.AsyncIntegrationsResource
     memories: memories.AsyncMemoriesResource
     evaluate: evaluate.AsyncEvaluateResource
@@ -303,6 +306,7 @@ class AsyncHyperspell(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
+        self.connections = connections.AsyncConnectionsResource(self)
         self.integrations = integrations.AsyncIntegrationsResource(self)
         self.memories = memories.AsyncMemoriesResource(self)
         self.evaluate = evaluate.AsyncEvaluateResource(self)
@@ -431,6 +435,7 @@ class AsyncHyperspell(AsyncAPIClient):
 
 class HyperspellWithRawResponse:
     def __init__(self, client: Hyperspell) -> None:
+        self.connections = connections.ConnectionsResourceWithRawResponse(client.connections)
         self.integrations = integrations.IntegrationsResourceWithRawResponse(client.integrations)
         self.memories = memories.MemoriesResourceWithRawResponse(client.memories)
         self.evaluate = evaluate.EvaluateResourceWithRawResponse(client.evaluate)
@@ -440,6 +445,7 @@ class HyperspellWithRawResponse:
 
 class AsyncHyperspellWithRawResponse:
     def __init__(self, client: AsyncHyperspell) -> None:
+        self.connections = connections.AsyncConnectionsResourceWithRawResponse(client.connections)
         self.integrations = integrations.AsyncIntegrationsResourceWithRawResponse(client.integrations)
         self.memories = memories.AsyncMemoriesResourceWithRawResponse(client.memories)
         self.evaluate = evaluate.AsyncEvaluateResourceWithRawResponse(client.evaluate)
@@ -449,6 +455,7 @@ class AsyncHyperspellWithRawResponse:
 
 class HyperspellWithStreamedResponse:
     def __init__(self, client: Hyperspell) -> None:
+        self.connections = connections.ConnectionsResourceWithStreamingResponse(client.connections)
         self.integrations = integrations.IntegrationsResourceWithStreamingResponse(client.integrations)
         self.memories = memories.MemoriesResourceWithStreamingResponse(client.memories)
         self.evaluate = evaluate.EvaluateResourceWithStreamingResponse(client.evaluate)
@@ -458,6 +465,7 @@ class HyperspellWithStreamedResponse:
 
 class AsyncHyperspellWithStreamedResponse:
     def __init__(self, client: AsyncHyperspell) -> None:
+        self.connections = connections.AsyncConnectionsResourceWithStreamingResponse(client.connections)
         self.integrations = integrations.AsyncIntegrationsResourceWithStreamingResponse(client.integrations)
         self.memories = memories.AsyncMemoriesResourceWithStreamingResponse(client.memories)
         self.evaluate = evaluate.AsyncEvaluateResourceWithStreamingResponse(client.evaluate)
