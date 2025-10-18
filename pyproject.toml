@@ -39,7 +39,7 @@ Homepage = "https://github.com/hyperspell/python-sdk"
 Repository = "https://github.com/hyperspell/python-sdk"
 
 [project.optional-dependencies]
-aiohttp = ["aiohttp", "httpx_aiohttp>=0.1.8"]
+aiohttp = ["aiohttp", "httpx_aiohttp>=0.1.9"]
 
 [tool.rye]
 managed = true
