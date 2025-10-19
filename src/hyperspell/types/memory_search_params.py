@@ -279,7 +279,7 @@ class OptionsWebCrawler(TypedDict, total=False):
     max_depth: int
     """Maximum depth to crawl from the starting URL"""
 
-    url: Union[str, object]
+    url: Optional[str]
     """The URL to crawl"""
 
     weight: float
