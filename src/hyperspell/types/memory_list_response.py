@@ -6,12 +6,12 @@ from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
 
-from ..._models import BaseModel
+from .._models import BaseModel
 
-__all__ = ["QueryResult", "Document", "DocumentMetadata", "DocumentMetadataEvent"]
+__all__ = ["MemoryListResponse", "Metadata", "MetadataEvent"]
 
 
-class DocumentMetadataEvent(BaseModel):
+class MetadataEvent(BaseModel):
     message: str
 
     type: Literal["error", "warning", "info", "success"]
@@ -19,10 +19,10 @@ class DocumentMetadataEvent(BaseModel):
     time: Optional[datetime] = None
 
 
-class DocumentMetadata(BaseModel):
+class Metadata(BaseModel):
     created_at: Optional[datetime] = None
 
-    events: Optional[List[DocumentMetadataEvent]] = None
+    events: Optional[List[MetadataEvent]] = None
 
     indexed_at: Optional[datetime] = None
 
@@ -45,7 +45,7 @@ class DocumentMetadata(BaseModel):
         __pydantic_extra__: Dict[str, object]
 
 
-class Document(BaseModel):
+class MemoryListResponse(BaseModel):
     resource_id: str
 
     source: Literal[
@@ -97,33 +97,9 @@ class Document(BaseModel):
         "zoom",
     ]
 
-    metadata: Optional[DocumentMetadata] = None
+    metadata: Optional[Metadata] = None
 
     score: Optional[float] = None
     """The relevance of the resource to the query"""
 
     title: Optional[str] = None
-
-
-class QueryResult(BaseModel):
-    documents: List[Document]
-
-    answer: Optional[str] = None
-    """The answer to the query, if the request was set to answer."""
-
-    errors: Optional[List[Dict[str, str]]] = None
-    """Errors that occurred during the query.
-
-    These are meant to help the developer debug the query, and are not meant to be
-    shown to the user.
-    """
-
-    query_id: Optional[str] = None
-    """The ID of the query.
-
-    This can be used to retrieve the query later, or add feedback to it. If the
-    query failed, this will be None.
-    """
-
-    score: Optional[float] = None
-    """The average score of the query feedback, if any."""
