@@ -12,6 +12,9 @@ class Connection(BaseModel):
     id: str
     """The connection's id"""
 
+    integration_id: str
+    """The connection's integration id"""
+
     label: Optional[str] = None
     """The connection's label"""
 
