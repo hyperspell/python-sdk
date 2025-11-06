@@ -15,6 +15,15 @@ class Integration(BaseModel):
     allow_multiple_connections: bool
     """Whether the integration allows multiple connections"""
 
+    auth_provider: Literal["nango", "hyperspell", "composio", "whitelabel", "unified"]
+    """The integration's auth provider"""
+
+    icon: str
+    """Generate a display name from the provider by capitalizing each word."""
+
+    name: str
+    """Generate a display name from the provider by capitalizing each word."""
+
     provider: Literal[
         "collections",
         "vault",
