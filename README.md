@@ -83,6 +83,7 @@ pip install hyperspell[aiohttp]
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
 
 ```python
+import os
 import asyncio
 from hyperspell import DefaultAioHttpClient
 from hyperspell import AsyncHyperspell
@@ -90,7 +91,7 @@ from hyperspell import AsyncHyperspell
 
 async def main() -> None:
     async with AsyncHyperspell(
-        api_key="My API Key",
+        api_key=os.environ.get("HYPERSPELL_TOKEN"),  # This is the default and can be omitted
         http_client=DefaultAioHttpClient(),
     ) as client:
         memory_status = await client.memories.add(
