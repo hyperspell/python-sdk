@@ -10,6 +10,8 @@ __all__ = ["AuthMeResponse", "App"]
 
 
 class App(BaseModel):
+    """The Hyperspell app's id this user belongs to"""
+
     id: str
     """The Hyperspell app's id this user belongs to"""
 
