@@ -91,6 +91,8 @@ class MemorySearchParams(TypedDict, total=False):
 
 
 class OptionsBox(TypedDict, total=False):
+    """Search options for Box"""
+
     after: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
     """Only query documents created on or after this date."""
 
@@ -107,6 +109,8 @@ class OptionsBox(TypedDict, total=False):
 
 
 class OptionsCollections(TypedDict, total=False):
+    """Search options for vault"""
+
     after: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
     """Only query documents created on or after this date."""
 
@@ -123,6 +127,8 @@ class OptionsCollections(TypedDict, total=False):
 
 
 class OptionsGoogleCalendar(TypedDict, total=False):
+    """Search options for Google Calendar"""
+
     after: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
     """Only query documents created on or after this date."""
 
@@ -146,6 +152,8 @@ class OptionsGoogleCalendar(TypedDict, total=False):
 
 
 class OptionsGoogleDrive(TypedDict, total=False):
+    """Search options for Google Drive"""
+
     after: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
     """Only query documents created on or after this date."""
 
@@ -162,6 +170,8 @@ class OptionsGoogleDrive(TypedDict, total=False):
 
 
 class OptionsGoogleMail(TypedDict, total=False):
+    """Search options for Gmail"""
+
     after: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
     """Only query documents created on or after this date."""
 
@@ -186,6 +196,8 @@ class OptionsGoogleMail(TypedDict, total=False):
 
 
 class OptionsNotion(TypedDict, total=False):
+    """Search options for Notion"""
+
     after: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
     """Only query documents created on or after this date."""
 
@@ -208,6 +220,8 @@ class OptionsNotion(TypedDict, total=False):
 
 
 class OptionsReddit(TypedDict, total=False):
+    """Search options for Reddit"""
+
     after: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
     """Only query documents created on or after this date."""
 
@@ -236,6 +250,8 @@ class OptionsReddit(TypedDict, total=False):
 
 
 class OptionsSlack(TypedDict, total=False):
+    """Search options for Slack"""
+
     after: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
     """Only query documents created on or after this date."""
 
@@ -270,6 +286,8 @@ class OptionsSlack(TypedDict, total=False):
 
 
 class OptionsWebCrawler(TypedDict, total=False):
+    """Search options for Web Crawler"""
+
     after: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
     """Only query documents created on or after this date."""
 
@@ -292,6 +310,8 @@ class OptionsWebCrawler(TypedDict, total=False):
 
 
 class Options(TypedDict, total=False):
+    """Search options for the query."""
+
     after: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
     """Only query documents created on or after this date."""
 
