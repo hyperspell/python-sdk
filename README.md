@@ -3,7 +3,7 @@
 <!-- prettier-ignore -->
 [![PyPI version](https://img.shields.io/pypi/v/hyperspell.svg?label=pypi%20(stable))](https://pypi.org/project/hyperspell/)
 
-The Hyperspell Python library provides convenient access to the Hyperspell REST API from any Python 3.8+
+The Hyperspell Python library provides convenient access to the Hyperspell REST API from any Python 3.9+
 application. The library includes type definitions for all request params and response fields,
 and offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).
 
@@ -29,7 +29,7 @@ import os
 from hyperspell import Hyperspell
 
 client = Hyperspell(
-    api_key=os.environ.get("HYPERSPELL_TOKEN"),  # This is the default and can be omitted
+    api_key=os.environ.get("HYPERSPELL_API_KEY"),  # This is the default and can be omitted
 )
 
 memory_status = client.memories.add(
@@ -40,7 +40,7 @@ print(memory_status.resource_id)
 
 While you can provide an `api_key` keyword argument,
 we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
-to add `HYPERSPELL_TOKEN="My API Key"` to your `.env` file
+to add `HYPERSPELL_API_KEY="My API Key"` to your `.env` file
 so that your API Key is not stored in source control.
 
 ## Async usage
@@ -53,7 +53,7 @@ import asyncio
 from hyperspell import AsyncHyperspell
 
 client = AsyncHyperspell(
-    api_key=os.environ.get("HYPERSPELL_TOKEN"),  # This is the default and can be omitted
+    api_key=os.environ.get("HYPERSPELL_API_KEY"),  # This is the default and can be omitted
 )
 
 
@@ -83,6 +83,7 @@ pip install hyperspell[aiohttp]
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
 
 ```python
+import os
 import asyncio
 from hyperspell import DefaultAioHttpClient
 from hyperspell import AsyncHyperspell
@@ -90,7 +91,7 @@ from hyperspell import AsyncHyperspell
 
 async def main() -> None:
     async with AsyncHyperspell(
-        api_key="My API Key",
+        api_key=os.environ.get("HYPERSPELL_API_KEY"),  # This is the default and can be omitted
         http_client=DefaultAioHttpClient(),
     ) as client:
         memory_status = await client.memories.add(
@@ -476,7 +477,7 @@ print(hyperspell.__version__)
 
 ## Requirements
 
-Python 3.8 or higher.
+Python 3.9 or higher.
 
 ## Contributing
 

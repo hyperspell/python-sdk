@@ -1,28 +1,22 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List
+from typing import List, Optional
 from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["IntegrationListResponse", "Integration"]
+__all__ = ["ConnectionListResponse", "Connection"]
 
 
-class Integration(BaseModel):
+class Connection(BaseModel):
     id: str
-    """The integration's id"""
+    """The connection's id"""
 
-    allow_multiple_connections: bool
-    """Whether the integration allows multiple connections"""
+    integration_id: str
+    """The connection's integration id"""
 
-    auth_provider: Literal["nango", "hyperspell", "composio", "whitelabel", "unified"]
-    """The integration's auth provider"""
-
-    icon: str
-    """Generate a display name from the provider by capitalizing each word."""
-
-    name: str
-    """Generate a display name from the provider by capitalizing each word."""
+    label: Optional[str] = None
+    """The connection's label"""
 
     provider: Literal[
         "collections",
@@ -72,8 +66,8 @@ class Integration(BaseModel):
         "twitter",
         "zoom",
     ]
-    """The integration's provider"""
+    """The connection's provider"""
 
 
-class IntegrationListResponse(BaseModel):
-    integrations: List[Integration]
+class ConnectionListResponse(BaseModel):
+    connections: List[Connection]

@@ -43,7 +43,6 @@ from .google_calendar import (
     AsyncGoogleCalendarResourceWithStreamingResponse,
 )
 from ...types.integration_list_response import IntegrationListResponse
-from ...types.integration_revoke_response import IntegrationRevokeResponse
 from ...types.integration_connect_response import IntegrationConnectResponse
 
 __all__ = ["IntegrationsResource", "AsyncIntegrationsResource"]
@@ -140,40 +139,6 @@ class IntegrationsResource(SyncAPIResource):
             cast_to=IntegrationConnectResponse,
         )
 
-    def revoke(
-        self,
-        integration_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> IntegrationRevokeResponse:
-        """
-        Revokes Hyperspell's access the given provider and deletes all stored
-        credentials and indexed data.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not integration_id:
-            raise ValueError(f"Expected a non-empty value for `integration_id` but received {integration_id!r}")
-        return self._get(
-            f"/integrations/{integration_id}/revoke",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=IntegrationRevokeResponse,
-        )
-
 
 class AsyncIntegrationsResource(AsyncAPIResource):
     @cached_property
@@ -266,40 +231,6 @@ class AsyncIntegrationsResource(AsyncAPIResource):
             cast_to=IntegrationConnectResponse,
         )
 
-    async def revoke(
-        self,
-        integration_id: str,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> IntegrationRevokeResponse:
-        """
-        Revokes Hyperspell's access the given provider and deletes all stored
-        credentials and indexed data.
-
-        Args:
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not integration_id:
-            raise ValueError(f"Expected a non-empty value for `integration_id` but received {integration_id!r}")
-        return await self._get(
-            f"/integrations/{integration_id}/revoke",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=IntegrationRevokeResponse,
-        )
-
 
 class IntegrationsResourceWithRawResponse:
     def __init__(self, integrations: IntegrationsResource) -> None:
@@ -310,9 +241,6 @@ class IntegrationsResourceWithRawResponse:
         )
         self.connect = to_raw_response_wrapper(
             integrations.connect,
-        )
-        self.revoke = to_raw_response_wrapper(
-            integrations.revoke,
         )
 
     @cached_property
@@ -338,9 +266,6 @@ class AsyncIntegrationsResourceWithRawResponse:
         self.connect = async_to_raw_response_wrapper(
             integrations.connect,
         )
-        self.revoke = async_to_raw_response_wrapper(
-            integrations.revoke,
-        )
 
     @cached_property
     def google_calendar(self) -> AsyncGoogleCalendarResourceWithRawResponse:
@@ -365,9 +290,6 @@ class IntegrationsResourceWithStreamingResponse:
         self.connect = to_streamed_response_wrapper(
             integrations.connect,
         )
-        self.revoke = to_streamed_response_wrapper(
-            integrations.revoke,
-        )
 
     @cached_property
     def google_calendar(self) -> GoogleCalendarResourceWithStreamingResponse:
@@ -391,9 +313,6 @@ class AsyncIntegrationsResourceWithStreamingResponse:
         )
         self.connect = async_to_streamed_response_wrapper(
             integrations.connect,
-        )
-        self.revoke = async_to_streamed_response_wrapper(
-            integrations.revoke,
         )
 
     @cached_property

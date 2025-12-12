@@ -115,6 +115,7 @@ class TestMemories:
             text="text",
             collection="collection",
             date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            metadata={"foo": "string"},
             resource_id="resource_id",
             title="title",
         )
@@ -206,27 +207,33 @@ class TestMemories:
                 "box": {
                     "after": parse_datetime("2019-12-27T18:11:19.117Z"),
                     "before": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "filter": {"foo": "bar"},
                     "weight": 0,
                 },
                 "collections": {
                     "after": parse_datetime("2019-12-27T18:11:19.117Z"),
                     "before": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "filter": {"foo": "bar"},
                     "weight": 0,
                 },
+                "filter": {"foo": "bar"},
                 "google_calendar": {
                     "after": parse_datetime("2019-12-27T18:11:19.117Z"),
                     "before": parse_datetime("2019-12-27T18:11:19.117Z"),
                     "calendar_id": "calendar_id",
+                    "filter": {"foo": "bar"},
                     "weight": 0,
                 },
                 "google_drive": {
                     "after": parse_datetime("2019-12-27T18:11:19.117Z"),
                     "before": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "filter": {"foo": "bar"},
                     "weight": 0,
                 },
                 "google_mail": {
                     "after": parse_datetime("2019-12-27T18:11:19.117Z"),
                     "before": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "filter": {"foo": "bar"},
                     "label_ids": ["string"],
                     "weight": 0,
                 },
@@ -234,12 +241,14 @@ class TestMemories:
                 "notion": {
                     "after": parse_datetime("2019-12-27T18:11:19.117Z"),
                     "before": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "filter": {"foo": "bar"},
                     "notion_page_ids": ["string"],
                     "weight": 0,
                 },
                 "reddit": {
                     "after": parse_datetime("2019-12-27T18:11:19.117Z"),
                     "before": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "filter": {"foo": "bar"},
                     "period": "hour",
                     "sort": "relevance",
                     "subreddit": "subreddit",
@@ -250,6 +259,7 @@ class TestMemories:
                     "before": parse_datetime("2019-12-27T18:11:19.117Z"),
                     "channels": ["string"],
                     "exclude_archived": True,
+                    "filter": {"foo": "bar"},
                     "include_dms": True,
                     "include_group_dms": True,
                     "include_private": True,
@@ -258,8 +268,9 @@ class TestMemories:
                 "web_crawler": {
                     "after": parse_datetime("2019-12-27T18:11:19.117Z"),
                     "before": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "filter": {"foo": "bar"},
                     "max_depth": 0,
-                    "url": "string",
+                    "url": "url",
                     "weight": 0,
                 },
             },
@@ -328,6 +339,7 @@ class TestMemories:
         memory = client.memories.upload(
             file=b"raw file contents",
             collection="collection",
+            metadata="metadata",
         )
         assert_matches_type(MemoryStatus, memory, path=["response"])
 
@@ -451,6 +463,7 @@ class TestAsyncMemories:
             text="text",
             collection="collection",
             date=parse_datetime("2019-12-27T18:11:19.117Z"),
+            metadata={"foo": "string"},
             resource_id="resource_id",
             title="title",
         )
@@ -542,27 +555,33 @@ class TestAsyncMemories:
                 "box": {
                     "after": parse_datetime("2019-12-27T18:11:19.117Z"),
                     "before": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "filter": {"foo": "bar"},
                     "weight": 0,
                 },
                 "collections": {
                     "after": parse_datetime("2019-12-27T18:11:19.117Z"),
                     "before": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "filter": {"foo": "bar"},
                     "weight": 0,
                 },
+                "filter": {"foo": "bar"},
                 "google_calendar": {
                     "after": parse_datetime("2019-12-27T18:11:19.117Z"),
                     "before": parse_datetime("2019-12-27T18:11:19.117Z"),
                     "calendar_id": "calendar_id",
+                    "filter": {"foo": "bar"},
                     "weight": 0,
                 },
                 "google_drive": {
                     "after": parse_datetime("2019-12-27T18:11:19.117Z"),
                     "before": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "filter": {"foo": "bar"},
                     "weight": 0,
                 },
                 "google_mail": {
                     "after": parse_datetime("2019-12-27T18:11:19.117Z"),
                     "before": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "filter": {"foo": "bar"},
                     "label_ids": ["string"],
                     "weight": 0,
                 },
@@ -570,12 +589,14 @@ class TestAsyncMemories:
                 "notion": {
                     "after": parse_datetime("2019-12-27T18:11:19.117Z"),
                     "before": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "filter": {"foo": "bar"},
                     "notion_page_ids": ["string"],
                     "weight": 0,
                 },
                 "reddit": {
                     "after": parse_datetime("2019-12-27T18:11:19.117Z"),
                     "before": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "filter": {"foo": "bar"},
                     "period": "hour",
                     "sort": "relevance",
                     "subreddit": "subreddit",
@@ -586,6 +607,7 @@ class TestAsyncMemories:
                     "before": parse_datetime("2019-12-27T18:11:19.117Z"),
                     "channels": ["string"],
                     "exclude_archived": True,
+                    "filter": {"foo": "bar"},
                     "include_dms": True,
                     "include_group_dms": True,
                     "include_private": True,
@@ -594,8 +616,9 @@ class TestAsyncMemories:
                 "web_crawler": {
                     "after": parse_datetime("2019-12-27T18:11:19.117Z"),
                     "before": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    "filter": {"foo": "bar"},
                     "max_depth": 0,
-                    "url": "string",
+                    "url": "url",
                     "weight": 0,
                 },
             },
@@ -664,6 +687,7 @@ class TestAsyncMemories:
         memory = await async_client.memories.upload(
             file=b"raw file contents",
             collection="collection",
+            metadata="metadata",
         )
         assert_matches_type(MemoryStatus, memory, path=["response"])
 

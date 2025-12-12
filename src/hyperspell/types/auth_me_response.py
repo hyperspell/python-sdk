@@ -6,10 +6,12 @@ from typing_extensions import Literal
 
 from .._models import BaseModel
 
-__all__ = ["AuthMeResponse", "App", "Connection"]
+__all__ = ["AuthMeResponse", "App"]
 
 
 class App(BaseModel):
+    """The Hyperspell app's id this user belongs to"""
+
     id: str
     """The Hyperspell app's id this user belongs to"""
 
@@ -21,64 +23,6 @@ class App(BaseModel):
 
     redirect_url: Optional[str] = None
     """The app's redirect URL"""
-
-
-class Connection(BaseModel):
-    id: str
-    """The connection's id"""
-
-    label: Optional[str] = None
-    """The connection's label"""
-
-    provider: Literal[
-        "collections",
-        "vault",
-        "web_crawler",
-        "notion",
-        "slack",
-        "google_calendar",
-        "reddit",
-        "box",
-        "google_drive",
-        "airtable",
-        "algolia",
-        "amplitude",
-        "asana",
-        "ashby",
-        "bamboohr",
-        "basecamp",
-        "bubbles",
-        "calendly",
-        "confluence",
-        "clickup",
-        "datadog",
-        "deel",
-        "discord",
-        "dropbox",
-        "exa",
-        "facebook",
-        "front",
-        "github",
-        "gitlab",
-        "google_docs",
-        "google_mail",
-        "google_sheet",
-        "hubspot",
-        "jira",
-        "linear",
-        "microsoft_teams",
-        "mixpanel",
-        "monday",
-        "outlook",
-        "perplexity",
-        "rippling",
-        "salesforce",
-        "segment",
-        "todoist",
-        "twitter",
-        "zoom",
-    ]
-    """The connection's provider"""
 
 
 class AuthMeResponse(BaseModel):
@@ -139,9 +83,6 @@ class AuthMeResponse(BaseModel):
         ]
     ]
     """All integrations available for the app"""
-
-    connections: List[Connection]
-    """Established connections for the user"""
 
     installed_integrations: List[
         Literal[

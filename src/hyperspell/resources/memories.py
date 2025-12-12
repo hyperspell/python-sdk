@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, Union, Mapping, Optional, cast
+from typing import Dict, List, Union, Mapping, Optional, cast
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -256,6 +256,7 @@ class MemoriesResource(SyncAPIResource):
         text: str,
         collection: Optional[str] | Omit = omit,
         date: Union[str, datetime] | Omit = omit,
+        metadata: Optional[Dict[str, Union[str, float, bool]]] | Omit = omit,
         resource_id: str | Omit = omit,
         title: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -281,6 +282,9 @@ class MemoriesResource(SyncAPIResource):
               the date of the last message). This helps the ranking algorithm and allows you
               to filter by date range.
 
+          metadata: Custom metadata for filtering. Keys must be alphanumeric with underscores, max
+              64 chars. Values must be string, number, or boolean.
+
           resource_id: The resource ID to add the document to. If not provided, a new resource ID will
               be generated. If provided, the document will be updated if it already exists.
 
@@ -301,6 +305,7 @@ class MemoriesResource(SyncAPIResource):
                     "text": text,
                     "collection": collection,
                     "date": date,
+                    "metadata": metadata,
                     "resource_id": resource_id,
                     "title": title,
                 },
@@ -527,6 +532,7 @@ class MemoriesResource(SyncAPIResource):
         *,
         file: FileTypes,
         collection: Optional[str] | Omit = omit,
+        metadata: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -546,6 +552,9 @@ class MemoriesResource(SyncAPIResource):
 
           collection: The collection to add the document to.
 
+          metadata: Custom metadata as JSON string for filtering. Keys must be alphanumeric with
+              underscores, max 64 chars. Values must be string, number, or boolean.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -558,6 +567,7 @@ class MemoriesResource(SyncAPIResource):
             {
                 "file": file,
                 "collection": collection,
+                "metadata": metadata,
             }
         )
         files = extract_files(cast(Mapping[str, object], body), paths=[["file"]])
@@ -802,6 +812,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
         text: str,
         collection: Optional[str] | Omit = omit,
         date: Union[str, datetime] | Omit = omit,
+        metadata: Optional[Dict[str, Union[str, float, bool]]] | Omit = omit,
         resource_id: str | Omit = omit,
         title: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -827,6 +838,9 @@ class AsyncMemoriesResource(AsyncAPIResource):
               the date of the last message). This helps the ranking algorithm and allows you
               to filter by date range.
 
+          metadata: Custom metadata for filtering. Keys must be alphanumeric with underscores, max
+              64 chars. Values must be string, number, or boolean.
+
           resource_id: The resource ID to add the document to. If not provided, a new resource ID will
               be generated. If provided, the document will be updated if it already exists.
 
@@ -847,6 +861,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
                     "text": text,
                     "collection": collection,
                     "date": date,
+                    "metadata": metadata,
                     "resource_id": resource_id,
                     "title": title,
                 },
@@ -1073,6 +1088,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
         *,
         file: FileTypes,
         collection: Optional[str] | Omit = omit,
+        metadata: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1092,6 +1108,9 @@ class AsyncMemoriesResource(AsyncAPIResource):
 
           collection: The collection to add the document to.
 
+          metadata: Custom metadata as JSON string for filtering. Keys must be alphanumeric with
+              underscores, max 64 chars. Values must be string, number, or boolean.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -1104,6 +1123,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
             {
                 "file": file,
                 "collection": collection,
+                "metadata": metadata,
             }
         )
         files = extract_files(cast(Mapping[str, object], body), paths=[["file"]])

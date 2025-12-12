@@ -2,10 +2,10 @@
 
 from .._models import BaseModel
 
-__all__ = ["IntegrationRevokeResponse"]
+__all__ = ["ConnectionRevokeResponse"]
 
 
-class IntegrationRevokeResponse(BaseModel):
+class ConnectionRevokeResponse(BaseModel):
     message: str
 
     success: bool
