@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, Union, Optional
+from typing import Dict, List, Union, Optional
 from datetime import datetime
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
@@ -99,6 +99,12 @@ class OptionsBox(TypedDict, total=False):
     before: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
     """Only query documents created before this date."""
 
+    filter: Optional[Dict[str, object]]
+    """Metadata filters using MongoDB-style operators.
+
+    Example: {'status': 'published', 'priority': {'$gt': 3}}
+    """
+
     weight: float
     """Weight of results from this source.
 
@@ -116,6 +122,12 @@ class OptionsCollections(TypedDict, total=False):
 
     before: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
     """Only query documents created before this date."""
+
+    filter: Optional[Dict[str, object]]
+    """Metadata filters using MongoDB-style operators.
+
+    Example: {'status': 'published', 'priority': {'$gt': 3}}
+    """
 
     weight: float
     """Weight of results from this source.
@@ -142,6 +154,12 @@ class OptionsGoogleCalendar(TypedDict, total=False):
     list of calendars with the `/integrations/google_calendar/list` endpoint.
     """
 
+    filter: Optional[Dict[str, object]]
+    """Metadata filters using MongoDB-style operators.
+
+    Example: {'status': 'published', 'priority': {'$gt': 3}}
+    """
+
     weight: float
     """Weight of results from this source.
 
@@ -160,6 +178,12 @@ class OptionsGoogleDrive(TypedDict, total=False):
     before: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
     """Only query documents created before this date."""
 
+    filter: Optional[Dict[str, object]]
+    """Metadata filters using MongoDB-style operators.
+
+    Example: {'status': 'published', 'priority': {'$gt': 3}}
+    """
+
     weight: float
     """Weight of results from this source.
 
@@ -177,6 +201,12 @@ class OptionsGoogleMail(TypedDict, total=False):
 
     before: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
     """Only query documents created before this date."""
+
+    filter: Optional[Dict[str, object]]
+    """Metadata filters using MongoDB-style operators.
+
+    Example: {'status': 'published', 'priority': {'$gt': 3}}
+    """
 
     label_ids: SequenceNotStr[str]
     """List of label IDs to filter messages (e.g., ['INBOX', 'SENT', 'DRAFT']).
@@ -204,6 +234,12 @@ class OptionsNotion(TypedDict, total=False):
     before: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
     """Only query documents created before this date."""
 
+    filter: Optional[Dict[str, object]]
+    """Metadata filters using MongoDB-style operators.
+
+    Example: {'status': 'published', 'priority': {'$gt': 3}}
+    """
+
     notion_page_ids: SequenceNotStr[str]
     """List of Notion page IDs to search.
 
@@ -227,6 +263,12 @@ class OptionsReddit(TypedDict, total=False):
 
     before: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
     """Only query documents created before this date."""
+
+    filter: Optional[Dict[str, object]]
+    """Metadata filters using MongoDB-style operators.
+
+    Example: {'status': 'published', 'priority': {'$gt': 3}}
+    """
 
     period: Literal["hour", "day", "week", "month", "year", "all"]
     """The time period to search. Defaults to 'month'."""
@@ -264,6 +306,12 @@ class OptionsSlack(TypedDict, total=False):
     exclude_archived: Optional[bool]
     """If set, pass 'exclude_archived' to Slack. If None, omit the param."""
 
+    filter: Optional[Dict[str, object]]
+    """Metadata filters using MongoDB-style operators.
+
+    Example: {'status': 'published', 'priority': {'$gt': 3}}
+    """
+
     include_dms: bool
     """Include direct messages (im) when listing conversations."""
 
@@ -293,6 +341,12 @@ class OptionsWebCrawler(TypedDict, total=False):
 
     before: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
     """Only query documents created before this date."""
+
+    filter: Optional[Dict[str, object]]
+    """Metadata filters using MongoDB-style operators.
+
+    Example: {'status': 'published', 'priority': {'$gt': 3}}
+    """
 
     max_depth: int
     """Maximum depth to crawl from the starting URL"""
@@ -326,6 +380,12 @@ class Options(TypedDict, total=False):
 
     collections: OptionsCollections
     """Search options for vault"""
+
+    filter: Optional[Dict[str, object]]
+    """Metadata filters using MongoDB-style operators.
+
+    Example: {'status': 'published', 'priority': {'$gt': 3}}
+    """
 
     google_calendar: OptionsGoogleCalendar
     """Search options for Google Calendar"""

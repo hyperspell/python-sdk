@@ -16,3 +16,10 @@ class MemoryUploadParams(TypedDict, total=False):
 
     collection: Optional[str]
     """The collection to add the document to."""
+
+    metadata: Optional[str]
+    """Custom metadata as JSON string for filtering.
+
+    Keys must be alphanumeric with underscores, max 64 chars. Values must be string,
+    number, or boolean.
+    """
