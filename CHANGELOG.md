@@ -1,5 +1,42 @@
 # Changelog
 
+## 0.27.0 (2025-12-12)
+
+Full Changelog: [v0.26.0...v0.27.0](https://github.com/hyperspell/python-sdk/compare/v0.26.0...v0.27.0)
+
+### Features
+
+* **api:** api update ([cc4b7a1](https://github.com/hyperspell/python-sdk/commit/cc4b7a13f9aa8f38e2d115fc2292cf6b1f959cd0))
+* **api:** api update ([2e9f356](https://github.com/hyperspell/python-sdk/commit/2e9f356bd097204a9d89b927768e261e79397b36))
+* **api:** api update ([0f29501](https://github.com/hyperspell/python-sdk/commit/0f2950160b0842b7522f9a7ac3100b003f276cc4))
+* **api:** api update ([add1d76](https://github.com/hyperspell/python-sdk/commit/add1d76538a307e7a1c3fc592207d50351c4c5ca))
+* **api:** api update ([1bfef28](https://github.com/hyperspell/python-sdk/commit/1bfef28fdcd09c6b6cccfb0aa21055b2ad220403))
+* **api:** update via SDK Studio ([18945ea](https://github.com/hyperspell/python-sdk/commit/18945ea3354e140c6d150fb0d8e2238a33113c5e))
+* **api:** update via SDK Studio ([b005609](https://github.com/hyperspell/python-sdk/commit/b005609bbfd778bf2bbb8eba1c22fae89f75441a))
+* **api:** update via SDK Studio ([49e68c8](https://github.com/hyperspell/python-sdk/commit/49e68c866483f9be8900eef7fc3e776e43cd74b1))
+
+
+### Bug Fixes
+
+* **client:** close streams without requiring full consumption ([669e4cf](https://github.com/hyperspell/python-sdk/commit/669e4cf750158df6aa381083911c051a6afb8f07))
+* compat with Python 3.14 ([53fdd97](https://github.com/hyperspell/python-sdk/commit/53fdd97e8631bf9093c775de401b0f1fd8965efe))
+* **compat:** update signatures of `model_dump` and `model_dump_json` for Pydantic v1 ([6ed583e](https://github.com/hyperspell/python-sdk/commit/6ed583ec067269fb1c27c8dcce9167795a1abd17))
+* ensure streams are always closed ([c676043](https://github.com/hyperspell/python-sdk/commit/c6760434add9e200c865154a08d0289d556b70a8))
+* **types:** allow pyright to infer TypedDict types within SequenceNotStr ([9c7824f](https://github.com/hyperspell/python-sdk/commit/9c7824f603cd5b1935ee1aac676e3fcf299d51f6))
+
+
+### Chores
+
+* add missing docstrings ([16f09b6](https://github.com/hyperspell/python-sdk/commit/16f09b68057a3be4b878f32980d7d07fefbc7cb9))
+* add Python 3.14 classifier and testing ([75b429e](https://github.com/hyperspell/python-sdk/commit/75b429e1dc942a6595024682d7bf9d7b22cad632))
+* bump `httpx-aiohttp` version to 0.1.9 ([802a6ee](https://github.com/hyperspell/python-sdk/commit/802a6ee6c0b67bddd725727078fc9c3ce2650b69))
+* **deps:** mypy 1.18.1 has a regression, pin to 1.17 ([223b7fc](https://github.com/hyperspell/python-sdk/commit/223b7fcd14499af7a908d7ddb9cbe83e44656737))
+* **docs:** use environment variables for authentication in code snippets ([0e42e5d](https://github.com/hyperspell/python-sdk/commit/0e42e5d97de61b3224eeaac980df5efc35a9336e))
+* **internal/tests:** avoid race condition with implicit client cleanup ([01d946a](https://github.com/hyperspell/python-sdk/commit/01d946a29b5dbfd37f2f7a7c93f6824c5865af1b))
+* **internal:** grammar fix (it's -&gt; its) ([516dd5e](https://github.com/hyperspell/python-sdk/commit/516dd5e4f13fcffa9593e58f7a4c8bf855968ae0))
+* **package:** drop Python 3.8 support ([4d8d0a5](https://github.com/hyperspell/python-sdk/commit/4d8d0a501af22b0d5321e34e1d6c368dec622d34))
+* update lockfile ([9170730](https://github.com/hyperspell/python-sdk/commit/9170730ae0dd8259dcd9b5814b76e6a79247b237))
+
 ## 0.26.0 (2025-10-14)
 
 Full Changelog: [v0.25.0...v0.26.0](https://github.com/hyperspell/python-sdk/compare/v0.25.0...v0.26.0)
