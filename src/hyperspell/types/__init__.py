@@ -3,15 +3,14 @@
 from __future__ import annotations
 
 from .token import Token as Token
+from .memory import Memory as Memory
 from .shared import QueryResult as QueryResult
 from .memory_status import MemoryStatus as MemoryStatus
 from .auth_me_response import AuthMeResponse as AuthMeResponse
 from .memory_add_params import MemoryAddParams as MemoryAddParams
 from .vault_list_params import VaultListParams as VaultListParams
 from .memory_list_params import MemoryListParams as MemoryListParams
-from .memory_get_response import MemoryGetResponse as MemoryGetResponse
 from .vault_list_response import VaultListResponse as VaultListResponse
-from .memory_list_response import MemoryListResponse as MemoryListResponse
 from .memory_search_params import MemorySearchParams as MemorySearchParams
 from .memory_upload_params import MemoryUploadParams as MemoryUploadParams
 from .auth_user_token_params import AuthUserTokenParams as AuthUserTokenParams
