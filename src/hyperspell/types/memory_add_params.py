@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union, Optional
+from typing import Dict, Union, Optional
 from datetime import datetime
 from typing_extensions import Required, Annotated, TypedDict
 
@@ -25,6 +25,13 @@ class MemoryAddParams(TypedDict, total=False):
     was last updated (eg. for a chat transcript, this would be the date of the last
     message). This helps the ranking algorithm and allows you to filter by date
     range.
+    """
+
+    metadata: Optional[Dict[str, Union[str, float, bool]]]
+    """Custom metadata for filtering.
+
+    Keys must be alphanumeric with underscores, max 64 chars. Values must be string,
+    number, or boolean.
     """
 
     resource_id: str
