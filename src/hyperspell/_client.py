@@ -83,13 +83,13 @@ class Hyperspell(SyncAPIClient):
     ) -> None:
         """Construct a new synchronous Hyperspell client instance.
 
-        This automatically infers the `api_key` argument from the `HYPERSPELL_TOKEN` environment variable if it is not provided.
+        This automatically infers the `api_key` argument from the `HYPERSPELL_API_KEY` environment variable if it is not provided.
         """
         if api_key is None:
-            api_key = os.environ.get("HYPERSPELL_TOKEN")
+            api_key = os.environ.get("HYPERSPELL_API_KEY")
         if api_key is None:
             raise HyperspellError(
-                "The api_key client option must be set either by passing api_key to the client or by setting the HYPERSPELL_TOKEN environment variable"
+                "The api_key client option must be set either by passing api_key to the client or by setting the HYPERSPELL_API_KEY environment variable"
             )
         self.api_key = api_key
 
@@ -278,13 +278,13 @@ class AsyncHyperspell(AsyncAPIClient):
     ) -> None:
         """Construct a new async AsyncHyperspell client instance.
 
-        This automatically infers the `api_key` argument from the `HYPERSPELL_TOKEN` environment variable if it is not provided.
+        This automatically infers the `api_key` argument from the `HYPERSPELL_API_KEY` environment variable if it is not provided.
         """
         if api_key is None:
-            api_key = os.environ.get("HYPERSPELL_TOKEN")
+            api_key = os.environ.get("HYPERSPELL_API_KEY")
         if api_key is None:
             raise HyperspellError(
-                "The api_key client option must be set either by passing api_key to the client or by setting the HYPERSPELL_TOKEN environment variable"
+                "The api_key client option must be set either by passing api_key to the client or by setting the HYPERSPELL_API_KEY environment variable"
             )
         self.api_key = api_key
 
