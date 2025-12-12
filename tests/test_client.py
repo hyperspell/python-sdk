@@ -389,7 +389,7 @@ class TestHyperspell:
         assert request.headers.get("X-As-User") == user_id
 
         with pytest.raises(HyperspellError):
-            with update_env(**{"HYPERSPELL_TOKEN": Omit()}):
+            with update_env(**{"HYPERSPELL_API_KEY": Omit()}):
                 client2 = Hyperspell(base_url=base_url, api_key=None, user_id=None, _strict_response_validation=True)
             _ = client2
 
@@ -1278,7 +1278,7 @@ class TestAsyncHyperspell:
         assert request.headers.get("X-As-User") == user_id
 
         with pytest.raises(HyperspellError):
-            with update_env(**{"HYPERSPELL_TOKEN": Omit()}):
+            with update_env(**{"HYPERSPELL_API_KEY": Omit()}):
                 client2 = AsyncHyperspell(
                     base_url=base_url, api_key=None, user_id=None, _strict_response_validation=True
                 )
