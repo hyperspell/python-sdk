@@ -55,6 +55,7 @@ class MemoriesResource(SyncAPIResource):
         *,
         collection: Optional[str] | Omit = omit,
         cursor: Optional[str] | Omit = omit,
+        filter: Optional[str] | Omit = omit,
         size: int | Omit = omit,
         source: Optional[
             Literal[
@@ -122,6 +123,10 @@ class MemoriesResource(SyncAPIResource):
         Args:
           collection: Filter documents by collection.
 
+          filter:
+              Filter documents by metadata using MongoDB-style operators. Example:
+              {"department": "engineering", "priority": {"$gt": 3}}
+
           source: Filter documents by source.
 
           extra_headers: Send extra headers
@@ -144,6 +149,7 @@ class MemoriesResource(SyncAPIResource):
                     {
                         "collection": collection,
                         "cursor": cursor,
+                        "filter": filter,
                         "size": size,
                         "source": source,
                     },
@@ -611,6 +617,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
         *,
         collection: Optional[str] | Omit = omit,
         cursor: Optional[str] | Omit = omit,
+        filter: Optional[str] | Omit = omit,
         size: int | Omit = omit,
         source: Optional[
             Literal[
@@ -678,6 +685,10 @@ class AsyncMemoriesResource(AsyncAPIResource):
         Args:
           collection: Filter documents by collection.
 
+          filter:
+              Filter documents by metadata using MongoDB-style operators. Example:
+              {"department": "engineering", "priority": {"$gt": 3}}
+
           source: Filter documents by source.
 
           extra_headers: Send extra headers
@@ -700,6 +711,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
                     {
                         "collection": collection,
                         "cursor": cursor,
+                        "filter": filter,
                         "size": size,
                         "source": source,
                     },

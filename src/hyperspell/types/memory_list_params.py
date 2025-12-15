@@ -14,6 +14,12 @@ class MemoryListParams(TypedDict, total=False):
 
     cursor: Optional[str]
 
+    filter: Optional[str]
+    """Filter documents by metadata using MongoDB-style operators.
+
+    Example: {"department": "engineering", "priority": {"$gt": 3}}
+    """
+
     size: int
 
     source: Optional[
