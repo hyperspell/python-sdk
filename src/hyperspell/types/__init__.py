@@ -12,6 +12,7 @@ from .vault_list_params import VaultListParams as VaultListParams
 from .memory_list_params import MemoryListParams as MemoryListParams
 from .vault_list_response import VaultListResponse as VaultListResponse
 from .memory_search_params import MemorySearchParams as MemorySearchParams
+from .memory_update_params import MemoryUpdateParams as MemoryUpdateParams
 from .memory_upload_params import MemoryUploadParams as MemoryUploadParams
 from .auth_user_token_params import AuthUserTokenParams as AuthUserTokenParams
 from .memory_delete_response import MemoryDeleteResponse as MemoryDeleteResponse

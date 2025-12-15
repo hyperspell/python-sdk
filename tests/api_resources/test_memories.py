@@ -26,6 +26,60 @@ class TestMemories:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
     @parametrize
+    def test_method_update(self, client: Hyperspell) -> None:
+        memory = client.memories.update(
+            resource_id="resource_id",
+            source="collections",
+        )
+        assert_matches_type(MemoryStatus, memory, path=["response"])
+
+    @parametrize
+    def test_method_update_with_all_params(self, client: Hyperspell) -> None:
+        memory = client.memories.update(
+            resource_id="resource_id",
+            source="collections",
+            collection="string",
+            metadata={"foo": "string"},
+            text="string",
+            title="string",
+        )
+        assert_matches_type(MemoryStatus, memory, path=["response"])
+
+    @parametrize
+    def test_raw_response_update(self, client: Hyperspell) -> None:
+        response = client.memories.with_raw_response.update(
+            resource_id="resource_id",
+            source="collections",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        memory = response.parse()
+        assert_matches_type(MemoryStatus, memory, path=["response"])
+
+    @parametrize
+    def test_streaming_response_update(self, client: Hyperspell) -> None:
+        with client.memories.with_streaming_response.update(
+            resource_id="resource_id",
+            source="collections",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            memory = response.parse()
+            assert_matches_type(MemoryStatus, memory, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_update(self, client: Hyperspell) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `resource_id` but received ''"):
+            client.memories.with_raw_response.update(
+                resource_id="",
+                source="collections",
+            )
+
+    @parametrize
     def test_method_list(self, client: Hyperspell) -> None:
         memory = client.memories.list()
         assert_matches_type(SyncCursorPage[Memory], memory, path=["response"])
@@ -373,6 +427,60 @@ class TestAsyncMemories:
     parametrize = pytest.mark.parametrize(
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
+
+    @parametrize
+    async def test_method_update(self, async_client: AsyncHyperspell) -> None:
+        memory = await async_client.memories.update(
+            resource_id="resource_id",
+            source="collections",
+        )
+        assert_matches_type(MemoryStatus, memory, path=["response"])
+
+    @parametrize
+    async def test_method_update_with_all_params(self, async_client: AsyncHyperspell) -> None:
+        memory = await async_client.memories.update(
+            resource_id="resource_id",
+            source="collections",
+            collection="string",
+            metadata={"foo": "string"},
+            text="string",
+            title="string",
+        )
+        assert_matches_type(MemoryStatus, memory, path=["response"])
+
+    @parametrize
+    async def test_raw_response_update(self, async_client: AsyncHyperspell) -> None:
+        response = await async_client.memories.with_raw_response.update(
+            resource_id="resource_id",
+            source="collections",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        memory = await response.parse()
+        assert_matches_type(MemoryStatus, memory, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_update(self, async_client: AsyncHyperspell) -> None:
+        async with async_client.memories.with_streaming_response.update(
+            resource_id="resource_id",
+            source="collections",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            memory = await response.parse()
+            assert_matches_type(MemoryStatus, memory, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_update(self, async_client: AsyncHyperspell) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `resource_id` but received ''"):
+            await async_client.memories.with_raw_response.update(
+                resource_id="",
+                source="collections",
+            )
 
     @parametrize
     async def test_method_list(self, async_client: AsyncHyperspell) -> None:
