@@ -35,6 +35,7 @@ class TestMemories:
         memory = client.memories.list(
             collection="collection",
             cursor="cursor",
+            filter="filter",
             size=0,
             source="collections",
         )
@@ -383,6 +384,7 @@ class TestAsyncMemories:
         memory = await async_client.memories.list(
             collection="collection",
             cursor="cursor",
+            filter="filter",
             size=0,
             source="collections",
         )
