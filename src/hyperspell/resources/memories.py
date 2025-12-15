@@ -8,7 +8,13 @@ from typing_extensions import Literal
 
 import httpx
 
-from ..types import memory_add_params, memory_list_params, memory_search_params, memory_upload_params
+from ..types import (
+    memory_add_params,
+    memory_list_params,
+    memory_search_params,
+    memory_update_params,
+    memory_upload_params,
+)
 from .._types import Body, Omit, Query, Headers, NotGiven, FileTypes, omit, not_given
 from .._utils import extract_files, maybe_transform, deepcopy_minimal, async_maybe_transform
 from .._compat import cached_property
@@ -49,6 +55,117 @@ class MemoriesResource(SyncAPIResource):
         For more information, see https://www.github.com/hyperspell/python-sdk#with_streaming_response
         """
         return MemoriesResourceWithStreamingResponse(self)
+
+    def update(
+        self,
+        resource_id: str,
+        *,
+        source: Literal[
+            "collections",
+            "vault",
+            "web_crawler",
+            "notion",
+            "slack",
+            "google_calendar",
+            "reddit",
+            "box",
+            "google_drive",
+            "airtable",
+            "algolia",
+            "amplitude",
+            "asana",
+            "ashby",
+            "bamboohr",
+            "basecamp",
+            "bubbles",
+            "calendly",
+            "confluence",
+            "clickup",
+            "datadog",
+            "deel",
+            "discord",
+            "dropbox",
+            "exa",
+            "facebook",
+            "front",
+            "github",
+            "gitlab",
+            "google_docs",
+            "google_mail",
+            "google_sheet",
+            "hubspot",
+            "jira",
+            "linear",
+            "microsoft_teams",
+            "mixpanel",
+            "monday",
+            "outlook",
+            "perplexity",
+            "rippling",
+            "salesforce",
+            "segment",
+            "todoist",
+            "twitter",
+            "zoom",
+        ],
+        collection: Union[str, object, None] | Omit = omit,
+        metadata: Union[Dict[str, Union[str, float, bool]], object, None] | Omit = omit,
+        text: Union[str, object, None] | Omit = omit,
+        title: Union[str, object, None] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> MemoryStatus:
+        """Updates an existing document in the index.
+
+        You can update the text, collection,
+        title, and metadata. The document must already exist or a 404 will be returned.
+        This works for documents from any source (vault, slack, gmail, etc.).
+
+        To remove a collection, set it to null explicitly.
+
+        Args:
+          collection: The collection to move the document to. Set to null to remove the collection.
+
+          metadata: Custom metadata for filtering. Keys must be alphanumeric with underscores, max
+              64 chars. Values must be string, number, or boolean. Will be merged with
+              existing metadata.
+
+          text: Full text of the document. If provided, the document will be re-indexed.
+
+          title: Title of the document.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not source:
+            raise ValueError(f"Expected a non-empty value for `source` but received {source!r}")
+        if not resource_id:
+            raise ValueError(f"Expected a non-empty value for `resource_id` but received {resource_id!r}")
+        return self._post(
+            f"/memories/update/{source}/{resource_id}",
+            body=maybe_transform(
+                {
+                    "collection": collection,
+                    "metadata": metadata,
+                    "text": text,
+                    "title": title,
+                },
+                memory_update_params.MemoryUpdateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=MemoryStatus,
+        )
 
     def list(
         self,
@@ -612,6 +729,117 @@ class AsyncMemoriesResource(AsyncAPIResource):
         """
         return AsyncMemoriesResourceWithStreamingResponse(self)
 
+    async def update(
+        self,
+        resource_id: str,
+        *,
+        source: Literal[
+            "collections",
+            "vault",
+            "web_crawler",
+            "notion",
+            "slack",
+            "google_calendar",
+            "reddit",
+            "box",
+            "google_drive",
+            "airtable",
+            "algolia",
+            "amplitude",
+            "asana",
+            "ashby",
+            "bamboohr",
+            "basecamp",
+            "bubbles",
+            "calendly",
+            "confluence",
+            "clickup",
+            "datadog",
+            "deel",
+            "discord",
+            "dropbox",
+            "exa",
+            "facebook",
+            "front",
+            "github",
+            "gitlab",
+            "google_docs",
+            "google_mail",
+            "google_sheet",
+            "hubspot",
+            "jira",
+            "linear",
+            "microsoft_teams",
+            "mixpanel",
+            "monday",
+            "outlook",
+            "perplexity",
+            "rippling",
+            "salesforce",
+            "segment",
+            "todoist",
+            "twitter",
+            "zoom",
+        ],
+        collection: Union[str, object, None] | Omit = omit,
+        metadata: Union[Dict[str, Union[str, float, bool]], object, None] | Omit = omit,
+        text: Union[str, object, None] | Omit = omit,
+        title: Union[str, object, None] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> MemoryStatus:
+        """Updates an existing document in the index.
+
+        You can update the text, collection,
+        title, and metadata. The document must already exist or a 404 will be returned.
+        This works for documents from any source (vault, slack, gmail, etc.).
+
+        To remove a collection, set it to null explicitly.
+
+        Args:
+          collection: The collection to move the document to. Set to null to remove the collection.
+
+          metadata: Custom metadata for filtering. Keys must be alphanumeric with underscores, max
+              64 chars. Values must be string, number, or boolean. Will be merged with
+              existing metadata.
+
+          text: Full text of the document. If provided, the document will be re-indexed.
+
+          title: Title of the document.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not source:
+            raise ValueError(f"Expected a non-empty value for `source` but received {source!r}")
+        if not resource_id:
+            raise ValueError(f"Expected a non-empty value for `resource_id` but received {resource_id!r}")
+        return await self._post(
+            f"/memories/update/{source}/{resource_id}",
+            body=await async_maybe_transform(
+                {
+                    "collection": collection,
+                    "metadata": metadata,
+                    "text": text,
+                    "title": title,
+                },
+                memory_update_params.MemoryUpdateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=MemoryStatus,
+        )
+
     def list(
         self,
         *,
@@ -1158,6 +1386,9 @@ class MemoriesResourceWithRawResponse:
     def __init__(self, memories: MemoriesResource) -> None:
         self._memories = memories
 
+        self.update = to_raw_response_wrapper(
+            memories.update,
+        )
         self.list = to_raw_response_wrapper(
             memories.list,
         )
@@ -1185,6 +1416,9 @@ class AsyncMemoriesResourceWithRawResponse:
     def __init__(self, memories: AsyncMemoriesResource) -> None:
         self._memories = memories
 
+        self.update = async_to_raw_response_wrapper(
+            memories.update,
+        )
         self.list = async_to_raw_response_wrapper(
             memories.list,
         )
@@ -1212,6 +1446,9 @@ class MemoriesResourceWithStreamingResponse:
     def __init__(self, memories: MemoriesResource) -> None:
         self._memories = memories
 
+        self.update = to_streamed_response_wrapper(
+            memories.update,
+        )
         self.list = to_streamed_response_wrapper(
             memories.list,
         )
@@ -1239,6 +1476,9 @@ class AsyncMemoriesResourceWithStreamingResponse:
     def __init__(self, memories: AsyncMemoriesResource) -> None:
         self._memories = memories
 
+        self.update = async_to_streamed_response_wrapper(
+            memories.update,
+        )
         self.list = async_to_streamed_response_wrapper(
             memories.list,
         )
