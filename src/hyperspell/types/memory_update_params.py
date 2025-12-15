@@ -2,27 +2,14 @@
 
 from __future__ import annotations
 
-from typing import Optional
-from typing_extensions import Literal, TypedDict
+from typing import Dict, Union
+from typing_extensions import Literal, Required, TypedDict
 
-__all__ = ["MemoryListParams"]
+__all__ = ["MemoryUpdateParams"]
 
 
-class MemoryListParams(TypedDict, total=False):
-    collection: Optional[str]
-    """Filter documents by collection."""
-
-    cursor: Optional[str]
-
-    filter: Optional[str]
-    """Filter documents by metadata using MongoDB-style operators.
-
-    Example: {"department": "engineering", "priority": {"$gt": 3}}
-    """
-
-    size: int
-
-    source: Optional[
+class MemoryUpdateParams(TypedDict, total=False):
+    source: Required[
         Literal[
             "collections",
             "vault",
@@ -72,4 +59,19 @@ class MemoryListParams(TypedDict, total=False):
             "zoom",
         ]
     ]
-    """Filter documents by source."""
+
+    collection: Union[str, object, None]
+    """The collection to move the document to. Set to null to remove the collection."""
+
+    metadata: Union[Dict[str, Union[str, float, bool]], object, None]
+    """Custom metadata for filtering.
+
+    Keys must be alphanumeric with underscores, max 64 chars. Values must be string,
+    number, or boolean. Will be merged with existing metadata.
+    """
+
+    text: Union[str, object, None]
+    """Full text of the document. If provided, the document will be re-indexed."""
+
+    title: Union[str, object, None]
+    """Title of the document."""
