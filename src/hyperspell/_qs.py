@@ -75,11 +75,26 @@ class Querystring:
         if isinstance(value, Mapping):
             items: list[tuple[str, str]] = []
             nested_format = opts.nested_format
+            
+            if nested_format not in get_args(NestedFormat):
+                raise ValueError(
+                    f"Unknown nested_format value: {nested_format}, "
+                    f"choose from {', '.join(get_args(NestedFormat))}"
+                )
+                
             for subkey, subvalue in value.items():
+                if nested_format == "dots":
+                    new_key = f"{key}.{subkey}"
+                elif nested_format == "brackets":
+                    new_key = f"{key}[{subkey}]"
+                else:
+                    # This should be unreachable due to the check above
+                    # but kept for type safety and future-proofing
+                    raise ValueError(f"Unhandled nested_format: {nested_format}")
+                    
                 items.extend(
                     self._stringify_item(
-                        # TODO: error if unknown format
-                        f"{key}.{subkey}" if nested_format == "dots" else f"{key}[{subkey}]",
+                        new_key,
                         subvalue,
                         opts,
                     )
