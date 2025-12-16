@@ -31,10 +31,20 @@ class Stream(Generic[_T]):
         cast_to: type[_T],
         response: httpx.Response,
         client: Hyperspell,
+        timeout: float | None = None,
     ) -> None:
+        """Initialize the synchronous stream.
+
+        Args:
+            cast_to: The type to cast the response data to.
+            response: The HTTP response object.
+            client: The Hyperspell client instance.
+            timeout: Optional timeout in seconds for the stream. If None, no timeout is applied.
+        """
         self.response = response
         self._cast_to = cast_to
         self._client = client
+        self._timeout = timeout
         self._decoder = client._make_sse_decoder()
         self._iterator = self.__stream__()
 
@@ -46,7 +56,27 @@ class Stream(Generic[_T]):
             yield item
 
     def _iter_events(self) -> Iterator[ServerSentEvent]:
-        yield from self._decoder.iter_bytes(self.response.iter_bytes())
+        import time
+        
+        start_time = time.monotonic()
+        bytes_iterator = self.response.iter_bytes()
+        
+        if self._timeout is not None:
+            def timeout_iterator() -> Iterator[bytes]:
+                timeout = self._timeout  # Store in local variable for type safety
+                if timeout is None:  # This should never happen due to the outer if
+                    yield from bytes_iterator
+                    return
+                    
+                for chunk in bytes_iterator:
+                    current_time = time.monotonic()
+                    if current_time - start_time > timeout:
+                        raise TimeoutError(f"Stream timed out after {timeout} seconds")
+                    yield chunk
+            
+            bytes_iterator = timeout_iterator()
+        
+        yield from self._decoder.iter_bytes(bytes_iterator)
 
     def __stream__(self) -> Iterator[_T]:
         cast_to = cast(Any, self._cast_to)
@@ -94,10 +124,20 @@ class AsyncStream(Generic[_T]):
         cast_to: type[_T],
         response: httpx.Response,
         client: AsyncHyperspell,
+        timeout: float | None = None,
     ) -> None:
+        """Initialize the asynchronous stream.
+
+        Args:
+            cast_to: The type to cast the response data to.
+            response: The HTTP response object.
+            client: The AsyncHyperspell client instance.
+            timeout: Optional timeout in seconds for the stream. If None, no timeout is applied.
+        """
         self.response = response
         self._cast_to = cast_to
         self._client = client
+        self._timeout = timeout
         self._decoder = client._make_sse_decoder()
         self._iterator = self.__stream__()
 
@@ -109,7 +149,28 @@ class AsyncStream(Generic[_T]):
             yield item
 
     async def _iter_events(self) -> AsyncIterator[ServerSentEvent]:
-        async for sse in self._decoder.aiter_bytes(self.response.aiter_bytes()):
+        import time
+        
+        start_time = time.monotonic()
+        bytes_iterator = self.response.aiter_bytes()
+        
+        if self._timeout is not None:
+            async def timeout_iterator() -> AsyncIterator[bytes]:
+                timeout = self._timeout  # Store in local variable for type safety
+                if timeout is None:  # This should never happen due to the outer if
+                    async for chunk in bytes_iterator:
+                        yield chunk
+                    return
+                    
+                async for chunk in bytes_iterator:
+                    current_time = time.monotonic()
+                    if current_time - start_time > timeout:
+                        raise TimeoutError(f"Stream timed out after {timeout} seconds")
+                    yield chunk
+            
+            bytes_iterator = timeout_iterator()
+        
+        async for sse in self._decoder.aiter_bytes(bytes_iterator):
             yield sse
 
     async def __stream__(self) -> AsyncIterator[_T]:
@@ -134,7 +195,13 @@ class AsyncStream(Generic[_T]):
         exc: BaseException | None,
         exc_tb: TracebackType | None,
     ) -> None:
-        await self.close()
+        # Ensure resources are cleaned up properly
+        try:
+            await self.close()
+        except Exception as close_exc:
+            # If we're already handling an exception, don't suppress it with the close exception
+            if exc is None:
+                raise close_exc from None
 
     async def close(self) -> None:
         """
