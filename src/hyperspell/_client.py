@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from typing import Any, Mapping
+from typing import TYPE_CHECKING, Any, Mapping
 from typing_extensions import Self, override
 
 import httpx
@@ -20,8 +20,8 @@ from ._types import (
     not_given,
 )
 from ._utils import is_given, get_async_library
+from ._compat import cached_property
 from ._version import __version__
-from .resources import auth, vaults, evaluate, memories, connections
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import APIStatusError, HyperspellError
 from ._base_client import (
@@ -29,7 +29,15 @@ from ._base_client import (
     SyncAPIClient,
     AsyncAPIClient,
 )
-from .resources.integrations import integrations
+
+if TYPE_CHECKING:
+    from .resources import auth, vaults, evaluate, memories, connections, integrations
+    from .resources.auth import AuthResource, AsyncAuthResource
+    from .resources.vaults import VaultsResource, AsyncVaultsResource
+    from .resources.evaluate import EvaluateResource, AsyncEvaluateResource
+    from .resources.memories import MemoriesResource, AsyncMemoriesResource
+    from .resources.connections import ConnectionsResource, AsyncConnectionsResource
+    from .resources.integrations.integrations import IntegrationsResource, AsyncIntegrationsResource
 
 __all__ = [
     "Timeout",
@@ -44,15 +52,6 @@ __all__ = [
 
 
 class Hyperspell(SyncAPIClient):
-    connections: connections.ConnectionsResource
-    integrations: integrations.IntegrationsResource
-    memories: memories.MemoriesResource
-    evaluate: evaluate.EvaluateResource
-    vaults: vaults.VaultsResource
-    auth: auth.AuthResource
-    with_raw_response: HyperspellWithRawResponse
-    with_streaming_response: HyperspellWithStreamedResponse
-
     # client options
     api_key: str
     user_id: str | None
@@ -111,14 +110,49 @@ class Hyperspell(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.connections = connections.ConnectionsResource(self)
-        self.integrations = integrations.IntegrationsResource(self)
-        self.memories = memories.MemoriesResource(self)
-        self.evaluate = evaluate.EvaluateResource(self)
-        self.vaults = vaults.VaultsResource(self)
-        self.auth = auth.AuthResource(self)
-        self.with_raw_response = HyperspellWithRawResponse(self)
-        self.with_streaming_response = HyperspellWithStreamedResponse(self)
+    @cached_property
+    def connections(self) -> ConnectionsResource:
+        from .resources.connections import ConnectionsResource
+
+        return ConnectionsResource(self)
+
+    @cached_property
+    def integrations(self) -> IntegrationsResource:
+        from .resources.integrations import IntegrationsResource
+
+        return IntegrationsResource(self)
+
+    @cached_property
+    def memories(self) -> MemoriesResource:
+        from .resources.memories import MemoriesResource
+
+        return MemoriesResource(self)
+
+    @cached_property
+    def evaluate(self) -> EvaluateResource:
+        from .resources.evaluate import EvaluateResource
+
+        return EvaluateResource(self)
+
+    @cached_property
+    def vaults(self) -> VaultsResource:
+        from .resources.vaults import VaultsResource
+
+        return VaultsResource(self)
+
+    @cached_property
+    def auth(self) -> AuthResource:
+        from .resources.auth import AuthResource
+
+        return AuthResource(self)
+
+    @cached_property
+    def with_raw_response(self) -> HyperspellWithRawResponse:
+        return HyperspellWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> HyperspellWithStreamedResponse:
+        return HyperspellWithStreamedResponse(self)
 
     @property
     @override
@@ -239,15 +273,6 @@ class Hyperspell(SyncAPIClient):
 
 
 class AsyncHyperspell(AsyncAPIClient):
-    connections: connections.AsyncConnectionsResource
-    integrations: integrations.AsyncIntegrationsResource
-    memories: memories.AsyncMemoriesResource
-    evaluate: evaluate.AsyncEvaluateResource
-    vaults: vaults.AsyncVaultsResource
-    auth: auth.AsyncAuthResource
-    with_raw_response: AsyncHyperspellWithRawResponse
-    with_streaming_response: AsyncHyperspellWithStreamedResponse
-
     # client options
     api_key: str
     user_id: str | None
@@ -306,14 +331,49 @@ class AsyncHyperspell(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.connections = connections.AsyncConnectionsResource(self)
-        self.integrations = integrations.AsyncIntegrationsResource(self)
-        self.memories = memories.AsyncMemoriesResource(self)
-        self.evaluate = evaluate.AsyncEvaluateResource(self)
-        self.vaults = vaults.AsyncVaultsResource(self)
-        self.auth = auth.AsyncAuthResource(self)
-        self.with_raw_response = AsyncHyperspellWithRawResponse(self)
-        self.with_streaming_response = AsyncHyperspellWithStreamedResponse(self)
+    @cached_property
+    def connections(self) -> AsyncConnectionsResource:
+        from .resources.connections import AsyncConnectionsResource
+
+        return AsyncConnectionsResource(self)
+
+    @cached_property
+    def integrations(self) -> AsyncIntegrationsResource:
+        from .resources.integrations import AsyncIntegrationsResource
+
+        return AsyncIntegrationsResource(self)
+
+    @cached_property
+    def memories(self) -> AsyncMemoriesResource:
+        from .resources.memories import AsyncMemoriesResource
+
+        return AsyncMemoriesResource(self)
+
+    @cached_property
+    def evaluate(self) -> AsyncEvaluateResource:
+        from .resources.evaluate import AsyncEvaluateResource
+
+        return AsyncEvaluateResource(self)
+
+    @cached_property
+    def vaults(self) -> AsyncVaultsResource:
+        from .resources.vaults import AsyncVaultsResource
+
+        return AsyncVaultsResource(self)
+
+    @cached_property
+    def auth(self) -> AsyncAuthResource:
+        from .resources.auth import AsyncAuthResource
+
+        return AsyncAuthResource(self)
+
+    @cached_property
+    def with_raw_response(self) -> AsyncHyperspellWithRawResponse:
+        return AsyncHyperspellWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncHyperspellWithStreamedResponse:
+        return AsyncHyperspellWithStreamedResponse(self)
 
     @property
     @override
@@ -434,43 +494,175 @@ class AsyncHyperspell(AsyncAPIClient):
 
 
 class HyperspellWithRawResponse:
+    _client: Hyperspell
+
     def __init__(self, client: Hyperspell) -> None:
-        self.connections = connections.ConnectionsResourceWithRawResponse(client.connections)
-        self.integrations = integrations.IntegrationsResourceWithRawResponse(client.integrations)
-        self.memories = memories.MemoriesResourceWithRawResponse(client.memories)
-        self.evaluate = evaluate.EvaluateResourceWithRawResponse(client.evaluate)
-        self.vaults = vaults.VaultsResourceWithRawResponse(client.vaults)
-        self.auth = auth.AuthResourceWithRawResponse(client.auth)
+        self._client = client
+
+    @cached_property
+    def connections(self) -> connections.ConnectionsResourceWithRawResponse:
+        from .resources.connections import ConnectionsResourceWithRawResponse
+
+        return ConnectionsResourceWithRawResponse(self._client.connections)
+
+    @cached_property
+    def integrations(self) -> integrations.IntegrationsResourceWithRawResponse:
+        from .resources.integrations import IntegrationsResourceWithRawResponse
+
+        return IntegrationsResourceWithRawResponse(self._client.integrations)
+
+    @cached_property
+    def memories(self) -> memories.MemoriesResourceWithRawResponse:
+        from .resources.memories import MemoriesResourceWithRawResponse
+
+        return MemoriesResourceWithRawResponse(self._client.memories)
+
+    @cached_property
+    def evaluate(self) -> evaluate.EvaluateResourceWithRawResponse:
+        from .resources.evaluate import EvaluateResourceWithRawResponse
+
+        return EvaluateResourceWithRawResponse(self._client.evaluate)
+
+    @cached_property
+    def vaults(self) -> vaults.VaultsResourceWithRawResponse:
+        from .resources.vaults import VaultsResourceWithRawResponse
+
+        return VaultsResourceWithRawResponse(self._client.vaults)
+
+    @cached_property
+    def auth(self) -> auth.AuthResourceWithRawResponse:
+        from .resources.auth import AuthResourceWithRawResponse
+
+        return AuthResourceWithRawResponse(self._client.auth)
 
 
 class AsyncHyperspellWithRawResponse:
+    _client: AsyncHyperspell
+
     def __init__(self, client: AsyncHyperspell) -> None:
-        self.connections = connections.AsyncConnectionsResourceWithRawResponse(client.connections)
-        self.integrations = integrations.AsyncIntegrationsResourceWithRawResponse(client.integrations)
-        self.memories = memories.AsyncMemoriesResourceWithRawResponse(client.memories)
-        self.evaluate = evaluate.AsyncEvaluateResourceWithRawResponse(client.evaluate)
-        self.vaults = vaults.AsyncVaultsResourceWithRawResponse(client.vaults)
-        self.auth = auth.AsyncAuthResourceWithRawResponse(client.auth)
+        self._client = client
+
+    @cached_property
+    def connections(self) -> connections.AsyncConnectionsResourceWithRawResponse:
+        from .resources.connections import AsyncConnectionsResourceWithRawResponse
+
+        return AsyncConnectionsResourceWithRawResponse(self._client.connections)
+
+    @cached_property
+    def integrations(self) -> integrations.AsyncIntegrationsResourceWithRawResponse:
+        from .resources.integrations import AsyncIntegrationsResourceWithRawResponse
+
+        return AsyncIntegrationsResourceWithRawResponse(self._client.integrations)
+
+    @cached_property
+    def memories(self) -> memories.AsyncMemoriesResourceWithRawResponse:
+        from .resources.memories import AsyncMemoriesResourceWithRawResponse
+
+        return AsyncMemoriesResourceWithRawResponse(self._client.memories)
+
+    @cached_property
+    def evaluate(self) -> evaluate.AsyncEvaluateResourceWithRawResponse:
+        from .resources.evaluate import AsyncEvaluateResourceWithRawResponse
+
+        return AsyncEvaluateResourceWithRawResponse(self._client.evaluate)
+
+    @cached_property
+    def vaults(self) -> vaults.AsyncVaultsResourceWithRawResponse:
+        from .resources.vaults import AsyncVaultsResourceWithRawResponse
+
+        return AsyncVaultsResourceWithRawResponse(self._client.vaults)
+
+    @cached_property
+    def auth(self) -> auth.AsyncAuthResourceWithRawResponse:
+        from .resources.auth import AsyncAuthResourceWithRawResponse
+
+        return AsyncAuthResourceWithRawResponse(self._client.auth)
 
 
 class HyperspellWithStreamedResponse:
+    _client: Hyperspell
+
     def __init__(self, client: Hyperspell) -> None:
-        self.connections = connections.ConnectionsResourceWithStreamingResponse(client.connections)
-        self.integrations = integrations.IntegrationsResourceWithStreamingResponse(client.integrations)
-        self.memories = memories.MemoriesResourceWithStreamingResponse(client.memories)
-        self.evaluate = evaluate.EvaluateResourceWithStreamingResponse(client.evaluate)
-        self.vaults = vaults.VaultsResourceWithStreamingResponse(client.vaults)
-        self.auth = auth.AuthResourceWithStreamingResponse(client.auth)
+        self._client = client
+
+    @cached_property
+    def connections(self) -> connections.ConnectionsResourceWithStreamingResponse:
+        from .resources.connections import ConnectionsResourceWithStreamingResponse
+
+        return ConnectionsResourceWithStreamingResponse(self._client.connections)
+
+    @cached_property
+    def integrations(self) -> integrations.IntegrationsResourceWithStreamingResponse:
+        from .resources.integrations import IntegrationsResourceWithStreamingResponse
+
+        return IntegrationsResourceWithStreamingResponse(self._client.integrations)
+
+    @cached_property
+    def memories(self) -> memories.MemoriesResourceWithStreamingResponse:
+        from .resources.memories import MemoriesResourceWithStreamingResponse
+
+        return MemoriesResourceWithStreamingResponse(self._client.memories)
+
+    @cached_property
+    def evaluate(self) -> evaluate.EvaluateResourceWithStreamingResponse:
+        from .resources.evaluate import EvaluateResourceWithStreamingResponse
+
+        return EvaluateResourceWithStreamingResponse(self._client.evaluate)
+
+    @cached_property
+    def vaults(self) -> vaults.VaultsResourceWithStreamingResponse:
+        from .resources.vaults import VaultsResourceWithStreamingResponse
+
+        return VaultsResourceWithStreamingResponse(self._client.vaults)
+
+    @cached_property
+    def auth(self) -> auth.AuthResourceWithStreamingResponse:
+        from .resources.auth import AuthResourceWithStreamingResponse
+
+        return AuthResourceWithStreamingResponse(self._client.auth)
 
 
 class AsyncHyperspellWithStreamedResponse:
+    _client: AsyncHyperspell
+
     def __init__(self, client: AsyncHyperspell) -> None:
-        self.connections = connections.AsyncConnectionsResourceWithStreamingResponse(client.connections)
-        self.integrations = integrations.AsyncIntegrationsResourceWithStreamingResponse(client.integrations)
-        self.memories = memories.AsyncMemoriesResourceWithStreamingResponse(client.memories)
-        self.evaluate = evaluate.AsyncEvaluateResourceWithStreamingResponse(client.evaluate)
-        self.vaults = vaults.AsyncVaultsResourceWithStreamingResponse(client.vaults)
-        self.auth = auth.AsyncAuthResourceWithStreamingResponse(client.auth)
+        self._client = client
+
+    @cached_property
+    def connections(self) -> connections.AsyncConnectionsResourceWithStreamingResponse:
+        from .resources.connections import AsyncConnectionsResourceWithStreamingResponse
+
+        return AsyncConnectionsResourceWithStreamingResponse(self._client.connections)
+
+    @cached_property
+    def integrations(self) -> integrations.AsyncIntegrationsResourceWithStreamingResponse:
+        from .resources.integrations import AsyncIntegrationsResourceWithStreamingResponse
+
+        return AsyncIntegrationsResourceWithStreamingResponse(self._client.integrations)
+
+    @cached_property
+    def memories(self) -> memories.AsyncMemoriesResourceWithStreamingResponse:
+        from .resources.memories import AsyncMemoriesResourceWithStreamingResponse
+
+        return AsyncMemoriesResourceWithStreamingResponse(self._client.memories)
+
+    @cached_property
+    def evaluate(self) -> evaluate.AsyncEvaluateResourceWithStreamingResponse:
+        from .resources.evaluate import AsyncEvaluateResourceWithStreamingResponse
+
+        return AsyncEvaluateResourceWithStreamingResponse(self._client.evaluate)
+
+    @cached_property
+    def vaults(self) -> vaults.AsyncVaultsResourceWithStreamingResponse:
+        from .resources.vaults import AsyncVaultsResourceWithStreamingResponse
+
+        return AsyncVaultsResourceWithStreamingResponse(self._client.vaults)
+
+    @cached_property
+    def auth(self) -> auth.AsyncAuthResourceWithStreamingResponse:
+        from .resources.auth import AsyncAuthResourceWithStreamingResponse
+
+        return AsyncAuthResourceWithStreamingResponse(self._client.auth)
 
 
 Client = Hyperspell
