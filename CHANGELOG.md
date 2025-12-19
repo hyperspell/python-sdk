@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.28.1 (2025-12-19)
+
+Full Changelog: [v0.28.0...v0.28.1](https://github.com/hyperspell/python-sdk/compare/v0.28.0...v0.28.1)
+
+### Bug Fixes
+
+* use async_to_httpx_files in patch method ([4116107](https://github.com/hyperspell/python-sdk/commit/4116107e99dbe09a060f53ebfedcf1ff58715674))
+
+
+### Chores
+
+* **internal:** add `--fix` argument to lint script ([9d02a46](https://github.com/hyperspell/python-sdk/commit/9d02a464264ed187e3072c7b9337c14101b21945))
+* **internal:** add missing files argument to base client ([22826f9](https://github.com/hyperspell/python-sdk/commit/22826f97b3edf8910eda4be67aa1c2e5dfdf200b))
+* speedup initial import ([b39343e](https://github.com/hyperspell/python-sdk/commit/b39343e600358251c604ee2d0232b3af538172f5))
+
 ## 0.28.0 (2025-12-15)
 
 Full Changelog: [v0.27.0...v0.28.0](https://github.com/hyperspell/python-sdk/compare/v0.27.0...v0.28.0)
