@@ -1,5 +1,31 @@
 # Changelog
 
+## 0.29.0 (2026-01-09)
+
+Full Changelog: [v0.28.0...v0.29.0](https://github.com/hyperspell/python-sdk/compare/v0.28.0...v0.29.0)
+
+### Features
+
+* **api:** api update ([8553859](https://github.com/hyperspell/python-sdk/commit/855385906fced24870ed2e7b24cffe0ad5856bbf))
+
+
+### Bug Fixes
+
+* use async_to_httpx_files in patch method ([4116107](https://github.com/hyperspell/python-sdk/commit/4116107e99dbe09a060f53ebfedcf1ff58715674))
+
+
+### Chores
+
+* **internal:** add `--fix` argument to lint script ([9d02a46](https://github.com/hyperspell/python-sdk/commit/9d02a464264ed187e3072c7b9337c14101b21945))
+* **internal:** add missing files argument to base client ([22826f9](https://github.com/hyperspell/python-sdk/commit/22826f97b3edf8910eda4be67aa1c2e5dfdf200b))
+* **internal:** codegen related update ([ddb8f8f](https://github.com/hyperspell/python-sdk/commit/ddb8f8f25eb0f015edcb2cbb833316555a68adbf))
+* speedup initial import ([b39343e](https://github.com/hyperspell/python-sdk/commit/b39343e600358251c604ee2d0232b3af538172f5))
+
+
+### Documentation
+
+* prominently feature MCP server setup in root SDK readmes ([115424d](https://github.com/hyperspell/python-sdk/commit/115424d9ff7344bad70fd0a92657ae6f5fbfc647))
+
 ## 0.28.0 (2025-12-15)
 
 Full Changelog: [v0.27.0...v0.28.0](https://github.com/hyperspell/python-sdk/compare/v0.27.0...v0.28.0)
