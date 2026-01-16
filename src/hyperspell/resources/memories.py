@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, List, Union, Mapping, Optional, cast
+from typing import Dict, List, Union, Mapping, Iterable, Optional, cast
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -14,6 +14,7 @@ from ..types import (
     memory_search_params,
     memory_update_params,
     memory_upload_params,
+    memory_add_bulk_params,
 )
 from .._types import Body, Omit, Query, Headers, NotGiven, FileTypes, omit, not_given
 from .._utils import extract_files, maybe_transform, deepcopy_minimal, async_maybe_transform
@@ -32,6 +33,7 @@ from ..types.memory_status import MemoryStatus
 from ..types.shared.query_result import QueryResult
 from ..types.memory_delete_response import MemoryDeleteResponse
 from ..types.memory_status_response import MemoryStatusResponse
+from ..types.memory_add_bulk_response import MemoryAddBulkResponse
 
 __all__ = ["MemoriesResource", "AsyncMemoriesResource"]
 
@@ -330,6 +332,47 @@ class MemoriesResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=MemoryStatus,
+        )
+
+    def add_bulk(
+        self,
+        *,
+        items: Iterable[memory_add_bulk_params.Item],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> MemoryAddBulkResponse:
+        """
+        Adds multiple documents to the index in a single request.
+
+        All items are validated before any database operations occur. If any item fails
+        validation, the entire batch is rejected with a 422 error detailing which items
+        failed and why.
+
+        Maximum 100 items per request. Each item follows the same schema as the
+        single-item /memories/add endpoint.
+
+        Args:
+          items: List of memories to ingest. Maximum 100 items.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/memories/add/bulk",
+            body=maybe_transform({"items": items}, memory_add_bulk_params.MemoryAddBulkParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=MemoryAddBulkResponse,
         )
 
     def get(
@@ -825,6 +868,47 @@ class AsyncMemoriesResource(AsyncAPIResource):
             cast_to=MemoryStatus,
         )
 
+    async def add_bulk(
+        self,
+        *,
+        items: Iterable[memory_add_bulk_params.Item],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> MemoryAddBulkResponse:
+        """
+        Adds multiple documents to the index in a single request.
+
+        All items are validated before any database operations occur. If any item fails
+        validation, the entire batch is rejected with a 422 error detailing which items
+        failed and why.
+
+        Maximum 100 items per request. Each item follows the same schema as the
+        single-item /memories/add endpoint.
+
+        Args:
+          items: List of memories to ingest. Maximum 100 items.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/memories/add/bulk",
+            body=await async_maybe_transform({"items": items}, memory_add_bulk_params.MemoryAddBulkParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=MemoryAddBulkResponse,
+        )
+
     async def get(
         self,
         resource_id: str,
@@ -1038,6 +1122,9 @@ class MemoriesResourceWithRawResponse:
         self.add = to_raw_response_wrapper(
             memories.add,
         )
+        self.add_bulk = to_raw_response_wrapper(
+            memories.add_bulk,
+        )
         self.get = to_raw_response_wrapper(
             memories.get,
         )
@@ -1067,6 +1154,9 @@ class AsyncMemoriesResourceWithRawResponse:
         )
         self.add = async_to_raw_response_wrapper(
             memories.add,
+        )
+        self.add_bulk = async_to_raw_response_wrapper(
+            memories.add_bulk,
         )
         self.get = async_to_raw_response_wrapper(
             memories.get,
@@ -1098,6 +1188,9 @@ class MemoriesResourceWithStreamingResponse:
         self.add = to_streamed_response_wrapper(
             memories.add,
         )
+        self.add_bulk = to_streamed_response_wrapper(
+            memories.add_bulk,
+        )
         self.get = to_streamed_response_wrapper(
             memories.get,
         )
@@ -1127,6 +1220,9 @@ class AsyncMemoriesResourceWithStreamingResponse:
         )
         self.add = async_to_streamed_response_wrapper(
             memories.add,
+        )
+        self.add_bulk = async_to_streamed_response_wrapper(
+            memories.add_bulk,
         )
         self.get = async_to_streamed_response_wrapper(
             memories.get,
