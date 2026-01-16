@@ -14,6 +14,7 @@ from hyperspell.types import (
     MemoryStatus,
     MemoryDeleteResponse,
     MemoryStatusResponse,
+    MemoryAddBulkResponse,
 )
 from hyperspell._utils import parse_datetime
 from hyperspell.pagination import SyncCursorPage, AsyncCursorPage
@@ -197,6 +198,37 @@ class TestMemories:
 
             memory = response.parse()
             assert_matches_type(MemoryStatus, memory, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_method_add_bulk(self, client: Hyperspell) -> None:
+        memory = client.memories.add_bulk(
+            items=[{"text": "..."}],
+        )
+        assert_matches_type(MemoryAddBulkResponse, memory, path=["response"])
+
+    @parametrize
+    def test_raw_response_add_bulk(self, client: Hyperspell) -> None:
+        response = client.memories.with_raw_response.add_bulk(
+            items=[{"text": "..."}],
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        memory = response.parse()
+        assert_matches_type(MemoryAddBulkResponse, memory, path=["response"])
+
+    @parametrize
+    def test_streaming_response_add_bulk(self, client: Hyperspell) -> None:
+        with client.memories.with_streaming_response.add_bulk(
+            items=[{"text": "..."}],
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            memory = response.parse()
+            assert_matches_type(MemoryAddBulkResponse, memory, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -600,6 +632,37 @@ class TestAsyncMemories:
 
             memory = await response.parse()
             assert_matches_type(MemoryStatus, memory, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_method_add_bulk(self, async_client: AsyncHyperspell) -> None:
+        memory = await async_client.memories.add_bulk(
+            items=[{"text": "..."}],
+        )
+        assert_matches_type(MemoryAddBulkResponse, memory, path=["response"])
+
+    @parametrize
+    async def test_raw_response_add_bulk(self, async_client: AsyncHyperspell) -> None:
+        response = await async_client.memories.with_raw_response.add_bulk(
+            items=[{"text": "..."}],
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        memory = await response.parse()
+        assert_matches_type(MemoryAddBulkResponse, memory, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_add_bulk(self, async_client: AsyncHyperspell) -> None:
+        async with async_client.memories.with_streaming_response.add_bulk(
+            items=[{"text": "..."}],
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            memory = await response.parse()
+            assert_matches_type(MemoryAddBulkResponse, memory, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

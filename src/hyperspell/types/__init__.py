@@ -15,9 +15,11 @@ from .memory_search_params import MemorySearchParams as MemorySearchParams
 from .memory_update_params import MemoryUpdateParams as MemoryUpdateParams
 from .memory_upload_params import MemoryUploadParams as MemoryUploadParams
 from .auth_user_token_params import AuthUserTokenParams as AuthUserTokenParams
+from .memory_add_bulk_params import MemoryAddBulkParams as MemoryAddBulkParams
 from .memory_delete_response import MemoryDeleteResponse as MemoryDeleteResponse
 from .memory_status_response import MemoryStatusResponse as MemoryStatusResponse
 from .connection_list_response import ConnectionListResponse as ConnectionListResponse
+from .memory_add_bulk_response import MemoryAddBulkResponse as MemoryAddBulkResponse
 from .auth_delete_user_response import AuthDeleteUserResponse as AuthDeleteUserResponse
 from .integration_list_response import IntegrationListResponse as IntegrationListResponse
 from .connection_revoke_response import ConnectionRevokeResponse as ConnectionRevokeResponse
