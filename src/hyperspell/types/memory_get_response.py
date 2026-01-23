@@ -8,7 +8,7 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = ["Memory", "Metadata", "MetadataEvent"]
+__all__ = ["MemoryGetResponse", "Metadata", "MetadataEvent"]
 
 
 class MetadataEvent(BaseModel):
@@ -45,7 +45,7 @@ class Metadata(BaseModel):
         __pydantic_extra__: Dict[str, object]
 
 
-class Memory(BaseModel):
+class MemoryGetResponse(BaseModel):
     resource_id: str
 
     source: Literal[
