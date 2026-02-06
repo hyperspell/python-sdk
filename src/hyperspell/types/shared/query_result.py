@@ -56,6 +56,7 @@ class Document(BaseModel):
         "google_calendar",
         "google_mail",
         "box",
+        "dropbox",
         "google_drive",
         "vault",
         "web_crawler",
