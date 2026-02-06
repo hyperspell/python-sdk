@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List
+from typing import List, Optional
 from typing_extensions import Literal
 
 from .._models import BaseModel
@@ -18,11 +18,11 @@ class Integration(BaseModel):
     auth_provider: Literal["nango", "unified", "whitelabel"]
     """The integration's auth provider"""
 
-    icon: str
-    """Generate a display name from the provider by capitalizing each word."""
+    icon: Optional[str] = None
+    """URL to the integration's icon"""
 
     name: str
-    """Generate a display name from the provider by capitalizing each word."""
+    """The integration's display name"""
 
     provider: Literal[
         "collections",
