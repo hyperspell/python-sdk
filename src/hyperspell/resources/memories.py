@@ -77,7 +77,7 @@ class MemoriesResource(SyncAPIResource):
             "web_crawler",
         ],
         collection: Union[str, object, None] | Omit = omit,
-        metadata: Union[Dict[str, Union[str, float, bool]], object, None] | Omit = omit,
+        metadata: Union[Dict[str, Union[str, float, bool, None]], object, None] | Omit = omit,
         text: Union[str, object, None] | Omit = omit,
         title: Union[str, object, None] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -99,7 +99,7 @@ class MemoriesResource(SyncAPIResource):
           collection: The collection to move the document to. Set to null to remove the collection.
 
           metadata: Custom metadata for filtering. Keys must be alphanumeric with underscores, max
-              64 chars. Values must be string, number, or boolean. Will be merged with
+              64 chars. Values must be string, number, boolean, or null. Will be merged with
               existing metadata.
 
           text: Full text of the document. If provided, the document will be re-indexed.
@@ -277,7 +277,7 @@ class MemoriesResource(SyncAPIResource):
         text: str,
         collection: Optional[str] | Omit = omit,
         date: Union[str, datetime] | Omit = omit,
-        metadata: Optional[Dict[str, Union[str, float, bool]]] | Omit = omit,
+        metadata: Optional[Dict[str, Union[str, float, bool, None]]] | Omit = omit,
         resource_id: str | Omit = omit,
         title: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -304,7 +304,7 @@ class MemoriesResource(SyncAPIResource):
               to filter by date range.
 
           metadata: Custom metadata for filtering. Keys must be alphanumeric with underscores, max
-              64 chars. Values must be string, number, or boolean.
+              64 chars. Values must be string, number, boolean, or null.
 
           resource_id: The resource ID to add the document to. If not provided, a new resource ID will
               be generated. If provided, the document will be updated if it already exists.
@@ -616,7 +616,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
             "web_crawler",
         ],
         collection: Union[str, object, None] | Omit = omit,
-        metadata: Union[Dict[str, Union[str, float, bool]], object, None] | Omit = omit,
+        metadata: Union[Dict[str, Union[str, float, bool, None]], object, None] | Omit = omit,
         text: Union[str, object, None] | Omit = omit,
         title: Union[str, object, None] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -638,7 +638,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
           collection: The collection to move the document to. Set to null to remove the collection.
 
           metadata: Custom metadata for filtering. Keys must be alphanumeric with underscores, max
-              64 chars. Values must be string, number, or boolean. Will be merged with
+              64 chars. Values must be string, number, boolean, or null. Will be merged with
               existing metadata.
 
           text: Full text of the document. If provided, the document will be re-indexed.
@@ -816,7 +816,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
         text: str,
         collection: Optional[str] | Omit = omit,
         date: Union[str, datetime] | Omit = omit,
-        metadata: Optional[Dict[str, Union[str, float, bool]]] | Omit = omit,
+        metadata: Optional[Dict[str, Union[str, float, bool, None]]] | Omit = omit,
         resource_id: str | Omit = omit,
         title: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -843,7 +843,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
               to filter by date range.
 
           metadata: Custom metadata for filtering. Keys must be alphanumeric with underscores, max
-              64 chars. Values must be string, number, or boolean.
+              64 chars. Values must be string, number, boolean, or null.
 
           resource_id: The resource ID to add the document to. If not provided, a new resource ID will
               be generated. If provided, the document will be updated if it already exists.
