@@ -32,11 +32,11 @@ class Item(TypedDict, total=False):
     range.
     """
 
-    metadata: Optional[Dict[str, Union[str, float, bool]]]
+    metadata: Optional[Dict[str, Union[str, float, bool, None]]]
     """Custom metadata for filtering.
 
     Keys must be alphanumeric with underscores, max 64 chars. Values must be string,
-    number, or boolean.
+    number, boolean, or null.
     """
 
     resource_id: str
