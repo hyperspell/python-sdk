@@ -94,6 +94,7 @@ class TestMemories:
             filter="filter",
             size=0,
             source="collections",
+            status="pending",
         )
         assert_matches_type(SyncCursorPage[MemoryListResponse], memory, path=["response"])
 
@@ -528,6 +529,7 @@ class TestAsyncMemories:
             filter="filter",
             size=0,
             source="collections",
+            status="pending",
         )
         assert_matches_type(AsyncCursorPage[MemoryListResponse], memory, path=["response"])
 
