@@ -38,3 +38,6 @@ class MemoryListParams(TypedDict, total=False):
         ]
     ]
     """Filter documents by source."""
+
+    status: Optional[Literal["pending", "processing", "completed", "failed"]]
+    """Filter documents by status."""
