@@ -64,6 +64,8 @@ class OptionsBox(TypedDict, total=False):
     before: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
     """Only query documents created before this date."""
 
+    collection: Optional[str]
+
     filter: Optional[Dict[str, object]]
     """Metadata filters using MongoDB-style operators.
 
@@ -87,6 +89,8 @@ class OptionsCollections(TypedDict, total=False):
 
     before: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
     """Only query documents created before this date."""
+
+    collection: Optional[str]
 
     filter: Optional[Dict[str, object]]
     """Metadata filters using MongoDB-style operators.
@@ -119,6 +123,8 @@ class OptionsGoogleCalendar(TypedDict, total=False):
     list of calendars with the `/integrations/google_calendar/list` endpoint.
     """
 
+    collection: Optional[str]
+
     filter: Optional[Dict[str, object]]
     """Metadata filters using MongoDB-style operators.
 
@@ -143,6 +149,8 @@ class OptionsGoogleDrive(TypedDict, total=False):
     before: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
     """Only query documents created before this date."""
 
+    collection: Optional[str]
+
     filter: Optional[Dict[str, object]]
     """Metadata filters using MongoDB-style operators.
 
@@ -166,6 +174,8 @@ class OptionsGoogleMail(TypedDict, total=False):
 
     before: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
     """Only query documents created before this date."""
+
+    collection: Optional[str]
 
     filter: Optional[Dict[str, object]]
     """Metadata filters using MongoDB-style operators.
@@ -199,6 +209,8 @@ class OptionsNotion(TypedDict, total=False):
     before: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
     """Only query documents created before this date."""
 
+    collection: Optional[str]
+
     filter: Optional[Dict[str, object]]
     """Metadata filters using MongoDB-style operators.
 
@@ -228,6 +240,8 @@ class OptionsReddit(TypedDict, total=False):
 
     before: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
     """Only query documents created before this date."""
+
+    collection: Optional[str]
 
     filter: Optional[Dict[str, object]]
     """Metadata filters using MongoDB-style operators.
@@ -268,6 +282,8 @@ class OptionsSlack(TypedDict, total=False):
     channels: SequenceNotStr[str]
     """List of Slack channels to include (by id, name, or #name)."""
 
+    collection: Optional[str]
+
     exclude_archived: Optional[bool]
     """If set, pass 'exclude_archived' to Slack. If None, omit the param."""
 
@@ -306,6 +322,8 @@ class OptionsWebCrawler(TypedDict, total=False):
 
     before: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
     """Only query documents created before this date."""
+
+    collection: Optional[str]
 
     filter: Optional[Dict[str, object]]
     """Metadata filters using MongoDB-style operators.
