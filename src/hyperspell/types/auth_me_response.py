@@ -34,7 +34,6 @@ class AuthMeResponse(BaseModel):
 
     available_integrations: List[
         Literal[
-            "collections",
             "reddit",
             "notion",
             "slack",
@@ -51,7 +50,6 @@ class AuthMeResponse(BaseModel):
 
     installed_integrations: List[
         Literal[
-            "collections",
             "reddit",
             "notion",
             "slack",

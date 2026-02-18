@@ -64,7 +64,6 @@ class MemoriesResource(SyncAPIResource):
         resource_id: str,
         *,
         source: Literal[
-            "collections",
             "reddit",
             "notion",
             "slack",
@@ -144,7 +143,6 @@ class MemoriesResource(SyncAPIResource):
         size: int | Omit = omit,
         source: Optional[
             Literal[
-                "collections",
                 "reddit",
                 "notion",
                 "slack",
@@ -218,7 +216,6 @@ class MemoriesResource(SyncAPIResource):
         resource_id: str,
         *,
         source: Literal[
-            "collections",
             "reddit",
             "notion",
             "slack",
@@ -388,7 +385,6 @@ class MemoriesResource(SyncAPIResource):
         resource_id: str,
         *,
         source: Literal[
-            "collections",
             "reddit",
             "notion",
             "slack",
@@ -440,7 +436,6 @@ class MemoriesResource(SyncAPIResource):
         options: memory_search_params.Options | Omit = omit,
         sources: List[
             Literal[
-                "collections",
                 "reddit",
                 "notion",
                 "slack",
@@ -607,7 +602,6 @@ class AsyncMemoriesResource(AsyncAPIResource):
         resource_id: str,
         *,
         source: Literal[
-            "collections",
             "reddit",
             "notion",
             "slack",
@@ -687,7 +681,6 @@ class AsyncMemoriesResource(AsyncAPIResource):
         size: int | Omit = omit,
         source: Optional[
             Literal[
-                "collections",
                 "reddit",
                 "notion",
                 "slack",
@@ -761,7 +754,6 @@ class AsyncMemoriesResource(AsyncAPIResource):
         resource_id: str,
         *,
         source: Literal[
-            "collections",
             "reddit",
             "notion",
             "slack",
@@ -931,7 +923,6 @@ class AsyncMemoriesResource(AsyncAPIResource):
         resource_id: str,
         *,
         source: Literal[
-            "collections",
             "reddit",
             "notion",
             "slack",
@@ -983,7 +974,6 @@ class AsyncMemoriesResource(AsyncAPIResource):
         options: memory_search_params.Options | Omit = omit,
         sources: List[
             Literal[
-                "collections",
                 "reddit",
                 "notion",
                 "slack",
