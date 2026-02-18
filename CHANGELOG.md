@@ -1,5 +1,51 @@
 # Changelog
 
+## 0.32.0 (2026-02-18)
+
+Full Changelog: [v0.28.0...v0.32.0](https://github.com/hyperspell/python-sdk/compare/v0.28.0...v0.32.0)
+
+### Features
+
+* **api:** api update ([83df8aa](https://github.com/hyperspell/python-sdk/commit/83df8aaf655694d5bc231fa725c1799b94c70c45))
+* **api:** api update ([c8db96e](https://github.com/hyperspell/python-sdk/commit/c8db96e0a2f696c8aa7f916913eaa9f55896a26f))
+* **api:** api update ([f44d0fe](https://github.com/hyperspell/python-sdk/commit/f44d0fe6d5c248ee21f8287c021fe75254b6f427))
+* **api:** api update ([ddb2917](https://github.com/hyperspell/python-sdk/commit/ddb291789c93bea2851c5ed4cd407f699f0e172b))
+* **api:** api update ([b72736d](https://github.com/hyperspell/python-sdk/commit/b72736d5c2c1d590edd7bc4147241258622372e5))
+* **api:** api update ([f65f71c](https://github.com/hyperspell/python-sdk/commit/f65f71c05ad0b6e4e98bb79cd02341482103543a))
+* **api:** api update ([c10b8bd](https://github.com/hyperspell/python-sdk/commit/c10b8bdfe3d36ac07fc948baec5561f7bb7261b3))
+* **api:** api update ([a1721fa](https://github.com/hyperspell/python-sdk/commit/a1721fac778acdbb3d05c71396da3277e201cde0))
+* **api:** api update ([b701ec5](https://github.com/hyperspell/python-sdk/commit/b701ec51489e3100814dfd3295161cc04867e679))
+* **api:** api update ([8553859](https://github.com/hyperspell/python-sdk/commit/855385906fced24870ed2e7b24cffe0ad5856bbf))
+* **api:** manual updates ([7bea30d](https://github.com/hyperspell/python-sdk/commit/7bea30d9ad5618f737fdf8595ae704b4980c9151))
+* **api:** manual updates ([495b4b7](https://github.com/hyperspell/python-sdk/commit/495b4b7f64b69ea59076d070b23bd35e7293b84f))
+* **api:** manual updates ([a4d305c](https://github.com/hyperspell/python-sdk/commit/a4d305c10a9364f499b2cd9eaf0fc02bb7dcb136))
+* **client:** add custom JSON encoder for extended type support ([9329d81](https://github.com/hyperspell/python-sdk/commit/9329d815fd50d4d8ad31016de8992e8bb6e0f250))
+* **client:** add support for binary request streaming ([578c776](https://github.com/hyperspell/python-sdk/commit/578c77664d05aa2ffa1c7d6cc3f7e3e3d5c77991))
+
+
+### Bug Fixes
+
+* **docs:** fix mcp installation instructions for remote servers ([5043409](https://github.com/hyperspell/python-sdk/commit/504340918cac3cd3b69a19d741b9ba5b8d6ada94))
+* use async_to_httpx_files in patch method ([4116107](https://github.com/hyperspell/python-sdk/commit/4116107e99dbe09a060f53ebfedcf1ff58715674))
+
+
+### Chores
+
+* **ci:** upgrade `actions/github-script` ([87a2eff](https://github.com/hyperspell/python-sdk/commit/87a2effc14173b8ee2d74f2f4424a79423449f39))
+* format all `api.md` files ([723d07a](https://github.com/hyperspell/python-sdk/commit/723d07a7166012dcfbce22149323215e131ad2a7))
+* **internal:** add `--fix` argument to lint script ([9d02a46](https://github.com/hyperspell/python-sdk/commit/9d02a464264ed187e3072c7b9337c14101b21945))
+* **internal:** add missing files argument to base client ([22826f9](https://github.com/hyperspell/python-sdk/commit/22826f97b3edf8910eda4be67aa1c2e5dfdf200b))
+* **internal:** bump dependencies ([ec30503](https://github.com/hyperspell/python-sdk/commit/ec3050344556ea4fc9fecb4deec130660f618a33))
+* **internal:** codegen related update ([ddb8f8f](https://github.com/hyperspell/python-sdk/commit/ddb8f8f25eb0f015edcb2cbb833316555a68adbf))
+* **internal:** fix lint error on Python 3.14 ([ef876fd](https://github.com/hyperspell/python-sdk/commit/ef876fdad3bb8165f57f9fe80913da369f0ccdcb))
+* **internal:** update `actions/checkout` version ([2453986](https://github.com/hyperspell/python-sdk/commit/2453986d89b02dd99528eb40676ef0a087391e29))
+* speedup initial import ([b39343e](https://github.com/hyperspell/python-sdk/commit/b39343e600358251c604ee2d0232b3af538172f5))
+
+
+### Documentation
+
+* prominently feature MCP server setup in root SDK readmes ([115424d](https://github.com/hyperspell/python-sdk/commit/115424d9ff7344bad70fd0a92657ae6f5fbfc647))
+
 ## 0.28.0 (2025-12-15)
 
 Full Changelog: [v0.27.0...v0.28.0](https://github.com/hyperspell/python-sdk/compare/v0.27.0...v0.28.0)

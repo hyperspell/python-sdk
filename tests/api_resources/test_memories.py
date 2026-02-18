@@ -12,8 +12,10 @@ from tests.utils import assert_matches_type
 from hyperspell.types import (
     Memory,
     MemoryStatus,
+    MemoryListResponse,
     MemoryDeleteResponse,
     MemoryStatusResponse,
+    MemoryAddBulkResponse,
 )
 from hyperspell._utils import parse_datetime
 from hyperspell.pagination import SyncCursorPage, AsyncCursorPage
@@ -29,7 +31,7 @@ class TestMemories:
     def test_method_update(self, client: Hyperspell) -> None:
         memory = client.memories.update(
             resource_id="resource_id",
-            source="collections",
+            source="reddit",
         )
         assert_matches_type(MemoryStatus, memory, path=["response"])
 
@@ -37,7 +39,7 @@ class TestMemories:
     def test_method_update_with_all_params(self, client: Hyperspell) -> None:
         memory = client.memories.update(
             resource_id="resource_id",
-            source="collections",
+            source="reddit",
             collection="string",
             metadata={"foo": "string"},
             text="string",
@@ -49,7 +51,7 @@ class TestMemories:
     def test_raw_response_update(self, client: Hyperspell) -> None:
         response = client.memories.with_raw_response.update(
             resource_id="resource_id",
-            source="collections",
+            source="reddit",
         )
 
         assert response.is_closed is True
@@ -61,7 +63,7 @@ class TestMemories:
     def test_streaming_response_update(self, client: Hyperspell) -> None:
         with client.memories.with_streaming_response.update(
             resource_id="resource_id",
-            source="collections",
+            source="reddit",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -76,13 +78,13 @@ class TestMemories:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `resource_id` but received ''"):
             client.memories.with_raw_response.update(
                 resource_id="",
-                source="collections",
+                source="reddit",
             )
 
     @parametrize
     def test_method_list(self, client: Hyperspell) -> None:
         memory = client.memories.list()
-        assert_matches_type(SyncCursorPage[Memory], memory, path=["response"])
+        assert_matches_type(SyncCursorPage[MemoryListResponse], memory, path=["response"])
 
     @parametrize
     def test_method_list_with_all_params(self, client: Hyperspell) -> None:
@@ -91,9 +93,10 @@ class TestMemories:
             cursor="cursor",
             filter="filter",
             size=0,
-            source="collections",
+            source="reddit",
+            status="pending",
         )
-        assert_matches_type(SyncCursorPage[Memory], memory, path=["response"])
+        assert_matches_type(SyncCursorPage[MemoryListResponse], memory, path=["response"])
 
     @parametrize
     def test_raw_response_list(self, client: Hyperspell) -> None:
@@ -102,7 +105,7 @@ class TestMemories:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         memory = response.parse()
-        assert_matches_type(SyncCursorPage[Memory], memory, path=["response"])
+        assert_matches_type(SyncCursorPage[MemoryListResponse], memory, path=["response"])
 
     @parametrize
     def test_streaming_response_list(self, client: Hyperspell) -> None:
@@ -111,7 +114,7 @@ class TestMemories:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             memory = response.parse()
-            assert_matches_type(SyncCursorPage[Memory], memory, path=["response"])
+            assert_matches_type(SyncCursorPage[MemoryListResponse], memory, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -119,7 +122,7 @@ class TestMemories:
     def test_method_delete(self, client: Hyperspell) -> None:
         memory = client.memories.delete(
             resource_id="resource_id",
-            source="collections",
+            source="reddit",
         )
         assert_matches_type(MemoryDeleteResponse, memory, path=["response"])
 
@@ -127,7 +130,7 @@ class TestMemories:
     def test_raw_response_delete(self, client: Hyperspell) -> None:
         response = client.memories.with_raw_response.delete(
             resource_id="resource_id",
-            source="collections",
+            source="reddit",
         )
 
         assert response.is_closed is True
@@ -139,7 +142,7 @@ class TestMemories:
     def test_streaming_response_delete(self, client: Hyperspell) -> None:
         with client.memories.with_streaming_response.delete(
             resource_id="resource_id",
-            source="collections",
+            source="reddit",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -154,7 +157,7 @@ class TestMemories:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `resource_id` but received ''"):
             client.memories.with_raw_response.delete(
                 resource_id="",
-                source="collections",
+                source="reddit",
             )
 
     @parametrize
@@ -201,10 +204,41 @@ class TestMemories:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
+    def test_method_add_bulk(self, client: Hyperspell) -> None:
+        memory = client.memories.add_bulk(
+            items=[{"text": "..."}],
+        )
+        assert_matches_type(MemoryAddBulkResponse, memory, path=["response"])
+
+    @parametrize
+    def test_raw_response_add_bulk(self, client: Hyperspell) -> None:
+        response = client.memories.with_raw_response.add_bulk(
+            items=[{"text": "..."}],
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        memory = response.parse()
+        assert_matches_type(MemoryAddBulkResponse, memory, path=["response"])
+
+    @parametrize
+    def test_streaming_response_add_bulk(self, client: Hyperspell) -> None:
+        with client.memories.with_streaming_response.add_bulk(
+            items=[{"text": "..."}],
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            memory = response.parse()
+            assert_matches_type(MemoryAddBulkResponse, memory, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
     def test_method_get(self, client: Hyperspell) -> None:
         memory = client.memories.get(
             resource_id="resource_id",
-            source="collections",
+            source="reddit",
         )
         assert_matches_type(Memory, memory, path=["response"])
 
@@ -212,7 +246,7 @@ class TestMemories:
     def test_raw_response_get(self, client: Hyperspell) -> None:
         response = client.memories.with_raw_response.get(
             resource_id="resource_id",
-            source="collections",
+            source="reddit",
         )
 
         assert response.is_closed is True
@@ -224,7 +258,7 @@ class TestMemories:
     def test_streaming_response_get(self, client: Hyperspell) -> None:
         with client.memories.with_streaming_response.get(
             resource_id="resource_id",
-            source="collections",
+            source="reddit",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -239,7 +273,7 @@ class TestMemories:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `resource_id` but received ''"):
             client.memories.with_raw_response.get(
                 resource_id="",
-                source="collections",
+                source="reddit",
             )
 
     @parametrize
@@ -260,76 +294,58 @@ class TestMemories:
                 "answer_model": "llama-3.1",
                 "before": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "box": {
-                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "filter": {"foo": "bar"},
-                    "weight": 0,
-                },
-                "collections": {
-                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "filter": {"foo": "bar"},
+                    "collection": "collection",
                     "weight": 0,
                 },
                 "filter": {"foo": "bar"},
                 "google_calendar": {
-                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
                     "calendar_id": "calendar_id",
-                    "filter": {"foo": "bar"},
+                    "collection": "collection",
                     "weight": 0,
                 },
                 "google_drive": {
-                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "filter": {"foo": "bar"},
+                    "collection": "collection",
                     "weight": 0,
                 },
                 "google_mail": {
-                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "filter": {"foo": "bar"},
+                    "collection": "collection",
                     "label_ids": ["string"],
                     "weight": 0,
                 },
                 "max_results": 0,
                 "notion": {
-                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "filter": {"foo": "bar"},
+                    "collection": "collection",
                     "notion_page_ids": ["string"],
                     "weight": 0,
                 },
                 "reddit": {
-                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "filter": {"foo": "bar"},
+                    "collection": "collection",
                     "period": "hour",
                     "sort": "relevance",
                     "subreddit": "subreddit",
                     "weight": 0,
                 },
                 "slack": {
-                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
                     "channels": ["string"],
+                    "collection": "collection",
                     "exclude_archived": True,
-                    "filter": {"foo": "bar"},
                     "include_dms": True,
                     "include_group_dms": True,
                     "include_private": True,
                     "weight": 0,
                 },
+                "vault": {
+                    "collection": "collection",
+                    "weight": 0,
+                },
                 "web_crawler": {
-                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "filter": {"foo": "bar"},
+                    "collection": "collection",
                     "max_depth": 0,
                     "url": "url",
                     "weight": 0,
                 },
             },
-            sources=["collections"],
+            sources=["reddit"],
         )
         assert_matches_type(QueryResult, memory, path=["response"])
 
@@ -432,7 +448,7 @@ class TestAsyncMemories:
     async def test_method_update(self, async_client: AsyncHyperspell) -> None:
         memory = await async_client.memories.update(
             resource_id="resource_id",
-            source="collections",
+            source="reddit",
         )
         assert_matches_type(MemoryStatus, memory, path=["response"])
 
@@ -440,7 +456,7 @@ class TestAsyncMemories:
     async def test_method_update_with_all_params(self, async_client: AsyncHyperspell) -> None:
         memory = await async_client.memories.update(
             resource_id="resource_id",
-            source="collections",
+            source="reddit",
             collection="string",
             metadata={"foo": "string"},
             text="string",
@@ -452,7 +468,7 @@ class TestAsyncMemories:
     async def test_raw_response_update(self, async_client: AsyncHyperspell) -> None:
         response = await async_client.memories.with_raw_response.update(
             resource_id="resource_id",
-            source="collections",
+            source="reddit",
         )
 
         assert response.is_closed is True
@@ -464,7 +480,7 @@ class TestAsyncMemories:
     async def test_streaming_response_update(self, async_client: AsyncHyperspell) -> None:
         async with async_client.memories.with_streaming_response.update(
             resource_id="resource_id",
-            source="collections",
+            source="reddit",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -479,13 +495,13 @@ class TestAsyncMemories:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `resource_id` but received ''"):
             await async_client.memories.with_raw_response.update(
                 resource_id="",
-                source="collections",
+                source="reddit",
             )
 
     @parametrize
     async def test_method_list(self, async_client: AsyncHyperspell) -> None:
         memory = await async_client.memories.list()
-        assert_matches_type(AsyncCursorPage[Memory], memory, path=["response"])
+        assert_matches_type(AsyncCursorPage[MemoryListResponse], memory, path=["response"])
 
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncHyperspell) -> None:
@@ -494,9 +510,10 @@ class TestAsyncMemories:
             cursor="cursor",
             filter="filter",
             size=0,
-            source="collections",
+            source="reddit",
+            status="pending",
         )
-        assert_matches_type(AsyncCursorPage[Memory], memory, path=["response"])
+        assert_matches_type(AsyncCursorPage[MemoryListResponse], memory, path=["response"])
 
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncHyperspell) -> None:
@@ -505,7 +522,7 @@ class TestAsyncMemories:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         memory = await response.parse()
-        assert_matches_type(AsyncCursorPage[Memory], memory, path=["response"])
+        assert_matches_type(AsyncCursorPage[MemoryListResponse], memory, path=["response"])
 
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncHyperspell) -> None:
@@ -514,7 +531,7 @@ class TestAsyncMemories:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             memory = await response.parse()
-            assert_matches_type(AsyncCursorPage[Memory], memory, path=["response"])
+            assert_matches_type(AsyncCursorPage[MemoryListResponse], memory, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -522,7 +539,7 @@ class TestAsyncMemories:
     async def test_method_delete(self, async_client: AsyncHyperspell) -> None:
         memory = await async_client.memories.delete(
             resource_id="resource_id",
-            source="collections",
+            source="reddit",
         )
         assert_matches_type(MemoryDeleteResponse, memory, path=["response"])
 
@@ -530,7 +547,7 @@ class TestAsyncMemories:
     async def test_raw_response_delete(self, async_client: AsyncHyperspell) -> None:
         response = await async_client.memories.with_raw_response.delete(
             resource_id="resource_id",
-            source="collections",
+            source="reddit",
         )
 
         assert response.is_closed is True
@@ -542,7 +559,7 @@ class TestAsyncMemories:
     async def test_streaming_response_delete(self, async_client: AsyncHyperspell) -> None:
         async with async_client.memories.with_streaming_response.delete(
             resource_id="resource_id",
-            source="collections",
+            source="reddit",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -557,7 +574,7 @@ class TestAsyncMemories:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `resource_id` but received ''"):
             await async_client.memories.with_raw_response.delete(
                 resource_id="",
-                source="collections",
+                source="reddit",
             )
 
     @parametrize
@@ -604,10 +621,41 @@ class TestAsyncMemories:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
+    async def test_method_add_bulk(self, async_client: AsyncHyperspell) -> None:
+        memory = await async_client.memories.add_bulk(
+            items=[{"text": "..."}],
+        )
+        assert_matches_type(MemoryAddBulkResponse, memory, path=["response"])
+
+    @parametrize
+    async def test_raw_response_add_bulk(self, async_client: AsyncHyperspell) -> None:
+        response = await async_client.memories.with_raw_response.add_bulk(
+            items=[{"text": "..."}],
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        memory = await response.parse()
+        assert_matches_type(MemoryAddBulkResponse, memory, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_add_bulk(self, async_client: AsyncHyperspell) -> None:
+        async with async_client.memories.with_streaming_response.add_bulk(
+            items=[{"text": "..."}],
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            memory = await response.parse()
+            assert_matches_type(MemoryAddBulkResponse, memory, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
     async def test_method_get(self, async_client: AsyncHyperspell) -> None:
         memory = await async_client.memories.get(
             resource_id="resource_id",
-            source="collections",
+            source="reddit",
         )
         assert_matches_type(Memory, memory, path=["response"])
 
@@ -615,7 +663,7 @@ class TestAsyncMemories:
     async def test_raw_response_get(self, async_client: AsyncHyperspell) -> None:
         response = await async_client.memories.with_raw_response.get(
             resource_id="resource_id",
-            source="collections",
+            source="reddit",
         )
 
         assert response.is_closed is True
@@ -627,7 +675,7 @@ class TestAsyncMemories:
     async def test_streaming_response_get(self, async_client: AsyncHyperspell) -> None:
         async with async_client.memories.with_streaming_response.get(
             resource_id="resource_id",
-            source="collections",
+            source="reddit",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -642,7 +690,7 @@ class TestAsyncMemories:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `resource_id` but received ''"):
             await async_client.memories.with_raw_response.get(
                 resource_id="",
-                source="collections",
+                source="reddit",
             )
 
     @parametrize
@@ -663,76 +711,58 @@ class TestAsyncMemories:
                 "answer_model": "llama-3.1",
                 "before": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "box": {
-                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "filter": {"foo": "bar"},
-                    "weight": 0,
-                },
-                "collections": {
-                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "filter": {"foo": "bar"},
+                    "collection": "collection",
                     "weight": 0,
                 },
                 "filter": {"foo": "bar"},
                 "google_calendar": {
-                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
                     "calendar_id": "calendar_id",
-                    "filter": {"foo": "bar"},
+                    "collection": "collection",
                     "weight": 0,
                 },
                 "google_drive": {
-                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "filter": {"foo": "bar"},
+                    "collection": "collection",
                     "weight": 0,
                 },
                 "google_mail": {
-                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "filter": {"foo": "bar"},
+                    "collection": "collection",
                     "label_ids": ["string"],
                     "weight": 0,
                 },
                 "max_results": 0,
                 "notion": {
-                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "filter": {"foo": "bar"},
+                    "collection": "collection",
                     "notion_page_ids": ["string"],
                     "weight": 0,
                 },
                 "reddit": {
-                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "filter": {"foo": "bar"},
+                    "collection": "collection",
                     "period": "hour",
                     "sort": "relevance",
                     "subreddit": "subreddit",
                     "weight": 0,
                 },
                 "slack": {
-                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
                     "channels": ["string"],
+                    "collection": "collection",
                     "exclude_archived": True,
-                    "filter": {"foo": "bar"},
                     "include_dms": True,
                     "include_group_dms": True,
                     "include_private": True,
                     "weight": 0,
                 },
+                "vault": {
+                    "collection": "collection",
+                    "weight": 0,
+                },
                 "web_crawler": {
-                    "after": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "before": parse_datetime("2019-12-27T18:11:19.117Z"),
-                    "filter": {"foo": "bar"},
+                    "collection": "collection",
                     "max_depth": 0,
                     "url": "url",
                     "weight": 0,
                 },
             },
-            sources=["collections"],
+            sources=["reddit"],
         )
         assert_matches_type(QueryResult, memory, path=["response"])
 

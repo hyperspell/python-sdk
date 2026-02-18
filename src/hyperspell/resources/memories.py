@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, List, Union, Mapping, Optional, cast
+from typing import Dict, List, Union, Mapping, Iterable, Optional, cast
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -14,6 +14,7 @@ from ..types import (
     memory_search_params,
     memory_update_params,
     memory_upload_params,
+    memory_add_bulk_params,
 )
 from .._types import Body, Omit, Query, Headers, NotGiven, FileTypes, omit, not_given
 from .._utils import extract_files, maybe_transform, deepcopy_minimal, async_maybe_transform
@@ -30,8 +31,10 @@ from .._base_client import AsyncPaginator, make_request_options
 from ..types.memory import Memory
 from ..types.memory_status import MemoryStatus
 from ..types.shared.query_result import QueryResult
+from ..types.memory_list_response import MemoryListResponse
 from ..types.memory_delete_response import MemoryDeleteResponse
 from ..types.memory_status_response import MemoryStatusResponse
+from ..types.memory_add_bulk_response import MemoryAddBulkResponse
 
 __all__ = ["MemoriesResource", "AsyncMemoriesResource"]
 
@@ -61,55 +64,19 @@ class MemoriesResource(SyncAPIResource):
         resource_id: str,
         *,
         source: Literal[
-            "collections",
-            "vault",
-            "web_crawler",
+            "reddit",
             "notion",
             "slack",
             "google_calendar",
-            "reddit",
-            "box",
-            "google_drive",
-            "airtable",
-            "algolia",
-            "amplitude",
-            "asana",
-            "ashby",
-            "bamboohr",
-            "basecamp",
-            "bubbles",
-            "calendly",
-            "confluence",
-            "clickup",
-            "datadog",
-            "deel",
-            "discord",
-            "dropbox",
-            "exa",
-            "facebook",
-            "front",
-            "github",
-            "gitlab",
-            "google_docs",
             "google_mail",
-            "google_sheet",
-            "hubspot",
-            "jira",
-            "linear",
-            "microsoft_teams",
-            "mixpanel",
-            "monday",
-            "outlook",
-            "perplexity",
-            "rippling",
-            "salesforce",
-            "segment",
-            "todoist",
-            "twitter",
-            "zoom",
+            "box",
+            "dropbox",
+            "google_drive",
+            "vault",
+            "web_crawler",
         ],
         collection: Union[str, object, None] | Omit = omit,
-        metadata: Union[Dict[str, Union[str, float, bool]], object, None] | Omit = omit,
+        metadata: Union[Dict[str, Union[str, float, bool, None]], object, None] | Omit = omit,
         text: Union[str, object, None] | Omit = omit,
         title: Union[str, object, None] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -131,7 +98,7 @@ class MemoriesResource(SyncAPIResource):
           collection: The collection to move the document to. Set to null to remove the collection.
 
           metadata: Custom metadata for filtering. Keys must be alphanumeric with underscores, max
-              64 chars. Values must be string, number, or boolean. Will be merged with
+              64 chars. Values must be string, number, boolean, or null. Will be merged with
               existing metadata.
 
           text: Full text of the document. If provided, the document will be re-indexed.
@@ -176,62 +143,27 @@ class MemoriesResource(SyncAPIResource):
         size: int | Omit = omit,
         source: Optional[
             Literal[
-                "collections",
-                "vault",
-                "web_crawler",
+                "reddit",
                 "notion",
                 "slack",
                 "google_calendar",
-                "reddit",
-                "box",
-                "google_drive",
-                "airtable",
-                "algolia",
-                "amplitude",
-                "asana",
-                "ashby",
-                "bamboohr",
-                "basecamp",
-                "bubbles",
-                "calendly",
-                "confluence",
-                "clickup",
-                "datadog",
-                "deel",
-                "discord",
-                "dropbox",
-                "exa",
-                "facebook",
-                "front",
-                "github",
-                "gitlab",
-                "google_docs",
                 "google_mail",
-                "google_sheet",
-                "hubspot",
-                "jira",
-                "linear",
-                "microsoft_teams",
-                "mixpanel",
-                "monday",
-                "outlook",
-                "perplexity",
-                "rippling",
-                "salesforce",
-                "segment",
-                "todoist",
-                "twitter",
-                "zoom",
+                "box",
+                "dropbox",
+                "google_drive",
+                "vault",
+                "web_crawler",
             ]
         ]
         | Omit = omit,
+        status: Optional[Literal["pending", "processing", "completed", "failed"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SyncCursorPage[Memory]:
+    ) -> SyncCursorPage[MemoryListResponse]:
         """This endpoint allows you to paginate through all documents in the index.
 
         You can
@@ -246,6 +178,8 @@ class MemoriesResource(SyncAPIResource):
 
           source: Filter documents by source.
 
+          status: Filter documents by status.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -256,7 +190,7 @@ class MemoriesResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/memories/list",
-            page=SyncCursorPage[Memory],
+            page=SyncCursorPage[MemoryListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -269,11 +203,12 @@ class MemoriesResource(SyncAPIResource):
                         "filter": filter,
                         "size": size,
                         "source": source,
+                        "status": status,
                     },
                     memory_list_params.MemoryListParams,
                 ),
             ),
-            model=Memory,
+            model=MemoryListResponse,
         )
 
     def delete(
@@ -281,52 +216,16 @@ class MemoriesResource(SyncAPIResource):
         resource_id: str,
         *,
         source: Literal[
-            "collections",
-            "vault",
-            "web_crawler",
+            "reddit",
             "notion",
             "slack",
             "google_calendar",
-            "reddit",
-            "box",
-            "google_drive",
-            "airtable",
-            "algolia",
-            "amplitude",
-            "asana",
-            "ashby",
-            "bamboohr",
-            "basecamp",
-            "bubbles",
-            "calendly",
-            "confluence",
-            "clickup",
-            "datadog",
-            "deel",
-            "discord",
-            "dropbox",
-            "exa",
-            "facebook",
-            "front",
-            "github",
-            "gitlab",
-            "google_docs",
             "google_mail",
-            "google_sheet",
-            "hubspot",
-            "jira",
-            "linear",
-            "microsoft_teams",
-            "mixpanel",
-            "monday",
-            "outlook",
-            "perplexity",
-            "rippling",
-            "salesforce",
-            "segment",
-            "todoist",
-            "twitter",
-            "zoom",
+            "box",
+            "dropbox",
+            "google_drive",
+            "vault",
+            "web_crawler",
         ],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -379,7 +278,7 @@ class MemoriesResource(SyncAPIResource):
         text: str,
         collection: Optional[str] | Omit = omit,
         date: Union[str, datetime] | Omit = omit,
-        metadata: Optional[Dict[str, Union[str, float, bool]]] | Omit = omit,
+        metadata: Optional[Dict[str, Union[str, float, bool, None]]] | Omit = omit,
         resource_id: str | Omit = omit,
         title: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -406,7 +305,7 @@ class MemoriesResource(SyncAPIResource):
               to filter by date range.
 
           metadata: Custom metadata for filtering. Keys must be alphanumeric with underscores, max
-              64 chars. Values must be string, number, or boolean.
+              64 chars. Values must be string, number, boolean, or null.
 
           resource_id: The resource ID to add the document to. If not provided, a new resource ID will
               be generated. If provided, the document will be updated if it already exists.
@@ -440,57 +339,62 @@ class MemoriesResource(SyncAPIResource):
             cast_to=MemoryStatus,
         )
 
+    def add_bulk(
+        self,
+        *,
+        items: Iterable[memory_add_bulk_params.Item],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> MemoryAddBulkResponse:
+        """
+        Adds multiple documents to the index in a single request.
+
+        All items are validated before any database operations occur. If any item fails
+        validation, the entire batch is rejected with a 422 error detailing which items
+        failed and why.
+
+        Maximum 100 items per request. Each item follows the same schema as the
+        single-item /memories/add endpoint.
+
+        Args:
+          items: List of memories to ingest. Maximum 100 items.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/memories/add/bulk",
+            body=maybe_transform({"items": items}, memory_add_bulk_params.MemoryAddBulkParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=MemoryAddBulkResponse,
+        )
+
     def get(
         self,
         resource_id: str,
         *,
         source: Literal[
-            "collections",
-            "vault",
-            "web_crawler",
+            "reddit",
             "notion",
             "slack",
             "google_calendar",
-            "reddit",
-            "box",
-            "google_drive",
-            "airtable",
-            "algolia",
-            "amplitude",
-            "asana",
-            "ashby",
-            "bamboohr",
-            "basecamp",
-            "bubbles",
-            "calendly",
-            "confluence",
-            "clickup",
-            "datadog",
-            "deel",
-            "discord",
-            "dropbox",
-            "exa",
-            "facebook",
-            "front",
-            "github",
-            "gitlab",
-            "google_docs",
             "google_mail",
-            "google_sheet",
-            "hubspot",
-            "jira",
-            "linear",
-            "microsoft_teams",
-            "mixpanel",
-            "monday",
-            "outlook",
-            "perplexity",
-            "rippling",
-            "salesforce",
-            "segment",
-            "todoist",
-            "twitter",
-            "zoom",
+            "box",
+            "dropbox",
+            "google_drive",
+            "vault",
+            "web_crawler",
         ],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -532,52 +436,16 @@ class MemoriesResource(SyncAPIResource):
         options: memory_search_params.Options | Omit = omit,
         sources: List[
             Literal[
-                "collections",
-                "vault",
-                "web_crawler",
+                "reddit",
                 "notion",
                 "slack",
                 "google_calendar",
-                "reddit",
-                "box",
-                "google_drive",
-                "airtable",
-                "algolia",
-                "amplitude",
-                "asana",
-                "ashby",
-                "bamboohr",
-                "basecamp",
-                "bubbles",
-                "calendly",
-                "confluence",
-                "clickup",
-                "datadog",
-                "deel",
-                "discord",
-                "dropbox",
-                "exa",
-                "facebook",
-                "front",
-                "github",
-                "gitlab",
-                "google_docs",
                 "google_mail",
-                "google_sheet",
-                "hubspot",
-                "jira",
-                "linear",
-                "microsoft_teams",
-                "mixpanel",
-                "monday",
-                "outlook",
-                "perplexity",
-                "rippling",
-                "salesforce",
-                "segment",
-                "todoist",
-                "twitter",
-                "zoom",
+                "box",
+                "dropbox",
+                "google_drive",
+                "vault",
+                "web_crawler",
             ]
         ]
         | Omit = omit,
@@ -734,55 +602,19 @@ class AsyncMemoriesResource(AsyncAPIResource):
         resource_id: str,
         *,
         source: Literal[
-            "collections",
-            "vault",
-            "web_crawler",
+            "reddit",
             "notion",
             "slack",
             "google_calendar",
-            "reddit",
-            "box",
-            "google_drive",
-            "airtable",
-            "algolia",
-            "amplitude",
-            "asana",
-            "ashby",
-            "bamboohr",
-            "basecamp",
-            "bubbles",
-            "calendly",
-            "confluence",
-            "clickup",
-            "datadog",
-            "deel",
-            "discord",
-            "dropbox",
-            "exa",
-            "facebook",
-            "front",
-            "github",
-            "gitlab",
-            "google_docs",
             "google_mail",
-            "google_sheet",
-            "hubspot",
-            "jira",
-            "linear",
-            "microsoft_teams",
-            "mixpanel",
-            "monday",
-            "outlook",
-            "perplexity",
-            "rippling",
-            "salesforce",
-            "segment",
-            "todoist",
-            "twitter",
-            "zoom",
+            "box",
+            "dropbox",
+            "google_drive",
+            "vault",
+            "web_crawler",
         ],
         collection: Union[str, object, None] | Omit = omit,
-        metadata: Union[Dict[str, Union[str, float, bool]], object, None] | Omit = omit,
+        metadata: Union[Dict[str, Union[str, float, bool, None]], object, None] | Omit = omit,
         text: Union[str, object, None] | Omit = omit,
         title: Union[str, object, None] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -804,7 +636,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
           collection: The collection to move the document to. Set to null to remove the collection.
 
           metadata: Custom metadata for filtering. Keys must be alphanumeric with underscores, max
-              64 chars. Values must be string, number, or boolean. Will be merged with
+              64 chars. Values must be string, number, boolean, or null. Will be merged with
               existing metadata.
 
           text: Full text of the document. If provided, the document will be re-indexed.
@@ -849,62 +681,27 @@ class AsyncMemoriesResource(AsyncAPIResource):
         size: int | Omit = omit,
         source: Optional[
             Literal[
-                "collections",
-                "vault",
-                "web_crawler",
+                "reddit",
                 "notion",
                 "slack",
                 "google_calendar",
-                "reddit",
-                "box",
-                "google_drive",
-                "airtable",
-                "algolia",
-                "amplitude",
-                "asana",
-                "ashby",
-                "bamboohr",
-                "basecamp",
-                "bubbles",
-                "calendly",
-                "confluence",
-                "clickup",
-                "datadog",
-                "deel",
-                "discord",
-                "dropbox",
-                "exa",
-                "facebook",
-                "front",
-                "github",
-                "gitlab",
-                "google_docs",
                 "google_mail",
-                "google_sheet",
-                "hubspot",
-                "jira",
-                "linear",
-                "microsoft_teams",
-                "mixpanel",
-                "monday",
-                "outlook",
-                "perplexity",
-                "rippling",
-                "salesforce",
-                "segment",
-                "todoist",
-                "twitter",
-                "zoom",
+                "box",
+                "dropbox",
+                "google_drive",
+                "vault",
+                "web_crawler",
             ]
         ]
         | Omit = omit,
+        status: Optional[Literal["pending", "processing", "completed", "failed"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AsyncPaginator[Memory, AsyncCursorPage[Memory]]:
+    ) -> AsyncPaginator[MemoryListResponse, AsyncCursorPage[MemoryListResponse]]:
         """This endpoint allows you to paginate through all documents in the index.
 
         You can
@@ -919,6 +716,8 @@ class AsyncMemoriesResource(AsyncAPIResource):
 
           source: Filter documents by source.
 
+          status: Filter documents by status.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -929,7 +728,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/memories/list",
-            page=AsyncCursorPage[Memory],
+            page=AsyncCursorPage[MemoryListResponse],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -942,11 +741,12 @@ class AsyncMemoriesResource(AsyncAPIResource):
                         "filter": filter,
                         "size": size,
                         "source": source,
+                        "status": status,
                     },
                     memory_list_params.MemoryListParams,
                 ),
             ),
-            model=Memory,
+            model=MemoryListResponse,
         )
 
     async def delete(
@@ -954,52 +754,16 @@ class AsyncMemoriesResource(AsyncAPIResource):
         resource_id: str,
         *,
         source: Literal[
-            "collections",
-            "vault",
-            "web_crawler",
+            "reddit",
             "notion",
             "slack",
             "google_calendar",
-            "reddit",
-            "box",
-            "google_drive",
-            "airtable",
-            "algolia",
-            "amplitude",
-            "asana",
-            "ashby",
-            "bamboohr",
-            "basecamp",
-            "bubbles",
-            "calendly",
-            "confluence",
-            "clickup",
-            "datadog",
-            "deel",
-            "discord",
-            "dropbox",
-            "exa",
-            "facebook",
-            "front",
-            "github",
-            "gitlab",
-            "google_docs",
             "google_mail",
-            "google_sheet",
-            "hubspot",
-            "jira",
-            "linear",
-            "microsoft_teams",
-            "mixpanel",
-            "monday",
-            "outlook",
-            "perplexity",
-            "rippling",
-            "salesforce",
-            "segment",
-            "todoist",
-            "twitter",
-            "zoom",
+            "box",
+            "dropbox",
+            "google_drive",
+            "vault",
+            "web_crawler",
         ],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1052,7 +816,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
         text: str,
         collection: Optional[str] | Omit = omit,
         date: Union[str, datetime] | Omit = omit,
-        metadata: Optional[Dict[str, Union[str, float, bool]]] | Omit = omit,
+        metadata: Optional[Dict[str, Union[str, float, bool, None]]] | Omit = omit,
         resource_id: str | Omit = omit,
         title: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1079,7 +843,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
               to filter by date range.
 
           metadata: Custom metadata for filtering. Keys must be alphanumeric with underscores, max
-              64 chars. Values must be string, number, or boolean.
+              64 chars. Values must be string, number, boolean, or null.
 
           resource_id: The resource ID to add the document to. If not provided, a new resource ID will
               be generated. If provided, the document will be updated if it already exists.
@@ -1113,57 +877,62 @@ class AsyncMemoriesResource(AsyncAPIResource):
             cast_to=MemoryStatus,
         )
 
+    async def add_bulk(
+        self,
+        *,
+        items: Iterable[memory_add_bulk_params.Item],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> MemoryAddBulkResponse:
+        """
+        Adds multiple documents to the index in a single request.
+
+        All items are validated before any database operations occur. If any item fails
+        validation, the entire batch is rejected with a 422 error detailing which items
+        failed and why.
+
+        Maximum 100 items per request. Each item follows the same schema as the
+        single-item /memories/add endpoint.
+
+        Args:
+          items: List of memories to ingest. Maximum 100 items.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/memories/add/bulk",
+            body=await async_maybe_transform({"items": items}, memory_add_bulk_params.MemoryAddBulkParams),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=MemoryAddBulkResponse,
+        )
+
     async def get(
         self,
         resource_id: str,
         *,
         source: Literal[
-            "collections",
-            "vault",
-            "web_crawler",
+            "reddit",
             "notion",
             "slack",
             "google_calendar",
-            "reddit",
-            "box",
-            "google_drive",
-            "airtable",
-            "algolia",
-            "amplitude",
-            "asana",
-            "ashby",
-            "bamboohr",
-            "basecamp",
-            "bubbles",
-            "calendly",
-            "confluence",
-            "clickup",
-            "datadog",
-            "deel",
-            "discord",
-            "dropbox",
-            "exa",
-            "facebook",
-            "front",
-            "github",
-            "gitlab",
-            "google_docs",
             "google_mail",
-            "google_sheet",
-            "hubspot",
-            "jira",
-            "linear",
-            "microsoft_teams",
-            "mixpanel",
-            "monday",
-            "outlook",
-            "perplexity",
-            "rippling",
-            "salesforce",
-            "segment",
-            "todoist",
-            "twitter",
-            "zoom",
+            "box",
+            "dropbox",
+            "google_drive",
+            "vault",
+            "web_crawler",
         ],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1205,52 +974,16 @@ class AsyncMemoriesResource(AsyncAPIResource):
         options: memory_search_params.Options | Omit = omit,
         sources: List[
             Literal[
-                "collections",
-                "vault",
-                "web_crawler",
+                "reddit",
                 "notion",
                 "slack",
                 "google_calendar",
-                "reddit",
-                "box",
-                "google_drive",
-                "airtable",
-                "algolia",
-                "amplitude",
-                "asana",
-                "ashby",
-                "bamboohr",
-                "basecamp",
-                "bubbles",
-                "calendly",
-                "confluence",
-                "clickup",
-                "datadog",
-                "deel",
-                "discord",
-                "dropbox",
-                "exa",
-                "facebook",
-                "front",
-                "github",
-                "gitlab",
-                "google_docs",
                 "google_mail",
-                "google_sheet",
-                "hubspot",
-                "jira",
-                "linear",
-                "microsoft_teams",
-                "mixpanel",
-                "monday",
-                "outlook",
-                "perplexity",
-                "rippling",
-                "salesforce",
-                "segment",
-                "todoist",
-                "twitter",
-                "zoom",
+                "box",
+                "dropbox",
+                "google_drive",
+                "vault",
+                "web_crawler",
             ]
         ]
         | Omit = omit,
@@ -1398,6 +1131,9 @@ class MemoriesResourceWithRawResponse:
         self.add = to_raw_response_wrapper(
             memories.add,
         )
+        self.add_bulk = to_raw_response_wrapper(
+            memories.add_bulk,
+        )
         self.get = to_raw_response_wrapper(
             memories.get,
         )
@@ -1427,6 +1163,9 @@ class AsyncMemoriesResourceWithRawResponse:
         )
         self.add = async_to_raw_response_wrapper(
             memories.add,
+        )
+        self.add_bulk = async_to_raw_response_wrapper(
+            memories.add_bulk,
         )
         self.get = async_to_raw_response_wrapper(
             memories.get,
@@ -1458,6 +1197,9 @@ class MemoriesResourceWithStreamingResponse:
         self.add = to_streamed_response_wrapper(
             memories.add,
         )
+        self.add_bulk = to_streamed_response_wrapper(
+            memories.add_bulk,
+        )
         self.get = to_streamed_response_wrapper(
             memories.get,
         )
@@ -1487,6 +1229,9 @@ class AsyncMemoriesResourceWithStreamingResponse:
         )
         self.add = async_to_streamed_response_wrapper(
             memories.add,
+        )
+        self.add_bulk = async_to_streamed_response_wrapper(
+            memories.add_bulk,
         )
         self.get = async_to_streamed_response_wrapper(
             memories.get,

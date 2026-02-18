@@ -2,16 +2,21 @@
 
 from __future__ import annotations
 
-from typing import Dict, Union, Optional
+from typing import Dict, Union, Iterable, Optional
 from datetime import datetime
 from typing_extensions import Required, Annotated, TypedDict
 
 from .._utils import PropertyInfo
 
-__all__ = ["MemoryAddParams"]
+__all__ = ["MemoryAddBulkParams", "Item"]
 
 
-class MemoryAddParams(TypedDict, total=False):
+class MemoryAddBulkParams(TypedDict, total=False):
+    items: Required[Iterable[Item]]
+    """List of memories to ingest. Maximum 100 items."""
+
+
+class Item(TypedDict, total=False):
     text: Required[str]
     """Full text of the document."""
 
