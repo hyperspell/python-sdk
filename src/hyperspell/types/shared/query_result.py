@@ -49,7 +49,6 @@ class Document(BaseModel):
     resource_id: str
 
     source: Literal[
-        "collections",
         "reddit",
         "notion",
         "slack",

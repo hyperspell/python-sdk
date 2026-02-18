@@ -31,7 +31,7 @@ class TestMemories:
     def test_method_update(self, client: Hyperspell) -> None:
         memory = client.memories.update(
             resource_id="resource_id",
-            source="collections",
+            source="reddit",
         )
         assert_matches_type(MemoryStatus, memory, path=["response"])
 
@@ -39,7 +39,7 @@ class TestMemories:
     def test_method_update_with_all_params(self, client: Hyperspell) -> None:
         memory = client.memories.update(
             resource_id="resource_id",
-            source="collections",
+            source="reddit",
             collection="string",
             metadata={"foo": "string"},
             text="string",
@@ -51,7 +51,7 @@ class TestMemories:
     def test_raw_response_update(self, client: Hyperspell) -> None:
         response = client.memories.with_raw_response.update(
             resource_id="resource_id",
-            source="collections",
+            source="reddit",
         )
 
         assert response.is_closed is True
@@ -63,7 +63,7 @@ class TestMemories:
     def test_streaming_response_update(self, client: Hyperspell) -> None:
         with client.memories.with_streaming_response.update(
             resource_id="resource_id",
-            source="collections",
+            source="reddit",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -78,7 +78,7 @@ class TestMemories:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `resource_id` but received ''"):
             client.memories.with_raw_response.update(
                 resource_id="",
-                source="collections",
+                source="reddit",
             )
 
     @parametrize
@@ -93,7 +93,7 @@ class TestMemories:
             cursor="cursor",
             filter="filter",
             size=0,
-            source="collections",
+            source="reddit",
             status="pending",
         )
         assert_matches_type(SyncCursorPage[MemoryListResponse], memory, path=["response"])
@@ -122,7 +122,7 @@ class TestMemories:
     def test_method_delete(self, client: Hyperspell) -> None:
         memory = client.memories.delete(
             resource_id="resource_id",
-            source="collections",
+            source="reddit",
         )
         assert_matches_type(MemoryDeleteResponse, memory, path=["response"])
 
@@ -130,7 +130,7 @@ class TestMemories:
     def test_raw_response_delete(self, client: Hyperspell) -> None:
         response = client.memories.with_raw_response.delete(
             resource_id="resource_id",
-            source="collections",
+            source="reddit",
         )
 
         assert response.is_closed is True
@@ -142,7 +142,7 @@ class TestMemories:
     def test_streaming_response_delete(self, client: Hyperspell) -> None:
         with client.memories.with_streaming_response.delete(
             resource_id="resource_id",
-            source="collections",
+            source="reddit",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -157,7 +157,7 @@ class TestMemories:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `resource_id` but received ''"):
             client.memories.with_raw_response.delete(
                 resource_id="",
-                source="collections",
+                source="reddit",
             )
 
     @parametrize
@@ -238,7 +238,7 @@ class TestMemories:
     def test_method_get(self, client: Hyperspell) -> None:
         memory = client.memories.get(
             resource_id="resource_id",
-            source="collections",
+            source="reddit",
         )
         assert_matches_type(MemoryGetResponse, memory, path=["response"])
 
@@ -246,7 +246,7 @@ class TestMemories:
     def test_raw_response_get(self, client: Hyperspell) -> None:
         response = client.memories.with_raw_response.get(
             resource_id="resource_id",
-            source="collections",
+            source="reddit",
         )
 
         assert response.is_closed is True
@@ -258,7 +258,7 @@ class TestMemories:
     def test_streaming_response_get(self, client: Hyperspell) -> None:
         with client.memories.with_streaming_response.get(
             resource_id="resource_id",
-            source="collections",
+            source="reddit",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -273,7 +273,7 @@ class TestMemories:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `resource_id` but received ''"):
             client.memories.with_raw_response.get(
                 resource_id="",
-                source="collections",
+                source="reddit",
             )
 
     @parametrize
@@ -294,10 +294,6 @@ class TestMemories:
                 "answer_model": "llama-3.1",
                 "before": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "box": {
-                    "collection": "collection",
-                    "weight": 0,
-                },
-                "collections": {
                     "collection": "collection",
                     "weight": 0,
                 },
@@ -338,6 +334,10 @@ class TestMemories:
                     "include_private": True,
                     "weight": 0,
                 },
+                "vault": {
+                    "collection": "collection",
+                    "weight": 0,
+                },
                 "web_crawler": {
                     "collection": "collection",
                     "max_depth": 0,
@@ -345,7 +345,7 @@ class TestMemories:
                     "weight": 0,
                 },
             },
-            sources=["collections"],
+            sources=["reddit"],
         )
         assert_matches_type(QueryResult, memory, path=["response"])
 
@@ -448,7 +448,7 @@ class TestAsyncMemories:
     async def test_method_update(self, async_client: AsyncHyperspell) -> None:
         memory = await async_client.memories.update(
             resource_id="resource_id",
-            source="collections",
+            source="reddit",
         )
         assert_matches_type(MemoryStatus, memory, path=["response"])
 
@@ -456,7 +456,7 @@ class TestAsyncMemories:
     async def test_method_update_with_all_params(self, async_client: AsyncHyperspell) -> None:
         memory = await async_client.memories.update(
             resource_id="resource_id",
-            source="collections",
+            source="reddit",
             collection="string",
             metadata={"foo": "string"},
             text="string",
@@ -468,7 +468,7 @@ class TestAsyncMemories:
     async def test_raw_response_update(self, async_client: AsyncHyperspell) -> None:
         response = await async_client.memories.with_raw_response.update(
             resource_id="resource_id",
-            source="collections",
+            source="reddit",
         )
 
         assert response.is_closed is True
@@ -480,7 +480,7 @@ class TestAsyncMemories:
     async def test_streaming_response_update(self, async_client: AsyncHyperspell) -> None:
         async with async_client.memories.with_streaming_response.update(
             resource_id="resource_id",
-            source="collections",
+            source="reddit",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -495,7 +495,7 @@ class TestAsyncMemories:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `resource_id` but received ''"):
             await async_client.memories.with_raw_response.update(
                 resource_id="",
-                source="collections",
+                source="reddit",
             )
 
     @parametrize
@@ -510,7 +510,7 @@ class TestAsyncMemories:
             cursor="cursor",
             filter="filter",
             size=0,
-            source="collections",
+            source="reddit",
             status="pending",
         )
         assert_matches_type(AsyncCursorPage[MemoryListResponse], memory, path=["response"])
@@ -539,7 +539,7 @@ class TestAsyncMemories:
     async def test_method_delete(self, async_client: AsyncHyperspell) -> None:
         memory = await async_client.memories.delete(
             resource_id="resource_id",
-            source="collections",
+            source="reddit",
         )
         assert_matches_type(MemoryDeleteResponse, memory, path=["response"])
 
@@ -547,7 +547,7 @@ class TestAsyncMemories:
     async def test_raw_response_delete(self, async_client: AsyncHyperspell) -> None:
         response = await async_client.memories.with_raw_response.delete(
             resource_id="resource_id",
-            source="collections",
+            source="reddit",
         )
 
         assert response.is_closed is True
@@ -559,7 +559,7 @@ class TestAsyncMemories:
     async def test_streaming_response_delete(self, async_client: AsyncHyperspell) -> None:
         async with async_client.memories.with_streaming_response.delete(
             resource_id="resource_id",
-            source="collections",
+            source="reddit",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -574,7 +574,7 @@ class TestAsyncMemories:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `resource_id` but received ''"):
             await async_client.memories.with_raw_response.delete(
                 resource_id="",
-                source="collections",
+                source="reddit",
             )
 
     @parametrize
@@ -655,7 +655,7 @@ class TestAsyncMemories:
     async def test_method_get(self, async_client: AsyncHyperspell) -> None:
         memory = await async_client.memories.get(
             resource_id="resource_id",
-            source="collections",
+            source="reddit",
         )
         assert_matches_type(MemoryGetResponse, memory, path=["response"])
 
@@ -663,7 +663,7 @@ class TestAsyncMemories:
     async def test_raw_response_get(self, async_client: AsyncHyperspell) -> None:
         response = await async_client.memories.with_raw_response.get(
             resource_id="resource_id",
-            source="collections",
+            source="reddit",
         )
 
         assert response.is_closed is True
@@ -675,7 +675,7 @@ class TestAsyncMemories:
     async def test_streaming_response_get(self, async_client: AsyncHyperspell) -> None:
         async with async_client.memories.with_streaming_response.get(
             resource_id="resource_id",
-            source="collections",
+            source="reddit",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -690,7 +690,7 @@ class TestAsyncMemories:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `resource_id` but received ''"):
             await async_client.memories.with_raw_response.get(
                 resource_id="",
-                source="collections",
+                source="reddit",
             )
 
     @parametrize
@@ -711,10 +711,6 @@ class TestAsyncMemories:
                 "answer_model": "llama-3.1",
                 "before": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "box": {
-                    "collection": "collection",
-                    "weight": 0,
-                },
-                "collections": {
                     "collection": "collection",
                     "weight": 0,
                 },
@@ -755,6 +751,10 @@ class TestAsyncMemories:
                     "include_private": True,
                     "weight": 0,
                 },
+                "vault": {
+                    "collection": "collection",
+                    "weight": 0,
+                },
                 "web_crawler": {
                     "collection": "collection",
                     "max_depth": 0,
@@ -762,7 +762,7 @@ class TestAsyncMemories:
                     "weight": 0,
                 },
             },
-            sources=["collections"],
+            sources=["reddit"],
         )
         assert_matches_type(QueryResult, memory, path=["response"])
 

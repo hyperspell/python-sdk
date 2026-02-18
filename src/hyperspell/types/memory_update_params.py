@@ -11,7 +11,6 @@ __all__ = ["MemoryUpdateParams"]
 class MemoryUpdateParams(TypedDict, total=False):
     source: Required[
         Literal[
-            "collections",
             "reddit",
             "notion",
             "slack",

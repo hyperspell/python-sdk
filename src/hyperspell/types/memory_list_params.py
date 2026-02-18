@@ -24,7 +24,6 @@ class MemoryListParams(TypedDict, total=False):
 
     source: Optional[
         Literal[
-            "collections",
             "reddit",
             "notion",
             "slack",

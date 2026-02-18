@@ -19,7 +19,6 @@ class Connection(BaseModel):
     """The connection's label"""
 
     provider: Literal[
-        "collections",
         "reddit",
         "notion",
         "slack",

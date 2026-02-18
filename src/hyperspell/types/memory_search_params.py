@@ -13,13 +13,13 @@ __all__ = [
     "MemorySearchParams",
     "Options",
     "OptionsBox",
-    "OptionsCollections",
     "OptionsGoogleCalendar",
     "OptionsGoogleDrive",
     "OptionsGoogleMail",
     "OptionsNotion",
     "OptionsReddit",
     "OptionsSlack",
+    "OptionsVault",
     "OptionsWebCrawler",
 ]
 
@@ -39,7 +39,6 @@ class MemorySearchParams(TypedDict, total=False):
 
     sources: List[
         Literal[
-            "collections",
             "reddit",
             "notion",
             "slack",
@@ -57,20 +56,6 @@ class MemorySearchParams(TypedDict, total=False):
 
 class OptionsBox(TypedDict, total=False):
     """Search options for Box"""
-
-    collection: Optional[str]
-
-    weight: float
-    """Weight of results from this source.
-
-    A weight greater than 1.0 means more results from this source will be returned,
-    a weight less than 1.0 means fewer results will be returned. This will only
-    affect results if multiple sources are queried at the same time.
-    """
-
-
-class OptionsCollections(TypedDict, total=False):
-    """Search options for vault"""
 
     collection: Optional[str]
 
@@ -218,6 +203,20 @@ class OptionsSlack(TypedDict, total=False):
     """
 
 
+class OptionsVault(TypedDict, total=False):
+    """Search options for vault"""
+
+    collection: Optional[str]
+
+    weight: float
+    """Weight of results from this source.
+
+    A weight greater than 1.0 means more results from this source will be returned,
+    a weight less than 1.0 means fewer results will be returned. This will only
+    affect results if multiple sources are queried at the same time.
+    """
+
+
 class OptionsWebCrawler(TypedDict, total=False):
     """Search options for Web Crawler"""
 
@@ -253,9 +252,6 @@ class Options(TypedDict, total=False):
     box: OptionsBox
     """Search options for Box"""
 
-    collections: OptionsCollections
-    """Search options for vault"""
-
     filter: Optional[Dict[str, object]]
     """Metadata filters using MongoDB-style operators.
 
@@ -282,6 +278,9 @@ class Options(TypedDict, total=False):
 
     slack: OptionsSlack
     """Search options for Slack"""
+
+    vault: OptionsVault
+    """Search options for vault"""
 
     web_crawler: OptionsWebCrawler
     """Search options for Web Crawler"""

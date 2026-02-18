@@ -25,7 +25,6 @@ class Integration(BaseModel):
     """The integration's display name"""
 
     provider: Literal[
-        "collections",
         "reddit",
         "notion",
         "slack",

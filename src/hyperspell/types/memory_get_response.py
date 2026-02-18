@@ -46,10 +46,11 @@ class Metadata(BaseModel):
 
 
 class MemoryGetResponse(BaseModel):
+    """Response model for the GET /memories/get endpoint."""
+
     resource_id: str
 
     source: Literal[
-        "collections",
         "reddit",
         "notion",
         "slack",
@@ -62,9 +63,27 @@ class MemoryGetResponse(BaseModel):
         "web_crawler",
     ]
 
+    type: str
+    """The type of document (e.g. Document, Website, Email)"""
+
+    data: Optional[List[object]] = None
+    """The structured content of the document"""
+
+    memories: Optional[List[str]] = None
+    """Summaries of all memories extracted from this document"""
+
     metadata: Optional[Metadata] = None
 
-    score: Optional[float] = None
-    """The relevance of the resource to the query"""
-
     title: Optional[str] = None
+
+    if TYPE_CHECKING:
+        # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a
+        # value to this field, so for compatibility we avoid doing it at runtime.
+        __pydantic_extra__: Dict[str, object] = FieldInfo(init=False)  # pyright: ignore[reportIncompatibleVariableOverride]
+
+        # Stub to indicate that arbitrary properties are accepted.
+        # To access properties that are not valid identifiers you can use `getattr`, e.g.
+        # `getattr(obj, '$type')`
+        def __getattr__(self, attr: str) -> object: ...
+    else:
+        __pydantic_extra__: Dict[str, object]
