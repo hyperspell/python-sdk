@@ -1,7 +1,7 @@
 # Shared Types
 
 ```python
-from hyperspell.types import QueryResult
+from hyperspell.types import Metadata, Notification, QueryResult
 ```
 
 # Connections

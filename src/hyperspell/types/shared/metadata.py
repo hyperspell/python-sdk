@@ -1,46 +1,29 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import TYPE_CHECKING, Dict, List, Optional
+from datetime import datetime
 from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
 
-from .._models import BaseModel
-from .shared.metadata import Metadata
+from ..._models import BaseModel
+from .notification import Notification
 
-__all__ = ["Memory"]
+__all__ = ["Metadata"]
 
 
-class Memory(BaseModel):
-    """Response model for the GET /memories/get endpoint."""
+class Metadata(BaseModel):
+    created_at: Optional[datetime] = None
 
-    resource_id: str
+    events: Optional[List[Notification]] = None
 
-    source: Literal[
-        "reddit",
-        "notion",
-        "slack",
-        "google_calendar",
-        "google_mail",
-        "box",
-        "dropbox",
-        "google_drive",
-        "vault",
-        "web_crawler",
-    ]
+    indexed_at: Optional[datetime] = None
 
-    type: str
-    """The type of document (e.g. Document, Website, Email)"""
+    last_modified: Optional[datetime] = None
 
-    data: Optional[List[object]] = None
-    """The structured content of the document"""
+    status: Optional[Literal["pending", "processing", "completed", "failed"]] = None
 
-    memories: Optional[List[str]] = None
-    """Summaries of all memories extracted from this document"""
-
-    metadata: Optional[Metadata] = None
-
-    title: Optional[str] = None
+    url: Optional[str] = None
 
     if TYPE_CHECKING:
         # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a
