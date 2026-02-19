@@ -57,8 +57,6 @@ class MemorySearchParams(TypedDict, total=False):
 class OptionsBox(TypedDict, total=False):
     """Search options for Box"""
 
-    collection: Optional[str]
-
     weight: float
     """Weight of results from this source.
 
@@ -78,8 +76,6 @@ class OptionsGoogleCalendar(TypedDict, total=False):
     list of calendars with the `/integrations/google_calendar/list` endpoint.
     """
 
-    collection: Optional[str]
-
     weight: float
     """Weight of results from this source.
 
@@ -92,8 +88,6 @@ class OptionsGoogleCalendar(TypedDict, total=False):
 class OptionsGoogleDrive(TypedDict, total=False):
     """Search options for Google Drive"""
 
-    collection: Optional[str]
-
     weight: float
     """Weight of results from this source.
 
@@ -105,8 +99,6 @@ class OptionsGoogleDrive(TypedDict, total=False):
 
 class OptionsGoogleMail(TypedDict, total=False):
     """Search options for Gmail"""
-
-    collection: Optional[str]
 
     label_ids: SequenceNotStr[str]
     """List of label IDs to filter messages (e.g., ['INBOX', 'SENT', 'DRAFT']).
@@ -128,8 +120,6 @@ class OptionsGoogleMail(TypedDict, total=False):
 class OptionsNotion(TypedDict, total=False):
     """Search options for Notion"""
 
-    collection: Optional[str]
-
     notion_page_ids: SequenceNotStr[str]
     """List of Notion page IDs to search.
 
@@ -147,8 +137,6 @@ class OptionsNotion(TypedDict, total=False):
 
 class OptionsReddit(TypedDict, total=False):
     """Search options for Reddit"""
-
-    collection: Optional[str]
 
     period: Literal["hour", "day", "week", "month", "year", "all"]
     """The time period to search. Defaults to 'month'."""
@@ -177,8 +165,6 @@ class OptionsSlack(TypedDict, total=False):
     channels: SequenceNotStr[str]
     """List of Slack channels to include (by id, name, or #name)."""
 
-    collection: Optional[str]
-
     exclude_archived: Optional[bool]
     """If set, pass 'exclude_archived' to Slack. If None, omit the param."""
 
@@ -206,8 +192,6 @@ class OptionsSlack(TypedDict, total=False):
 class OptionsVault(TypedDict, total=False):
     """Search options for vault"""
 
-    collection: Optional[str]
-
     weight: float
     """Weight of results from this source.
 
@@ -219,8 +203,6 @@ class OptionsVault(TypedDict, total=False):
 
 class OptionsWebCrawler(TypedDict, total=False):
     """Search options for Web Crawler"""
-
-    collection: Optional[str]
 
     max_depth: int
     """Maximum depth to crawl from the starting URL"""
