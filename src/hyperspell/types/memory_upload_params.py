@@ -15,7 +15,10 @@ class MemoryUploadParams(TypedDict, total=False):
     """The file to ingest."""
 
     collection: Optional[str]
-    """The collection to add the document to."""
+    """
+    The collection to add the document to — deprecated, set the collection using
+    metadata instead.
+    """
 
     metadata: Optional[str]
     """Custom metadata as JSON string for filtering.
