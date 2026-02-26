@@ -27,6 +27,7 @@ class Memory(BaseModel):
         "google_drive",
         "vault",
         "web_crawler",
+        "trace",
     ]
 
     type: str

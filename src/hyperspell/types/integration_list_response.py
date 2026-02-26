@@ -35,6 +35,7 @@ class Integration(BaseModel):
         "google_drive",
         "vault",
         "web_crawler",
+        "trace",
     ]
     """The integration's provider"""
 

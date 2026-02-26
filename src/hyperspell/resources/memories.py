@@ -74,6 +74,7 @@ class MemoriesResource(SyncAPIResource):
             "google_drive",
             "vault",
             "web_crawler",
+            "trace",
         ],
         collection: Union[str, object, None] | Omit = omit,
         metadata: Union[Dict[str, Union[str, float, bool, None]], object, None] | Omit = omit,
@@ -154,6 +155,7 @@ class MemoriesResource(SyncAPIResource):
                 "google_drive",
                 "vault",
                 "web_crawler",
+                "trace",
             ]
         ]
         | Omit = omit,
@@ -227,6 +229,7 @@ class MemoriesResource(SyncAPIResource):
             "google_drive",
             "vault",
             "web_crawler",
+            "trace",
         ],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -397,6 +400,7 @@ class MemoriesResource(SyncAPIResource):
             "google_drive",
             "vault",
             "web_crawler",
+            "trace",
         ],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -448,6 +452,7 @@ class MemoriesResource(SyncAPIResource):
                 "google_drive",
                 "vault",
                 "web_crawler",
+                "trace",
             ]
         ]
         | Omit = omit,
@@ -615,6 +620,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
             "google_drive",
             "vault",
             "web_crawler",
+            "trace",
         ],
         collection: Union[str, object, None] | Omit = omit,
         metadata: Union[Dict[str, Union[str, float, bool, None]], object, None] | Omit = omit,
@@ -695,6 +701,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
                 "google_drive",
                 "vault",
                 "web_crawler",
+                "trace",
             ]
         ]
         | Omit = omit,
@@ -768,6 +775,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
             "google_drive",
             "vault",
             "web_crawler",
+            "trace",
         ],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -938,6 +946,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
             "google_drive",
             "vault",
             "web_crawler",
+            "trace",
         ],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -989,6 +998,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
                 "google_drive",
                 "vault",
                 "web_crawler",
+                "trace",
             ]
         ]
         | Omit = omit,
