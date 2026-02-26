@@ -226,7 +226,9 @@ class Options(TypedDict, total=False):
     after: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
     """Only query documents created on or after this date."""
 
-    answer_model: Literal["llama-3.1", "gemma2", "qwen-qwq", "mistral-saba", "llama-4-scout", "deepseek-r1"]
+    answer_model: Literal[
+        "llama-3.1", "gemma2", "qwen-qwq", "mistral-saba", "llama-4-scout", "deepseek-r1", "gpt-oss-20b", "gpt-oss-120b"
+    ]
     """Model to use for answer generation when answer=True"""
 
     before: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
