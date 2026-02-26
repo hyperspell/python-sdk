@@ -23,6 +23,7 @@ class MemoryListResponse(BaseModel):
         "google_drive",
         "vault",
         "web_crawler",
+        "trace",
     ]
 
     metadata: Optional[Metadata] = None

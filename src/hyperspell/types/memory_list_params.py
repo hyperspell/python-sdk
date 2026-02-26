@@ -34,6 +34,7 @@ class MemoryListParams(TypedDict, total=False):
             "google_drive",
             "vault",
             "web_crawler",
+            "trace",
         ]
     ]
     """Filter documents by source."""

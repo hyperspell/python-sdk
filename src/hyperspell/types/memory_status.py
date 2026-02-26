@@ -21,6 +21,7 @@ class MemoryStatus(BaseModel):
         "google_drive",
         "vault",
         "web_crawler",
+        "trace",
     ]
 
     status: Literal["pending", "processing", "completed", "failed"]

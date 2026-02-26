@@ -25,6 +25,7 @@ class MemoryDeleteResponse(BaseModel):
         "google_drive",
         "vault",
         "web_crawler",
+        "trace",
     ]
 
     success: bool

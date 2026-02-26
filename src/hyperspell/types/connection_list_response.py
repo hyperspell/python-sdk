@@ -29,6 +29,7 @@ class Connection(BaseModel):
         "google_drive",
         "vault",
         "web_crawler",
+        "trace",
     ]
     """The connection's provider"""
 

@@ -44,6 +44,7 @@ class AuthMeResponse(BaseModel):
             "google_drive",
             "vault",
             "web_crawler",
+            "trace",
         ]
     ]
     """All integrations available for the app"""
@@ -60,6 +61,7 @@ class AuthMeResponse(BaseModel):
             "google_drive",
             "vault",
             "web_crawler",
+            "trace",
         ]
     ]
     """All integrations installed for the user"""

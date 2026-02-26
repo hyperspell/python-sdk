@@ -49,6 +49,7 @@ class MemorySearchParams(TypedDict, total=False):
             "google_drive",
             "vault",
             "web_crawler",
+            "trace",
         ]
     ]
     """Only query documents from these sources."""
