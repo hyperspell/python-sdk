@@ -21,6 +21,7 @@ class MemoryListResponse(BaseModel):
         "box",
         "dropbox",
         "google_drive",
+        "github",
         "vault",
         "web_crawler",
         "trace",
