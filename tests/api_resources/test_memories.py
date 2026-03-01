@@ -315,6 +315,7 @@ class TestMemories:
                     "subreddit": "subreddit",
                     "weight": 0,
                 },
+                "resource_ids": ["string"],
                 "slack": {
                     "channels": ["string"],
                     "exclude_archived": True,
@@ -717,6 +718,7 @@ class TestAsyncMemories:
                     "subreddit": "subreddit",
                     "weight": 0,
                 },
+                "resource_ids": ["string"],
                 "slack": {
                     "channels": ["string"],
                     "exclude_archived": True,

@@ -262,6 +262,13 @@ class Options(TypedDict, total=False):
     reddit: OptionsReddit
     """Search options for Reddit"""
 
+    resource_ids: Optional[SequenceNotStr[str]]
+    """Only return results from these specific resource IDs.
+
+    Useful for scoping searches to specific documents (e.g., a specific email thread
+    or uploaded file).
+    """
+
     slack: OptionsSlack
     """Search options for Slack"""
 
