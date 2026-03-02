@@ -25,7 +25,10 @@ class MemoryUpdateParams(TypedDict, total=False):
     ]
 
     collection: Union[str, object, None]
-    """The collection to move the document to. Set to null to remove the collection."""
+    """
+    The collection to move the document to — deprecated, set the collection using
+    metadata instead.
+    """
 
     metadata: Union[Dict[str, Union[str, float, bool, None]], object, None]
     """Custom metadata for filtering.

@@ -16,7 +16,10 @@ class MemoryAddParams(TypedDict, total=False):
     """Full text of the document."""
 
     collection: Optional[str]
-    """The collection to add the document to for easier retrieval."""
+    """
+    The collection to add the document to — deprecated, set the collection using
+    metadata instead.
+    """
 
     date: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
     """Date of the document.

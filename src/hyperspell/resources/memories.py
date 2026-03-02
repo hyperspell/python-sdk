@@ -95,7 +95,8 @@ class MemoriesResource(SyncAPIResource):
         To remove a collection, set it to null explicitly.
 
         Args:
-          collection: The collection to move the document to. Set to null to remove the collection.
+          collection: The collection to move the document to — deprecated, set the collection using
+              metadata instead.
 
           metadata: Custom metadata for filtering. Keys must be alphanumeric with underscores, max
               64 chars. Values must be string, number, boolean, or null. Will be merged with
@@ -297,7 +298,8 @@ class MemoriesResource(SyncAPIResource):
         Args:
           text: Full text of the document.
 
-          collection: The collection to add the document to for easier retrieval.
+          collection: The collection to add the document to — deprecated, set the collection using
+              metadata instead.
 
           date: Date of the document. Depending on the document, this could be the creation date
               or date the document was last updated (eg. for a chat transcript, this would be
@@ -541,7 +543,8 @@ class MemoriesResource(SyncAPIResource):
         Args:
           file: The file to ingest.
 
-          collection: The collection to add the document to.
+          collection: The collection to add the document to — deprecated, set the collection using
+              metadata instead.
 
           metadata: Custom metadata as JSON string for filtering. Keys must be alphanumeric with
               underscores, max 64 chars. Values must be string, number, or boolean.
@@ -633,7 +636,8 @@ class AsyncMemoriesResource(AsyncAPIResource):
         To remove a collection, set it to null explicitly.
 
         Args:
-          collection: The collection to move the document to. Set to null to remove the collection.
+          collection: The collection to move the document to — deprecated, set the collection using
+              metadata instead.
 
           metadata: Custom metadata for filtering. Keys must be alphanumeric with underscores, max
               64 chars. Values must be string, number, boolean, or null. Will be merged with
@@ -835,7 +839,8 @@ class AsyncMemoriesResource(AsyncAPIResource):
         Args:
           text: Full text of the document.
 
-          collection: The collection to add the document to for easier retrieval.
+          collection: The collection to add the document to — deprecated, set the collection using
+              metadata instead.
 
           date: Date of the document. Depending on the document, this could be the creation date
               or date the document was last updated (eg. for a chat transcript, this would be
@@ -1079,7 +1084,8 @@ class AsyncMemoriesResource(AsyncAPIResource):
         Args:
           file: The file to ingest.
 
-          collection: The collection to add the document to.
+          collection: The collection to add the document to — deprecated, set the collection using
+              metadata instead.
 
           metadata: Custom metadata as JSON string for filtering. Keys must be alphanumeric with
               underscores, max 64 chars. Values must be string, number, or boolean.

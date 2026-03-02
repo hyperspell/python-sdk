@@ -293,33 +293,23 @@ class TestMemories:
                 "after": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "answer_model": "llama-3.1",
                 "before": parse_datetime("2019-12-27T18:11:19.117Z"),
-                "box": {
-                    "collection": "collection",
-                    "weight": 0,
-                },
+                "box": {"weight": 0},
                 "filter": {"foo": "bar"},
                 "google_calendar": {
                     "calendar_id": "calendar_id",
-                    "collection": "collection",
                     "weight": 0,
                 },
-                "google_drive": {
-                    "collection": "collection",
-                    "weight": 0,
-                },
+                "google_drive": {"weight": 0},
                 "google_mail": {
-                    "collection": "collection",
                     "label_ids": ["string"],
                     "weight": 0,
                 },
                 "max_results": 0,
                 "notion": {
-                    "collection": "collection",
                     "notion_page_ids": ["string"],
                     "weight": 0,
                 },
                 "reddit": {
-                    "collection": "collection",
                     "period": "hour",
                     "sort": "relevance",
                     "subreddit": "subreddit",
@@ -327,19 +317,14 @@ class TestMemories:
                 },
                 "slack": {
                     "channels": ["string"],
-                    "collection": "collection",
                     "exclude_archived": True,
                     "include_dms": True,
                     "include_group_dms": True,
                     "include_private": True,
                     "weight": 0,
                 },
-                "vault": {
-                    "collection": "collection",
-                    "weight": 0,
-                },
+                "vault": {"weight": 0},
                 "web_crawler": {
-                    "collection": "collection",
                     "max_depth": 0,
                     "url": "url",
                     "weight": 0,
@@ -710,33 +695,23 @@ class TestAsyncMemories:
                 "after": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "answer_model": "llama-3.1",
                 "before": parse_datetime("2019-12-27T18:11:19.117Z"),
-                "box": {
-                    "collection": "collection",
-                    "weight": 0,
-                },
+                "box": {"weight": 0},
                 "filter": {"foo": "bar"},
                 "google_calendar": {
                     "calendar_id": "calendar_id",
-                    "collection": "collection",
                     "weight": 0,
                 },
-                "google_drive": {
-                    "collection": "collection",
-                    "weight": 0,
-                },
+                "google_drive": {"weight": 0},
                 "google_mail": {
-                    "collection": "collection",
                     "label_ids": ["string"],
                     "weight": 0,
                 },
                 "max_results": 0,
                 "notion": {
-                    "collection": "collection",
                     "notion_page_ids": ["string"],
                     "weight": 0,
                 },
                 "reddit": {
-                    "collection": "collection",
                     "period": "hour",
                     "sort": "relevance",
                     "subreddit": "subreddit",
@@ -744,19 +719,14 @@ class TestAsyncMemories:
                 },
                 "slack": {
                     "channels": ["string"],
-                    "collection": "collection",
                     "exclude_archived": True,
                     "include_dms": True,
                     "include_group_dms": True,
                     "include_private": True,
                     "weight": 0,
                 },
-                "vault": {
-                    "collection": "collection",
-                    "weight": 0,
-                },
+                "vault": {"weight": 0},
                 "web_crawler": {
-                    "collection": "collection",
                     "max_depth": 0,
                     "url": "url",
                     "weight": 0,
