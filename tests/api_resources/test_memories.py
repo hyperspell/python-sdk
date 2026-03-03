@@ -304,7 +304,7 @@ class TestMemories:
                     "label_ids": ["string"],
                     "weight": 0,
                 },
-                "max_results": 0,
+                "max_results": 200,
                 "notion": {
                     "notion_page_ids": ["string"],
                     "weight": 0,
@@ -707,7 +707,7 @@ class TestAsyncMemories:
                     "label_ids": ["string"],
                     "weight": 0,
                 },
-                "max_results": 0,
+                "max_results": 200,
                 "notion": {
                     "notion_page_ids": ["string"],
                     "weight": 0,
