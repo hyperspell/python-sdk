@@ -51,6 +51,7 @@ class MemorySearchParams(TypedDict, total=False):
             "vault",
             "web_crawler",
             "trace",
+            "microsoft_teams",
         ]
     ]
     """Only query documents from these sources."""

@@ -25,6 +25,7 @@ class Document(BaseModel):
         "vault",
         "web_crawler",
         "trace",
+        "microsoft_teams",
     ]
 
     metadata: Optional[Metadata] = None

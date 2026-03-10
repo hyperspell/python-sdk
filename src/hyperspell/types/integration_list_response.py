@@ -37,6 +37,7 @@ class Integration(BaseModel):
         "vault",
         "web_crawler",
         "trace",
+        "microsoft_teams",
     ]
     """The integration's provider"""
 
