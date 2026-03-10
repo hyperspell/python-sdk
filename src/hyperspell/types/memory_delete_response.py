@@ -27,6 +27,7 @@ class MemoryDeleteResponse(BaseModel):
         "vault",
         "web_crawler",
         "trace",
+        "microsoft_teams",
     ]
 
     success: bool

@@ -23,6 +23,7 @@ class MemoryStatus(BaseModel):
         "vault",
         "web_crawler",
         "trace",
+        "microsoft_teams",
     ]
 
     status: Literal["pending", "processing", "completed", "failed"]

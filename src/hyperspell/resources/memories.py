@@ -76,6 +76,7 @@ class MemoriesResource(SyncAPIResource):
             "vault",
             "web_crawler",
             "trace",
+            "microsoft_teams",
         ],
         collection: Union[str, object, None] | Omit = omit,
         metadata: Union[Dict[str, Union[str, float, bool, None]], object, None] | Omit = omit,
@@ -158,6 +159,7 @@ class MemoriesResource(SyncAPIResource):
                 "vault",
                 "web_crawler",
                 "trace",
+                "microsoft_teams",
             ]
         ]
         | Omit = omit,
@@ -233,6 +235,7 @@ class MemoriesResource(SyncAPIResource):
             "vault",
             "web_crawler",
             "trace",
+            "microsoft_teams",
         ],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -405,6 +408,7 @@ class MemoriesResource(SyncAPIResource):
             "vault",
             "web_crawler",
             "trace",
+            "microsoft_teams",
         ],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -458,6 +462,7 @@ class MemoriesResource(SyncAPIResource):
                 "vault",
                 "web_crawler",
                 "trace",
+                "microsoft_teams",
             ]
         ]
         | Omit = omit,
@@ -627,6 +632,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
             "vault",
             "web_crawler",
             "trace",
+            "microsoft_teams",
         ],
         collection: Union[str, object, None] | Omit = omit,
         metadata: Union[Dict[str, Union[str, float, bool, None]], object, None] | Omit = omit,
@@ -709,6 +715,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
                 "vault",
                 "web_crawler",
                 "trace",
+                "microsoft_teams",
             ]
         ]
         | Omit = omit,
@@ -784,6 +791,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
             "vault",
             "web_crawler",
             "trace",
+            "microsoft_teams",
         ],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -956,6 +964,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
             "vault",
             "web_crawler",
             "trace",
+            "microsoft_teams",
         ],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1009,6 +1018,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
                 "vault",
                 "web_crawler",
                 "trace",
+                "microsoft_teams",
             ]
         ]
         | Omit = omit,

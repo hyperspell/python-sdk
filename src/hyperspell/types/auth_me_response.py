@@ -46,6 +46,7 @@ class AuthMeResponse(BaseModel):
             "vault",
             "web_crawler",
             "trace",
+            "microsoft_teams",
         ]
     ]
     """All integrations available for the app"""
@@ -64,6 +65,7 @@ class AuthMeResponse(BaseModel):
             "vault",
             "web_crawler",
             "trace",
+            "microsoft_teams",
         ]
     ]
     """All integrations installed for the user"""

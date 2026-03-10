@@ -29,6 +29,7 @@ class Memory(BaseModel):
         "vault",
         "web_crawler",
         "trace",
+        "microsoft_teams",
     ]
 
     type: str

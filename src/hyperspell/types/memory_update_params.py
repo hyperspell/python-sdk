@@ -23,6 +23,7 @@ class MemoryUpdateParams(TypedDict, total=False):
             "vault",
             "web_crawler",
             "trace",
+            "microsoft_teams",
         ]
     ]
 
