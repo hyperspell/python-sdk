@@ -305,6 +305,7 @@ class TestMemories:
                     "weight": 0,
                 },
                 "max_results": 200,
+                "memory_types": ["procedure"],
                 "notion": {
                     "notion_page_ids": ["string"],
                     "weight": 0,
@@ -708,6 +709,7 @@ class TestAsyncMemories:
                     "weight": 0,
                 },
                 "max_results": 200,
+                "memory_types": ["procedure"],
                 "notion": {
                     "notion_page_ids": ["string"],
                     "weight": 0,
