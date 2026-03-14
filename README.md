@@ -134,9 +134,7 @@ client = Hyperspell()
 
 all_memories = []
 # Automatically fetches more pages as needed.
-for memory in client.memories.list(
-    collection="REPLACE_ME",
-):
+for memory in client.memories.list():
     # Do something with memory here
     all_memories.append(memory)
 print(all_memories)
@@ -154,9 +152,7 @@ client = AsyncHyperspell()
 async def main() -> None:
     all_memories = []
     # Iterate through items across all pages, issuing requests as needed.
-    async for memory in client.memories.list(
-        collection="REPLACE_ME",
-    ):
+    async for memory in client.memories.list():
         all_memories.append(memory)
     print(all_memories)
 
@@ -167,9 +163,7 @@ asyncio.run(main())
 Alternatively, you can use the `.has_next_page()`, `.next_page_info()`, or `.get_next_page()` methods for more granular control working with pages:
 
 ```python
-first_page = await client.memories.list(
-    collection="REPLACE_ME",
-)
+first_page = await client.memories.list()
 if first_page.has_next_page():
     print(f"will fetch next page using these details: {first_page.next_page_info()}")
     next_page = await first_page.get_next_page()
@@ -181,9 +175,7 @@ if first_page.has_next_page():
 Or just work directly with the returned data:
 
 ```python
-first_page = await client.memories.list(
-    collection="REPLACE_ME",
-)
+first_page = await client.memories.list()
 
 print(f"next page cursor: {first_page.next_cursor}")  # => "next page cursor: ..."
 for memory in first_page.items:

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import typing_extensions
 from typing import Optional
 
 import httpx
@@ -44,6 +45,7 @@ class VaultsResource(SyncAPIResource):
         """
         return VaultsResourceWithStreamingResponse(self)
 
+    @typing_extensions.deprecated("This method will be removed in the future")
     def list(
         self,
         *,
@@ -110,6 +112,7 @@ class AsyncVaultsResource(AsyncAPIResource):
         """
         return AsyncVaultsResourceWithStreamingResponse(self)
 
+    @typing_extensions.deprecated("This method will be removed in the future")
     def list(
         self,
         *,
@@ -160,8 +163,10 @@ class VaultsResourceWithRawResponse:
     def __init__(self, vaults: VaultsResource) -> None:
         self._vaults = vaults
 
-        self.list = to_raw_response_wrapper(
-            vaults.list,
+        self.list = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                vaults.list,  # pyright: ignore[reportDeprecated],
+            )
         )
 
 
@@ -169,8 +174,10 @@ class AsyncVaultsResourceWithRawResponse:
     def __init__(self, vaults: AsyncVaultsResource) -> None:
         self._vaults = vaults
 
-        self.list = async_to_raw_response_wrapper(
-            vaults.list,
+        self.list = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                vaults.list,  # pyright: ignore[reportDeprecated],
+            )
         )
 
 
@@ -178,8 +185,10 @@ class VaultsResourceWithStreamingResponse:
     def __init__(self, vaults: VaultsResource) -> None:
         self._vaults = vaults
 
-        self.list = to_streamed_response_wrapper(
-            vaults.list,
+        self.list = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                vaults.list,  # pyright: ignore[reportDeprecated],
+            )
         )
 
 
@@ -187,6 +196,8 @@ class AsyncVaultsResourceWithStreamingResponse:
     def __init__(self, vaults: AsyncVaultsResource) -> None:
         self._vaults = vaults
 
-        self.list = async_to_streamed_response_wrapper(
-            vaults.list,
+        self.list = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                vaults.list,  # pyright: ignore[reportDeprecated],
+            )
         )
