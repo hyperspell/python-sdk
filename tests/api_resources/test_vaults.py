@@ -12,6 +12,8 @@ from tests.utils import assert_matches_type
 from hyperspell.types import VaultListResponse
 from hyperspell.pagination import SyncCursorPage, AsyncCursorPage
 
+# pyright: reportDeprecated=false
+
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
 
@@ -20,20 +22,25 @@ class TestVaults:
 
     @parametrize
     def test_method_list(self, client: Hyperspell) -> None:
-        vault = client.vaults.list()
+        with pytest.warns(DeprecationWarning):
+            vault = client.vaults.list()
+
         assert_matches_type(SyncCursorPage[VaultListResponse], vault, path=["response"])
 
     @parametrize
     def test_method_list_with_all_params(self, client: Hyperspell) -> None:
-        vault = client.vaults.list(
-            cursor="cursor",
-            size=0,
-        )
+        with pytest.warns(DeprecationWarning):
+            vault = client.vaults.list(
+                cursor="cursor",
+                size=0,
+            )
+
         assert_matches_type(SyncCursorPage[VaultListResponse], vault, path=["response"])
 
     @parametrize
     def test_raw_response_list(self, client: Hyperspell) -> None:
-        response = client.vaults.with_raw_response.list()
+        with pytest.warns(DeprecationWarning):
+            response = client.vaults.with_raw_response.list()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -42,12 +49,13 @@ class TestVaults:
 
     @parametrize
     def test_streaming_response_list(self, client: Hyperspell) -> None:
-        with client.vaults.with_streaming_response.list() as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        with pytest.warns(DeprecationWarning):
+            with client.vaults.with_streaming_response.list() as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            vault = response.parse()
-            assert_matches_type(SyncCursorPage[VaultListResponse], vault, path=["response"])
+                vault = response.parse()
+                assert_matches_type(SyncCursorPage[VaultListResponse], vault, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -59,20 +67,25 @@ class TestAsyncVaults:
 
     @parametrize
     async def test_method_list(self, async_client: AsyncHyperspell) -> None:
-        vault = await async_client.vaults.list()
+        with pytest.warns(DeprecationWarning):
+            vault = await async_client.vaults.list()
+
         assert_matches_type(AsyncCursorPage[VaultListResponse], vault, path=["response"])
 
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncHyperspell) -> None:
-        vault = await async_client.vaults.list(
-            cursor="cursor",
-            size=0,
-        )
+        with pytest.warns(DeprecationWarning):
+            vault = await async_client.vaults.list(
+                cursor="cursor",
+                size=0,
+            )
+
         assert_matches_type(AsyncCursorPage[VaultListResponse], vault, path=["response"])
 
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncHyperspell) -> None:
-        response = await async_client.vaults.with_raw_response.list()
+        with pytest.warns(DeprecationWarning):
+            response = await async_client.vaults.with_raw_response.list()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -81,11 +94,12 @@ class TestAsyncVaults:
 
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncHyperspell) -> None:
-        async with async_client.vaults.with_streaming_response.list() as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        with pytest.warns(DeprecationWarning):
+            async with async_client.vaults.with_streaming_response.list() as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            vault = await response.parse()
-            assert_matches_type(AsyncCursorPage[VaultListResponse], vault, path=["response"])
+                vault = await response.parse()
+                assert_matches_type(AsyncCursorPage[VaultListResponse], vault, path=["response"])
 
         assert cast(Any, response.is_closed) is True
