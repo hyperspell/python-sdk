@@ -47,8 +47,11 @@ class MemorySearchParams(TypedDict, total=False):
             "box",
             "dropbox",
             "google_drive",
+            "github",
             "vault",
             "web_crawler",
+            "trace",
+            "microsoft_teams",
         ]
     ]
     """Only query documents from these sources."""
@@ -225,7 +228,9 @@ class Options(TypedDict, total=False):
     after: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
     """Only query documents created on or after this date."""
 
-    answer_model: Literal["llama-3.1", "gemma2", "qwen-qwq", "mistral-saba", "llama-4-scout", "deepseek-r1"]
+    answer_model: Literal[
+        "llama-3.1", "gemma2", "qwen-qwq", "mistral-saba", "llama-4-scout", "deepseek-r1", "gpt-oss-20b", "gpt-oss-120b"
+    ]
     """Model to use for answer generation when answer=True"""
 
     before: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
@@ -252,11 +257,25 @@ class Options(TypedDict, total=False):
     max_results: int
     """Maximum number of results to return."""
 
+    memory_types: List[Literal["procedure", "memory"]]
+    """Filter by memory type.
+
+    Defaults to generic memories only. Pass multiple types to include procedures,
+    etc.
+    """
+
     notion: OptionsNotion
     """Search options for Notion"""
 
     reddit: OptionsReddit
     """Search options for Reddit"""
+
+    resource_ids: Optional[SequenceNotStr[str]]
+    """Only return results from these specific resource IDs.
+
+    Useful for scoping searches to specific documents (e.g., a specific email thread
+    or uploaded file).
+    """
 
     slack: OptionsSlack
     """Search options for Slack"""

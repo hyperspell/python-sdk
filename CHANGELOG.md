@@ -1,5 +1,31 @@
 # Changelog
 
+## 0.34.0 (2026-03-14)
+
+Full Changelog: [v0.33.0...v0.34.0](https://github.com/hyperspell/python-sdk/compare/v0.33.0...v0.34.0)
+
+### Features
+
+* **api:** api update ([f690c84](https://github.com/hyperspell/python-sdk/commit/f690c841ce28801b1511142026b62d7fcc2706ba))
+* **api:** api update ([784a11e](https://github.com/hyperspell/python-sdk/commit/784a11e826b748f682186bbb39e8f7580cb4d683))
+* **api:** api update ([0f66c9d](https://github.com/hyperspell/python-sdk/commit/0f66c9dfe8e50d22f1a66f6de9b3ee0f1a89ab38))
+* **api:** api update ([b76b873](https://github.com/hyperspell/python-sdk/commit/b76b873e4c01f4c9421cc6e452f216c19374b687))
+* **api:** api update ([b75e2b3](https://github.com/hyperspell/python-sdk/commit/b75e2b3bbb5a871a39d147e4cb0949d7279f3271))
+* **api:** api update ([d330dea](https://github.com/hyperspell/python-sdk/commit/d330deaec6f907f4abee6dd8fc786da018ea72a7))
+* **api:** api update ([e01d911](https://github.com/hyperspell/python-sdk/commit/e01d911cb400b1ee3827332299f054d278f867d4))
+* **api:** manual updates ([48f1e5b](https://github.com/hyperspell/python-sdk/commit/48f1e5b7a76e607c52a3a29c289352e07ca466c6))
+
+
+### Chores
+
+* **api:** python trusted publisher ([3d7a283](https://github.com/hyperspell/python-sdk/commit/3d7a283ebe54b78a23964a17a3167c50da0aeba2))
+* **ci:** skip uploading artifacts on stainless-internal branches ([2361dcb](https://github.com/hyperspell/python-sdk/commit/2361dcb5e76f8aeca00e12a4fcf6b912fca1084a))
+* **internal:** add request options to SSE classes ([6b5c9ad](https://github.com/hyperspell/python-sdk/commit/6b5c9ad8271ecb8887faf8cb678805e6d481459c))
+* **internal:** make `test_proxy_environment_variables` more resilient ([3cc3332](https://github.com/hyperspell/python-sdk/commit/3cc33321d35a6162c6c8540b571d4d3c2b63a022))
+* **internal:** make `test_proxy_environment_variables` more resilient to env ([2c99a7f](https://github.com/hyperspell/python-sdk/commit/2c99a7f619b2581f2bf7bc2bea4519fc1f6c5733))
+* **test:** do not count install time for mock server timeout ([ee29761](https://github.com/hyperspell/python-sdk/commit/ee29761e756adb19eb1f07232abde4e2a1e20d4f))
+* update placeholder string ([5608e0b](https://github.com/hyperspell/python-sdk/commit/5608e0bb6e840cd1b52b8ca79ec6042bc704de82))
+
 ## 0.33.0 (2026-02-20)
 
 Full Changelog: [v0.32.0...v0.33.0](https://github.com/hyperspell/python-sdk/compare/v0.32.0...v0.33.0)

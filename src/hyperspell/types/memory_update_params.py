@@ -19,8 +19,11 @@ class MemoryUpdateParams(TypedDict, total=False):
             "box",
             "dropbox",
             "google_drive",
+            "github",
             "vault",
             "web_crawler",
+            "trace",
+            "microsoft_teams",
         ]
     ]
 

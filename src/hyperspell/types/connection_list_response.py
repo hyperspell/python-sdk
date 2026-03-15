@@ -27,8 +27,11 @@ class Connection(BaseModel):
         "box",
         "dropbox",
         "google_drive",
+        "github",
         "vault",
         "web_crawler",
+        "trace",
+        "microsoft_teams",
     ]
     """The connection's provider"""
 

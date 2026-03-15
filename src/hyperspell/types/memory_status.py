@@ -19,8 +19,11 @@ class MemoryStatus(BaseModel):
         "box",
         "dropbox",
         "google_drive",
+        "github",
         "vault",
         "web_crawler",
+        "trace",
+        "microsoft_teams",
     ]
 
     status: Literal["pending", "processing", "completed", "failed"]

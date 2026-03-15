@@ -32,8 +32,11 @@ class MemoryListParams(TypedDict, total=False):
             "box",
             "dropbox",
             "google_drive",
+            "github",
             "vault",
             "web_crawler",
+            "trace",
+            "microsoft_teams",
         ]
     ]
     """Filter documents by source."""

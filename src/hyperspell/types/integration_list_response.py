@@ -33,8 +33,11 @@ class Integration(BaseModel):
         "box",
         "dropbox",
         "google_drive",
+        "github",
         "vault",
         "web_crawler",
+        "trace",
+        "microsoft_teams",
     ]
     """The integration's provider"""
 

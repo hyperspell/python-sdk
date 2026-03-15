@@ -42,8 +42,11 @@ class AuthMeResponse(BaseModel):
             "box",
             "dropbox",
             "google_drive",
+            "github",
             "vault",
             "web_crawler",
+            "trace",
+            "microsoft_teams",
         ]
     ]
     """All integrations available for the app"""
@@ -58,8 +61,11 @@ class AuthMeResponse(BaseModel):
             "box",
             "dropbox",
             "google_drive",
+            "github",
             "vault",
             "web_crawler",
+            "trace",
+            "microsoft_teams",
         ]
     ]
     """All integrations installed for the user"""
