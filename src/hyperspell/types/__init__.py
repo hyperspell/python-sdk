@@ -4,14 +4,14 @@ from __future__ import annotations
 
 from .token import Token as Token
 from .memory import Memory as Memory
-from .shared import Metadata as Metadata, QueryResult as QueryResult, Notification as Notification
+from .shared import Metadata as Metadata, Resource as Resource, QueryResult as QueryResult, Notification as Notification
 from .memory_status import MemoryStatus as MemoryStatus
 from .auth_me_response import AuthMeResponse as AuthMeResponse
 from .memory_add_params import MemoryAddParams as MemoryAddParams
 from .vault_list_params import VaultListParams as VaultListParams
 from .memory_list_params import MemoryListParams as MemoryListParams
+from .session_add_params import SessionAddParams as SessionAddParams
 from .vault_list_response import VaultListResponse as VaultListResponse
-from .memory_list_response import MemoryListResponse as MemoryListResponse
 from .memory_search_params import MemorySearchParams as MemorySearchParams
 from .memory_update_params import MemoryUpdateParams as MemoryUpdateParams
 from .memory_upload_params import MemoryUploadParams as MemoryUploadParams
@@ -23,9 +23,13 @@ from .connection_list_response import ConnectionListResponse as ConnectionListRe
 from .memory_add_bulk_response import MemoryAddBulkResponse as MemoryAddBulkResponse
 from .auth_delete_user_response import AuthDeleteUserResponse as AuthDeleteUserResponse
 from .integration_list_response import IntegrationListResponse as IntegrationListResponse
+from .action_add_reaction_params import ActionAddReactionParams as ActionAddReactionParams
+from .action_send_message_params import ActionSendMessageParams as ActionSendMessageParams
 from .connection_revoke_response import ConnectionRevokeResponse as ConnectionRevokeResponse
 from .integration_connect_params import IntegrationConnectParams as IntegrationConnectParams
 from .evaluate_score_query_params import EvaluateScoreQueryParams as EvaluateScoreQueryParams
+from .action_add_reaction_response import ActionAddReactionResponse as ActionAddReactionResponse
+from .action_send_message_response import ActionSendMessageResponse as ActionSendMessageResponse
 from .integration_connect_response import IntegrationConnectResponse as IntegrationConnectResponse
 from .evaluate_score_query_response import EvaluateScoreQueryResponse as EvaluateScoreQueryResponse
 from .evaluate_score_highlight_params import EvaluateScoreHighlightParams as EvaluateScoreHighlightParams

@@ -16,6 +16,14 @@ from .vaults import (
     VaultsResourceWithStreamingResponse,
     AsyncVaultsResourceWithStreamingResponse,
 )
+from .actions import (
+    ActionsResource,
+    AsyncActionsResource,
+    ActionsResourceWithRawResponse,
+    AsyncActionsResourceWithRawResponse,
+    ActionsResourceWithStreamingResponse,
+    AsyncActionsResourceWithStreamingResponse,
+)
 from .evaluate import (
     EvaluateResource,
     AsyncEvaluateResource,
@@ -31,6 +39,14 @@ from .memories import (
     AsyncMemoriesResourceWithRawResponse,
     MemoriesResourceWithStreamingResponse,
     AsyncMemoriesResourceWithStreamingResponse,
+)
+from .sessions import (
+    SessionsResource,
+    AsyncSessionsResource,
+    SessionsResourceWithRawResponse,
+    AsyncSessionsResourceWithRawResponse,
+    SessionsResourceWithStreamingResponse,
+    AsyncSessionsResourceWithStreamingResponse,
 )
 from .connections import (
     ConnectionsResource,
@@ -74,6 +90,18 @@ __all__ = [
     "AsyncEvaluateResourceWithRawResponse",
     "EvaluateResourceWithStreamingResponse",
     "AsyncEvaluateResourceWithStreamingResponse",
+    "ActionsResource",
+    "AsyncActionsResource",
+    "ActionsResourceWithRawResponse",
+    "AsyncActionsResourceWithRawResponse",
+    "ActionsResourceWithStreamingResponse",
+    "AsyncActionsResourceWithStreamingResponse",
+    "SessionsResource",
+    "AsyncSessionsResource",
+    "SessionsResourceWithRawResponse",
+    "AsyncSessionsResourceWithRawResponse",
+    "SessionsResourceWithStreamingResponse",
+    "AsyncSessionsResourceWithStreamingResponse",
     "VaultsResource",
     "AsyncVaultsResource",
     "VaultsResourceWithRawResponse",

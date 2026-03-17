@@ -3,13 +3,13 @@
 from typing import Optional
 from typing_extensions import Literal
 
-from .._models import BaseModel
-from .shared.metadata import Metadata
+from .metadata import Metadata
+from ..._models import BaseModel
 
-__all__ = ["MemoryListResponse"]
+__all__ = ["Resource"]
 
 
-class MemoryListResponse(BaseModel):
+class Resource(BaseModel):
     resource_id: str
 
     source: Literal[
