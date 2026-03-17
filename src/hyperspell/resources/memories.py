@@ -30,8 +30,8 @@ from ..pagination import SyncCursorPage, AsyncCursorPage
 from .._base_client import AsyncPaginator, make_request_options
 from ..types.memory import Memory
 from ..types.memory_status import MemoryStatus
+from ..types.shared.resource import Resource
 from ..types.shared.query_result import QueryResult
-from ..types.memory_list_response import MemoryListResponse
 from ..types.memory_delete_response import MemoryDeleteResponse
 from ..types.memory_status_response import MemoryStatusResponse
 from ..types.memory_add_bulk_response import MemoryAddBulkResponse
@@ -170,7 +170,7 @@ class MemoriesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SyncCursorPage[MemoryListResponse]:
+    ) -> SyncCursorPage[Resource]:
         """This endpoint allows you to paginate through all documents in the index.
 
         You can
@@ -197,7 +197,7 @@ class MemoriesResource(SyncAPIResource):
         """
         return self._get_api_list(
             "/memories/list",
-            page=SyncCursorPage[MemoryListResponse],
+            page=SyncCursorPage[Resource],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -215,7 +215,7 @@ class MemoriesResource(SyncAPIResource):
                     memory_list_params.MemoryListParams,
                 ),
             ),
-            model=MemoryListResponse,
+            model=Resource,
         )
 
     def delete(
@@ -726,7 +726,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> AsyncPaginator[MemoryListResponse, AsyncCursorPage[MemoryListResponse]]:
+    ) -> AsyncPaginator[Resource, AsyncCursorPage[Resource]]:
         """This endpoint allows you to paginate through all documents in the index.
 
         You can
@@ -753,7 +753,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
         """
         return self._get_api_list(
             "/memories/list",
-            page=AsyncCursorPage[MemoryListResponse],
+            page=AsyncCursorPage[Resource],
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -771,7 +771,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
                     memory_list_params.MemoryListParams,
                 ),
             ),
-            model=MemoryListResponse,
+            model=Resource,
         )
 
     async def delete(

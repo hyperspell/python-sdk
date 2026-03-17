@@ -32,11 +32,13 @@ from ._base_client import (
 )
 
 if TYPE_CHECKING:
-    from .resources import auth, vaults, evaluate, memories, connections, integrations
+    from .resources import auth, vaults, actions, evaluate, memories, sessions, connections, integrations
     from .resources.auth import AuthResource, AsyncAuthResource
     from .resources.vaults import VaultsResource, AsyncVaultsResource
+    from .resources.actions import ActionsResource, AsyncActionsResource
     from .resources.evaluate import EvaluateResource, AsyncEvaluateResource
     from .resources.memories import MemoriesResource, AsyncMemoriesResource
+    from .resources.sessions import SessionsResource, AsyncSessionsResource
     from .resources.connections import ConnectionsResource, AsyncConnectionsResource
     from .resources.integrations.integrations import IntegrationsResource, AsyncIntegrationsResource
 
@@ -134,6 +136,18 @@ class Hyperspell(SyncAPIClient):
         from .resources.evaluate import EvaluateResource
 
         return EvaluateResource(self)
+
+    @cached_property
+    def actions(self) -> ActionsResource:
+        from .resources.actions import ActionsResource
+
+        return ActionsResource(self)
+
+    @cached_property
+    def sessions(self) -> SessionsResource:
+        from .resources.sessions import SessionsResource
+
+        return SessionsResource(self)
 
     @cached_property
     def vaults(self) -> VaultsResource:
@@ -359,6 +373,18 @@ class AsyncHyperspell(AsyncAPIClient):
         return AsyncEvaluateResource(self)
 
     @cached_property
+    def actions(self) -> AsyncActionsResource:
+        from .resources.actions import AsyncActionsResource
+
+        return AsyncActionsResource(self)
+
+    @cached_property
+    def sessions(self) -> AsyncSessionsResource:
+        from .resources.sessions import AsyncSessionsResource
+
+        return AsyncSessionsResource(self)
+
+    @cached_property
     def vaults(self) -> AsyncVaultsResource:
         from .resources.vaults import AsyncVaultsResource
 
@@ -529,6 +555,18 @@ class HyperspellWithRawResponse:
         return EvaluateResourceWithRawResponse(self._client.evaluate)
 
     @cached_property
+    def actions(self) -> actions.ActionsResourceWithRawResponse:
+        from .resources.actions import ActionsResourceWithRawResponse
+
+        return ActionsResourceWithRawResponse(self._client.actions)
+
+    @cached_property
+    def sessions(self) -> sessions.SessionsResourceWithRawResponse:
+        from .resources.sessions import SessionsResourceWithRawResponse
+
+        return SessionsResourceWithRawResponse(self._client.sessions)
+
+    @cached_property
     def vaults(self) -> vaults.VaultsResourceWithRawResponse:
         from .resources.vaults import VaultsResourceWithRawResponse
 
@@ -570,6 +608,18 @@ class AsyncHyperspellWithRawResponse:
         from .resources.evaluate import AsyncEvaluateResourceWithRawResponse
 
         return AsyncEvaluateResourceWithRawResponse(self._client.evaluate)
+
+    @cached_property
+    def actions(self) -> actions.AsyncActionsResourceWithRawResponse:
+        from .resources.actions import AsyncActionsResourceWithRawResponse
+
+        return AsyncActionsResourceWithRawResponse(self._client.actions)
+
+    @cached_property
+    def sessions(self) -> sessions.AsyncSessionsResourceWithRawResponse:
+        from .resources.sessions import AsyncSessionsResourceWithRawResponse
+
+        return AsyncSessionsResourceWithRawResponse(self._client.sessions)
 
     @cached_property
     def vaults(self) -> vaults.AsyncVaultsResourceWithRawResponse:
@@ -615,6 +665,18 @@ class HyperspellWithStreamedResponse:
         return EvaluateResourceWithStreamingResponse(self._client.evaluate)
 
     @cached_property
+    def actions(self) -> actions.ActionsResourceWithStreamingResponse:
+        from .resources.actions import ActionsResourceWithStreamingResponse
+
+        return ActionsResourceWithStreamingResponse(self._client.actions)
+
+    @cached_property
+    def sessions(self) -> sessions.SessionsResourceWithStreamingResponse:
+        from .resources.sessions import SessionsResourceWithStreamingResponse
+
+        return SessionsResourceWithStreamingResponse(self._client.sessions)
+
+    @cached_property
     def vaults(self) -> vaults.VaultsResourceWithStreamingResponse:
         from .resources.vaults import VaultsResourceWithStreamingResponse
 
@@ -656,6 +718,18 @@ class AsyncHyperspellWithStreamedResponse:
         from .resources.evaluate import AsyncEvaluateResourceWithStreamingResponse
 
         return AsyncEvaluateResourceWithStreamingResponse(self._client.evaluate)
+
+    @cached_property
+    def actions(self) -> actions.AsyncActionsResourceWithStreamingResponse:
+        from .resources.actions import AsyncActionsResourceWithStreamingResponse
+
+        return AsyncActionsResourceWithStreamingResponse(self._client.actions)
+
+    @cached_property
+    def sessions(self) -> sessions.AsyncSessionsResourceWithStreamingResponse:
+        from .resources.sessions import AsyncSessionsResourceWithStreamingResponse
+
+        return AsyncSessionsResourceWithStreamingResponse(self._client.sessions)
 
     @cached_property
     def vaults(self) -> vaults.AsyncVaultsResourceWithStreamingResponse:
