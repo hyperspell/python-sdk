@@ -30,5 +30,3 @@ jobs:
       - name: Publish to PyPI
         run: |
           bash ./bin/publish-pypi
-        env:
-          PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
