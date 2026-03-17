@@ -791,6 +791,11 @@ elif not TYPE_CHECKING:  # TODO: condition is weird
         return RootModel[type_]  # type: ignore
 
 
+class SecurityOptions(TypedDict, total=False):
+    api_key: bool
+    as_user: bool
+
+
 class FinalRequestOptionsInput(TypedDict, total=False):
     method: Required[str]
     url: Required[str]
@@ -804,6 +809,7 @@ class FinalRequestOptionsInput(TypedDict, total=False):
     json_data: Body
     extra_json: AnyMapping
     follow_redirects: bool
+    security: SecurityOptions
 
 
 @final
@@ -818,6 +824,10 @@ class FinalRequestOptions(pydantic.BaseModel):
     idempotency_key: Union[str, None] = None
     post_parser: Union[Callable[[Any], Any], NotGiven] = NotGiven()
     follow_redirects: Union[bool, None] = None
+    security: SecurityOptions = {
+        "api_key": True,
+        "as_user": True,
+    }
 
     content: Union[bytes, bytearray, IO[bytes], Iterable[bytes], AsyncIterable[bytes], None] = None
     # It should be noted that we cannot use `json` here as that would override
