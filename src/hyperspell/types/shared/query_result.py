@@ -1,43 +1,15 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import Dict, List, Optional
-from typing_extensions import Literal
 
-from .metadata import Metadata
+from .resource import Resource
 from ..._models import BaseModel
 
-__all__ = ["QueryResult", "Document"]
-
-
-class Document(BaseModel):
-    resource_id: str
-
-    source: Literal[
-        "reddit",
-        "notion",
-        "slack",
-        "google_calendar",
-        "google_mail",
-        "box",
-        "dropbox",
-        "google_drive",
-        "github",
-        "vault",
-        "web_crawler",
-        "trace",
-        "microsoft_teams",
-    ]
-
-    metadata: Optional[Metadata] = None
-
-    score: Optional[float] = None
-    """The relevance of the resource to the query"""
-
-    title: Optional[str] = None
+__all__ = ["QueryResult"]
 
 
 class QueryResult(BaseModel):
-    documents: List[Document]
+    documents: List[Resource]
 
     answer: Optional[str] = None
     """The answer to the query, if the request was set to answer."""

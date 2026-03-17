@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.35.0 (2026-03-17)
+
+Full Changelog: [v0.34.0...v0.35.0](https://github.com/hyperspell/python-sdk/compare/v0.34.0...v0.35.0)
+
+### Features
+
+* **api:** manual updates ([57f61a3](https://github.com/hyperspell/python-sdk/commit/57f61a30e64edabde28811e7f3120c584b712bc6))
+* **api:** manual updates ([5a96266](https://github.com/hyperspell/python-sdk/commit/5a9626654c7dd350086bf1ed0b2a57855780cd76))
+* **api:** Update edition to 2026-02-23 ([1b40f77](https://github.com/hyperspell/python-sdk/commit/1b40f77b3ed34e46a0e53c737224a8059ba6b052))
+
+
+### Bug Fixes
+
+* **deps:** bump minimum typing-extensions version ([401d90e](https://github.com/hyperspell/python-sdk/commit/401d90e10737fbe2bcb7ff03a6ddf7a745027402))
+* pass PYPI_TOKEN secret to publish step ([#108](https://github.com/hyperspell/python-sdk/issues/108)) ([8efbde0](https://github.com/hyperspell/python-sdk/commit/8efbde0f510d0ceb34b20cb37faad32d71773634))
+* **pydantic:** do not pass `by_alias` unless set ([420c153](https://github.com/hyperspell/python-sdk/commit/420c153d3d0c00100ad7531ecf287dc818aa0045))
+
+
+### Chores
+
+* **internal:** tweak CI branches ([692b283](https://github.com/hyperspell/python-sdk/commit/692b283cd22646a5fe6591d073a32a5984df6eb5))
+* remove custom code ([a0a90a0](https://github.com/hyperspell/python-sdk/commit/a0a90a0982eb2484619ea01bcc784a42f5d353a8))
+
 ## 0.34.0 (2026-03-14)
 
 Full Changelog: [v0.33.0...v0.34.0](https://github.com/hyperspell/python-sdk/compare/v0.33.0...v0.34.0)

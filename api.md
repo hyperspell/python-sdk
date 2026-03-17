@@ -1,7 +1,7 @@
 # Shared Types
 
 ```python
-from hyperspell.types import Metadata, Notification, QueryResult
+from hyperspell.types import Metadata, Notification, QueryResult, Resource
 ```
 
 # Connections
@@ -68,7 +68,6 @@ Types:
 from hyperspell.types import (
     Memory,
     MemoryStatus,
-    MemoryListResponse,
     MemoryDeleteResponse,
     MemoryAddBulkResponse,
     MemoryStatusResponse,
@@ -78,7 +77,7 @@ from hyperspell.types import (
 Methods:
 
 - <code title="post /memories/update/{source}/{resource_id}">client.memories.<a href="./src/hyperspell/resources/memories.py">update</a>(resource_id, \*, source, \*\*<a href="src/hyperspell/types/memory_update_params.py">params</a>) -> <a href="./src/hyperspell/types/memory_status.py">MemoryStatus</a></code>
-- <code title="get /memories/list">client.memories.<a href="./src/hyperspell/resources/memories.py">list</a>(\*\*<a href="src/hyperspell/types/memory_list_params.py">params</a>) -> <a href="./src/hyperspell/types/memory_list_response.py">SyncCursorPage[MemoryListResponse]</a></code>
+- <code title="get /memories/list">client.memories.<a href="./src/hyperspell/resources/memories.py">list</a>(\*\*<a href="src/hyperspell/types/memory_list_params.py">params</a>) -> <a href="./src/hyperspell/types/shared/resource.py">SyncCursorPage[Resource]</a></code>
 - <code title="delete /memories/delete/{source}/{resource_id}">client.memories.<a href="./src/hyperspell/resources/memories.py">delete</a>(resource_id, \*, source) -> <a href="./src/hyperspell/types/memory_delete_response.py">MemoryDeleteResponse</a></code>
 - <code title="post /memories/add">client.memories.<a href="./src/hyperspell/resources/memories.py">add</a>(\*\*<a href="src/hyperspell/types/memory_add_params.py">params</a>) -> <a href="./src/hyperspell/types/memory_status.py">MemoryStatus</a></code>
 - <code title="post /memories/add/bulk">client.memories.<a href="./src/hyperspell/resources/memories.py">add_bulk</a>(\*\*<a href="src/hyperspell/types/memory_add_bulk_params.py">params</a>) -> <a href="./src/hyperspell/types/memory_add_bulk_response.py">MemoryAddBulkResponse</a></code>
@@ -100,6 +99,25 @@ Methods:
 - <code title="get /evaluate/query/{query_id}">client.evaluate.<a href="./src/hyperspell/resources/evaluate.py">get_query</a>(query_id) -> <a href="./src/hyperspell/types/shared/query_result.py">QueryResult</a></code>
 - <code title="post /evaluate/highlight/{highlight_id}">client.evaluate.<a href="./src/hyperspell/resources/evaluate.py">score_highlight</a>(highlight_id, \*\*<a href="src/hyperspell/types/evaluate_score_highlight_params.py">params</a>) -> <a href="./src/hyperspell/types/evaluate_score_highlight_response.py">EvaluateScoreHighlightResponse</a></code>
 - <code title="post /evaluate/query/{query_id}">client.evaluate.<a href="./src/hyperspell/resources/evaluate.py">score_query</a>(query_id, \*\*<a href="src/hyperspell/types/evaluate_score_query_params.py">params</a>) -> <a href="./src/hyperspell/types/evaluate_score_query_response.py">EvaluateScoreQueryResponse</a></code>
+
+# Actions
+
+Types:
+
+```python
+from hyperspell.types import ActionAddReactionResponse, ActionSendMessageResponse
+```
+
+Methods:
+
+- <code title="post /actions/add_reaction">client.actions.<a href="./src/hyperspell/resources/actions.py">add_reaction</a>(\*\*<a href="src/hyperspell/types/action_add_reaction_params.py">params</a>) -> <a href="./src/hyperspell/types/action_add_reaction_response.py">ActionAddReactionResponse</a></code>
+- <code title="post /actions/send_message">client.actions.<a href="./src/hyperspell/resources/actions.py">send_message</a>(\*\*<a href="src/hyperspell/types/action_send_message_params.py">params</a>) -> <a href="./src/hyperspell/types/action_send_message_response.py">ActionSendMessageResponse</a></code>
+
+# Sessions
+
+Methods:
+
+- <code title="post /trace/add">client.sessions.<a href="./src/hyperspell/resources/sessions.py">add</a>(\*\*<a href="src/hyperspell/types/session_add_params.py">params</a>) -> <a href="./src/hyperspell/types/memory_status.py">MemoryStatus</a></code>
 
 # Vaults
 
