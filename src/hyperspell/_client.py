@@ -21,6 +21,7 @@ from ._types import (
 )
 from ._utils import is_given, get_async_library
 from ._compat import cached_property
+from ._models import SecurityOptions
 from ._version import __version__
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import APIStatusError, HyperspellError
@@ -159,10 +160,12 @@ class Hyperspell(SyncAPIClient):
     def qs(self) -> Querystring:
         return Querystring(array_format="comma")
 
-    @property
     @override
-    def auth_headers(self) -> dict[str, str]:
-        return {**self._api_key, **self._as_user}
+    def _auth_headers(self, security: SecurityOptions) -> dict[str, str]:
+        return {
+            **(self._api_key if security.get("api_key", False) else {}),
+            **(self._as_user if security.get("as_user", False) else {}),
+        }
 
     @property
     def _api_key(self) -> dict[str, str]:
@@ -380,10 +383,12 @@ class AsyncHyperspell(AsyncAPIClient):
     def qs(self) -> Querystring:
         return Querystring(array_format="comma")
 
-    @property
     @override
-    def auth_headers(self) -> dict[str, str]:
-        return {**self._api_key, **self._as_user}
+    def _auth_headers(self, security: SecurityOptions) -> dict[str, str]:
+        return {
+            **(self._api_key if security.get("api_key", False) else {}),
+            **(self._as_user if security.get("as_user", False) else {}),
+        }
 
     @property
     def _api_key(self) -> dict[str, str]:
