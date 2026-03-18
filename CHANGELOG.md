@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.36.0 (2026-03-18)
+
+Full Changelog: [v0.35.0...v0.36.0](https://github.com/hyperspell/python-sdk/compare/v0.35.0...v0.36.0)
+
+### Features
+
+* **api:** api update ([40646ea](https://github.com/hyperspell/python-sdk/commit/40646ea3b19f2aa41b81ba714a2ef162fd3905a0))
+* **api:** manual updates ([a8665fb](https://github.com/hyperspell/python-sdk/commit/a8665fb009d02463ce1d17016df9b34d30b1ef08))
+
 ## 0.35.0 (2026-03-17)
 
 Full Changelog: [v0.34.0...v0.35.0](https://github.com/hyperspell/python-sdk/compare/v0.34.0...v0.35.0)
