@@ -24,6 +24,14 @@ from .actions import (
     ActionsResourceWithStreamingResponse,
     AsyncActionsResourceWithStreamingResponse,
 )
+from .folders import (
+    FoldersResource,
+    AsyncFoldersResource,
+    FoldersResourceWithRawResponse,
+    AsyncFoldersResourceWithRawResponse,
+    FoldersResourceWithStreamingResponse,
+    AsyncFoldersResourceWithStreamingResponse,
+)
 from .evaluate import (
     EvaluateResource,
     AsyncEvaluateResource,
@@ -72,6 +80,12 @@ __all__ = [
     "AsyncConnectionsResourceWithRawResponse",
     "ConnectionsResourceWithStreamingResponse",
     "AsyncConnectionsResourceWithStreamingResponse",
+    "FoldersResource",
+    "AsyncFoldersResource",
+    "FoldersResourceWithRawResponse",
+    "AsyncFoldersResourceWithRawResponse",
+    "FoldersResourceWithStreamingResponse",
+    "AsyncFoldersResourceWithStreamingResponse",
     "IntegrationsResource",
     "AsyncIntegrationsResource",
     "IntegrationsResourceWithRawResponse",

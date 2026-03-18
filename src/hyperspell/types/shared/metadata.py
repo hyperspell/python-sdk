@@ -21,7 +21,7 @@ class Metadata(BaseModel):
 
     last_modified: Optional[datetime] = None
 
-    status: Optional[Literal["pending", "processing", "completed", "failed"]] = None
+    status: Optional[Literal["pending", "processing", "completed", "failed", "pending_review", "skipped"]] = None
 
     url: Optional[str] = None
 
