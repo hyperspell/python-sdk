@@ -31,10 +31,11 @@ from ._base_client import (
 )
 
 if TYPE_CHECKING:
-    from .resources import auth, vaults, actions, evaluate, memories, sessions, connections, integrations
+    from .resources import auth, vaults, actions, folders, evaluate, memories, sessions, connections, integrations
     from .resources.auth import AuthResource, AsyncAuthResource
     from .resources.vaults import VaultsResource, AsyncVaultsResource
     from .resources.actions import ActionsResource, AsyncActionsResource
+    from .resources.folders import FoldersResource, AsyncFoldersResource
     from .resources.evaluate import EvaluateResource, AsyncEvaluateResource
     from .resources.memories import MemoriesResource, AsyncMemoriesResource
     from .resources.sessions import SessionsResource, AsyncSessionsResource
@@ -117,6 +118,12 @@ class Hyperspell(SyncAPIClient):
         from .resources.connections import ConnectionsResource
 
         return ConnectionsResource(self)
+
+    @cached_property
+    def folders(self) -> FoldersResource:
+        from .resources.folders import FoldersResource
+
+        return FoldersResource(self)
 
     @cached_property
     def integrations(self) -> IntegrationsResource:
@@ -352,6 +359,12 @@ class AsyncHyperspell(AsyncAPIClient):
         return AsyncConnectionsResource(self)
 
     @cached_property
+    def folders(self) -> AsyncFoldersResource:
+        from .resources.folders import AsyncFoldersResource
+
+        return AsyncFoldersResource(self)
+
+    @cached_property
     def integrations(self) -> AsyncIntegrationsResource:
         from .resources.integrations import AsyncIntegrationsResource
 
@@ -532,6 +545,12 @@ class HyperspellWithRawResponse:
         return ConnectionsResourceWithRawResponse(self._client.connections)
 
     @cached_property
+    def folders(self) -> folders.FoldersResourceWithRawResponse:
+        from .resources.folders import FoldersResourceWithRawResponse
+
+        return FoldersResourceWithRawResponse(self._client.folders)
+
+    @cached_property
     def integrations(self) -> integrations.IntegrationsResourceWithRawResponse:
         from .resources.integrations import IntegrationsResourceWithRawResponse
 
@@ -585,6 +604,12 @@ class AsyncHyperspellWithRawResponse:
         from .resources.connections import AsyncConnectionsResourceWithRawResponse
 
         return AsyncConnectionsResourceWithRawResponse(self._client.connections)
+
+    @cached_property
+    def folders(self) -> folders.AsyncFoldersResourceWithRawResponse:
+        from .resources.folders import AsyncFoldersResourceWithRawResponse
+
+        return AsyncFoldersResourceWithRawResponse(self._client.folders)
 
     @cached_property
     def integrations(self) -> integrations.AsyncIntegrationsResourceWithRawResponse:
@@ -642,6 +667,12 @@ class HyperspellWithStreamedResponse:
         return ConnectionsResourceWithStreamingResponse(self._client.connections)
 
     @cached_property
+    def folders(self) -> folders.FoldersResourceWithStreamingResponse:
+        from .resources.folders import FoldersResourceWithStreamingResponse
+
+        return FoldersResourceWithStreamingResponse(self._client.folders)
+
+    @cached_property
     def integrations(self) -> integrations.IntegrationsResourceWithStreamingResponse:
         from .resources.integrations import IntegrationsResourceWithStreamingResponse
 
@@ -695,6 +726,12 @@ class AsyncHyperspellWithStreamedResponse:
         from .resources.connections import AsyncConnectionsResourceWithStreamingResponse
 
         return AsyncConnectionsResourceWithStreamingResponse(self._client.connections)
+
+    @cached_property
+    def folders(self) -> folders.AsyncFoldersResourceWithStreamingResponse:
+        from .resources.folders import AsyncFoldersResourceWithStreamingResponse
+
+        return AsyncFoldersResourceWithStreamingResponse(self._client.folders)
 
     @cached_property
     def integrations(self) -> integrations.AsyncIntegrationsResourceWithStreamingResponse:

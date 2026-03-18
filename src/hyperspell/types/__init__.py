@@ -9,9 +9,11 @@ from .memory_status import MemoryStatus as MemoryStatus
 from .auth_me_response import AuthMeResponse as AuthMeResponse
 from .memory_add_params import MemoryAddParams as MemoryAddParams
 from .vault_list_params import VaultListParams as VaultListParams
+from .folder_list_params import FolderListParams as FolderListParams
 from .memory_list_params import MemoryListParams as MemoryListParams
 from .session_add_params import SessionAddParams as SessionAddParams
 from .vault_list_response import VaultListResponse as VaultListResponse
+from .folder_list_response import FolderListResponse as FolderListResponse
 from .memory_search_params import MemorySearchParams as MemorySearchParams
 from .memory_update_params import MemoryUpdateParams as MemoryUpdateParams
 from .memory_upload_params import MemoryUploadParams as MemoryUploadParams
@@ -26,11 +28,15 @@ from .integration_list_response import IntegrationListResponse as IntegrationLis
 from .action_add_reaction_params import ActionAddReactionParams as ActionAddReactionParams
 from .action_send_message_params import ActionSendMessageParams as ActionSendMessageParams
 from .connection_revoke_response import ConnectionRevokeResponse as ConnectionRevokeResponse
+from .folder_set_policies_params import FolderSetPoliciesParams as FolderSetPoliciesParams
 from .integration_connect_params import IntegrationConnectParams as IntegrationConnectParams
 from .evaluate_score_query_params import EvaluateScoreQueryParams as EvaluateScoreQueryParams
 from .action_add_reaction_response import ActionAddReactionResponse as ActionAddReactionResponse
 from .action_send_message_response import ActionSendMessageResponse as ActionSendMessageResponse
+from .folder_set_policies_response import FolderSetPoliciesResponse as FolderSetPoliciesResponse
 from .integration_connect_response import IntegrationConnectResponse as IntegrationConnectResponse
 from .evaluate_score_query_response import EvaluateScoreQueryResponse as EvaluateScoreQueryResponse
+from .folder_delete_policy_response import FolderDeletePolicyResponse as FolderDeletePolicyResponse
+from .folder_list_policies_response import FolderListPoliciesResponse as FolderListPoliciesResponse
 from .evaluate_score_highlight_params import EvaluateScoreHighlightParams as EvaluateScoreHighlightParams
 from .evaluate_score_highlight_response import EvaluateScoreHighlightResponse as EvaluateScoreHighlightResponse
