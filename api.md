@@ -17,6 +17,26 @@ Methods:
 - <code title="get /connections/list">client.connections.<a href="./src/hyperspell/resources/connections.py">list</a>() -> <a href="./src/hyperspell/types/connection_list_response.py">ConnectionListResponse</a></code>
 - <code title="delete /connections/{connection_id}/revoke">client.connections.<a href="./src/hyperspell/resources/connections.py">revoke</a>(connection_id) -> <a href="./src/hyperspell/types/connection_revoke_response.py">ConnectionRevokeResponse</a></code>
 
+# Folders
+
+Types:
+
+```python
+from hyperspell.types import (
+    FolderListResponse,
+    FolderDeletePolicyResponse,
+    FolderListPoliciesResponse,
+    FolderSetPoliciesResponse,
+)
+```
+
+Methods:
+
+- <code title="get /connections/{connection_id}/folders">client.folders.<a href="./src/hyperspell/resources/folders.py">list</a>(connection_id, \*\*<a href="src/hyperspell/types/folder_list_params.py">params</a>) -> <a href="./src/hyperspell/types/folder_list_response.py">FolderListResponse</a></code>
+- <code title="delete /connections/{connection_id}/folder-policies/{policy_id}">client.folders.<a href="./src/hyperspell/resources/folders.py">delete_policy</a>(policy_id, \*, connection_id) -> <a href="./src/hyperspell/types/folder_delete_policy_response.py">FolderDeletePolicyResponse</a></code>
+- <code title="get /connections/{connection_id}/folder-policies">client.folders.<a href="./src/hyperspell/resources/folders.py">list_policies</a>(connection_id) -> <a href="./src/hyperspell/types/folder_list_policies_response.py">FolderListPoliciesResponse</a></code>
+- <code title="post /connections/{connection_id}/folder-policies">client.folders.<a href="./src/hyperspell/resources/folders.py">set_policies</a>(connection_id, \*\*<a href="src/hyperspell/types/folder_set_policies_params.py">params</a>) -> <a href="./src/hyperspell/types/folder_set_policies_response.py">FolderSetPoliciesResponse</a></code>
+
 # Integrations
 
 Types:
