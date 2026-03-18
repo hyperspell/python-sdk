@@ -28,7 +28,13 @@ class Resource(BaseModel):
         "microsoft_teams",
     ]
 
+    folder_id: Optional[str] = None
+    """Provider folder ID this resource belongs to"""
+
     metadata: Optional[Metadata] = None
+
+    parent_folder_id: Optional[str] = None
+    """Parent folder ID for policy inheritance"""
 
     score: Optional[float] = None
     """The relevance of the resource to the query"""

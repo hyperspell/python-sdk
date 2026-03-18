@@ -26,4 +26,4 @@ class WebCrawlerIndexResponse(BaseModel):
         "microsoft_teams",
     ]
 
-    status: Literal["pending", "processing", "completed", "failed"]
+    status: Literal["pending", "processing", "completed", "failed", "pending_review", "skipped"]
