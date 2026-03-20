@@ -17,7 +17,7 @@ from ..types import (
     memory_add_bulk_params,
 )
 from .._types import Body, Omit, Query, Headers, NotGiven, FileTypes, omit, not_given
-from .._utils import extract_files, maybe_transform, deepcopy_minimal, async_maybe_transform
+from .._utils import extract_files, path_template, maybe_transform, deepcopy_minimal, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -122,7 +122,7 @@ class MemoriesResource(SyncAPIResource):
         if not resource_id:
             raise ValueError(f"Expected a non-empty value for `resource_id` but received {resource_id!r}")
         return self._post(
-            f"/memories/update/{source}/{resource_id}",
+            path_template("/memories/update/{source}/{resource_id}", source=source, resource_id=resource_id),
             body=maybe_transform(
                 {
                     "collection": collection,
@@ -276,7 +276,7 @@ class MemoriesResource(SyncAPIResource):
         if not resource_id:
             raise ValueError(f"Expected a non-empty value for `resource_id` but received {resource_id!r}")
         return self._delete(
-            f"/memories/delete/{source}/{resource_id}",
+            path_template("/memories/delete/{source}/{resource_id}", source=source, resource_id=resource_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -435,7 +435,7 @@ class MemoriesResource(SyncAPIResource):
         if not resource_id:
             raise ValueError(f"Expected a non-empty value for `resource_id` but received {resource_id!r}")
         return self._get(
-            f"/memories/get/{source}/{resource_id}",
+            path_template("/memories/get/{source}/{resource_id}", source=source, resource_id=resource_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -679,7 +679,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
         if not resource_id:
             raise ValueError(f"Expected a non-empty value for `resource_id` but received {resource_id!r}")
         return await self._post(
-            f"/memories/update/{source}/{resource_id}",
+            path_template("/memories/update/{source}/{resource_id}", source=source, resource_id=resource_id),
             body=await async_maybe_transform(
                 {
                     "collection": collection,
@@ -833,7 +833,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
         if not resource_id:
             raise ValueError(f"Expected a non-empty value for `resource_id` but received {resource_id!r}")
         return await self._delete(
-            f"/memories/delete/{source}/{resource_id}",
+            path_template("/memories/delete/{source}/{resource_id}", source=source, resource_id=resource_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -992,7 +992,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
         if not resource_id:
             raise ValueError(f"Expected a non-empty value for `resource_id` but received {resource_id!r}")
         return await self._get(
-            f"/memories/get/{source}/{resource_id}",
+            path_template("/memories/get/{source}/{resource_id}", source=source, resource_id=resource_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
