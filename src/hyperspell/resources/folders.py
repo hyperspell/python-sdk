@@ -9,7 +9,7 @@ import httpx
 
 from ..types import folder_list_params, folder_set_policies_params
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from .._utils import maybe_transform, async_maybe_transform
+from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -79,7 +79,7 @@ class FoldersResource(SyncAPIResource):
         if not connection_id:
             raise ValueError(f"Expected a non-empty value for `connection_id` but received {connection_id!r}")
         return self._get(
-            f"/connections/{connection_id}/folders",
+            path_template("/connections/{connection_id}/folders", connection_id=connection_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -119,7 +119,11 @@ class FoldersResource(SyncAPIResource):
         if not policy_id:
             raise ValueError(f"Expected a non-empty value for `policy_id` but received {policy_id!r}")
         return self._delete(
-            f"/connections/{connection_id}/folder-policies/{policy_id}",
+            path_template(
+                "/connections/{connection_id}/folder-policies/{policy_id}",
+                connection_id=connection_id,
+                policy_id=policy_id,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -152,7 +156,7 @@ class FoldersResource(SyncAPIResource):
         if not connection_id:
             raise ValueError(f"Expected a non-empty value for `connection_id` but received {connection_id!r}")
         return self._get(
-            f"/connections/{connection_id}/folder-policies",
+            path_template("/connections/{connection_id}/folder-policies", connection_id=connection_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -200,7 +204,7 @@ class FoldersResource(SyncAPIResource):
         if not connection_id:
             raise ValueError(f"Expected a non-empty value for `connection_id` but received {connection_id!r}")
         return self._post(
-            f"/connections/{connection_id}/folder-policies",
+            path_template("/connections/{connection_id}/folder-policies", connection_id=connection_id),
             body=maybe_transform(
                 {
                     "provider_folder_id": provider_folder_id,
@@ -270,7 +274,7 @@ class AsyncFoldersResource(AsyncAPIResource):
         if not connection_id:
             raise ValueError(f"Expected a non-empty value for `connection_id` but received {connection_id!r}")
         return await self._get(
-            f"/connections/{connection_id}/folders",
+            path_template("/connections/{connection_id}/folders", connection_id=connection_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -310,7 +314,11 @@ class AsyncFoldersResource(AsyncAPIResource):
         if not policy_id:
             raise ValueError(f"Expected a non-empty value for `policy_id` but received {policy_id!r}")
         return await self._delete(
-            f"/connections/{connection_id}/folder-policies/{policy_id}",
+            path_template(
+                "/connections/{connection_id}/folder-policies/{policy_id}",
+                connection_id=connection_id,
+                policy_id=policy_id,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -343,7 +351,7 @@ class AsyncFoldersResource(AsyncAPIResource):
         if not connection_id:
             raise ValueError(f"Expected a non-empty value for `connection_id` but received {connection_id!r}")
         return await self._get(
-            f"/connections/{connection_id}/folder-policies",
+            path_template("/connections/{connection_id}/folder-policies", connection_id=connection_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -391,7 +399,7 @@ class AsyncFoldersResource(AsyncAPIResource):
         if not connection_id:
             raise ValueError(f"Expected a non-empty value for `connection_id` but received {connection_id!r}")
         return await self._post(
-            f"/connections/{connection_id}/folder-policies",
+            path_template("/connections/{connection_id}/folder-policies", connection_id=connection_id),
             body=await async_maybe_transform(
                 {
                     "provider_folder_id": provider_folder_id,

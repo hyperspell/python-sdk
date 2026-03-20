@@ -8,7 +8,7 @@ import httpx
 
 from ..types import evaluate_score_query_params, evaluate_score_highlight_params
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from .._utils import maybe_transform, async_maybe_transform
+from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -71,7 +71,7 @@ class EvaluateResource(SyncAPIResource):
         if not query_id:
             raise ValueError(f"Expected a non-empty value for `query_id` but received {query_id!r}")
         return self._get(
-            f"/evaluate/query/{query_id}",
+            path_template("/evaluate/query/{query_id}", query_id=query_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -110,7 +110,7 @@ class EvaluateResource(SyncAPIResource):
         if not highlight_id:
             raise ValueError(f"Expected a non-empty value for `highlight_id` but received {highlight_id!r}")
         return self._post(
-            f"/evaluate/highlight/{highlight_id}",
+            path_template("/evaluate/highlight/{highlight_id}", highlight_id=highlight_id),
             body=maybe_transform(
                 {
                     "comment": comment,
@@ -153,7 +153,7 @@ class EvaluateResource(SyncAPIResource):
         if not query_id:
             raise ValueError(f"Expected a non-empty value for `query_id` but received {query_id!r}")
         return self._post(
-            f"/evaluate/query/{query_id}",
+            path_template("/evaluate/query/{query_id}", query_id=query_id),
             body=maybe_transform({"score": score}, evaluate_score_query_params.EvaluateScoreQueryParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -208,7 +208,7 @@ class AsyncEvaluateResource(AsyncAPIResource):
         if not query_id:
             raise ValueError(f"Expected a non-empty value for `query_id` but received {query_id!r}")
         return await self._get(
-            f"/evaluate/query/{query_id}",
+            path_template("/evaluate/query/{query_id}", query_id=query_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -247,7 +247,7 @@ class AsyncEvaluateResource(AsyncAPIResource):
         if not highlight_id:
             raise ValueError(f"Expected a non-empty value for `highlight_id` but received {highlight_id!r}")
         return await self._post(
-            f"/evaluate/highlight/{highlight_id}",
+            path_template("/evaluate/highlight/{highlight_id}", highlight_id=highlight_id),
             body=await async_maybe_transform(
                 {
                     "comment": comment,
@@ -290,7 +290,7 @@ class AsyncEvaluateResource(AsyncAPIResource):
         if not query_id:
             raise ValueError(f"Expected a non-empty value for `query_id` but received {query_id!r}")
         return await self._post(
-            f"/evaluate/query/{query_id}",
+            path_template("/evaluate/query/{query_id}", query_id=query_id),
             body=await async_maybe_transform({"score": score}, evaluate_score_query_params.EvaluateScoreQueryParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
