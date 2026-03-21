@@ -37,6 +37,7 @@ class MemoryListParams(TypedDict, total=False):
             "web_crawler",
             "trace",
             "microsoft_teams",
+            "gmail_actions",
         ]
     ]
     """Filter documents by source."""

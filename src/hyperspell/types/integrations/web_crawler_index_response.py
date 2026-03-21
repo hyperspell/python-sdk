@@ -24,6 +24,7 @@ class WebCrawlerIndexResponse(BaseModel):
         "web_crawler",
         "trace",
         "microsoft_teams",
+        "gmail_actions",
     ]
 
     status: Literal["pending", "processing", "completed", "failed", "pending_review", "skipped"]

@@ -32,6 +32,7 @@ class Connection(BaseModel):
         "web_crawler",
         "trace",
         "microsoft_teams",
+        "gmail_actions",
     ]
     """The connection's provider"""
 

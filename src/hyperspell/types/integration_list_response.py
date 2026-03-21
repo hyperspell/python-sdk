@@ -38,6 +38,7 @@ class Integration(BaseModel):
         "web_crawler",
         "trace",
         "microsoft_teams",
+        "gmail_actions",
     ]
     """The integration's provider"""
 

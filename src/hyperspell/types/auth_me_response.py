@@ -47,6 +47,7 @@ class AuthMeResponse(BaseModel):
             "web_crawler",
             "trace",
             "microsoft_teams",
+            "gmail_actions",
         ]
     ]
     """All integrations available for the app"""
@@ -66,6 +67,7 @@ class AuthMeResponse(BaseModel):
             "web_crawler",
             "trace",
             "microsoft_teams",
+            "gmail_actions",
         ]
     ]
     """All integrations installed for the user"""

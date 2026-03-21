@@ -30,6 +30,7 @@ class ActionAddReactionParams(TypedDict, total=False):
             "web_crawler",
             "trace",
             "microsoft_teams",
+            "gmail_actions",
         ]
     ]
     """Integration provider (e.g., slack)"""
