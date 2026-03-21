@@ -52,6 +52,7 @@ class MemorySearchParams(TypedDict, total=False):
             "web_crawler",
             "trace",
             "microsoft_teams",
+            "gmail_actions",
         ]
     ]
     """Only query documents from these sources."""

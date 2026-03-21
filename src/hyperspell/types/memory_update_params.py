@@ -24,6 +24,7 @@ class MemoryUpdateParams(TypedDict, total=False):
             "web_crawler",
             "trace",
             "microsoft_teams",
+            "gmail_actions",
         ]
     ]
 

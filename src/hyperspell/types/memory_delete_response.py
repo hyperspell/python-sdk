@@ -28,6 +28,7 @@ class MemoryDeleteResponse(BaseModel):
         "web_crawler",
         "trace",
         "microsoft_teams",
+        "gmail_actions",
     ]
 
     success: bool

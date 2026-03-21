@@ -26,6 +26,7 @@ class Resource(BaseModel):
         "web_crawler",
         "trace",
         "microsoft_teams",
+        "gmail_actions",
     ]
 
     folder_id: Optional[str] = None
