@@ -42,6 +42,9 @@ class Integration(BaseModel):
     ]
     """The integration's provider"""
 
+    actions_only: Optional[bool] = None
+    """Whether this integration only supports write actions (no sync)"""
+
 
 class IntegrationListResponse(BaseModel):
     integrations: List[Integration]
