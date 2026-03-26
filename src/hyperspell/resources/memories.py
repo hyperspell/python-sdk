@@ -451,6 +451,7 @@ class MemoriesResource(SyncAPIResource):
         *,
         query: str,
         answer: bool | Omit = omit,
+        effort: int | Omit = omit,
         max_results: int | Omit = omit,
         options: memory_search_params.Options | Omit = omit,
         sources: List[
@@ -487,6 +488,9 @@ class MemoriesResource(SyncAPIResource):
 
           answer: If true, the query will be answered along with matching source documents.
 
+          effort: Effort level. 0 = pass query through verbatim. 1 = LLM rewrites the query for
+              better retrieval and extracts date filters.
+
           max_results: Maximum number of results to return.
 
           options: Search options for the query.
@@ -507,6 +511,7 @@ class MemoriesResource(SyncAPIResource):
                 {
                     "query": query,
                     "answer": answer,
+                    "effort": effort,
                     "max_results": max_results,
                     "options": options,
                     "sources": sources,
@@ -1013,6 +1018,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
         *,
         query: str,
         answer: bool | Omit = omit,
+        effort: int | Omit = omit,
         max_results: int | Omit = omit,
         options: memory_search_params.Options | Omit = omit,
         sources: List[
@@ -1049,6 +1055,9 @@ class AsyncMemoriesResource(AsyncAPIResource):
 
           answer: If true, the query will be answered along with matching source documents.
 
+          effort: Effort level. 0 = pass query through verbatim. 1 = LLM rewrites the query for
+              better retrieval and extracts date filters.
+
           max_results: Maximum number of results to return.
 
           options: Search options for the query.
@@ -1069,6 +1078,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
                 {
                     "query": query,
                     "answer": answer,
+                    "effort": effort,
                     "max_results": max_results,
                     "options": options,
                     "sources": sources,
