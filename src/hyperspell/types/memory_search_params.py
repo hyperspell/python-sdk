@@ -31,6 +31,13 @@ class MemorySearchParams(TypedDict, total=False):
     answer: bool
     """If true, the query will be answered along with matching source documents."""
 
+    effort: int
+    """Effort level.
+
+    0 = pass query through verbatim. 1 = LLM rewrites the query for better retrieval
+    and extracts date filters.
+    """
+
     max_results: int
     """Maximum number of results to return."""
 

@@ -287,6 +287,7 @@ class TestMemories:
         memory = client.memories.search(
             query="query",
             answer=True,
+            effort=0,
             max_results=0,
             options={
                 "after": parse_datetime("2019-12-27T18:11:19.117Z"),
@@ -691,6 +692,7 @@ class TestAsyncMemories:
         memory = await async_client.memories.search(
             query="query",
             answer=True,
+            effort=0,
             max_results=0,
             options={
                 "after": parse_datetime("2019-12-27T18:11:19.117Z"),
