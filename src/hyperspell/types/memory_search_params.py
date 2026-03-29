@@ -265,7 +265,7 @@ class Options(TypedDict, total=False):
     max_results: int
     """Maximum number of results to return."""
 
-    memory_types: List[Literal["procedure", "memory"]]
+    memory_types: List[Literal["procedure", "memory", "mood"]]
     """Filter by memory type.
 
     Defaults to generic memories only. Pass multiple types to include procedures,

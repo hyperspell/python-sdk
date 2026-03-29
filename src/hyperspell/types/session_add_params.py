@@ -22,7 +22,7 @@ class SessionAddParams(TypedDict, total=False):
     date: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
     """Date of the trace"""
 
-    extract: List[Literal["procedure", "memory"]]
+    extract: List[Literal["procedure", "memory", "mood"]]
     """What kind of memories to extract from the trace"""
 
     format: Optional[Literal["vercel", "hyperdoc", "openclaw"]]
