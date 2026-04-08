@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, List, Union, Iterable, Optional
+from typing import Dict, List, Union, Mapping, Iterable, Optional, cast
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -16,8 +16,8 @@ from ..types import (
     memory_upload_params,
     memory_add_bulk_params,
 )
-from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
-from .._utils import path_template, maybe_transform, async_maybe_transform
+from .._types import Body, Omit, Query, Headers, NotGiven, FileTypes, omit, not_given
+from .._utils import extract_files, path_template, maybe_transform, deepcopy_minimal, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -549,7 +549,7 @@ class MemoriesResource(SyncAPIResource):
     def upload(
         self,
         *,
-        file: str,
+        file: FileTypes,
         collection: Optional[str] | Omit = omit,
         metadata: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -583,20 +583,22 @@ class MemoriesResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        body = deepcopy_minimal(
+            {
+                "file": file,
+                "collection": collection,
+                "metadata": metadata,
+            }
+        )
+        files = extract_files(cast(Mapping[str, object], body), paths=[["file"]])
         # It should be noted that the actual Content-Type header that will be
         # sent to the server will contain a `boundary` parameter, e.g.
         # multipart/form-data; boundary=---abc--
         extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
         return self._post(
             "/memories/upload",
-            body=maybe_transform(
-                {
-                    "file": file,
-                    "collection": collection,
-                    "metadata": metadata,
-                },
-                memory_upload_params.MemoryUploadParams,
-            ),
+            body=maybe_transform(body, memory_upload_params.MemoryUploadParams),
+            files=files,
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -1114,7 +1116,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
     async def upload(
         self,
         *,
-        file: str,
+        file: FileTypes,
         collection: Optional[str] | Omit = omit,
         metadata: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -1148,20 +1150,22 @@ class AsyncMemoriesResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        body = deepcopy_minimal(
+            {
+                "file": file,
+                "collection": collection,
+                "metadata": metadata,
+            }
+        )
+        files = extract_files(cast(Mapping[str, object], body), paths=[["file"]])
         # It should be noted that the actual Content-Type header that will be
         # sent to the server will contain a `boundary` parameter, e.g.
         # multipart/form-data; boundary=---abc--
         extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
         return await self._post(
             "/memories/upload",
-            body=await async_maybe_transform(
-                {
-                    "file": file,
-                    "collection": collection,
-                    "metadata": metadata,
-                },
-                memory_upload_params.MemoryUploadParams,
-            ),
+            body=await async_maybe_transform(body, memory_upload_params.MemoryUploadParams),
+            files=files,
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

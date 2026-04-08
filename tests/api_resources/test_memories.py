@@ -388,14 +388,14 @@ class TestMemories:
     @parametrize
     def test_method_upload(self, client: Hyperspell) -> None:
         memory = client.memories.upload(
-            file="file",
+            file=b"Example data",
         )
         assert_matches_type(MemoryStatus, memory, path=["response"])
 
     @parametrize
     def test_method_upload_with_all_params(self, client: Hyperspell) -> None:
         memory = client.memories.upload(
-            file="file",
+            file=b"Example data",
             collection="collection",
             metadata="metadata",
         )
@@ -404,7 +404,7 @@ class TestMemories:
     @parametrize
     def test_raw_response_upload(self, client: Hyperspell) -> None:
         response = client.memories.with_raw_response.upload(
-            file="file",
+            file=b"Example data",
         )
 
         assert response.is_closed is True
@@ -415,7 +415,7 @@ class TestMemories:
     @parametrize
     def test_streaming_response_upload(self, client: Hyperspell) -> None:
         with client.memories.with_streaming_response.upload(
-            file="file",
+            file=b"Example data",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -793,14 +793,14 @@ class TestAsyncMemories:
     @parametrize
     async def test_method_upload(self, async_client: AsyncHyperspell) -> None:
         memory = await async_client.memories.upload(
-            file="file",
+            file=b"Example data",
         )
         assert_matches_type(MemoryStatus, memory, path=["response"])
 
     @parametrize
     async def test_method_upload_with_all_params(self, async_client: AsyncHyperspell) -> None:
         memory = await async_client.memories.upload(
-            file="file",
+            file=b"Example data",
             collection="collection",
             metadata="metadata",
         )
@@ -809,7 +809,7 @@ class TestAsyncMemories:
     @parametrize
     async def test_raw_response_upload(self, async_client: AsyncHyperspell) -> None:
         response = await async_client.memories.with_raw_response.upload(
-            file="file",
+            file=b"Example data",
         )
 
         assert response.is_closed is True
@@ -820,7 +820,7 @@ class TestAsyncMemories:
     @parametrize
     async def test_streaming_response_upload(self, async_client: AsyncHyperspell) -> None:
         async with async_client.memories.with_streaming_response.upload(
-            file="file",
+            file=b"Example data",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
