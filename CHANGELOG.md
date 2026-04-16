@@ -1,5 +1,49 @@
 # Changelog
 
+## 0.37.0 (2026-04-16)
+
+Full Changelog: [v0.36.0...v0.37.0](https://github.com/hyperspell/python-sdk/compare/v0.36.0...v0.37.0)
+
+### Features
+
+* **api:** api update ([1d6eca7](https://github.com/hyperspell/python-sdk/commit/1d6eca7e4e06048baa53ca84f669dc470c1276ee))
+* **api:** api update ([7db075c](https://github.com/hyperspell/python-sdk/commit/7db075c464314b7077bc555b57ef65e63e464594))
+* **api:** api update ([4865c08](https://github.com/hyperspell/python-sdk/commit/4865c08579bd2750a17976036da5b513e167112b))
+* **api:** api update ([13e0682](https://github.com/hyperspell/python-sdk/commit/13e068243400026b7c8e11b11fdca6ba89a2460e))
+* **api:** api update ([a0f4720](https://github.com/hyperspell/python-sdk/commit/a0f47209c51eb35cf31974bc158cf9e4df29c0ec))
+* **api:** api update ([d3e77c3](https://github.com/hyperspell/python-sdk/commit/d3e77c368350f9a22469db6574d3a44159a043c9))
+* **api:** api update ([6180902](https://github.com/hyperspell/python-sdk/commit/618090275519b615d2f0b4679aecb9a86ccbab0b))
+* **internal:** implement indices array format for query and form serialization ([0e1fd91](https://github.com/hyperspell/python-sdk/commit/0e1fd91815afe92b4b7ba73f96e196aa71d5f8c5))
+
+
+### Bug Fixes
+
+* **client:** preserve hardcoded query params when merging with user params ([c314c08](https://github.com/hyperspell/python-sdk/commit/c314c08b0c99131cd98a404ede9416d6c3ff47e3))
+* ensure file data are only sent as 1 parameter ([48cbd64](https://github.com/hyperspell/python-sdk/commit/48cbd64319e2eab5b2915858e47662a84e7e0e76))
+* sanitize endpoint path params ([b2b3ca2](https://github.com/hyperspell/python-sdk/commit/b2b3ca2749930db6558bbe5bc3bb1ce4adadfe0e))
+
+
+### Chores
+
+* **ci:** skip lint on metadata-only changes ([b5a6b2d](https://github.com/hyperspell/python-sdk/commit/b5a6b2d8467b72cc0bfa192cf2bfd2966de6190e))
+* **internal:** update gitignore ([8f27c46](https://github.com/hyperspell/python-sdk/commit/8f27c46407285a62b885632d2bb3c6059ec91eb2))
+* **tests:** bump steady to v0.19.4 ([a855b0a](https://github.com/hyperspell/python-sdk/commit/a855b0a42e5926bdb4c1ece32f74370f9b481241))
+* **tests:** bump steady to v0.19.5 ([7ea97c0](https://github.com/hyperspell/python-sdk/commit/7ea97c0c00ee4d81301a6b2214ed677e88a5fcd8))
+* **tests:** bump steady to v0.19.6 ([1ecd0bf](https://github.com/hyperspell/python-sdk/commit/1ecd0bfd11ca3de3436524145c5df5c20b2ec2eb))
+* **tests:** bump steady to v0.19.7 ([466a814](https://github.com/hyperspell/python-sdk/commit/466a8145d00c3810bd1d83ac8531c719377100b8))
+* **tests:** bump steady to v0.20.1 ([74c3b3b](https://github.com/hyperspell/python-sdk/commit/74c3b3b7867b0fef233c314c776c5d867f66937a))
+* **tests:** bump steady to v0.20.2 ([3eb71a2](https://github.com/hyperspell/python-sdk/commit/3eb71a2ea44943f9b2e10073292d7fd4d58c1b43))
+
+
+### Documentation
+
+* update examples ([2859f14](https://github.com/hyperspell/python-sdk/commit/2859f147d2331d1371a1fb61051e89a23e51c077))
+
+
+### Refactors
+
+* **tests:** switch from prism to steady ([441e854](https://github.com/hyperspell/python-sdk/commit/441e854a4933f7abd07961f08a58d7f7b7b3ea60))
+
 ## 0.36.0 (2026-03-18)
 
 Full Changelog: [v0.35.0...v0.36.0](https://github.com/hyperspell/python-sdk/compare/v0.35.0...v0.36.0)
