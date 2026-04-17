@@ -162,26 +162,30 @@ class TestMemories:
     @parametrize
     def test_method_add(self, client: Hyperspell) -> None:
         memory = client.memories.add(
-            text="text",
+            text="...",
         )
         assert_matches_type(MemoryStatus, memory, path=["response"])
 
     @parametrize
     def test_method_add_with_all_params(self, client: Hyperspell) -> None:
         memory = client.memories.add(
-            text="text",
-            collection="collection",
+            text="...",
+            collection="my-collection",
             date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            metadata={"foo": "string"},
+            metadata={
+                "author": "John Doe",
+                "date": "2025-05-20T02:31:00Z",
+                "rating": 3,
+            },
             resource_id="resource_id",
-            title="title",
+            title="My Document",
         )
         assert_matches_type(MemoryStatus, memory, path=["response"])
 
     @parametrize
     def test_raw_response_add(self, client: Hyperspell) -> None:
         response = client.memories.with_raw_response.add(
-            text="text",
+            text="...",
         )
 
         assert response.is_closed is True
@@ -192,7 +196,7 @@ class TestMemories:
     @parametrize
     def test_streaming_response_add(self, client: Hyperspell) -> None:
         with client.memories.with_streaming_response.add(
-            text="text",
+            text="...",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -278,22 +282,23 @@ class TestMemories:
     @parametrize
     def test_method_search(self, client: Hyperspell) -> None:
         memory = client.memories.search(
-            query="query",
+            query="What does Hyperspell do?",
         )
         assert_matches_type(QueryResult, memory, path=["response"])
 
     @parametrize
     def test_method_search_with_all_params(self, client: Hyperspell) -> None:
         memory = client.memories.search(
-            query="query",
+            query="What does Hyperspell do?",
             answer=True,
+            effort=0,
             max_results=0,
             options={
                 "after": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "answer_model": "llama-3.1",
                 "before": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "box": {"weight": 0},
-                "filter": {"foo": "bar"},
+                "filter": {},
                 "google_calendar": {
                     "calendar_id": "calendar_id",
                     "weight": 0,
@@ -331,14 +336,14 @@ class TestMemories:
                     "weight": 0,
                 },
             },
-            sources=["reddit"],
+            sources=["vault"],
         )
         assert_matches_type(QueryResult, memory, path=["response"])
 
     @parametrize
     def test_raw_response_search(self, client: Hyperspell) -> None:
         response = client.memories.with_raw_response.search(
-            query="query",
+            query="What does Hyperspell do?",
         )
 
         assert response.is_closed is True
@@ -349,7 +354,7 @@ class TestMemories:
     @parametrize
     def test_streaming_response_search(self, client: Hyperspell) -> None:
         with client.memories.with_streaming_response.search(
-            query="query",
+            query="What does Hyperspell do?",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -566,26 +571,30 @@ class TestAsyncMemories:
     @parametrize
     async def test_method_add(self, async_client: AsyncHyperspell) -> None:
         memory = await async_client.memories.add(
-            text="text",
+            text="...",
         )
         assert_matches_type(MemoryStatus, memory, path=["response"])
 
     @parametrize
     async def test_method_add_with_all_params(self, async_client: AsyncHyperspell) -> None:
         memory = await async_client.memories.add(
-            text="text",
-            collection="collection",
+            text="...",
+            collection="my-collection",
             date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            metadata={"foo": "string"},
+            metadata={
+                "author": "John Doe",
+                "date": "2025-05-20T02:31:00Z",
+                "rating": 3,
+            },
             resource_id="resource_id",
-            title="title",
+            title="My Document",
         )
         assert_matches_type(MemoryStatus, memory, path=["response"])
 
     @parametrize
     async def test_raw_response_add(self, async_client: AsyncHyperspell) -> None:
         response = await async_client.memories.with_raw_response.add(
-            text="text",
+            text="...",
         )
 
         assert response.is_closed is True
@@ -596,7 +605,7 @@ class TestAsyncMemories:
     @parametrize
     async def test_streaming_response_add(self, async_client: AsyncHyperspell) -> None:
         async with async_client.memories.with_streaming_response.add(
-            text="text",
+            text="...",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -682,22 +691,23 @@ class TestAsyncMemories:
     @parametrize
     async def test_method_search(self, async_client: AsyncHyperspell) -> None:
         memory = await async_client.memories.search(
-            query="query",
+            query="What does Hyperspell do?",
         )
         assert_matches_type(QueryResult, memory, path=["response"])
 
     @parametrize
     async def test_method_search_with_all_params(self, async_client: AsyncHyperspell) -> None:
         memory = await async_client.memories.search(
-            query="query",
+            query="What does Hyperspell do?",
             answer=True,
+            effort=0,
             max_results=0,
             options={
                 "after": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "answer_model": "llama-3.1",
                 "before": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "box": {"weight": 0},
-                "filter": {"foo": "bar"},
+                "filter": {},
                 "google_calendar": {
                     "calendar_id": "calendar_id",
                     "weight": 0,
@@ -735,14 +745,14 @@ class TestAsyncMemories:
                     "weight": 0,
                 },
             },
-            sources=["reddit"],
+            sources=["vault"],
         )
         assert_matches_type(QueryResult, memory, path=["response"])
 
     @parametrize
     async def test_raw_response_search(self, async_client: AsyncHyperspell) -> None:
         response = await async_client.memories.with_raw_response.search(
-            query="query",
+            query="What does Hyperspell do?",
         )
 
         assert response.is_closed is True
@@ -753,7 +763,7 @@ class TestAsyncMemories:
     @parametrize
     async def test_streaming_response_search(self, async_client: AsyncHyperspell) -> None:
         async with async_client.memories.with_streaming_response.search(
-            query="query",
+            query="What does Hyperspell do?",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

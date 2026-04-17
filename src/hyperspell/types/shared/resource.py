@@ -20,12 +20,13 @@ class Resource(BaseModel):
         "google_mail",
         "box",
         "dropbox",
-        "google_drive",
         "github",
+        "google_drive",
         "vault",
         "web_crawler",
         "trace",
         "microsoft_teams",
+        "gmail_actions",
     ]
 
     folder_id: Optional[str] = None

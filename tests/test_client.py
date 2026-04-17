@@ -470,6 +470,30 @@ class TestHyperspell:
 
         client.close()
 
+    def test_hardcoded_query_params_in_url(self, client: Hyperspell) -> None:
+        request = client._build_request(FinalRequestOptions(method="get", url="/foo?beta=true"))
+        url = httpx.URL(request.url)
+        assert dict(url.params) == {"beta": "true"}
+
+        request = client._build_request(
+            FinalRequestOptions(
+                method="get",
+                url="/foo?beta=true",
+                params={"limit": "10", "page": "abc"},
+            )
+        )
+        url = httpx.URL(request.url)
+        assert dict(url.params) == {"beta": "true", "limit": "10", "page": "abc"}
+
+        request = client._build_request(
+            FinalRequestOptions(
+                method="get",
+                url="/files/a%2Fb?beta=true",
+                params={"limit": "10"},
+            )
+        )
+        assert request.url.raw_path == b"/files/a%2Fb?beta=true&limit=10"
+
     def test_request_extra_json(self, client: Hyperspell) -> None:
         request = client._build_request(
             FinalRequestOptions(
@@ -926,7 +950,7 @@ class TestHyperspell:
         respx_mock.post("/memories/add").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            client.memories.with_streaming_response.add(text="text").__enter__()
+            client.memories.with_streaming_response.add(text="...").__enter__()
 
         assert _get_open_connections(client) == 0
 
@@ -936,7 +960,7 @@ class TestHyperspell:
         respx_mock.post("/memories/add").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            client.memories.with_streaming_response.add(text="text").__enter__()
+            client.memories.with_streaming_response.add(text="...").__enter__()
         assert _get_open_connections(client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
@@ -965,7 +989,7 @@ class TestHyperspell:
 
         respx_mock.post("/memories/add").mock(side_effect=retry_handler)
 
-        response = client.memories.with_raw_response.add(text="text")
+        response = client.memories.with_raw_response.add(text="...")
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -989,7 +1013,7 @@ class TestHyperspell:
 
         respx_mock.post("/memories/add").mock(side_effect=retry_handler)
 
-        response = client.memories.with_raw_response.add(text="text", extra_headers={"x-stainless-retry-count": Omit()})
+        response = client.memories.with_raw_response.add(text="...", extra_headers={"x-stainless-retry-count": Omit()})
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
@@ -1012,7 +1036,7 @@ class TestHyperspell:
 
         respx_mock.post("/memories/add").mock(side_effect=retry_handler)
 
-        response = client.memories.with_raw_response.add(text="text", extra_headers={"x-stainless-retry-count": "42"})
+        response = client.memories.with_raw_response.add(text="...", extra_headers={"x-stainless-retry-count": "42"})
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
 
@@ -1433,6 +1457,30 @@ class TestAsyncHyperspell:
         assert dict(url.params) == {"foo": "baz", "query_param": "overridden"}
 
         await client.close()
+
+    async def test_hardcoded_query_params_in_url(self, async_client: AsyncHyperspell) -> None:
+        request = async_client._build_request(FinalRequestOptions(method="get", url="/foo?beta=true"))
+        url = httpx.URL(request.url)
+        assert dict(url.params) == {"beta": "true"}
+
+        request = async_client._build_request(
+            FinalRequestOptions(
+                method="get",
+                url="/foo?beta=true",
+                params={"limit": "10", "page": "abc"},
+            )
+        )
+        url = httpx.URL(request.url)
+        assert dict(url.params) == {"beta": "true", "limit": "10", "page": "abc"}
+
+        request = async_client._build_request(
+            FinalRequestOptions(
+                method="get",
+                url="/files/a%2Fb?beta=true",
+                params={"limit": "10"},
+            )
+        )
+        assert request.url.raw_path == b"/files/a%2Fb?beta=true&limit=10"
 
     def test_request_extra_json(self, client: Hyperspell) -> None:
         request = client._build_request(
@@ -1903,7 +1951,7 @@ class TestAsyncHyperspell:
         respx_mock.post("/memories/add").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            await async_client.memories.with_streaming_response.add(text="text").__aenter__()
+            await async_client.memories.with_streaming_response.add(text="...").__aenter__()
 
         assert _get_open_connections(async_client) == 0
 
@@ -1915,7 +1963,7 @@ class TestAsyncHyperspell:
         respx_mock.post("/memories/add").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            await async_client.memories.with_streaming_response.add(text="text").__aenter__()
+            await async_client.memories.with_streaming_response.add(text="...").__aenter__()
         assert _get_open_connections(async_client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
@@ -1944,7 +1992,7 @@ class TestAsyncHyperspell:
 
         respx_mock.post("/memories/add").mock(side_effect=retry_handler)
 
-        response = await client.memories.with_raw_response.add(text="text")
+        response = await client.memories.with_raw_response.add(text="...")
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -1969,7 +2017,7 @@ class TestAsyncHyperspell:
         respx_mock.post("/memories/add").mock(side_effect=retry_handler)
 
         response = await client.memories.with_raw_response.add(
-            text="text", extra_headers={"x-stainless-retry-count": Omit()}
+            text="...", extra_headers={"x-stainless-retry-count": Omit()}
         )
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
@@ -1994,7 +2042,7 @@ class TestAsyncHyperspell:
         respx_mock.post("/memories/add").mock(side_effect=retry_handler)
 
         response = await client.memories.with_raw_response.add(
-            text="text", extra_headers={"x-stainless-retry-count": "42"}
+            text="...", extra_headers={"x-stainless-retry-count": "42"}
         )
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"

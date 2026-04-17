@@ -31,6 +31,13 @@ class MemorySearchParams(TypedDict, total=False):
     answer: bool
     """If true, the query will be answered along with matching source documents."""
 
+    effort: int
+    """Effort level.
+
+    0 = pass query through verbatim. 1 = LLM rewrites the query for better retrieval
+    and extracts date filters.
+    """
+
     max_results: int
     """Maximum number of results to return."""
 
@@ -46,12 +53,13 @@ class MemorySearchParams(TypedDict, total=False):
             "google_mail",
             "box",
             "dropbox",
-            "google_drive",
             "github",
+            "google_drive",
             "vault",
             "web_crawler",
             "trace",
             "microsoft_teams",
+            "gmail_actions",
         ]
     ]
     """Only query documents from these sources."""
@@ -257,7 +265,7 @@ class Options(TypedDict, total=False):
     max_results: int
     """Maximum number of results to return."""
 
-    memory_types: List[Literal["procedure", "memory"]]
+    memory_types: List[Literal["procedure", "memory", "mood"]]
     """Filter by memory type.
 
     Defaults to generic memories only. Pass multiple types to include procedures,

@@ -32,14 +32,18 @@ class Integration(BaseModel):
         "google_mail",
         "box",
         "dropbox",
-        "google_drive",
         "github",
+        "google_drive",
         "vault",
         "web_crawler",
         "trace",
         "microsoft_teams",
+        "gmail_actions",
     ]
     """The integration's provider"""
+
+    actions_only: Optional[bool] = None
+    """Whether this integration only supports write actions (no sync)"""
 
 
 class IntegrationListResponse(BaseModel):

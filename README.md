@@ -42,7 +42,7 @@ client = Hyperspell(
 )
 
 memory_status = client.memories.add(
-    text="text",
+    text="...",
 )
 print(memory_status.resource_id)
 ```
@@ -68,7 +68,7 @@ client = AsyncHyperspell(
 
 async def main() -> None:
     memory_status = await client.memories.add(
-        text="text",
+        text="...",
     )
     print(memory_status.resource_id)
 
@@ -104,7 +104,7 @@ async def main() -> None:
         http_client=DefaultAioHttpClient(),
     ) as client:
         memory_status = await client.memories.add(
-            text="text",
+            text="...",
         )
         print(memory_status.resource_id)
 
@@ -194,8 +194,8 @@ from hyperspell import Hyperspell
 client = Hyperspell()
 
 query_result = client.memories.search(
-    query="query",
-    options={},
+    query="What does Hyperspell do?",
+    options={"filter": {}},
 )
 print(query_result.options)
 ```
@@ -234,7 +234,7 @@ client = Hyperspell()
 
 try:
     client.memories.add(
-        text="text",
+        text="...",
     )
 except hyperspell.APIConnectionError as e:
     print("The server could not be reached")
@@ -279,7 +279,7 @@ client = Hyperspell(
 
 # Or, configure per-request:
 client.with_options(max_retries=5).memories.add(
-    text="text",
+    text="...",
 )
 ```
 
@@ -304,7 +304,7 @@ client = Hyperspell(
 
 # Override per-request:
 client.with_options(timeout=5.0).memories.add(
-    text="text",
+    text="...",
 )
 ```
 
@@ -347,7 +347,7 @@ from hyperspell import Hyperspell
 
 client = Hyperspell()
 response = client.memories.with_raw_response.add(
-    text="text",
+    text="...",
 )
 print(response.headers.get('X-My-Header'))
 
@@ -367,7 +367,7 @@ To stream the response body, use `.with_streaming_response` instead, which requi
 
 ```python
 with client.memories.with_streaming_response.add(
-    text="text",
+    text="...",
 ) as response:
     print(response.headers.get("X-My-Header"))
 

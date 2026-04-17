@@ -17,7 +17,7 @@ from ..types import (
     memory_add_bulk_params,
 )
 from .._types import Body, Omit, Query, Headers, NotGiven, FileTypes, omit, not_given
-from .._utils import extract_files, maybe_transform, deepcopy_minimal, async_maybe_transform
+from .._utils import extract_files, path_template, maybe_transform, deepcopy_minimal, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -71,12 +71,13 @@ class MemoriesResource(SyncAPIResource):
             "google_mail",
             "box",
             "dropbox",
-            "google_drive",
             "github",
+            "google_drive",
             "vault",
             "web_crawler",
             "trace",
             "microsoft_teams",
+            "gmail_actions",
         ],
         collection: Union[str, object, None] | Omit = omit,
         metadata: Union[Dict[str, Union[str, float, bool, None]], object, None] | Omit = omit,
@@ -122,7 +123,7 @@ class MemoriesResource(SyncAPIResource):
         if not resource_id:
             raise ValueError(f"Expected a non-empty value for `resource_id` but received {resource_id!r}")
         return self._post(
-            f"/memories/update/{source}/{resource_id}",
+            path_template("/memories/update/{source}/{resource_id}", source=source, resource_id=resource_id),
             body=maybe_transform(
                 {
                     "collection": collection,
@@ -154,12 +155,13 @@ class MemoriesResource(SyncAPIResource):
                 "google_mail",
                 "box",
                 "dropbox",
-                "google_drive",
                 "github",
+                "google_drive",
                 "vault",
                 "web_crawler",
                 "trace",
                 "microsoft_teams",
+                "gmail_actions",
             ]
         ]
         | Omit = omit,
@@ -231,12 +233,13 @@ class MemoriesResource(SyncAPIResource):
             "google_mail",
             "box",
             "dropbox",
-            "google_drive",
             "github",
+            "google_drive",
             "vault",
             "web_crawler",
             "trace",
             "microsoft_teams",
+            "gmail_actions",
         ],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -276,7 +279,7 @@ class MemoriesResource(SyncAPIResource):
         if not resource_id:
             raise ValueError(f"Expected a non-empty value for `resource_id` but received {resource_id!r}")
         return self._delete(
-            f"/memories/delete/{source}/{resource_id}",
+            path_template("/memories/delete/{source}/{resource_id}", source=source, resource_id=resource_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -404,12 +407,13 @@ class MemoriesResource(SyncAPIResource):
             "google_mail",
             "box",
             "dropbox",
-            "google_drive",
             "github",
+            "google_drive",
             "vault",
             "web_crawler",
             "trace",
             "microsoft_teams",
+            "gmail_actions",
         ],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -435,7 +439,7 @@ class MemoriesResource(SyncAPIResource):
         if not resource_id:
             raise ValueError(f"Expected a non-empty value for `resource_id` but received {resource_id!r}")
         return self._get(
-            f"/memories/get/{source}/{resource_id}",
+            path_template("/memories/get/{source}/{resource_id}", source=source, resource_id=resource_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -447,6 +451,7 @@ class MemoriesResource(SyncAPIResource):
         *,
         query: str,
         answer: bool | Omit = omit,
+        effort: int | Omit = omit,
         max_results: int | Omit = omit,
         options: memory_search_params.Options | Omit = omit,
         sources: List[
@@ -458,12 +463,13 @@ class MemoriesResource(SyncAPIResource):
                 "google_mail",
                 "box",
                 "dropbox",
-                "google_drive",
                 "github",
+                "google_drive",
                 "vault",
                 "web_crawler",
                 "trace",
                 "microsoft_teams",
+                "gmail_actions",
             ]
         ]
         | Omit = omit,
@@ -481,6 +487,9 @@ class MemoriesResource(SyncAPIResource):
           query: Query to run.
 
           answer: If true, the query will be answered along with matching source documents.
+
+          effort: Effort level. 0 = pass query through verbatim. 1 = LLM rewrites the query for
+              better retrieval and extracts date filters.
 
           max_results: Maximum number of results to return.
 
@@ -502,6 +511,7 @@ class MemoriesResource(SyncAPIResource):
                 {
                     "query": query,
                     "answer": answer,
+                    "effort": effort,
                     "max_results": max_results,
                     "options": options,
                     "sources": sources,
@@ -628,12 +638,13 @@ class AsyncMemoriesResource(AsyncAPIResource):
             "google_mail",
             "box",
             "dropbox",
-            "google_drive",
             "github",
+            "google_drive",
             "vault",
             "web_crawler",
             "trace",
             "microsoft_teams",
+            "gmail_actions",
         ],
         collection: Union[str, object, None] | Omit = omit,
         metadata: Union[Dict[str, Union[str, float, bool, None]], object, None] | Omit = omit,
@@ -679,7 +690,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
         if not resource_id:
             raise ValueError(f"Expected a non-empty value for `resource_id` but received {resource_id!r}")
         return await self._post(
-            f"/memories/update/{source}/{resource_id}",
+            path_template("/memories/update/{source}/{resource_id}", source=source, resource_id=resource_id),
             body=await async_maybe_transform(
                 {
                     "collection": collection,
@@ -711,12 +722,13 @@ class AsyncMemoriesResource(AsyncAPIResource):
                 "google_mail",
                 "box",
                 "dropbox",
-                "google_drive",
                 "github",
+                "google_drive",
                 "vault",
                 "web_crawler",
                 "trace",
                 "microsoft_teams",
+                "gmail_actions",
             ]
         ]
         | Omit = omit,
@@ -788,12 +800,13 @@ class AsyncMemoriesResource(AsyncAPIResource):
             "google_mail",
             "box",
             "dropbox",
-            "google_drive",
             "github",
+            "google_drive",
             "vault",
             "web_crawler",
             "trace",
             "microsoft_teams",
+            "gmail_actions",
         ],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -833,7 +846,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
         if not resource_id:
             raise ValueError(f"Expected a non-empty value for `resource_id` but received {resource_id!r}")
         return await self._delete(
-            f"/memories/delete/{source}/{resource_id}",
+            path_template("/memories/delete/{source}/{resource_id}", source=source, resource_id=resource_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -961,12 +974,13 @@ class AsyncMemoriesResource(AsyncAPIResource):
             "google_mail",
             "box",
             "dropbox",
-            "google_drive",
             "github",
+            "google_drive",
             "vault",
             "web_crawler",
             "trace",
             "microsoft_teams",
+            "gmail_actions",
         ],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -992,7 +1006,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
         if not resource_id:
             raise ValueError(f"Expected a non-empty value for `resource_id` but received {resource_id!r}")
         return await self._get(
-            f"/memories/get/{source}/{resource_id}",
+            path_template("/memories/get/{source}/{resource_id}", source=source, resource_id=resource_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -1004,6 +1018,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
         *,
         query: str,
         answer: bool | Omit = omit,
+        effort: int | Omit = omit,
         max_results: int | Omit = omit,
         options: memory_search_params.Options | Omit = omit,
         sources: List[
@@ -1015,12 +1030,13 @@ class AsyncMemoriesResource(AsyncAPIResource):
                 "google_mail",
                 "box",
                 "dropbox",
-                "google_drive",
                 "github",
+                "google_drive",
                 "vault",
                 "web_crawler",
                 "trace",
                 "microsoft_teams",
+                "gmail_actions",
             ]
         ]
         | Omit = omit,
@@ -1038,6 +1054,9 @@ class AsyncMemoriesResource(AsyncAPIResource):
           query: Query to run.
 
           answer: If true, the query will be answered along with matching source documents.
+
+          effort: Effort level. 0 = pass query through verbatim. 1 = LLM rewrites the query for
+              better retrieval and extracts date filters.
 
           max_results: Maximum number of results to return.
 
@@ -1059,6 +1078,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
                 {
                     "query": query,
                     "answer": answer,
+                    "effort": effort,
                     "max_results": max_results,
                     "options": options,
                     "sources": sources,

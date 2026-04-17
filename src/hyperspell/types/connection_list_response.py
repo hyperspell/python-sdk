@@ -26,12 +26,13 @@ class Connection(BaseModel):
         "google_mail",
         "box",
         "dropbox",
-        "google_drive",
         "github",
+        "google_drive",
         "vault",
         "web_crawler",
         "trace",
         "microsoft_teams",
+        "gmail_actions",
     ]
     """The connection's provider"""
 
