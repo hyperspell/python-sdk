@@ -3,7 +3,10 @@
 from __future__ import annotations
 
 from typing import Dict, Union
-from typing_extensions import Literal, Required, TypedDict
+from datetime import datetime
+from typing_extensions import Literal, Required, Annotated, TypedDict
+
+from .._utils import PropertyInfo
 
 __all__ = ["MemoryUpdateParams"]
 
@@ -33,6 +36,9 @@ class MemoryUpdateParams(TypedDict, total=False):
     The collection to move the document to — deprecated, set the collection using
     metadata instead.
     """
+
+    date: Annotated[Union[Union[str, datetime], object, None], PropertyInfo(format="iso8601")]
+    """Date of the document for ranking and filtering."""
 
     metadata: Union[Dict[str, Union[str, float, bool, None]], object, None]
     """Custom metadata for filtering.

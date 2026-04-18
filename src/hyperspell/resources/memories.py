@@ -80,6 +80,7 @@ class MemoriesResource(SyncAPIResource):
             "gmail_actions",
         ],
         collection: Union[str, object, None] | Omit = omit,
+        date: Union[Union[str, datetime], object, None] | Omit = omit,
         metadata: Union[Dict[str, Union[str, float, bool, None]], object, None] | Omit = omit,
         text: Union[str, object, None] | Omit = omit,
         title: Union[str, object, None] | Omit = omit,
@@ -101,6 +102,8 @@ class MemoriesResource(SyncAPIResource):
         Args:
           collection: The collection to move the document to — deprecated, set the collection using
               metadata instead.
+
+          date: Date of the document for ranking and filtering.
 
           metadata: Custom metadata for filtering. Keys must be alphanumeric with underscores, max
               64 chars. Values must be string, number, boolean, or null. Will be merged with
@@ -127,6 +130,7 @@ class MemoriesResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "collection": collection,
+                    "date": date,
                     "metadata": metadata,
                     "text": text,
                     "title": title,
@@ -647,6 +651,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
             "gmail_actions",
         ],
         collection: Union[str, object, None] | Omit = omit,
+        date: Union[Union[str, datetime], object, None] | Omit = omit,
         metadata: Union[Dict[str, Union[str, float, bool, None]], object, None] | Omit = omit,
         text: Union[str, object, None] | Omit = omit,
         title: Union[str, object, None] | Omit = omit,
@@ -668,6 +673,8 @@ class AsyncMemoriesResource(AsyncAPIResource):
         Args:
           collection: The collection to move the document to — deprecated, set the collection using
               metadata instead.
+
+          date: Date of the document for ranking and filtering.
 
           metadata: Custom metadata for filtering. Keys must be alphanumeric with underscores, max
               64 chars. Values must be string, number, boolean, or null. Will be merged with
@@ -694,6 +701,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "collection": collection,
+                    "date": date,
                     "metadata": metadata,
                     "text": text,
                     "title": title,
