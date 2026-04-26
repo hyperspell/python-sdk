@@ -275,6 +275,15 @@ class Options(TypedDict, total=False):
     notion: OptionsNotion
     """Search options for Notion"""
 
+    recency_half_life_days: Optional[float]
+    """
+    When set, multiplies each result's score by an exponential-decay factor based on
+    the document's most recent activity timestamp (source-reported last_modified,
+    falling back to document_date). A document one half-life old gets its score
+    halved. Resources with no recency timestamp are passed through unchanged. Leave
+    unset to disable.
+    """
+
     reddit: OptionsReddit
     """Search options for Reddit"""
 
