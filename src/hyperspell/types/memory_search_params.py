@@ -60,6 +60,9 @@ class MemorySearchParams(TypedDict, total=False):
             "trace",
             "microsoft_teams",
             "gmail_actions",
+            "granola",
+            "fathom",
+            "linear",
         ]
     ]
     """Only query documents from these sources."""

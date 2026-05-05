@@ -31,6 +31,9 @@ class Memory(BaseModel):
         "trace",
         "microsoft_teams",
         "gmail_actions",
+        "granola",
+        "fathom",
+        "linear",
     ]
 
     type: str

@@ -48,6 +48,9 @@ class AuthMeResponse(BaseModel):
             "trace",
             "microsoft_teams",
             "gmail_actions",
+            "granola",
+            "fathom",
+            "linear",
         ]
     ]
     """All integrations available for the app"""
@@ -68,6 +71,9 @@ class AuthMeResponse(BaseModel):
             "trace",
             "microsoft_teams",
             "gmail_actions",
+            "granola",
+            "fathom",
+            "linear",
         ]
     ]
     """All integrations installed for the user"""

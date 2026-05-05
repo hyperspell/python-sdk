@@ -27,6 +27,9 @@ class Resource(BaseModel):
         "trace",
         "microsoft_teams",
         "gmail_actions",
+        "granola",
+        "fathom",
+        "linear",
     ]
 
     folder_id: Optional[str] = None
