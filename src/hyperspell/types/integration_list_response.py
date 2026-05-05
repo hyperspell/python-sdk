@@ -39,6 +39,9 @@ class Integration(BaseModel):
         "trace",
         "microsoft_teams",
         "gmail_actions",
+        "granola",
+        "fathom",
+        "linear",
     ]
     """The integration's provider"""
 

@@ -33,6 +33,9 @@ class Connection(BaseModel):
         "trace",
         "microsoft_teams",
         "gmail_actions",
+        "granola",
+        "fathom",
+        "linear",
     ]
     """The connection's provider"""
 

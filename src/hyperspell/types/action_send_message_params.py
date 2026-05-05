@@ -25,6 +25,9 @@ class ActionSendMessageParams(TypedDict, total=False):
             "trace",
             "microsoft_teams",
             "gmail_actions",
+            "granola",
+            "fathom",
+            "linear",
         ]
     ]
     """Integration provider (e.g., slack)"""

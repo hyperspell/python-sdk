@@ -29,6 +29,9 @@ class MemoryDeleteResponse(BaseModel):
         "trace",
         "microsoft_teams",
         "gmail_actions",
+        "granola",
+        "fathom",
+        "linear",
     ]
 
     success: bool

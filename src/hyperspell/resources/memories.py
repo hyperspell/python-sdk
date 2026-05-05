@@ -79,6 +79,9 @@ class MemoriesResource(SyncAPIResource):
             "trace",
             "microsoft_teams",
             "gmail_actions",
+            "granola",
+            "fathom",
+            "linear",
         ],
         collection: Union[str, object, None] | Omit = omit,
         date: Union[Union[str, datetime], object, None] | Omit = omit,
@@ -167,6 +170,9 @@ class MemoriesResource(SyncAPIResource):
                 "trace",
                 "microsoft_teams",
                 "gmail_actions",
+                "granola",
+                "fathom",
+                "linear",
             ]
         ]
         | Omit = omit,
@@ -245,6 +251,9 @@ class MemoriesResource(SyncAPIResource):
             "trace",
             "microsoft_teams",
             "gmail_actions",
+            "granola",
+            "fathom",
+            "linear",
         ],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -419,6 +428,9 @@ class MemoriesResource(SyncAPIResource):
             "trace",
             "microsoft_teams",
             "gmail_actions",
+            "granola",
+            "fathom",
+            "linear",
         ],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -475,6 +487,9 @@ class MemoriesResource(SyncAPIResource):
                 "trace",
                 "microsoft_teams",
                 "gmail_actions",
+                "granola",
+                "fathom",
+                "linear",
             ]
         ]
         | Omit = omit,
@@ -651,6 +666,9 @@ class AsyncMemoriesResource(AsyncAPIResource):
             "trace",
             "microsoft_teams",
             "gmail_actions",
+            "granola",
+            "fathom",
+            "linear",
         ],
         collection: Union[str, object, None] | Omit = omit,
         date: Union[Union[str, datetime], object, None] | Omit = omit,
@@ -739,6 +757,9 @@ class AsyncMemoriesResource(AsyncAPIResource):
                 "trace",
                 "microsoft_teams",
                 "gmail_actions",
+                "granola",
+                "fathom",
+                "linear",
             ]
         ]
         | Omit = omit,
@@ -817,6 +838,9 @@ class AsyncMemoriesResource(AsyncAPIResource):
             "trace",
             "microsoft_teams",
             "gmail_actions",
+            "granola",
+            "fathom",
+            "linear",
         ],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -991,6 +1015,9 @@ class AsyncMemoriesResource(AsyncAPIResource):
             "trace",
             "microsoft_teams",
             "gmail_actions",
+            "granola",
+            "fathom",
+            "linear",
         ],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1047,6 +1074,9 @@ class AsyncMemoriesResource(AsyncAPIResource):
                 "trace",
                 "microsoft_teams",
                 "gmail_actions",
+                "granola",
+                "fathom",
+                "linear",
             ]
         ]
         | Omit = omit,
