@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
+from typing import List, Optional
 from typing_extensions import Literal
 
 from .metadata import Metadata
@@ -31,6 +31,14 @@ class Resource(BaseModel):
         "fathom",
         "linear",
     ]
+
+    folder_ancestors: Optional[List[str]] = None
+    """
+    Ordered list of provider folder IDs from immediate parent up to (but not
+    including) provider root. Used by resolve_sync_mode to walk the actual folder
+    tree without depending on intermediate policy records. Empty = resource lives at
+    provider root.
+    """
 
     folder_id: Optional[str] = None
     """Provider folder ID this resource belongs to"""
