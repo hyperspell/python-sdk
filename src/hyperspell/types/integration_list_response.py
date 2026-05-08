@@ -48,6 +48,9 @@ class Integration(BaseModel):
     actions_only: Optional[bool] = None
     """Whether this integration only supports write actions (no sync)"""
 
+    requires_channel_selection: Optional[bool] = None
+    """Whether the user must select channels before indexing starts"""
+
 
 class IntegrationListResponse(BaseModel):
     integrations: List[Integration]

@@ -39,6 +39,12 @@ class Connection(BaseModel):
     ]
     """The connection's provider"""
 
+    selected_count: Optional[int] = None
+    """
+    Count of items in user_options.channels (Teams: workspaces selected; 0 means
+    nothing is being indexed for integrations that require selection).
+    """
+
 
 class ConnectionListResponse(BaseModel):
     connections: List[Connection]
