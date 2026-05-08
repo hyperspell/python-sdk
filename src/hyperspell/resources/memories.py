@@ -468,7 +468,7 @@ class MemoriesResource(SyncAPIResource):
         *,
         query: str,
         answer: bool | Omit = omit,
-        effort: int | Omit = omit,
+        effort: Literal["minimal", "low", "medium", "high"] | Omit = omit,
         max_results: int | Omit = omit,
         options: memory_search_params.Options | Omit = omit,
         sources: List[
@@ -508,8 +508,13 @@ class MemoriesResource(SyncAPIResource):
 
           answer: If true, the query will be answered along with matching source documents.
 
-          effort: Effort level. 0 = pass query through verbatim. 1 = LLM rewrites the query for
-              better retrieval and extracts date filters.
+          effort: How much compute to spend on retrieval. Mirrors the dial popularized by
+              frontier-model APIs (OpenAI reasoning_effort, etc.). 'minimal' = verbatim
+              single-shot retrieval (fastest). 'low' = LLM rewrites the query for better
+              retrieval and extracts date filters. 'medium' = rewrite + agentic refinement
+              loop (the answer LLM may request additional retrieval rounds, up to 3). 'high' =
+              rewrite + extended refinement (up to 6 rounds). Higher = better recall, more
+              latency, more cost.
 
           max_results: Maximum number of results to return.
 
@@ -1055,7 +1060,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
         *,
         query: str,
         answer: bool | Omit = omit,
-        effort: int | Omit = omit,
+        effort: Literal["minimal", "low", "medium", "high"] | Omit = omit,
         max_results: int | Omit = omit,
         options: memory_search_params.Options | Omit = omit,
         sources: List[
@@ -1095,8 +1100,13 @@ class AsyncMemoriesResource(AsyncAPIResource):
 
           answer: If true, the query will be answered along with matching source documents.
 
-          effort: Effort level. 0 = pass query through verbatim. 1 = LLM rewrites the query for
-              better retrieval and extracts date filters.
+          effort: How much compute to spend on retrieval. Mirrors the dial popularized by
+              frontier-model APIs (OpenAI reasoning_effort, etc.). 'minimal' = verbatim
+              single-shot retrieval (fastest). 'low' = LLM rewrites the query for better
+              retrieval and extracts date filters. 'medium' = rewrite + agentic refinement
+              loop (the answer LLM may request additional retrieval rounds, up to 3). 'high' =
+              rewrite + extended refinement (up to 6 rounds). Higher = better recall, more
+              latency, more cost.
 
           max_results: Maximum number of results to return.
 

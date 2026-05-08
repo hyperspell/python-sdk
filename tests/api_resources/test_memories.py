@@ -292,7 +292,7 @@ class TestMemories:
         memory = client.memories.search(
             query="What does Hyperspell do?",
             answer=True,
-            effort=0,
+            effort="minimal",
             max_results=0,
             options={
                 "after": parse_datetime("2019-12-27T18:11:19.117Z"),
@@ -703,7 +703,7 @@ class TestAsyncMemories:
         memory = await async_client.memories.search(
             query="What does Hyperspell do?",
             answer=True,
-            effort=0,
+            effort="minimal",
             max_results=0,
             options={
                 "after": parse_datetime("2019-12-27T18:11:19.117Z"),
