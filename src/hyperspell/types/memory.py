@@ -34,6 +34,8 @@ class Memory(BaseModel):
         "granola",
         "fathom",
         "linear",
+        "hubspot",
+        "salesforce",
     ]
 
     type: str

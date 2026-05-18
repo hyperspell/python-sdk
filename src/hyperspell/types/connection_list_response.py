@@ -36,6 +36,8 @@ class Connection(BaseModel):
         "granola",
         "fathom",
         "linear",
+        "hubspot",
+        "salesforce",
     ]
     """The connection's provider"""
 
