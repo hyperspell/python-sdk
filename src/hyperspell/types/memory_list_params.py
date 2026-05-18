@@ -41,6 +41,8 @@ class MemoryListParams(TypedDict, total=False):
             "granola",
             "fathom",
             "linear",
+            "hubspot",
+            "salesforce",
         ]
     ]
     """Filter documents by source."""

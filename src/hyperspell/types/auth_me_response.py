@@ -51,6 +51,8 @@ class AuthMeResponse(BaseModel):
             "granola",
             "fathom",
             "linear",
+            "hubspot",
+            "salesforce",
         ]
     ]
     """All integrations available for the app"""
@@ -74,6 +76,8 @@ class AuthMeResponse(BaseModel):
             "granola",
             "fathom",
             "linear",
+            "hubspot",
+            "salesforce",
         ]
     ]
     """All integrations installed for the user"""

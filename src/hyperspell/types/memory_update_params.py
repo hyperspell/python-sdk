@@ -31,6 +31,8 @@ class MemoryUpdateParams(TypedDict, total=False):
             "granola",
             "fathom",
             "linear",
+            "hubspot",
+            "salesforce",
         ]
     ]
 

@@ -34,6 +34,8 @@ class ActionAddReactionParams(TypedDict, total=False):
             "granola",
             "fathom",
             "linear",
+            "hubspot",
+            "salesforce",
         ]
     ]
     """Integration provider (e.g., slack)"""

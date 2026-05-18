@@ -32,6 +32,8 @@ class MemoryDeleteResponse(BaseModel):
         "granola",
         "fathom",
         "linear",
+        "hubspot",
+        "salesforce",
     ]
 
     success: bool

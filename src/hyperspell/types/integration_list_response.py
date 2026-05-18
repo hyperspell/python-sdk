@@ -42,6 +42,8 @@ class Integration(BaseModel):
         "granola",
         "fathom",
         "linear",
+        "hubspot",
+        "salesforce",
     ]
     """The integration's provider"""
 

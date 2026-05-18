@@ -30,6 +30,8 @@ class Resource(BaseModel):
         "granola",
         "fathom",
         "linear",
+        "hubspot",
+        "salesforce",
     ]
 
     folder_ancestors: Optional[List[str]] = None

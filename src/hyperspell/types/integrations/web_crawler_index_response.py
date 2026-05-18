@@ -28,6 +28,8 @@ class WebCrawlerIndexResponse(BaseModel):
         "granola",
         "fathom",
         "linear",
+        "hubspot",
+        "salesforce",
     ]
 
     status: Literal["pending", "processing", "completed", "failed", "pending_review", "skipped"]

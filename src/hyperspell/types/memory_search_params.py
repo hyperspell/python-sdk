@@ -67,6 +67,8 @@ class MemorySearchParams(TypedDict, total=False):
             "granola",
             "fathom",
             "linear",
+            "hubspot",
+            "salesforce",
         ]
     ]
     """Only query documents from these sources."""
