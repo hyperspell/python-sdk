@@ -39,6 +39,7 @@ class Connection(BaseModel):
         "hubspot",
         "salesforce",
         "coda",
+        "lightfield",
     ]
     """The connection's provider"""
 

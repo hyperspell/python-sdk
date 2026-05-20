@@ -31,6 +31,7 @@ class MemoryStatus(BaseModel):
         "hubspot",
         "salesforce",
         "coda",
+        "lightfield",
     ]
 
     status: Literal["pending", "processing", "completed", "failed", "pending_review", "skipped"]

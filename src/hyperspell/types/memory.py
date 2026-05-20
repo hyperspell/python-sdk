@@ -37,6 +37,7 @@ class Memory(BaseModel):
         "hubspot",
         "salesforce",
         "coda",
+        "lightfield",
     ]
 
     type: str

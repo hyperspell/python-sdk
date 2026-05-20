@@ -35,6 +35,7 @@ class MemoryDeleteResponse(BaseModel):
         "hubspot",
         "salesforce",
         "coda",
+        "lightfield",
     ]
 
     success: bool

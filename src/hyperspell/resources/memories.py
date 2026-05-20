@@ -85,6 +85,7 @@ class MemoriesResource(SyncAPIResource):
             "hubspot",
             "salesforce",
             "coda",
+            "lightfield",
         ],
         collection: Union[str, object, None] | Omit = omit,
         date: Union[Union[str, datetime], object, None] | Omit = omit,
@@ -179,6 +180,7 @@ class MemoriesResource(SyncAPIResource):
                 "hubspot",
                 "salesforce",
                 "coda",
+                "lightfield",
             ]
         ]
         | Omit = omit,
@@ -263,6 +265,7 @@ class MemoriesResource(SyncAPIResource):
             "hubspot",
             "salesforce",
             "coda",
+            "lightfield",
         ],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -443,6 +446,7 @@ class MemoriesResource(SyncAPIResource):
             "hubspot",
             "salesforce",
             "coda",
+            "lightfield",
         ],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -505,6 +509,7 @@ class MemoriesResource(SyncAPIResource):
                 "hubspot",
                 "salesforce",
                 "coda",
+                "lightfield",
             ]
         ]
         | Omit = omit,
@@ -692,6 +697,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
             "hubspot",
             "salesforce",
             "coda",
+            "lightfield",
         ],
         collection: Union[str, object, None] | Omit = omit,
         date: Union[Union[str, datetime], object, None] | Omit = omit,
@@ -786,6 +792,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
                 "hubspot",
                 "salesforce",
                 "coda",
+                "lightfield",
             ]
         ]
         | Omit = omit,
@@ -870,6 +877,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
             "hubspot",
             "salesforce",
             "coda",
+            "lightfield",
         ],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1050,6 +1058,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
             "hubspot",
             "salesforce",
             "coda",
+            "lightfield",
         ],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -1112,6 +1121,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
                 "hubspot",
                 "salesforce",
                 "coda",
+                "lightfield",
             ]
         ]
         | Omit = omit,
