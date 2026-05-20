@@ -32,6 +32,7 @@ class Resource(BaseModel):
         "linear",
         "hubspot",
         "salesforce",
+        "coda",
     ]
 
     folder_ancestors: Optional[List[str]] = None

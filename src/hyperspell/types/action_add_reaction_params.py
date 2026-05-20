@@ -36,6 +36,7 @@ class ActionAddReactionParams(TypedDict, total=False):
             "linear",
             "hubspot",
             "salesforce",
+            "coda",
         ]
     ]
     """Integration provider (e.g., slack)"""

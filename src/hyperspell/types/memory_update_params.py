@@ -33,6 +33,7 @@ class MemoryUpdateParams(TypedDict, total=False):
             "linear",
             "hubspot",
             "salesforce",
+            "coda",
         ]
     ]
 

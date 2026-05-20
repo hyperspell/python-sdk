@@ -34,6 +34,7 @@ class MemoryDeleteResponse(BaseModel):
         "linear",
         "hubspot",
         "salesforce",
+        "coda",
     ]
 
     success: bool

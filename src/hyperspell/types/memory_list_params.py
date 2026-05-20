@@ -43,6 +43,7 @@ class MemoryListParams(TypedDict, total=False):
             "linear",
             "hubspot",
             "salesforce",
+            "coda",
         ]
     ]
     """Filter documents by source."""

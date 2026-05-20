@@ -53,6 +53,7 @@ class AuthMeResponse(BaseModel):
             "linear",
             "hubspot",
             "salesforce",
+            "coda",
         ]
     ]
     """All integrations available for the app"""
@@ -78,6 +79,7 @@ class AuthMeResponse(BaseModel):
             "linear",
             "hubspot",
             "salesforce",
+            "coda",
         ]
     ]
     """All integrations installed for the user"""
