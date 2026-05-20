@@ -30,6 +30,7 @@ class WebCrawlerIndexResponse(BaseModel):
         "linear",
         "hubspot",
         "salesforce",
+        "coda",
     ]
 
     status: Literal["pending", "processing", "completed", "failed", "pending_review", "skipped"]

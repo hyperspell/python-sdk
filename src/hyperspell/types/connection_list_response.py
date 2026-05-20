@@ -38,6 +38,7 @@ class Connection(BaseModel):
         "linear",
         "hubspot",
         "salesforce",
+        "coda",
     ]
     """The connection's provider"""
 

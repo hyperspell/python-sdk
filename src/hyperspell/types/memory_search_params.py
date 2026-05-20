@@ -69,6 +69,7 @@ class MemorySearchParams(TypedDict, total=False):
             "linear",
             "hubspot",
             "salesforce",
+            "coda",
         ]
     ]
     """Only query documents from these sources."""

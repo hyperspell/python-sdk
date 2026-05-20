@@ -44,6 +44,7 @@ class Integration(BaseModel):
         "linear",
         "hubspot",
         "salesforce",
+        "coda",
     ]
     """The integration's provider"""
 

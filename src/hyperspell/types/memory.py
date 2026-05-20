@@ -36,6 +36,7 @@ class Memory(BaseModel):
         "linear",
         "hubspot",
         "salesforce",
+        "coda",
     ]
 
     type: str
