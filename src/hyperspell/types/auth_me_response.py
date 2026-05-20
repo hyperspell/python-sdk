@@ -54,6 +54,7 @@ class AuthMeResponse(BaseModel):
             "hubspot",
             "salesforce",
             "coda",
+            "lightfield",
         ]
     ]
     """All integrations available for the app"""
@@ -80,6 +81,7 @@ class AuthMeResponse(BaseModel):
             "hubspot",
             "salesforce",
             "coda",
+            "lightfield",
         ]
     ]
     """All integrations installed for the user"""

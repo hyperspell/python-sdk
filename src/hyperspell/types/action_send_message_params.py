@@ -31,6 +31,7 @@ class ActionSendMessageParams(TypedDict, total=False):
             "hubspot",
             "salesforce",
             "coda",
+            "lightfield",
         ]
     ]
     """Integration provider (e.g., slack)"""

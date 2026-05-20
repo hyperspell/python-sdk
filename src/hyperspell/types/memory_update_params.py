@@ -34,6 +34,7 @@ class MemoryUpdateParams(TypedDict, total=False):
             "hubspot",
             "salesforce",
             "coda",
+            "lightfield",
         ]
     ]
 

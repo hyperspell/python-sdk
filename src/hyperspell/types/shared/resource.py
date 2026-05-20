@@ -33,6 +33,7 @@ class Resource(BaseModel):
         "hubspot",
         "salesforce",
         "coda",
+        "lightfield",
     ]
 
     folder_ancestors: Optional[List[str]] = None

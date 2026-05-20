@@ -45,6 +45,7 @@ class Integration(BaseModel):
         "hubspot",
         "salesforce",
         "coda",
+        "lightfield",
     ]
     """The integration's provider"""
 
