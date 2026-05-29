@@ -33,6 +33,7 @@ class Memory(BaseModel):
         "gmail_actions",
         "granola",
         "fathom",
+        "fireflies",
         "linear",
         "hubspot",
         "salesforce",

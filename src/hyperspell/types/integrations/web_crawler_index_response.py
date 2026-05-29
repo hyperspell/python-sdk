@@ -27,6 +27,7 @@ class WebCrawlerIndexResponse(BaseModel):
         "gmail_actions",
         "granola",
         "fathom",
+        "fireflies",
         "linear",
         "hubspot",
         "salesforce",
