@@ -488,9 +488,10 @@ class MemoriesResource(SyncAPIResource):
         *,
         query: str,
         answer: bool | Omit = omit,
-        effort: Literal["minimal", "low", "medium", "high"] | Omit = omit,
+        effort: Literal["minimal", "low", "medium", "high", "very_high"] | Omit = omit,
         max_results: int | Omit = omit,
         options: memory_search_params.Options | Omit = omit,
+        provenance: bool | Omit = omit,
         sources: List[
             Literal[
                 "reddit",
@@ -545,6 +546,12 @@ class MemoriesResource(SyncAPIResource):
 
           options: Search options for the query.
 
+          provenance:
+              If true (effort='very_high' only), attach a provenance record to the response:
+              the source documents and entities the answer was grounded in, the agent's search
+              trajectory, and any sources that failed. Adds one indexed lookup; intended for
+              auditability / compliance use cases.
+
           sources: Only query documents from these sources.
 
           extra_headers: Send extra headers
@@ -564,6 +571,7 @@ class MemoriesResource(SyncAPIResource):
                     "effort": effort,
                     "max_results": max_results,
                     "options": options,
+                    "provenance": provenance,
                     "sources": sources,
                 },
                 memory_search_params.MemorySearchParams,
@@ -1105,9 +1113,10 @@ class AsyncMemoriesResource(AsyncAPIResource):
         *,
         query: str,
         answer: bool | Omit = omit,
-        effort: Literal["minimal", "low", "medium", "high"] | Omit = omit,
+        effort: Literal["minimal", "low", "medium", "high", "very_high"] | Omit = omit,
         max_results: int | Omit = omit,
         options: memory_search_params.Options | Omit = omit,
+        provenance: bool | Omit = omit,
         sources: List[
             Literal[
                 "reddit",
@@ -1162,6 +1171,12 @@ class AsyncMemoriesResource(AsyncAPIResource):
 
           options: Search options for the query.
 
+          provenance:
+              If true (effort='very_high' only), attach a provenance record to the response:
+              the source documents and entities the answer was grounded in, the agent's search
+              trajectory, and any sources that failed. Adds one indexed lookup; intended for
+              auditability / compliance use cases.
+
           sources: Only query documents from these sources.
 
           extra_headers: Send extra headers
@@ -1181,6 +1196,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
                     "effort": effort,
                     "max_results": max_results,
                     "options": options,
+                    "provenance": provenance,
                     "sources": sources,
                 },
                 memory_search_params.MemorySearchParams,
