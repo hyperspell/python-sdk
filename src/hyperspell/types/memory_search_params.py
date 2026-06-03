@@ -31,7 +31,7 @@ class MemorySearchParams(TypedDict, total=False):
     answer: bool
     """If true, the query will be answered along with matching source documents."""
 
-    effort: Literal["minimal", "low", "medium", "high"]
+    effort: Literal["minimal", "low", "medium", "high", "very_high"]
     """How much compute to spend on retrieval.
 
     Mirrors the dial popularized by frontier-model APIs (OpenAI reasoning_effort,
@@ -47,6 +47,14 @@ class MemorySearchParams(TypedDict, total=False):
 
     options: Options
     """Search options for the query."""
+
+    provenance: bool
+    """
+    If true (effort='very_high' only), attach a provenance record to the response:
+    the source documents and entities the answer was grounded in, the agent's search
+    trajectory, and any sources that failed. Adds one indexed lookup; intended for
+    auditability / compliance use cases.
+    """
 
     sources: List[
         Literal[

@@ -338,6 +338,7 @@ class TestMemories:
                     "weight": 0,
                 },
             },
+            provenance=True,
             sources=["vault"],
         )
         assert_matches_type(QueryResult, memory, path=["response"])
@@ -749,6 +750,7 @@ class TestAsyncMemories:
                     "weight": 0,
                 },
             },
+            provenance=True,
             sources=["vault"],
         )
         assert_matches_type(QueryResult, memory, path=["response"])
