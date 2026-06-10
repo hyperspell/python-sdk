@@ -5,10 +5,10 @@ from __future__ import annotations
 from typing import Optional
 from typing_extensions import TypedDict
 
-__all__ = ["EvaluateQueriesParams"]
+__all__ = ["EvaluateListQueriesParams"]
 
 
-class EvaluateQueriesParams(TypedDict, total=False):
+class EvaluateListQueriesParams(TypedDict, total=False):
     cursor: Optional[str]
 
     size: int
