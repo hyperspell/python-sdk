@@ -6,7 +6,7 @@ from typing import Optional
 
 import httpx
 
-from ..types import evaluate_score_query_params, evaluate_score_highlight_params
+from ..types import evaluate_queries_params, evaluate_score_query_params, evaluate_score_highlight_params
 from .._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from .._utils import path_template, maybe_transform, async_maybe_transform
 from .._compat import cached_property
@@ -19,6 +19,7 @@ from .._response import (
 )
 from .._base_client import make_request_options
 from ..types.shared.query_result import QueryResult
+from ..types.evaluate_queries_response import EvaluateQueriesResponse
 from ..types.evaluate_score_query_response import EvaluateScoreQueryResponse
 from ..types.evaluate_score_highlight_response import EvaluateScoreHighlightResponse
 
@@ -76,6 +77,55 @@ class EvaluateResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=QueryResult,
+        )
+
+    def queries(
+        self,
+        *,
+        cursor: Optional[str] | Omit = omit,
+        size: int | Omit = omit,
+        user_id: Optional[str] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> EvaluateQueriesResponse:
+        """
+        Paginate through all prior queries for the app, newest first.
+
+        User tokens only see their own queries; admin tokens see every query in the app
+        and can narrow to a single user with the `user_id` filter.
+
+        Args:
+          user_id: Filter queries by the user that issued them.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            "/evaluate/queries",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "cursor": cursor,
+                        "size": size,
+                        "user_id": user_id,
+                    },
+                    evaluate_queries_params.EvaluateQueriesParams,
+                ),
+            ),
+            cast_to=EvaluateQueriesResponse,
         )
 
     def score_highlight(
@@ -215,6 +265,55 @@ class AsyncEvaluateResource(AsyncAPIResource):
             cast_to=QueryResult,
         )
 
+    async def queries(
+        self,
+        *,
+        cursor: Optional[str] | Omit = omit,
+        size: int | Omit = omit,
+        user_id: Optional[str] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> EvaluateQueriesResponse:
+        """
+        Paginate through all prior queries for the app, newest first.
+
+        User tokens only see their own queries; admin tokens see every query in the app
+        and can narrow to a single user with the `user_id` filter.
+
+        Args:
+          user_id: Filter queries by the user that issued them.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            "/evaluate/queries",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "cursor": cursor,
+                        "size": size,
+                        "user_id": user_id,
+                    },
+                    evaluate_queries_params.EvaluateQueriesParams,
+                ),
+            ),
+            cast_to=EvaluateQueriesResponse,
+        )
+
     async def score_highlight(
         self,
         highlight_id: str,
@@ -306,6 +405,9 @@ class EvaluateResourceWithRawResponse:
         self.get_query = to_raw_response_wrapper(
             evaluate.get_query,
         )
+        self.queries = to_raw_response_wrapper(
+            evaluate.queries,
+        )
         self.score_highlight = to_raw_response_wrapper(
             evaluate.score_highlight,
         )
@@ -320,6 +422,9 @@ class AsyncEvaluateResourceWithRawResponse:
 
         self.get_query = async_to_raw_response_wrapper(
             evaluate.get_query,
+        )
+        self.queries = async_to_raw_response_wrapper(
+            evaluate.queries,
         )
         self.score_highlight = async_to_raw_response_wrapper(
             evaluate.score_highlight,
@@ -336,6 +441,9 @@ class EvaluateResourceWithStreamingResponse:
         self.get_query = to_streamed_response_wrapper(
             evaluate.get_query,
         )
+        self.queries = to_streamed_response_wrapper(
+            evaluate.queries,
+        )
         self.score_highlight = to_streamed_response_wrapper(
             evaluate.score_highlight,
         )
@@ -350,6 +458,9 @@ class AsyncEvaluateResourceWithStreamingResponse:
 
         self.get_query = async_to_streamed_response_wrapper(
             evaluate.get_query,
+        )
+        self.queries = async_to_streamed_response_wrapper(
+            evaluate.queries,
         )
         self.score_highlight = async_to_streamed_response_wrapper(
             evaluate.score_highlight,
