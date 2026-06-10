@@ -108,6 +108,9 @@ class QueryResult(BaseModel):
     indexed DB lookup, so the whole record is only built on request.
     """
 
+    query: Optional[str] = None
+    """The query string that was issued."""
+
     query_id: Optional[str] = None
     """The ID of the query.
 
