@@ -1,14 +1,14 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import Optional
 from datetime import datetime
 
 from .._models import BaseModel
 
-__all__ = ["EvaluateQueriesResponse", "Item"]
+__all__ = ["EvaluateListQueriesResponse"]
 
 
-class Item(BaseModel):
+class EvaluateListQueriesResponse(BaseModel):
     query: str
     """The query string that was issued."""
 
@@ -20,9 +20,3 @@ class Item(BaseModel):
 
     user_id: Optional[str] = None
     """The ID of the user that issued the query, if any."""
-
-
-class EvaluateQueriesResponse(BaseModel):
-    items: List[Item]
-
-    next_cursor: Optional[str] = None

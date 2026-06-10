@@ -112,7 +112,7 @@ Types:
 
 ```python
 from hyperspell.types import (
-    EvaluateQueriesResponse,
+    EvaluateListQueriesResponse,
     EvaluateScoreHighlightResponse,
     EvaluateScoreQueryResponse,
 )
@@ -121,7 +121,7 @@ from hyperspell.types import (
 Methods:
 
 - <code title="get /evaluate/query/{query_id}">client.evaluate.<a href="./src/hyperspell/resources/evaluate.py">get_query</a>(query_id) -> <a href="./src/hyperspell/types/shared/query_result.py">QueryResult</a></code>
-- <code title="get /evaluate/queries">client.evaluate.<a href="./src/hyperspell/resources/evaluate.py">queries</a>(\*\*<a href="src/hyperspell/types/evaluate_queries_params.py">params</a>) -> <a href="./src/hyperspell/types/evaluate_queries_response.py">EvaluateQueriesResponse</a></code>
+- <code title="get /evaluate/queries">client.evaluate.<a href="./src/hyperspell/resources/evaluate.py">list_queries</a>(\*\*<a href="src/hyperspell/types/evaluate_list_queries_params.py">params</a>) -> <a href="./src/hyperspell/types/evaluate_list_queries_response.py">SyncCursorPage[EvaluateListQueriesResponse]</a></code>
 - <code title="post /evaluate/highlight/{highlight_id}">client.evaluate.<a href="./src/hyperspell/resources/evaluate.py">score_highlight</a>(highlight_id, \*\*<a href="src/hyperspell/types/evaluate_score_highlight_params.py">params</a>) -> <a href="./src/hyperspell/types/evaluate_score_highlight_response.py">EvaluateScoreHighlightResponse</a></code>
 - <code title="post /evaluate/query/{query_id}">client.evaluate.<a href="./src/hyperspell/resources/evaluate.py">score_query</a>(query_id, \*\*<a href="src/hyperspell/types/evaluate_score_query_params.py">params</a>) -> <a href="./src/hyperspell/types/evaluate_score_query_response.py">EvaluateScoreQueryResponse</a></code>
 
