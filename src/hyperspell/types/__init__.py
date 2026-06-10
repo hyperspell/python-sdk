@@ -21,9 +21,11 @@ from .auth_user_token_params import AuthUserTokenParams as AuthUserTokenParams
 from .memory_add_bulk_params import MemoryAddBulkParams as MemoryAddBulkParams
 from .memory_delete_response import MemoryDeleteResponse as MemoryDeleteResponse
 from .memory_status_response import MemoryStatusResponse as MemoryStatusResponse
+from .evaluate_queries_params import EvaluateQueriesParams as EvaluateQueriesParams
 from .connection_list_response import ConnectionListResponse as ConnectionListResponse
 from .memory_add_bulk_response import MemoryAddBulkResponse as MemoryAddBulkResponse
 from .auth_delete_user_response import AuthDeleteUserResponse as AuthDeleteUserResponse
+from .evaluate_queries_response import EvaluateQueriesResponse as EvaluateQueriesResponse
 from .integration_list_response import IntegrationListResponse as IntegrationListResponse
 from .action_add_reaction_params import ActionAddReactionParams as ActionAddReactionParams
 from .action_send_message_params import ActionSendMessageParams as ActionSendMessageParams
