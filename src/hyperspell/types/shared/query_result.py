@@ -1,12 +1,20966 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Dict, List, Optional
-from typing_extensions import Literal
+from typing import Dict, List, Union, Optional
+from datetime import date, datetime
+from typing_extensions import Literal, Annotated, TypeAlias
 
-from .resource import Resource
+from ..._utils import PropertyInfo
 from ..._models import BaseModel
 
-__all__ = ["QueryResult", "Provenance", "ProvenanceEntity", "ProvenanceSource", "ProvenanceStep"]
+__all__ = [
+    "QueryResult",
+    "Document",
+    "DocumentDocument",
+    "DocumentDocumentDocument",
+    "DocumentDocumentDocumentChild",
+    "DocumentDocumentDocumentChildBlob",
+    "DocumentDocumentDocumentChildCallout",
+    "DocumentDocumentDocumentChildCalloutChild",
+    "DocumentDocumentDocumentChildCalloutChildBlob",
+    "DocumentDocumentDocumentChildCalloutChildCode",
+    "DocumentDocumentDocumentChildCalloutChildComment",
+    "DocumentDocumentDocumentChildCalloutChildDivider",
+    "DocumentDocumentDocumentChildCalloutChildImage",
+    "DocumentDocumentDocumentChildCalloutChildLink",
+    "DocumentDocumentDocumentChildCalloutChildLineBreak",
+    "DocumentDocumentDocumentChildCalloutChildText",
+    "DocumentDocumentDocumentChildCalloutChildToolCall",
+    "DocumentDocumentDocumentChildCalloutChildToolResult",
+    "DocumentDocumentDocumentChildCalloutChildTraceMessage",
+    "DocumentDocumentDocumentChildChunk",
+    "DocumentDocumentDocumentChildChunkChild",
+    "DocumentDocumentDocumentChildChunkChildBlob",
+    "DocumentDocumentDocumentChildChunkChildCode",
+    "DocumentDocumentDocumentChildChunkChildComment",
+    "DocumentDocumentDocumentChildChunkChildDivider",
+    "DocumentDocumentDocumentChildChunkChildImage",
+    "DocumentDocumentDocumentChildChunkChildLink",
+    "DocumentDocumentDocumentChildChunkChildLineBreak",
+    "DocumentDocumentDocumentChildChunkChildText",
+    "DocumentDocumentDocumentChildChunkChildToolCall",
+    "DocumentDocumentDocumentChildChunkChildToolResult",
+    "DocumentDocumentDocumentChildChunkChildTraceMessage",
+    "DocumentDocumentDocumentChildCode",
+    "DocumentDocumentDocumentChildComment",
+    "DocumentDocumentDocumentChildDivider",
+    "DocumentDocumentDocumentChildEquation",
+    "DocumentDocumentDocumentChildEquationChild",
+    "DocumentDocumentDocumentChildEquationChildBlob",
+    "DocumentDocumentDocumentChildEquationChildCode",
+    "DocumentDocumentDocumentChildEquationChildComment",
+    "DocumentDocumentDocumentChildEquationChildDivider",
+    "DocumentDocumentDocumentChildEquationChildImage",
+    "DocumentDocumentDocumentChildEquationChildLink",
+    "DocumentDocumentDocumentChildEquationChildLineBreak",
+    "DocumentDocumentDocumentChildEquationChildText",
+    "DocumentDocumentDocumentChildEquationChildToolCall",
+    "DocumentDocumentDocumentChildEquationChildToolResult",
+    "DocumentDocumentDocumentChildEquationChildTraceMessage",
+    "DocumentDocumentDocumentChildFootnote",
+    "DocumentDocumentDocumentChildFootnoteChild",
+    "DocumentDocumentDocumentChildFootnoteChildBlob",
+    "DocumentDocumentDocumentChildFootnoteChildCode",
+    "DocumentDocumentDocumentChildFootnoteChildComment",
+    "DocumentDocumentDocumentChildFootnoteChildDivider",
+    "DocumentDocumentDocumentChildFootnoteChildImage",
+    "DocumentDocumentDocumentChildFootnoteChildLink",
+    "DocumentDocumentDocumentChildFootnoteChildLineBreak",
+    "DocumentDocumentDocumentChildFootnoteChildText",
+    "DocumentDocumentDocumentChildFootnoteChildToolCall",
+    "DocumentDocumentDocumentChildFootnoteChildToolResult",
+    "DocumentDocumentDocumentChildFootnoteChildTraceMessage",
+    "DocumentDocumentDocumentChildHeading",
+    "DocumentDocumentDocumentChildHeadingChild",
+    "DocumentDocumentDocumentChildHeadingChildBlob",
+    "DocumentDocumentDocumentChildHeadingChildCode",
+    "DocumentDocumentDocumentChildHeadingChildComment",
+    "DocumentDocumentDocumentChildHeadingChildDivider",
+    "DocumentDocumentDocumentChildHeadingChildImage",
+    "DocumentDocumentDocumentChildHeadingChildLink",
+    "DocumentDocumentDocumentChildHeadingChildLineBreak",
+    "DocumentDocumentDocumentChildHeadingChildText",
+    "DocumentDocumentDocumentChildHeadingChildToolCall",
+    "DocumentDocumentDocumentChildHeadingChildToolResult",
+    "DocumentDocumentDocumentChildHeadingChildTraceMessage",
+    "DocumentDocumentDocumentChildImage",
+    "DocumentDocumentDocumentChildLink",
+    "DocumentDocumentDocumentChildLineBreak",
+    "DocumentDocumentDocumentChildList",
+    "DocumentDocumentDocumentChildListItem",
+    "DocumentDocumentDocumentChildListItemChild",
+    "DocumentDocumentDocumentChildListItemChildBlob",
+    "DocumentDocumentDocumentChildListItemChildCode",
+    "DocumentDocumentDocumentChildListItemChildComment",
+    "DocumentDocumentDocumentChildListItemChildDivider",
+    "DocumentDocumentDocumentChildListItemChildImage",
+    "DocumentDocumentDocumentChildListItemChildLink",
+    "DocumentDocumentDocumentChildListItemChildLineBreak",
+    "DocumentDocumentDocumentChildListItemChildText",
+    "DocumentDocumentDocumentChildListItemChildToolCall",
+    "DocumentDocumentDocumentChildListItemChildToolResult",
+    "DocumentDocumentDocumentChildListItemChildTraceMessage",
+    "DocumentDocumentDocumentChildParagraph",
+    "DocumentDocumentDocumentChildParagraphChild",
+    "DocumentDocumentDocumentChildParagraphChildBlob",
+    "DocumentDocumentDocumentChildParagraphChildCode",
+    "DocumentDocumentDocumentChildParagraphChildComment",
+    "DocumentDocumentDocumentChildParagraphChildDivider",
+    "DocumentDocumentDocumentChildParagraphChildImage",
+    "DocumentDocumentDocumentChildParagraphChildLink",
+    "DocumentDocumentDocumentChildParagraphChildLineBreak",
+    "DocumentDocumentDocumentChildParagraphChildText",
+    "DocumentDocumentDocumentChildParagraphChildToolCall",
+    "DocumentDocumentDocumentChildParagraphChildToolResult",
+    "DocumentDocumentDocumentChildParagraphChildTraceMessage",
+    "DocumentDocumentDocumentChildQuote",
+    "DocumentDocumentDocumentChildQuoteChild",
+    "DocumentDocumentDocumentChildQuoteChildBlob",
+    "DocumentDocumentDocumentChildQuoteChildCode",
+    "DocumentDocumentDocumentChildQuoteChildComment",
+    "DocumentDocumentDocumentChildQuoteChildDivider",
+    "DocumentDocumentDocumentChildQuoteChildImage",
+    "DocumentDocumentDocumentChildQuoteChildLink",
+    "DocumentDocumentDocumentChildQuoteChildLineBreak",
+    "DocumentDocumentDocumentChildQuoteChildText",
+    "DocumentDocumentDocumentChildQuoteChildToolCall",
+    "DocumentDocumentDocumentChildQuoteChildToolResult",
+    "DocumentDocumentDocumentChildQuoteChildTraceMessage",
+    "DocumentDocumentDocumentChildTable",
+    "DocumentDocumentDocumentChildTableCell",
+    "DocumentDocumentDocumentChildTableCellChild",
+    "DocumentDocumentDocumentChildTableCellChildBlob",
+    "DocumentDocumentDocumentChildTableCellChildCode",
+    "DocumentDocumentDocumentChildTableCellChildComment",
+    "DocumentDocumentDocumentChildTableCellChildDivider",
+    "DocumentDocumentDocumentChildTableCellChildImage",
+    "DocumentDocumentDocumentChildTableCellChildLink",
+    "DocumentDocumentDocumentChildTableCellChildLineBreak",
+    "DocumentDocumentDocumentChildTableCellChildText",
+    "DocumentDocumentDocumentChildTableCellChildToolCall",
+    "DocumentDocumentDocumentChildTableCellChildToolResult",
+    "DocumentDocumentDocumentChildTableCellChildTraceMessage",
+    "DocumentDocumentDocumentChildTableRow",
+    "DocumentDocumentDocumentChildText",
+    "DocumentDocumentDocumentChildToDo",
+    "DocumentDocumentDocumentChildToDoChild",
+    "DocumentDocumentDocumentChildToDoChildBlob",
+    "DocumentDocumentDocumentChildToDoChildCode",
+    "DocumentDocumentDocumentChildToDoChildComment",
+    "DocumentDocumentDocumentChildToDoChildDivider",
+    "DocumentDocumentDocumentChildToDoChildImage",
+    "DocumentDocumentDocumentChildToDoChildLink",
+    "DocumentDocumentDocumentChildToDoChildLineBreak",
+    "DocumentDocumentDocumentChildToDoChildText",
+    "DocumentDocumentDocumentChildToDoChildToolCall",
+    "DocumentDocumentDocumentChildToDoChildToolResult",
+    "DocumentDocumentDocumentChildToDoChildTraceMessage",
+    "DocumentDocumentDocumentChildToolCall",
+    "DocumentDocumentDocumentChildToolResult",
+    "DocumentDocumentDocumentChildTraceMessage",
+    "DocumentDocumentDocumentChildUtterance",
+    "DocumentDocumentWebsite",
+    "DocumentDocumentWebsiteChild",
+    "DocumentDocumentWebsiteChildBlob",
+    "DocumentDocumentWebsiteChildCallout",
+    "DocumentDocumentWebsiteChildCalloutChild",
+    "DocumentDocumentWebsiteChildCalloutChildBlob",
+    "DocumentDocumentWebsiteChildCalloutChildCode",
+    "DocumentDocumentWebsiteChildCalloutChildComment",
+    "DocumentDocumentWebsiteChildCalloutChildDivider",
+    "DocumentDocumentWebsiteChildCalloutChildImage",
+    "DocumentDocumentWebsiteChildCalloutChildLink",
+    "DocumentDocumentWebsiteChildCalloutChildLineBreak",
+    "DocumentDocumentWebsiteChildCalloutChildText",
+    "DocumentDocumentWebsiteChildCalloutChildToolCall",
+    "DocumentDocumentWebsiteChildCalloutChildToolResult",
+    "DocumentDocumentWebsiteChildCalloutChildTraceMessage",
+    "DocumentDocumentWebsiteChildChunk",
+    "DocumentDocumentWebsiteChildChunkChild",
+    "DocumentDocumentWebsiteChildChunkChildBlob",
+    "DocumentDocumentWebsiteChildChunkChildCode",
+    "DocumentDocumentWebsiteChildChunkChildComment",
+    "DocumentDocumentWebsiteChildChunkChildDivider",
+    "DocumentDocumentWebsiteChildChunkChildImage",
+    "DocumentDocumentWebsiteChildChunkChildLink",
+    "DocumentDocumentWebsiteChildChunkChildLineBreak",
+    "DocumentDocumentWebsiteChildChunkChildText",
+    "DocumentDocumentWebsiteChildChunkChildToolCall",
+    "DocumentDocumentWebsiteChildChunkChildToolResult",
+    "DocumentDocumentWebsiteChildChunkChildTraceMessage",
+    "DocumentDocumentWebsiteChildCode",
+    "DocumentDocumentWebsiteChildComment",
+    "DocumentDocumentWebsiteChildDivider",
+    "DocumentDocumentWebsiteChildEquation",
+    "DocumentDocumentWebsiteChildEquationChild",
+    "DocumentDocumentWebsiteChildEquationChildBlob",
+    "DocumentDocumentWebsiteChildEquationChildCode",
+    "DocumentDocumentWebsiteChildEquationChildComment",
+    "DocumentDocumentWebsiteChildEquationChildDivider",
+    "DocumentDocumentWebsiteChildEquationChildImage",
+    "DocumentDocumentWebsiteChildEquationChildLink",
+    "DocumentDocumentWebsiteChildEquationChildLineBreak",
+    "DocumentDocumentWebsiteChildEquationChildText",
+    "DocumentDocumentWebsiteChildEquationChildToolCall",
+    "DocumentDocumentWebsiteChildEquationChildToolResult",
+    "DocumentDocumentWebsiteChildEquationChildTraceMessage",
+    "DocumentDocumentWebsiteChildFootnote",
+    "DocumentDocumentWebsiteChildFootnoteChild",
+    "DocumentDocumentWebsiteChildFootnoteChildBlob",
+    "DocumentDocumentWebsiteChildFootnoteChildCode",
+    "DocumentDocumentWebsiteChildFootnoteChildComment",
+    "DocumentDocumentWebsiteChildFootnoteChildDivider",
+    "DocumentDocumentWebsiteChildFootnoteChildImage",
+    "DocumentDocumentWebsiteChildFootnoteChildLink",
+    "DocumentDocumentWebsiteChildFootnoteChildLineBreak",
+    "DocumentDocumentWebsiteChildFootnoteChildText",
+    "DocumentDocumentWebsiteChildFootnoteChildToolCall",
+    "DocumentDocumentWebsiteChildFootnoteChildToolResult",
+    "DocumentDocumentWebsiteChildFootnoteChildTraceMessage",
+    "DocumentDocumentWebsiteChildHeading",
+    "DocumentDocumentWebsiteChildHeadingChild",
+    "DocumentDocumentWebsiteChildHeadingChildBlob",
+    "DocumentDocumentWebsiteChildHeadingChildCode",
+    "DocumentDocumentWebsiteChildHeadingChildComment",
+    "DocumentDocumentWebsiteChildHeadingChildDivider",
+    "DocumentDocumentWebsiteChildHeadingChildImage",
+    "DocumentDocumentWebsiteChildHeadingChildLink",
+    "DocumentDocumentWebsiteChildHeadingChildLineBreak",
+    "DocumentDocumentWebsiteChildHeadingChildText",
+    "DocumentDocumentWebsiteChildHeadingChildToolCall",
+    "DocumentDocumentWebsiteChildHeadingChildToolResult",
+    "DocumentDocumentWebsiteChildHeadingChildTraceMessage",
+    "DocumentDocumentWebsiteChildImage",
+    "DocumentDocumentWebsiteChildLink",
+    "DocumentDocumentWebsiteChildLineBreak",
+    "DocumentDocumentWebsiteChildList",
+    "DocumentDocumentWebsiteChildListItem",
+    "DocumentDocumentWebsiteChildListItemChild",
+    "DocumentDocumentWebsiteChildListItemChildBlob",
+    "DocumentDocumentWebsiteChildListItemChildCode",
+    "DocumentDocumentWebsiteChildListItemChildComment",
+    "DocumentDocumentWebsiteChildListItemChildDivider",
+    "DocumentDocumentWebsiteChildListItemChildImage",
+    "DocumentDocumentWebsiteChildListItemChildLink",
+    "DocumentDocumentWebsiteChildListItemChildLineBreak",
+    "DocumentDocumentWebsiteChildListItemChildText",
+    "DocumentDocumentWebsiteChildListItemChildToolCall",
+    "DocumentDocumentWebsiteChildListItemChildToolResult",
+    "DocumentDocumentWebsiteChildListItemChildTraceMessage",
+    "DocumentDocumentWebsiteChildParagraph",
+    "DocumentDocumentWebsiteChildParagraphChild",
+    "DocumentDocumentWebsiteChildParagraphChildBlob",
+    "DocumentDocumentWebsiteChildParagraphChildCode",
+    "DocumentDocumentWebsiteChildParagraphChildComment",
+    "DocumentDocumentWebsiteChildParagraphChildDivider",
+    "DocumentDocumentWebsiteChildParagraphChildImage",
+    "DocumentDocumentWebsiteChildParagraphChildLink",
+    "DocumentDocumentWebsiteChildParagraphChildLineBreak",
+    "DocumentDocumentWebsiteChildParagraphChildText",
+    "DocumentDocumentWebsiteChildParagraphChildToolCall",
+    "DocumentDocumentWebsiteChildParagraphChildToolResult",
+    "DocumentDocumentWebsiteChildParagraphChildTraceMessage",
+    "DocumentDocumentWebsiteChildQuote",
+    "DocumentDocumentWebsiteChildQuoteChild",
+    "DocumentDocumentWebsiteChildQuoteChildBlob",
+    "DocumentDocumentWebsiteChildQuoteChildCode",
+    "DocumentDocumentWebsiteChildQuoteChildComment",
+    "DocumentDocumentWebsiteChildQuoteChildDivider",
+    "DocumentDocumentWebsiteChildQuoteChildImage",
+    "DocumentDocumentWebsiteChildQuoteChildLink",
+    "DocumentDocumentWebsiteChildQuoteChildLineBreak",
+    "DocumentDocumentWebsiteChildQuoteChildText",
+    "DocumentDocumentWebsiteChildQuoteChildToolCall",
+    "DocumentDocumentWebsiteChildQuoteChildToolResult",
+    "DocumentDocumentWebsiteChildQuoteChildTraceMessage",
+    "DocumentDocumentWebsiteChildTable",
+    "DocumentDocumentWebsiteChildTableCell",
+    "DocumentDocumentWebsiteChildTableCellChild",
+    "DocumentDocumentWebsiteChildTableCellChildBlob",
+    "DocumentDocumentWebsiteChildTableCellChildCode",
+    "DocumentDocumentWebsiteChildTableCellChildComment",
+    "DocumentDocumentWebsiteChildTableCellChildDivider",
+    "DocumentDocumentWebsiteChildTableCellChildImage",
+    "DocumentDocumentWebsiteChildTableCellChildLink",
+    "DocumentDocumentWebsiteChildTableCellChildLineBreak",
+    "DocumentDocumentWebsiteChildTableCellChildText",
+    "DocumentDocumentWebsiteChildTableCellChildToolCall",
+    "DocumentDocumentWebsiteChildTableCellChildToolResult",
+    "DocumentDocumentWebsiteChildTableCellChildTraceMessage",
+    "DocumentDocumentWebsiteChildTableRow",
+    "DocumentDocumentWebsiteChildText",
+    "DocumentDocumentWebsiteChildToDo",
+    "DocumentDocumentWebsiteChildToDoChild",
+    "DocumentDocumentWebsiteChildToDoChildBlob",
+    "DocumentDocumentWebsiteChildToDoChildCode",
+    "DocumentDocumentWebsiteChildToDoChildComment",
+    "DocumentDocumentWebsiteChildToDoChildDivider",
+    "DocumentDocumentWebsiteChildToDoChildImage",
+    "DocumentDocumentWebsiteChildToDoChildLink",
+    "DocumentDocumentWebsiteChildToDoChildLineBreak",
+    "DocumentDocumentWebsiteChildToDoChildText",
+    "DocumentDocumentWebsiteChildToDoChildToolCall",
+    "DocumentDocumentWebsiteChildToDoChildToolResult",
+    "DocumentDocumentWebsiteChildToDoChildTraceMessage",
+    "DocumentDocumentWebsiteChildToolCall",
+    "DocumentDocumentWebsiteChildToolResult",
+    "DocumentDocumentWebsiteChildTraceMessage",
+    "DocumentDocumentWebsiteChildUtterance",
+    "DocumentDocumentTask",
+    "DocumentDocumentTaskChild",
+    "DocumentDocumentTaskChildBlob",
+    "DocumentDocumentTaskChildCallout",
+    "DocumentDocumentTaskChildCalloutChild",
+    "DocumentDocumentTaskChildCalloutChildBlob",
+    "DocumentDocumentTaskChildCalloutChildCode",
+    "DocumentDocumentTaskChildCalloutChildComment",
+    "DocumentDocumentTaskChildCalloutChildDivider",
+    "DocumentDocumentTaskChildCalloutChildImage",
+    "DocumentDocumentTaskChildCalloutChildLink",
+    "DocumentDocumentTaskChildCalloutChildLineBreak",
+    "DocumentDocumentTaskChildCalloutChildText",
+    "DocumentDocumentTaskChildCalloutChildToolCall",
+    "DocumentDocumentTaskChildCalloutChildToolResult",
+    "DocumentDocumentTaskChildCalloutChildTraceMessage",
+    "DocumentDocumentTaskChildChunk",
+    "DocumentDocumentTaskChildChunkChild",
+    "DocumentDocumentTaskChildChunkChildBlob",
+    "DocumentDocumentTaskChildChunkChildCode",
+    "DocumentDocumentTaskChildChunkChildComment",
+    "DocumentDocumentTaskChildChunkChildDivider",
+    "DocumentDocumentTaskChildChunkChildImage",
+    "DocumentDocumentTaskChildChunkChildLink",
+    "DocumentDocumentTaskChildChunkChildLineBreak",
+    "DocumentDocumentTaskChildChunkChildText",
+    "DocumentDocumentTaskChildChunkChildToolCall",
+    "DocumentDocumentTaskChildChunkChildToolResult",
+    "DocumentDocumentTaskChildChunkChildTraceMessage",
+    "DocumentDocumentTaskChildCode",
+    "DocumentDocumentTaskChildComment",
+    "DocumentDocumentTaskChildDivider",
+    "DocumentDocumentTaskChildEquation",
+    "DocumentDocumentTaskChildEquationChild",
+    "DocumentDocumentTaskChildEquationChildBlob",
+    "DocumentDocumentTaskChildEquationChildCode",
+    "DocumentDocumentTaskChildEquationChildComment",
+    "DocumentDocumentTaskChildEquationChildDivider",
+    "DocumentDocumentTaskChildEquationChildImage",
+    "DocumentDocumentTaskChildEquationChildLink",
+    "DocumentDocumentTaskChildEquationChildLineBreak",
+    "DocumentDocumentTaskChildEquationChildText",
+    "DocumentDocumentTaskChildEquationChildToolCall",
+    "DocumentDocumentTaskChildEquationChildToolResult",
+    "DocumentDocumentTaskChildEquationChildTraceMessage",
+    "DocumentDocumentTaskChildFootnote",
+    "DocumentDocumentTaskChildFootnoteChild",
+    "DocumentDocumentTaskChildFootnoteChildBlob",
+    "DocumentDocumentTaskChildFootnoteChildCode",
+    "DocumentDocumentTaskChildFootnoteChildComment",
+    "DocumentDocumentTaskChildFootnoteChildDivider",
+    "DocumentDocumentTaskChildFootnoteChildImage",
+    "DocumentDocumentTaskChildFootnoteChildLink",
+    "DocumentDocumentTaskChildFootnoteChildLineBreak",
+    "DocumentDocumentTaskChildFootnoteChildText",
+    "DocumentDocumentTaskChildFootnoteChildToolCall",
+    "DocumentDocumentTaskChildFootnoteChildToolResult",
+    "DocumentDocumentTaskChildFootnoteChildTraceMessage",
+    "DocumentDocumentTaskChildHeading",
+    "DocumentDocumentTaskChildHeadingChild",
+    "DocumentDocumentTaskChildHeadingChildBlob",
+    "DocumentDocumentTaskChildHeadingChildCode",
+    "DocumentDocumentTaskChildHeadingChildComment",
+    "DocumentDocumentTaskChildHeadingChildDivider",
+    "DocumentDocumentTaskChildHeadingChildImage",
+    "DocumentDocumentTaskChildHeadingChildLink",
+    "DocumentDocumentTaskChildHeadingChildLineBreak",
+    "DocumentDocumentTaskChildHeadingChildText",
+    "DocumentDocumentTaskChildHeadingChildToolCall",
+    "DocumentDocumentTaskChildHeadingChildToolResult",
+    "DocumentDocumentTaskChildHeadingChildTraceMessage",
+    "DocumentDocumentTaskChildImage",
+    "DocumentDocumentTaskChildLink",
+    "DocumentDocumentTaskChildLineBreak",
+    "DocumentDocumentTaskChildList",
+    "DocumentDocumentTaskChildListItem",
+    "DocumentDocumentTaskChildListItemChild",
+    "DocumentDocumentTaskChildListItemChildBlob",
+    "DocumentDocumentTaskChildListItemChildCode",
+    "DocumentDocumentTaskChildListItemChildComment",
+    "DocumentDocumentTaskChildListItemChildDivider",
+    "DocumentDocumentTaskChildListItemChildImage",
+    "DocumentDocumentTaskChildListItemChildLink",
+    "DocumentDocumentTaskChildListItemChildLineBreak",
+    "DocumentDocumentTaskChildListItemChildText",
+    "DocumentDocumentTaskChildListItemChildToolCall",
+    "DocumentDocumentTaskChildListItemChildToolResult",
+    "DocumentDocumentTaskChildListItemChildTraceMessage",
+    "DocumentDocumentTaskChildParagraph",
+    "DocumentDocumentTaskChildParagraphChild",
+    "DocumentDocumentTaskChildParagraphChildBlob",
+    "DocumentDocumentTaskChildParagraphChildCode",
+    "DocumentDocumentTaskChildParagraphChildComment",
+    "DocumentDocumentTaskChildParagraphChildDivider",
+    "DocumentDocumentTaskChildParagraphChildImage",
+    "DocumentDocumentTaskChildParagraphChildLink",
+    "DocumentDocumentTaskChildParagraphChildLineBreak",
+    "DocumentDocumentTaskChildParagraphChildText",
+    "DocumentDocumentTaskChildParagraphChildToolCall",
+    "DocumentDocumentTaskChildParagraphChildToolResult",
+    "DocumentDocumentTaskChildParagraphChildTraceMessage",
+    "DocumentDocumentTaskChildQuote",
+    "DocumentDocumentTaskChildQuoteChild",
+    "DocumentDocumentTaskChildQuoteChildBlob",
+    "DocumentDocumentTaskChildQuoteChildCode",
+    "DocumentDocumentTaskChildQuoteChildComment",
+    "DocumentDocumentTaskChildQuoteChildDivider",
+    "DocumentDocumentTaskChildQuoteChildImage",
+    "DocumentDocumentTaskChildQuoteChildLink",
+    "DocumentDocumentTaskChildQuoteChildLineBreak",
+    "DocumentDocumentTaskChildQuoteChildText",
+    "DocumentDocumentTaskChildQuoteChildToolCall",
+    "DocumentDocumentTaskChildQuoteChildToolResult",
+    "DocumentDocumentTaskChildQuoteChildTraceMessage",
+    "DocumentDocumentTaskChildTable",
+    "DocumentDocumentTaskChildTableCell",
+    "DocumentDocumentTaskChildTableCellChild",
+    "DocumentDocumentTaskChildTableCellChildBlob",
+    "DocumentDocumentTaskChildTableCellChildCode",
+    "DocumentDocumentTaskChildTableCellChildComment",
+    "DocumentDocumentTaskChildTableCellChildDivider",
+    "DocumentDocumentTaskChildTableCellChildImage",
+    "DocumentDocumentTaskChildTableCellChildLink",
+    "DocumentDocumentTaskChildTableCellChildLineBreak",
+    "DocumentDocumentTaskChildTableCellChildText",
+    "DocumentDocumentTaskChildTableCellChildToolCall",
+    "DocumentDocumentTaskChildTableCellChildToolResult",
+    "DocumentDocumentTaskChildTableCellChildTraceMessage",
+    "DocumentDocumentTaskChildTableRow",
+    "DocumentDocumentTaskChildText",
+    "DocumentDocumentTaskChildToDo",
+    "DocumentDocumentTaskChildToDoChild",
+    "DocumentDocumentTaskChildToDoChildBlob",
+    "DocumentDocumentTaskChildToDoChildCode",
+    "DocumentDocumentTaskChildToDoChildComment",
+    "DocumentDocumentTaskChildToDoChildDivider",
+    "DocumentDocumentTaskChildToDoChildImage",
+    "DocumentDocumentTaskChildToDoChildLink",
+    "DocumentDocumentTaskChildToDoChildLineBreak",
+    "DocumentDocumentTaskChildToDoChildText",
+    "DocumentDocumentTaskChildToDoChildToolCall",
+    "DocumentDocumentTaskChildToDoChildToolResult",
+    "DocumentDocumentTaskChildToDoChildTraceMessage",
+    "DocumentDocumentTaskChildToolCall",
+    "DocumentDocumentTaskChildToolResult",
+    "DocumentDocumentTaskChildTraceMessage",
+    "DocumentDocumentTaskChildUtterance",
+    "DocumentDocumentTaskComment",
+    "DocumentDocumentTaskCommentSender",
+    "DocumentDocumentTaskCommentSenderChild",
+    "DocumentDocumentTaskCommentSenderChildBlob",
+    "DocumentDocumentTaskCommentSenderChildCode",
+    "DocumentDocumentTaskCommentSenderChildComment",
+    "DocumentDocumentTaskCommentSenderChildDivider",
+    "DocumentDocumentTaskCommentSenderChildImage",
+    "DocumentDocumentTaskCommentSenderChildLink",
+    "DocumentDocumentTaskCommentSenderChildLineBreak",
+    "DocumentDocumentTaskCommentSenderChildText",
+    "DocumentDocumentTaskCommentSenderChildToolCall",
+    "DocumentDocumentTaskCommentSenderChildToolResult",
+    "DocumentDocumentTaskCommentSenderChildTraceMessage",
+    "DocumentDocumentTaskCommentChild",
+    "DocumentDocumentTaskCommentChildBlob",
+    "DocumentDocumentTaskCommentChildCallout",
+    "DocumentDocumentTaskCommentChildCalloutChild",
+    "DocumentDocumentTaskCommentChildCalloutChildBlob",
+    "DocumentDocumentTaskCommentChildCalloutChildCode",
+    "DocumentDocumentTaskCommentChildCalloutChildComment",
+    "DocumentDocumentTaskCommentChildCalloutChildDivider",
+    "DocumentDocumentTaskCommentChildCalloutChildImage",
+    "DocumentDocumentTaskCommentChildCalloutChildLink",
+    "DocumentDocumentTaskCommentChildCalloutChildLineBreak",
+    "DocumentDocumentTaskCommentChildCalloutChildText",
+    "DocumentDocumentTaskCommentChildCalloutChildToolCall",
+    "DocumentDocumentTaskCommentChildCalloutChildToolResult",
+    "DocumentDocumentTaskCommentChildCalloutChildTraceMessage",
+    "DocumentDocumentTaskCommentChildChunk",
+    "DocumentDocumentTaskCommentChildChunkChild",
+    "DocumentDocumentTaskCommentChildChunkChildBlob",
+    "DocumentDocumentTaskCommentChildChunkChildCode",
+    "DocumentDocumentTaskCommentChildChunkChildComment",
+    "DocumentDocumentTaskCommentChildChunkChildDivider",
+    "DocumentDocumentTaskCommentChildChunkChildImage",
+    "DocumentDocumentTaskCommentChildChunkChildLink",
+    "DocumentDocumentTaskCommentChildChunkChildLineBreak",
+    "DocumentDocumentTaskCommentChildChunkChildText",
+    "DocumentDocumentTaskCommentChildChunkChildToolCall",
+    "DocumentDocumentTaskCommentChildChunkChildToolResult",
+    "DocumentDocumentTaskCommentChildChunkChildTraceMessage",
+    "DocumentDocumentTaskCommentChildCode",
+    "DocumentDocumentTaskCommentChildComment",
+    "DocumentDocumentTaskCommentChildDivider",
+    "DocumentDocumentTaskCommentChildEquation",
+    "DocumentDocumentTaskCommentChildEquationChild",
+    "DocumentDocumentTaskCommentChildEquationChildBlob",
+    "DocumentDocumentTaskCommentChildEquationChildCode",
+    "DocumentDocumentTaskCommentChildEquationChildComment",
+    "DocumentDocumentTaskCommentChildEquationChildDivider",
+    "DocumentDocumentTaskCommentChildEquationChildImage",
+    "DocumentDocumentTaskCommentChildEquationChildLink",
+    "DocumentDocumentTaskCommentChildEquationChildLineBreak",
+    "DocumentDocumentTaskCommentChildEquationChildText",
+    "DocumentDocumentTaskCommentChildEquationChildToolCall",
+    "DocumentDocumentTaskCommentChildEquationChildToolResult",
+    "DocumentDocumentTaskCommentChildEquationChildTraceMessage",
+    "DocumentDocumentTaskCommentChildFootnote",
+    "DocumentDocumentTaskCommentChildFootnoteChild",
+    "DocumentDocumentTaskCommentChildFootnoteChildBlob",
+    "DocumentDocumentTaskCommentChildFootnoteChildCode",
+    "DocumentDocumentTaskCommentChildFootnoteChildComment",
+    "DocumentDocumentTaskCommentChildFootnoteChildDivider",
+    "DocumentDocumentTaskCommentChildFootnoteChildImage",
+    "DocumentDocumentTaskCommentChildFootnoteChildLink",
+    "DocumentDocumentTaskCommentChildFootnoteChildLineBreak",
+    "DocumentDocumentTaskCommentChildFootnoteChildText",
+    "DocumentDocumentTaskCommentChildFootnoteChildToolCall",
+    "DocumentDocumentTaskCommentChildFootnoteChildToolResult",
+    "DocumentDocumentTaskCommentChildFootnoteChildTraceMessage",
+    "DocumentDocumentTaskCommentChildHeading",
+    "DocumentDocumentTaskCommentChildHeadingChild",
+    "DocumentDocumentTaskCommentChildHeadingChildBlob",
+    "DocumentDocumentTaskCommentChildHeadingChildCode",
+    "DocumentDocumentTaskCommentChildHeadingChildComment",
+    "DocumentDocumentTaskCommentChildHeadingChildDivider",
+    "DocumentDocumentTaskCommentChildHeadingChildImage",
+    "DocumentDocumentTaskCommentChildHeadingChildLink",
+    "DocumentDocumentTaskCommentChildHeadingChildLineBreak",
+    "DocumentDocumentTaskCommentChildHeadingChildText",
+    "DocumentDocumentTaskCommentChildHeadingChildToolCall",
+    "DocumentDocumentTaskCommentChildHeadingChildToolResult",
+    "DocumentDocumentTaskCommentChildHeadingChildTraceMessage",
+    "DocumentDocumentTaskCommentChildImage",
+    "DocumentDocumentTaskCommentChildLink",
+    "DocumentDocumentTaskCommentChildLineBreak",
+    "DocumentDocumentTaskCommentChildList",
+    "DocumentDocumentTaskCommentChildListItem",
+    "DocumentDocumentTaskCommentChildListItemChild",
+    "DocumentDocumentTaskCommentChildListItemChildBlob",
+    "DocumentDocumentTaskCommentChildListItemChildCode",
+    "DocumentDocumentTaskCommentChildListItemChildComment",
+    "DocumentDocumentTaskCommentChildListItemChildDivider",
+    "DocumentDocumentTaskCommentChildListItemChildImage",
+    "DocumentDocumentTaskCommentChildListItemChildLink",
+    "DocumentDocumentTaskCommentChildListItemChildLineBreak",
+    "DocumentDocumentTaskCommentChildListItemChildText",
+    "DocumentDocumentTaskCommentChildListItemChildToolCall",
+    "DocumentDocumentTaskCommentChildListItemChildToolResult",
+    "DocumentDocumentTaskCommentChildListItemChildTraceMessage",
+    "DocumentDocumentTaskCommentChildParagraph",
+    "DocumentDocumentTaskCommentChildParagraphChild",
+    "DocumentDocumentTaskCommentChildParagraphChildBlob",
+    "DocumentDocumentTaskCommentChildParagraphChildCode",
+    "DocumentDocumentTaskCommentChildParagraphChildComment",
+    "DocumentDocumentTaskCommentChildParagraphChildDivider",
+    "DocumentDocumentTaskCommentChildParagraphChildImage",
+    "DocumentDocumentTaskCommentChildParagraphChildLink",
+    "DocumentDocumentTaskCommentChildParagraphChildLineBreak",
+    "DocumentDocumentTaskCommentChildParagraphChildText",
+    "DocumentDocumentTaskCommentChildParagraphChildToolCall",
+    "DocumentDocumentTaskCommentChildParagraphChildToolResult",
+    "DocumentDocumentTaskCommentChildParagraphChildTraceMessage",
+    "DocumentDocumentTaskCommentChildQuote",
+    "DocumentDocumentTaskCommentChildQuoteChild",
+    "DocumentDocumentTaskCommentChildQuoteChildBlob",
+    "DocumentDocumentTaskCommentChildQuoteChildCode",
+    "DocumentDocumentTaskCommentChildQuoteChildComment",
+    "DocumentDocumentTaskCommentChildQuoteChildDivider",
+    "DocumentDocumentTaskCommentChildQuoteChildImage",
+    "DocumentDocumentTaskCommentChildQuoteChildLink",
+    "DocumentDocumentTaskCommentChildQuoteChildLineBreak",
+    "DocumentDocumentTaskCommentChildQuoteChildText",
+    "DocumentDocumentTaskCommentChildQuoteChildToolCall",
+    "DocumentDocumentTaskCommentChildQuoteChildToolResult",
+    "DocumentDocumentTaskCommentChildQuoteChildTraceMessage",
+    "DocumentDocumentTaskCommentChildTable",
+    "DocumentDocumentTaskCommentChildTableCell",
+    "DocumentDocumentTaskCommentChildTableCellChild",
+    "DocumentDocumentTaskCommentChildTableCellChildBlob",
+    "DocumentDocumentTaskCommentChildTableCellChildCode",
+    "DocumentDocumentTaskCommentChildTableCellChildComment",
+    "DocumentDocumentTaskCommentChildTableCellChildDivider",
+    "DocumentDocumentTaskCommentChildTableCellChildImage",
+    "DocumentDocumentTaskCommentChildTableCellChildLink",
+    "DocumentDocumentTaskCommentChildTableCellChildLineBreak",
+    "DocumentDocumentTaskCommentChildTableCellChildText",
+    "DocumentDocumentTaskCommentChildTableCellChildToolCall",
+    "DocumentDocumentTaskCommentChildTableCellChildToolResult",
+    "DocumentDocumentTaskCommentChildTableCellChildTraceMessage",
+    "DocumentDocumentTaskCommentChildTableRow",
+    "DocumentDocumentTaskCommentChildText",
+    "DocumentDocumentTaskCommentChildToDo",
+    "DocumentDocumentTaskCommentChildToDoChild",
+    "DocumentDocumentTaskCommentChildToDoChildBlob",
+    "DocumentDocumentTaskCommentChildToDoChildCode",
+    "DocumentDocumentTaskCommentChildToDoChildComment",
+    "DocumentDocumentTaskCommentChildToDoChildDivider",
+    "DocumentDocumentTaskCommentChildToDoChildImage",
+    "DocumentDocumentTaskCommentChildToDoChildLink",
+    "DocumentDocumentTaskCommentChildToDoChildLineBreak",
+    "DocumentDocumentTaskCommentChildToDoChildText",
+    "DocumentDocumentTaskCommentChildToDoChildToolCall",
+    "DocumentDocumentTaskCommentChildToDoChildToolResult",
+    "DocumentDocumentTaskCommentChildToDoChildTraceMessage",
+    "DocumentDocumentTaskCommentChildToolCall",
+    "DocumentDocumentTaskCommentChildToolResult",
+    "DocumentDocumentTaskCommentChildTraceMessage",
+    "DocumentDocumentTaskCommentChildUtterance",
+    "DocumentDocumentTaskCommentMentionedUser",
+    "DocumentDocumentTaskCommentMentionedUserChild",
+    "DocumentDocumentTaskCommentMentionedUserChildBlob",
+    "DocumentDocumentTaskCommentMentionedUserChildCode",
+    "DocumentDocumentTaskCommentMentionedUserChildComment",
+    "DocumentDocumentTaskCommentMentionedUserChildDivider",
+    "DocumentDocumentTaskCommentMentionedUserChildImage",
+    "DocumentDocumentTaskCommentMentionedUserChildLink",
+    "DocumentDocumentTaskCommentMentionedUserChildLineBreak",
+    "DocumentDocumentTaskCommentMentionedUserChildText",
+    "DocumentDocumentTaskCommentMentionedUserChildToolCall",
+    "DocumentDocumentTaskCommentMentionedUserChildToolResult",
+    "DocumentDocumentTaskCommentMentionedUserChildTraceMessage",
+    "DocumentDocumentPerson",
+    "DocumentDocumentPersonChild",
+    "DocumentDocumentPersonChildBlob",
+    "DocumentDocumentPersonChildCode",
+    "DocumentDocumentPersonChildComment",
+    "DocumentDocumentPersonChildDivider",
+    "DocumentDocumentPersonChildImage",
+    "DocumentDocumentPersonChildLink",
+    "DocumentDocumentPersonChildLineBreak",
+    "DocumentDocumentPersonChildText",
+    "DocumentDocumentPersonChildToolCall",
+    "DocumentDocumentPersonChildToolResult",
+    "DocumentDocumentPersonChildTraceMessage",
+    "DocumentDocumentMessage",
+    "DocumentDocumentMessageSender",
+    "DocumentDocumentMessageSenderChild",
+    "DocumentDocumentMessageSenderChildBlob",
+    "DocumentDocumentMessageSenderChildCode",
+    "DocumentDocumentMessageSenderChildComment",
+    "DocumentDocumentMessageSenderChildDivider",
+    "DocumentDocumentMessageSenderChildImage",
+    "DocumentDocumentMessageSenderChildLink",
+    "DocumentDocumentMessageSenderChildLineBreak",
+    "DocumentDocumentMessageSenderChildText",
+    "DocumentDocumentMessageSenderChildToolCall",
+    "DocumentDocumentMessageSenderChildToolResult",
+    "DocumentDocumentMessageSenderChildTraceMessage",
+    "DocumentDocumentMessageChild",
+    "DocumentDocumentMessageChildBlob",
+    "DocumentDocumentMessageChildCallout",
+    "DocumentDocumentMessageChildCalloutChild",
+    "DocumentDocumentMessageChildCalloutChildBlob",
+    "DocumentDocumentMessageChildCalloutChildCode",
+    "DocumentDocumentMessageChildCalloutChildComment",
+    "DocumentDocumentMessageChildCalloutChildDivider",
+    "DocumentDocumentMessageChildCalloutChildImage",
+    "DocumentDocumentMessageChildCalloutChildLink",
+    "DocumentDocumentMessageChildCalloutChildLineBreak",
+    "DocumentDocumentMessageChildCalloutChildText",
+    "DocumentDocumentMessageChildCalloutChildToolCall",
+    "DocumentDocumentMessageChildCalloutChildToolResult",
+    "DocumentDocumentMessageChildCalloutChildTraceMessage",
+    "DocumentDocumentMessageChildChunk",
+    "DocumentDocumentMessageChildChunkChild",
+    "DocumentDocumentMessageChildChunkChildBlob",
+    "DocumentDocumentMessageChildChunkChildCode",
+    "DocumentDocumentMessageChildChunkChildComment",
+    "DocumentDocumentMessageChildChunkChildDivider",
+    "DocumentDocumentMessageChildChunkChildImage",
+    "DocumentDocumentMessageChildChunkChildLink",
+    "DocumentDocumentMessageChildChunkChildLineBreak",
+    "DocumentDocumentMessageChildChunkChildText",
+    "DocumentDocumentMessageChildChunkChildToolCall",
+    "DocumentDocumentMessageChildChunkChildToolResult",
+    "DocumentDocumentMessageChildChunkChildTraceMessage",
+    "DocumentDocumentMessageChildCode",
+    "DocumentDocumentMessageChildComment",
+    "DocumentDocumentMessageChildDivider",
+    "DocumentDocumentMessageChildEquation",
+    "DocumentDocumentMessageChildEquationChild",
+    "DocumentDocumentMessageChildEquationChildBlob",
+    "DocumentDocumentMessageChildEquationChildCode",
+    "DocumentDocumentMessageChildEquationChildComment",
+    "DocumentDocumentMessageChildEquationChildDivider",
+    "DocumentDocumentMessageChildEquationChildImage",
+    "DocumentDocumentMessageChildEquationChildLink",
+    "DocumentDocumentMessageChildEquationChildLineBreak",
+    "DocumentDocumentMessageChildEquationChildText",
+    "DocumentDocumentMessageChildEquationChildToolCall",
+    "DocumentDocumentMessageChildEquationChildToolResult",
+    "DocumentDocumentMessageChildEquationChildTraceMessage",
+    "DocumentDocumentMessageChildFootnote",
+    "DocumentDocumentMessageChildFootnoteChild",
+    "DocumentDocumentMessageChildFootnoteChildBlob",
+    "DocumentDocumentMessageChildFootnoteChildCode",
+    "DocumentDocumentMessageChildFootnoteChildComment",
+    "DocumentDocumentMessageChildFootnoteChildDivider",
+    "DocumentDocumentMessageChildFootnoteChildImage",
+    "DocumentDocumentMessageChildFootnoteChildLink",
+    "DocumentDocumentMessageChildFootnoteChildLineBreak",
+    "DocumentDocumentMessageChildFootnoteChildText",
+    "DocumentDocumentMessageChildFootnoteChildToolCall",
+    "DocumentDocumentMessageChildFootnoteChildToolResult",
+    "DocumentDocumentMessageChildFootnoteChildTraceMessage",
+    "DocumentDocumentMessageChildHeading",
+    "DocumentDocumentMessageChildHeadingChild",
+    "DocumentDocumentMessageChildHeadingChildBlob",
+    "DocumentDocumentMessageChildHeadingChildCode",
+    "DocumentDocumentMessageChildHeadingChildComment",
+    "DocumentDocumentMessageChildHeadingChildDivider",
+    "DocumentDocumentMessageChildHeadingChildImage",
+    "DocumentDocumentMessageChildHeadingChildLink",
+    "DocumentDocumentMessageChildHeadingChildLineBreak",
+    "DocumentDocumentMessageChildHeadingChildText",
+    "DocumentDocumentMessageChildHeadingChildToolCall",
+    "DocumentDocumentMessageChildHeadingChildToolResult",
+    "DocumentDocumentMessageChildHeadingChildTraceMessage",
+    "DocumentDocumentMessageChildImage",
+    "DocumentDocumentMessageChildLink",
+    "DocumentDocumentMessageChildLineBreak",
+    "DocumentDocumentMessageChildList",
+    "DocumentDocumentMessageChildListItem",
+    "DocumentDocumentMessageChildListItemChild",
+    "DocumentDocumentMessageChildListItemChildBlob",
+    "DocumentDocumentMessageChildListItemChildCode",
+    "DocumentDocumentMessageChildListItemChildComment",
+    "DocumentDocumentMessageChildListItemChildDivider",
+    "DocumentDocumentMessageChildListItemChildImage",
+    "DocumentDocumentMessageChildListItemChildLink",
+    "DocumentDocumentMessageChildListItemChildLineBreak",
+    "DocumentDocumentMessageChildListItemChildText",
+    "DocumentDocumentMessageChildListItemChildToolCall",
+    "DocumentDocumentMessageChildListItemChildToolResult",
+    "DocumentDocumentMessageChildListItemChildTraceMessage",
+    "DocumentDocumentMessageChildParagraph",
+    "DocumentDocumentMessageChildParagraphChild",
+    "DocumentDocumentMessageChildParagraphChildBlob",
+    "DocumentDocumentMessageChildParagraphChildCode",
+    "DocumentDocumentMessageChildParagraphChildComment",
+    "DocumentDocumentMessageChildParagraphChildDivider",
+    "DocumentDocumentMessageChildParagraphChildImage",
+    "DocumentDocumentMessageChildParagraphChildLink",
+    "DocumentDocumentMessageChildParagraphChildLineBreak",
+    "DocumentDocumentMessageChildParagraphChildText",
+    "DocumentDocumentMessageChildParagraphChildToolCall",
+    "DocumentDocumentMessageChildParagraphChildToolResult",
+    "DocumentDocumentMessageChildParagraphChildTraceMessage",
+    "DocumentDocumentMessageChildQuote",
+    "DocumentDocumentMessageChildQuoteChild",
+    "DocumentDocumentMessageChildQuoteChildBlob",
+    "DocumentDocumentMessageChildQuoteChildCode",
+    "DocumentDocumentMessageChildQuoteChildComment",
+    "DocumentDocumentMessageChildQuoteChildDivider",
+    "DocumentDocumentMessageChildQuoteChildImage",
+    "DocumentDocumentMessageChildQuoteChildLink",
+    "DocumentDocumentMessageChildQuoteChildLineBreak",
+    "DocumentDocumentMessageChildQuoteChildText",
+    "DocumentDocumentMessageChildQuoteChildToolCall",
+    "DocumentDocumentMessageChildQuoteChildToolResult",
+    "DocumentDocumentMessageChildQuoteChildTraceMessage",
+    "DocumentDocumentMessageChildTable",
+    "DocumentDocumentMessageChildTableCell",
+    "DocumentDocumentMessageChildTableCellChild",
+    "DocumentDocumentMessageChildTableCellChildBlob",
+    "DocumentDocumentMessageChildTableCellChildCode",
+    "DocumentDocumentMessageChildTableCellChildComment",
+    "DocumentDocumentMessageChildTableCellChildDivider",
+    "DocumentDocumentMessageChildTableCellChildImage",
+    "DocumentDocumentMessageChildTableCellChildLink",
+    "DocumentDocumentMessageChildTableCellChildLineBreak",
+    "DocumentDocumentMessageChildTableCellChildText",
+    "DocumentDocumentMessageChildTableCellChildToolCall",
+    "DocumentDocumentMessageChildTableCellChildToolResult",
+    "DocumentDocumentMessageChildTableCellChildTraceMessage",
+    "DocumentDocumentMessageChildTableRow",
+    "DocumentDocumentMessageChildText",
+    "DocumentDocumentMessageChildToDo",
+    "DocumentDocumentMessageChildToDoChild",
+    "DocumentDocumentMessageChildToDoChildBlob",
+    "DocumentDocumentMessageChildToDoChildCode",
+    "DocumentDocumentMessageChildToDoChildComment",
+    "DocumentDocumentMessageChildToDoChildDivider",
+    "DocumentDocumentMessageChildToDoChildImage",
+    "DocumentDocumentMessageChildToDoChildLink",
+    "DocumentDocumentMessageChildToDoChildLineBreak",
+    "DocumentDocumentMessageChildToDoChildText",
+    "DocumentDocumentMessageChildToDoChildToolCall",
+    "DocumentDocumentMessageChildToDoChildToolResult",
+    "DocumentDocumentMessageChildToDoChildTraceMessage",
+    "DocumentDocumentMessageChildToolCall",
+    "DocumentDocumentMessageChildToolResult",
+    "DocumentDocumentMessageChildTraceMessage",
+    "DocumentDocumentMessageChildUtterance",
+    "DocumentDocumentMessageMentionedUser",
+    "DocumentDocumentMessageMentionedUserChild",
+    "DocumentDocumentMessageMentionedUserChildBlob",
+    "DocumentDocumentMessageMentionedUserChildCode",
+    "DocumentDocumentMessageMentionedUserChildComment",
+    "DocumentDocumentMessageMentionedUserChildDivider",
+    "DocumentDocumentMessageMentionedUserChildImage",
+    "DocumentDocumentMessageMentionedUserChildLink",
+    "DocumentDocumentMessageMentionedUserChildLineBreak",
+    "DocumentDocumentMessageMentionedUserChildText",
+    "DocumentDocumentMessageMentionedUserChildToolCall",
+    "DocumentDocumentMessageMentionedUserChildToolResult",
+    "DocumentDocumentMessageMentionedUserChildTraceMessage",
+    "DocumentDocumentEvent",
+    "DocumentDocumentEventAttendee",
+    "DocumentDocumentEventAttendeeChild",
+    "DocumentDocumentEventAttendeeChildBlob",
+    "DocumentDocumentEventAttendeeChildCode",
+    "DocumentDocumentEventAttendeeChildComment",
+    "DocumentDocumentEventAttendeeChildDivider",
+    "DocumentDocumentEventAttendeeChildImage",
+    "DocumentDocumentEventAttendeeChildLink",
+    "DocumentDocumentEventAttendeeChildLineBreak",
+    "DocumentDocumentEventAttendeeChildText",
+    "DocumentDocumentEventAttendeeChildToolCall",
+    "DocumentDocumentEventAttendeeChildToolResult",
+    "DocumentDocumentEventAttendeeChildTraceMessage",
+    "DocumentDocumentEventChild",
+    "DocumentDocumentEventChildBlob",
+    "DocumentDocumentEventChildCallout",
+    "DocumentDocumentEventChildCalloutChild",
+    "DocumentDocumentEventChildCalloutChildBlob",
+    "DocumentDocumentEventChildCalloutChildCode",
+    "DocumentDocumentEventChildCalloutChildComment",
+    "DocumentDocumentEventChildCalloutChildDivider",
+    "DocumentDocumentEventChildCalloutChildImage",
+    "DocumentDocumentEventChildCalloutChildLink",
+    "DocumentDocumentEventChildCalloutChildLineBreak",
+    "DocumentDocumentEventChildCalloutChildText",
+    "DocumentDocumentEventChildCalloutChildToolCall",
+    "DocumentDocumentEventChildCalloutChildToolResult",
+    "DocumentDocumentEventChildCalloutChildTraceMessage",
+    "DocumentDocumentEventChildChunk",
+    "DocumentDocumentEventChildChunkChild",
+    "DocumentDocumentEventChildChunkChildBlob",
+    "DocumentDocumentEventChildChunkChildCode",
+    "DocumentDocumentEventChildChunkChildComment",
+    "DocumentDocumentEventChildChunkChildDivider",
+    "DocumentDocumentEventChildChunkChildImage",
+    "DocumentDocumentEventChildChunkChildLink",
+    "DocumentDocumentEventChildChunkChildLineBreak",
+    "DocumentDocumentEventChildChunkChildText",
+    "DocumentDocumentEventChildChunkChildToolCall",
+    "DocumentDocumentEventChildChunkChildToolResult",
+    "DocumentDocumentEventChildChunkChildTraceMessage",
+    "DocumentDocumentEventChildCode",
+    "DocumentDocumentEventChildComment",
+    "DocumentDocumentEventChildDivider",
+    "DocumentDocumentEventChildEquation",
+    "DocumentDocumentEventChildEquationChild",
+    "DocumentDocumentEventChildEquationChildBlob",
+    "DocumentDocumentEventChildEquationChildCode",
+    "DocumentDocumentEventChildEquationChildComment",
+    "DocumentDocumentEventChildEquationChildDivider",
+    "DocumentDocumentEventChildEquationChildImage",
+    "DocumentDocumentEventChildEquationChildLink",
+    "DocumentDocumentEventChildEquationChildLineBreak",
+    "DocumentDocumentEventChildEquationChildText",
+    "DocumentDocumentEventChildEquationChildToolCall",
+    "DocumentDocumentEventChildEquationChildToolResult",
+    "DocumentDocumentEventChildEquationChildTraceMessage",
+    "DocumentDocumentEventChildFootnote",
+    "DocumentDocumentEventChildFootnoteChild",
+    "DocumentDocumentEventChildFootnoteChildBlob",
+    "DocumentDocumentEventChildFootnoteChildCode",
+    "DocumentDocumentEventChildFootnoteChildComment",
+    "DocumentDocumentEventChildFootnoteChildDivider",
+    "DocumentDocumentEventChildFootnoteChildImage",
+    "DocumentDocumentEventChildFootnoteChildLink",
+    "DocumentDocumentEventChildFootnoteChildLineBreak",
+    "DocumentDocumentEventChildFootnoteChildText",
+    "DocumentDocumentEventChildFootnoteChildToolCall",
+    "DocumentDocumentEventChildFootnoteChildToolResult",
+    "DocumentDocumentEventChildFootnoteChildTraceMessage",
+    "DocumentDocumentEventChildHeading",
+    "DocumentDocumentEventChildHeadingChild",
+    "DocumentDocumentEventChildHeadingChildBlob",
+    "DocumentDocumentEventChildHeadingChildCode",
+    "DocumentDocumentEventChildHeadingChildComment",
+    "DocumentDocumentEventChildHeadingChildDivider",
+    "DocumentDocumentEventChildHeadingChildImage",
+    "DocumentDocumentEventChildHeadingChildLink",
+    "DocumentDocumentEventChildHeadingChildLineBreak",
+    "DocumentDocumentEventChildHeadingChildText",
+    "DocumentDocumentEventChildHeadingChildToolCall",
+    "DocumentDocumentEventChildHeadingChildToolResult",
+    "DocumentDocumentEventChildHeadingChildTraceMessage",
+    "DocumentDocumentEventChildImage",
+    "DocumentDocumentEventChildLink",
+    "DocumentDocumentEventChildLineBreak",
+    "DocumentDocumentEventChildList",
+    "DocumentDocumentEventChildListItem",
+    "DocumentDocumentEventChildListItemChild",
+    "DocumentDocumentEventChildListItemChildBlob",
+    "DocumentDocumentEventChildListItemChildCode",
+    "DocumentDocumentEventChildListItemChildComment",
+    "DocumentDocumentEventChildListItemChildDivider",
+    "DocumentDocumentEventChildListItemChildImage",
+    "DocumentDocumentEventChildListItemChildLink",
+    "DocumentDocumentEventChildListItemChildLineBreak",
+    "DocumentDocumentEventChildListItemChildText",
+    "DocumentDocumentEventChildListItemChildToolCall",
+    "DocumentDocumentEventChildListItemChildToolResult",
+    "DocumentDocumentEventChildListItemChildTraceMessage",
+    "DocumentDocumentEventChildParagraph",
+    "DocumentDocumentEventChildParagraphChild",
+    "DocumentDocumentEventChildParagraphChildBlob",
+    "DocumentDocumentEventChildParagraphChildCode",
+    "DocumentDocumentEventChildParagraphChildComment",
+    "DocumentDocumentEventChildParagraphChildDivider",
+    "DocumentDocumentEventChildParagraphChildImage",
+    "DocumentDocumentEventChildParagraphChildLink",
+    "DocumentDocumentEventChildParagraphChildLineBreak",
+    "DocumentDocumentEventChildParagraphChildText",
+    "DocumentDocumentEventChildParagraphChildToolCall",
+    "DocumentDocumentEventChildParagraphChildToolResult",
+    "DocumentDocumentEventChildParagraphChildTraceMessage",
+    "DocumentDocumentEventChildQuote",
+    "DocumentDocumentEventChildQuoteChild",
+    "DocumentDocumentEventChildQuoteChildBlob",
+    "DocumentDocumentEventChildQuoteChildCode",
+    "DocumentDocumentEventChildQuoteChildComment",
+    "DocumentDocumentEventChildQuoteChildDivider",
+    "DocumentDocumentEventChildQuoteChildImage",
+    "DocumentDocumentEventChildQuoteChildLink",
+    "DocumentDocumentEventChildQuoteChildLineBreak",
+    "DocumentDocumentEventChildQuoteChildText",
+    "DocumentDocumentEventChildQuoteChildToolCall",
+    "DocumentDocumentEventChildQuoteChildToolResult",
+    "DocumentDocumentEventChildQuoteChildTraceMessage",
+    "DocumentDocumentEventChildTable",
+    "DocumentDocumentEventChildTableCell",
+    "DocumentDocumentEventChildTableCellChild",
+    "DocumentDocumentEventChildTableCellChildBlob",
+    "DocumentDocumentEventChildTableCellChildCode",
+    "DocumentDocumentEventChildTableCellChildComment",
+    "DocumentDocumentEventChildTableCellChildDivider",
+    "DocumentDocumentEventChildTableCellChildImage",
+    "DocumentDocumentEventChildTableCellChildLink",
+    "DocumentDocumentEventChildTableCellChildLineBreak",
+    "DocumentDocumentEventChildTableCellChildText",
+    "DocumentDocumentEventChildTableCellChildToolCall",
+    "DocumentDocumentEventChildTableCellChildToolResult",
+    "DocumentDocumentEventChildTableCellChildTraceMessage",
+    "DocumentDocumentEventChildTableRow",
+    "DocumentDocumentEventChildText",
+    "DocumentDocumentEventChildToDo",
+    "DocumentDocumentEventChildToDoChild",
+    "DocumentDocumentEventChildToDoChildBlob",
+    "DocumentDocumentEventChildToDoChildCode",
+    "DocumentDocumentEventChildToDoChildComment",
+    "DocumentDocumentEventChildToDoChildDivider",
+    "DocumentDocumentEventChildToDoChildImage",
+    "DocumentDocumentEventChildToDoChildLink",
+    "DocumentDocumentEventChildToDoChildLineBreak",
+    "DocumentDocumentEventChildToDoChildText",
+    "DocumentDocumentEventChildToDoChildToolCall",
+    "DocumentDocumentEventChildToDoChildToolResult",
+    "DocumentDocumentEventChildToDoChildTraceMessage",
+    "DocumentDocumentEventChildToolCall",
+    "DocumentDocumentEventChildToolResult",
+    "DocumentDocumentEventChildTraceMessage",
+    "DocumentDocumentEventChildUtterance",
+    "DocumentDocumentFile",
+    "DocumentDocumentFileChild",
+    "DocumentDocumentFileChildBlob",
+    "DocumentDocumentFileChildCallout",
+    "DocumentDocumentFileChildCalloutChild",
+    "DocumentDocumentFileChildCalloutChildBlob",
+    "DocumentDocumentFileChildCalloutChildCode",
+    "DocumentDocumentFileChildCalloutChildComment",
+    "DocumentDocumentFileChildCalloutChildDivider",
+    "DocumentDocumentFileChildCalloutChildImage",
+    "DocumentDocumentFileChildCalloutChildLink",
+    "DocumentDocumentFileChildCalloutChildLineBreak",
+    "DocumentDocumentFileChildCalloutChildText",
+    "DocumentDocumentFileChildCalloutChildToolCall",
+    "DocumentDocumentFileChildCalloutChildToolResult",
+    "DocumentDocumentFileChildCalloutChildTraceMessage",
+    "DocumentDocumentFileChildChunk",
+    "DocumentDocumentFileChildChunkChild",
+    "DocumentDocumentFileChildChunkChildBlob",
+    "DocumentDocumentFileChildChunkChildCode",
+    "DocumentDocumentFileChildChunkChildComment",
+    "DocumentDocumentFileChildChunkChildDivider",
+    "DocumentDocumentFileChildChunkChildImage",
+    "DocumentDocumentFileChildChunkChildLink",
+    "DocumentDocumentFileChildChunkChildLineBreak",
+    "DocumentDocumentFileChildChunkChildText",
+    "DocumentDocumentFileChildChunkChildToolCall",
+    "DocumentDocumentFileChildChunkChildToolResult",
+    "DocumentDocumentFileChildChunkChildTraceMessage",
+    "DocumentDocumentFileChildCode",
+    "DocumentDocumentFileChildComment",
+    "DocumentDocumentFileChildDivider",
+    "DocumentDocumentFileChildEquation",
+    "DocumentDocumentFileChildEquationChild",
+    "DocumentDocumentFileChildEquationChildBlob",
+    "DocumentDocumentFileChildEquationChildCode",
+    "DocumentDocumentFileChildEquationChildComment",
+    "DocumentDocumentFileChildEquationChildDivider",
+    "DocumentDocumentFileChildEquationChildImage",
+    "DocumentDocumentFileChildEquationChildLink",
+    "DocumentDocumentFileChildEquationChildLineBreak",
+    "DocumentDocumentFileChildEquationChildText",
+    "DocumentDocumentFileChildEquationChildToolCall",
+    "DocumentDocumentFileChildEquationChildToolResult",
+    "DocumentDocumentFileChildEquationChildTraceMessage",
+    "DocumentDocumentFileChildFootnote",
+    "DocumentDocumentFileChildFootnoteChild",
+    "DocumentDocumentFileChildFootnoteChildBlob",
+    "DocumentDocumentFileChildFootnoteChildCode",
+    "DocumentDocumentFileChildFootnoteChildComment",
+    "DocumentDocumentFileChildFootnoteChildDivider",
+    "DocumentDocumentFileChildFootnoteChildImage",
+    "DocumentDocumentFileChildFootnoteChildLink",
+    "DocumentDocumentFileChildFootnoteChildLineBreak",
+    "DocumentDocumentFileChildFootnoteChildText",
+    "DocumentDocumentFileChildFootnoteChildToolCall",
+    "DocumentDocumentFileChildFootnoteChildToolResult",
+    "DocumentDocumentFileChildFootnoteChildTraceMessage",
+    "DocumentDocumentFileChildHeading",
+    "DocumentDocumentFileChildHeadingChild",
+    "DocumentDocumentFileChildHeadingChildBlob",
+    "DocumentDocumentFileChildHeadingChildCode",
+    "DocumentDocumentFileChildHeadingChildComment",
+    "DocumentDocumentFileChildHeadingChildDivider",
+    "DocumentDocumentFileChildHeadingChildImage",
+    "DocumentDocumentFileChildHeadingChildLink",
+    "DocumentDocumentFileChildHeadingChildLineBreak",
+    "DocumentDocumentFileChildHeadingChildText",
+    "DocumentDocumentFileChildHeadingChildToolCall",
+    "DocumentDocumentFileChildHeadingChildToolResult",
+    "DocumentDocumentFileChildHeadingChildTraceMessage",
+    "DocumentDocumentFileChildImage",
+    "DocumentDocumentFileChildLink",
+    "DocumentDocumentFileChildLineBreak",
+    "DocumentDocumentFileChildList",
+    "DocumentDocumentFileChildListItem",
+    "DocumentDocumentFileChildListItemChild",
+    "DocumentDocumentFileChildListItemChildBlob",
+    "DocumentDocumentFileChildListItemChildCode",
+    "DocumentDocumentFileChildListItemChildComment",
+    "DocumentDocumentFileChildListItemChildDivider",
+    "DocumentDocumentFileChildListItemChildImage",
+    "DocumentDocumentFileChildListItemChildLink",
+    "DocumentDocumentFileChildListItemChildLineBreak",
+    "DocumentDocumentFileChildListItemChildText",
+    "DocumentDocumentFileChildListItemChildToolCall",
+    "DocumentDocumentFileChildListItemChildToolResult",
+    "DocumentDocumentFileChildListItemChildTraceMessage",
+    "DocumentDocumentFileChildParagraph",
+    "DocumentDocumentFileChildParagraphChild",
+    "DocumentDocumentFileChildParagraphChildBlob",
+    "DocumentDocumentFileChildParagraphChildCode",
+    "DocumentDocumentFileChildParagraphChildComment",
+    "DocumentDocumentFileChildParagraphChildDivider",
+    "DocumentDocumentFileChildParagraphChildImage",
+    "DocumentDocumentFileChildParagraphChildLink",
+    "DocumentDocumentFileChildParagraphChildLineBreak",
+    "DocumentDocumentFileChildParagraphChildText",
+    "DocumentDocumentFileChildParagraphChildToolCall",
+    "DocumentDocumentFileChildParagraphChildToolResult",
+    "DocumentDocumentFileChildParagraphChildTraceMessage",
+    "DocumentDocumentFileChildQuote",
+    "DocumentDocumentFileChildQuoteChild",
+    "DocumentDocumentFileChildQuoteChildBlob",
+    "DocumentDocumentFileChildQuoteChildCode",
+    "DocumentDocumentFileChildQuoteChildComment",
+    "DocumentDocumentFileChildQuoteChildDivider",
+    "DocumentDocumentFileChildQuoteChildImage",
+    "DocumentDocumentFileChildQuoteChildLink",
+    "DocumentDocumentFileChildQuoteChildLineBreak",
+    "DocumentDocumentFileChildQuoteChildText",
+    "DocumentDocumentFileChildQuoteChildToolCall",
+    "DocumentDocumentFileChildQuoteChildToolResult",
+    "DocumentDocumentFileChildQuoteChildTraceMessage",
+    "DocumentDocumentFileChildTable",
+    "DocumentDocumentFileChildTableCell",
+    "DocumentDocumentFileChildTableCellChild",
+    "DocumentDocumentFileChildTableCellChildBlob",
+    "DocumentDocumentFileChildTableCellChildCode",
+    "DocumentDocumentFileChildTableCellChildComment",
+    "DocumentDocumentFileChildTableCellChildDivider",
+    "DocumentDocumentFileChildTableCellChildImage",
+    "DocumentDocumentFileChildTableCellChildLink",
+    "DocumentDocumentFileChildTableCellChildLineBreak",
+    "DocumentDocumentFileChildTableCellChildText",
+    "DocumentDocumentFileChildTableCellChildToolCall",
+    "DocumentDocumentFileChildTableCellChildToolResult",
+    "DocumentDocumentFileChildTableCellChildTraceMessage",
+    "DocumentDocumentFileChildTableRow",
+    "DocumentDocumentFileChildText",
+    "DocumentDocumentFileChildToDo",
+    "DocumentDocumentFileChildToDoChild",
+    "DocumentDocumentFileChildToDoChildBlob",
+    "DocumentDocumentFileChildToDoChildCode",
+    "DocumentDocumentFileChildToDoChildComment",
+    "DocumentDocumentFileChildToDoChildDivider",
+    "DocumentDocumentFileChildToDoChildImage",
+    "DocumentDocumentFileChildToDoChildLink",
+    "DocumentDocumentFileChildToDoChildLineBreak",
+    "DocumentDocumentFileChildToDoChildText",
+    "DocumentDocumentFileChildToDoChildToolCall",
+    "DocumentDocumentFileChildToDoChildToolResult",
+    "DocumentDocumentFileChildToDoChildTraceMessage",
+    "DocumentDocumentFileChildToolCall",
+    "DocumentDocumentFileChildToolResult",
+    "DocumentDocumentFileChildTraceMessage",
+    "DocumentDocumentFileChildUtterance",
+    "DocumentDocumentConversation",
+    "DocumentDocumentConversationChild",
+    "DocumentDocumentConversationChildSender",
+    "DocumentDocumentConversationChildSenderChild",
+    "DocumentDocumentConversationChildSenderChildBlob",
+    "DocumentDocumentConversationChildSenderChildCode",
+    "DocumentDocumentConversationChildSenderChildComment",
+    "DocumentDocumentConversationChildSenderChildDivider",
+    "DocumentDocumentConversationChildSenderChildImage",
+    "DocumentDocumentConversationChildSenderChildLink",
+    "DocumentDocumentConversationChildSenderChildLineBreak",
+    "DocumentDocumentConversationChildSenderChildText",
+    "DocumentDocumentConversationChildSenderChildToolCall",
+    "DocumentDocumentConversationChildSenderChildToolResult",
+    "DocumentDocumentConversationChildSenderChildTraceMessage",
+    "DocumentDocumentConversationChildChild",
+    "DocumentDocumentConversationChildChildBlob",
+    "DocumentDocumentConversationChildChildCallout",
+    "DocumentDocumentConversationChildChildCalloutChild",
+    "DocumentDocumentConversationChildChildCalloutChildBlob",
+    "DocumentDocumentConversationChildChildCalloutChildCode",
+    "DocumentDocumentConversationChildChildCalloutChildComment",
+    "DocumentDocumentConversationChildChildCalloutChildDivider",
+    "DocumentDocumentConversationChildChildCalloutChildImage",
+    "DocumentDocumentConversationChildChildCalloutChildLink",
+    "DocumentDocumentConversationChildChildCalloutChildLineBreak",
+    "DocumentDocumentConversationChildChildCalloutChildText",
+    "DocumentDocumentConversationChildChildCalloutChildToolCall",
+    "DocumentDocumentConversationChildChildCalloutChildToolResult",
+    "DocumentDocumentConversationChildChildCalloutChildTraceMessage",
+    "DocumentDocumentConversationChildChildChunk",
+    "DocumentDocumentConversationChildChildChunkChild",
+    "DocumentDocumentConversationChildChildChunkChildBlob",
+    "DocumentDocumentConversationChildChildChunkChildCode",
+    "DocumentDocumentConversationChildChildChunkChildComment",
+    "DocumentDocumentConversationChildChildChunkChildDivider",
+    "DocumentDocumentConversationChildChildChunkChildImage",
+    "DocumentDocumentConversationChildChildChunkChildLink",
+    "DocumentDocumentConversationChildChildChunkChildLineBreak",
+    "DocumentDocumentConversationChildChildChunkChildText",
+    "DocumentDocumentConversationChildChildChunkChildToolCall",
+    "DocumentDocumentConversationChildChildChunkChildToolResult",
+    "DocumentDocumentConversationChildChildChunkChildTraceMessage",
+    "DocumentDocumentConversationChildChildCode",
+    "DocumentDocumentConversationChildChildComment",
+    "DocumentDocumentConversationChildChildDivider",
+    "DocumentDocumentConversationChildChildEquation",
+    "DocumentDocumentConversationChildChildEquationChild",
+    "DocumentDocumentConversationChildChildEquationChildBlob",
+    "DocumentDocumentConversationChildChildEquationChildCode",
+    "DocumentDocumentConversationChildChildEquationChildComment",
+    "DocumentDocumentConversationChildChildEquationChildDivider",
+    "DocumentDocumentConversationChildChildEquationChildImage",
+    "DocumentDocumentConversationChildChildEquationChildLink",
+    "DocumentDocumentConversationChildChildEquationChildLineBreak",
+    "DocumentDocumentConversationChildChildEquationChildText",
+    "DocumentDocumentConversationChildChildEquationChildToolCall",
+    "DocumentDocumentConversationChildChildEquationChildToolResult",
+    "DocumentDocumentConversationChildChildEquationChildTraceMessage",
+    "DocumentDocumentConversationChildChildFootnote",
+    "DocumentDocumentConversationChildChildFootnoteChild",
+    "DocumentDocumentConversationChildChildFootnoteChildBlob",
+    "DocumentDocumentConversationChildChildFootnoteChildCode",
+    "DocumentDocumentConversationChildChildFootnoteChildComment",
+    "DocumentDocumentConversationChildChildFootnoteChildDivider",
+    "DocumentDocumentConversationChildChildFootnoteChildImage",
+    "DocumentDocumentConversationChildChildFootnoteChildLink",
+    "DocumentDocumentConversationChildChildFootnoteChildLineBreak",
+    "DocumentDocumentConversationChildChildFootnoteChildText",
+    "DocumentDocumentConversationChildChildFootnoteChildToolCall",
+    "DocumentDocumentConversationChildChildFootnoteChildToolResult",
+    "DocumentDocumentConversationChildChildFootnoteChildTraceMessage",
+    "DocumentDocumentConversationChildChildHeading",
+    "DocumentDocumentConversationChildChildHeadingChild",
+    "DocumentDocumentConversationChildChildHeadingChildBlob",
+    "DocumentDocumentConversationChildChildHeadingChildCode",
+    "DocumentDocumentConversationChildChildHeadingChildComment",
+    "DocumentDocumentConversationChildChildHeadingChildDivider",
+    "DocumentDocumentConversationChildChildHeadingChildImage",
+    "DocumentDocumentConversationChildChildHeadingChildLink",
+    "DocumentDocumentConversationChildChildHeadingChildLineBreak",
+    "DocumentDocumentConversationChildChildHeadingChildText",
+    "DocumentDocumentConversationChildChildHeadingChildToolCall",
+    "DocumentDocumentConversationChildChildHeadingChildToolResult",
+    "DocumentDocumentConversationChildChildHeadingChildTraceMessage",
+    "DocumentDocumentConversationChildChildImage",
+    "DocumentDocumentConversationChildChildLink",
+    "DocumentDocumentConversationChildChildLineBreak",
+    "DocumentDocumentConversationChildChildList",
+    "DocumentDocumentConversationChildChildListItem",
+    "DocumentDocumentConversationChildChildListItemChild",
+    "DocumentDocumentConversationChildChildListItemChildBlob",
+    "DocumentDocumentConversationChildChildListItemChildCode",
+    "DocumentDocumentConversationChildChildListItemChildComment",
+    "DocumentDocumentConversationChildChildListItemChildDivider",
+    "DocumentDocumentConversationChildChildListItemChildImage",
+    "DocumentDocumentConversationChildChildListItemChildLink",
+    "DocumentDocumentConversationChildChildListItemChildLineBreak",
+    "DocumentDocumentConversationChildChildListItemChildText",
+    "DocumentDocumentConversationChildChildListItemChildToolCall",
+    "DocumentDocumentConversationChildChildListItemChildToolResult",
+    "DocumentDocumentConversationChildChildListItemChildTraceMessage",
+    "DocumentDocumentConversationChildChildParagraph",
+    "DocumentDocumentConversationChildChildParagraphChild",
+    "DocumentDocumentConversationChildChildParagraphChildBlob",
+    "DocumentDocumentConversationChildChildParagraphChildCode",
+    "DocumentDocumentConversationChildChildParagraphChildComment",
+    "DocumentDocumentConversationChildChildParagraphChildDivider",
+    "DocumentDocumentConversationChildChildParagraphChildImage",
+    "DocumentDocumentConversationChildChildParagraphChildLink",
+    "DocumentDocumentConversationChildChildParagraphChildLineBreak",
+    "DocumentDocumentConversationChildChildParagraphChildText",
+    "DocumentDocumentConversationChildChildParagraphChildToolCall",
+    "DocumentDocumentConversationChildChildParagraphChildToolResult",
+    "DocumentDocumentConversationChildChildParagraphChildTraceMessage",
+    "DocumentDocumentConversationChildChildQuote",
+    "DocumentDocumentConversationChildChildQuoteChild",
+    "DocumentDocumentConversationChildChildQuoteChildBlob",
+    "DocumentDocumentConversationChildChildQuoteChildCode",
+    "DocumentDocumentConversationChildChildQuoteChildComment",
+    "DocumentDocumentConversationChildChildQuoteChildDivider",
+    "DocumentDocumentConversationChildChildQuoteChildImage",
+    "DocumentDocumentConversationChildChildQuoteChildLink",
+    "DocumentDocumentConversationChildChildQuoteChildLineBreak",
+    "DocumentDocumentConversationChildChildQuoteChildText",
+    "DocumentDocumentConversationChildChildQuoteChildToolCall",
+    "DocumentDocumentConversationChildChildQuoteChildToolResult",
+    "DocumentDocumentConversationChildChildQuoteChildTraceMessage",
+    "DocumentDocumentConversationChildChildTable",
+    "DocumentDocumentConversationChildChildTableCell",
+    "DocumentDocumentConversationChildChildTableCellChild",
+    "DocumentDocumentConversationChildChildTableCellChildBlob",
+    "DocumentDocumentConversationChildChildTableCellChildCode",
+    "DocumentDocumentConversationChildChildTableCellChildComment",
+    "DocumentDocumentConversationChildChildTableCellChildDivider",
+    "DocumentDocumentConversationChildChildTableCellChildImage",
+    "DocumentDocumentConversationChildChildTableCellChildLink",
+    "DocumentDocumentConversationChildChildTableCellChildLineBreak",
+    "DocumentDocumentConversationChildChildTableCellChildText",
+    "DocumentDocumentConversationChildChildTableCellChildToolCall",
+    "DocumentDocumentConversationChildChildTableCellChildToolResult",
+    "DocumentDocumentConversationChildChildTableCellChildTraceMessage",
+    "DocumentDocumentConversationChildChildTableRow",
+    "DocumentDocumentConversationChildChildText",
+    "DocumentDocumentConversationChildChildToDo",
+    "DocumentDocumentConversationChildChildToDoChild",
+    "DocumentDocumentConversationChildChildToDoChildBlob",
+    "DocumentDocumentConversationChildChildToDoChildCode",
+    "DocumentDocumentConversationChildChildToDoChildComment",
+    "DocumentDocumentConversationChildChildToDoChildDivider",
+    "DocumentDocumentConversationChildChildToDoChildImage",
+    "DocumentDocumentConversationChildChildToDoChildLink",
+    "DocumentDocumentConversationChildChildToDoChildLineBreak",
+    "DocumentDocumentConversationChildChildToDoChildText",
+    "DocumentDocumentConversationChildChildToDoChildToolCall",
+    "DocumentDocumentConversationChildChildToDoChildToolResult",
+    "DocumentDocumentConversationChildChildToDoChildTraceMessage",
+    "DocumentDocumentConversationChildChildToolCall",
+    "DocumentDocumentConversationChildChildToolResult",
+    "DocumentDocumentConversationChildChildTraceMessage",
+    "DocumentDocumentConversationChildChildUtterance",
+    "DocumentDocumentConversationChildMentionedUser",
+    "DocumentDocumentConversationChildMentionedUserChild",
+    "DocumentDocumentConversationChildMentionedUserChildBlob",
+    "DocumentDocumentConversationChildMentionedUserChildCode",
+    "DocumentDocumentConversationChildMentionedUserChildComment",
+    "DocumentDocumentConversationChildMentionedUserChildDivider",
+    "DocumentDocumentConversationChildMentionedUserChildImage",
+    "DocumentDocumentConversationChildMentionedUserChildLink",
+    "DocumentDocumentConversationChildMentionedUserChildLineBreak",
+    "DocumentDocumentConversationChildMentionedUserChildText",
+    "DocumentDocumentConversationChildMentionedUserChildToolCall",
+    "DocumentDocumentConversationChildMentionedUserChildToolResult",
+    "DocumentDocumentConversationChildMentionedUserChildTraceMessage",
+    "DocumentDocumentTrace",
+    "DocumentDocumentTraceChild",
+    "DocumentDocumentTraceChildTraceMessage",
+    "DocumentDocumentTraceChildToolCall",
+    "DocumentDocumentTraceChildToolResult",
+    "DocumentDocumentTranscript",
+    "DocumentDocumentTranscriptChild",
+    "DocumentDocumentTranscriptParticipant",
+    "DocumentDocumentTranscriptParticipantChild",
+    "DocumentDocumentTranscriptParticipantChildBlob",
+    "DocumentDocumentTranscriptParticipantChildCode",
+    "DocumentDocumentTranscriptParticipantChildComment",
+    "DocumentDocumentTranscriptParticipantChildDivider",
+    "DocumentDocumentTranscriptParticipantChildImage",
+    "DocumentDocumentTranscriptParticipantChildLink",
+    "DocumentDocumentTranscriptParticipantChildLineBreak",
+    "DocumentDocumentTranscriptParticipantChildText",
+    "DocumentDocumentTranscriptParticipantChildToolCall",
+    "DocumentDocumentTranscriptParticipantChildToolResult",
+    "DocumentDocumentTranscriptParticipantChildTraceMessage",
+    "DocumentDocumentCompany",
+    "DocumentDocumentCompanyChild",
+    "DocumentDocumentCompanyChildBlob",
+    "DocumentDocumentCompanyChildCallout",
+    "DocumentDocumentCompanyChildCalloutChild",
+    "DocumentDocumentCompanyChildCalloutChildBlob",
+    "DocumentDocumentCompanyChildCalloutChildCode",
+    "DocumentDocumentCompanyChildCalloutChildComment",
+    "DocumentDocumentCompanyChildCalloutChildDivider",
+    "DocumentDocumentCompanyChildCalloutChildImage",
+    "DocumentDocumentCompanyChildCalloutChildLink",
+    "DocumentDocumentCompanyChildCalloutChildLineBreak",
+    "DocumentDocumentCompanyChildCalloutChildText",
+    "DocumentDocumentCompanyChildCalloutChildToolCall",
+    "DocumentDocumentCompanyChildCalloutChildToolResult",
+    "DocumentDocumentCompanyChildCalloutChildTraceMessage",
+    "DocumentDocumentCompanyChildChunk",
+    "DocumentDocumentCompanyChildChunkChild",
+    "DocumentDocumentCompanyChildChunkChildBlob",
+    "DocumentDocumentCompanyChildChunkChildCode",
+    "DocumentDocumentCompanyChildChunkChildComment",
+    "DocumentDocumentCompanyChildChunkChildDivider",
+    "DocumentDocumentCompanyChildChunkChildImage",
+    "DocumentDocumentCompanyChildChunkChildLink",
+    "DocumentDocumentCompanyChildChunkChildLineBreak",
+    "DocumentDocumentCompanyChildChunkChildText",
+    "DocumentDocumentCompanyChildChunkChildToolCall",
+    "DocumentDocumentCompanyChildChunkChildToolResult",
+    "DocumentDocumentCompanyChildChunkChildTraceMessage",
+    "DocumentDocumentCompanyChildCode",
+    "DocumentDocumentCompanyChildComment",
+    "DocumentDocumentCompanyChildDivider",
+    "DocumentDocumentCompanyChildEquation",
+    "DocumentDocumentCompanyChildEquationChild",
+    "DocumentDocumentCompanyChildEquationChildBlob",
+    "DocumentDocumentCompanyChildEquationChildCode",
+    "DocumentDocumentCompanyChildEquationChildComment",
+    "DocumentDocumentCompanyChildEquationChildDivider",
+    "DocumentDocumentCompanyChildEquationChildImage",
+    "DocumentDocumentCompanyChildEquationChildLink",
+    "DocumentDocumentCompanyChildEquationChildLineBreak",
+    "DocumentDocumentCompanyChildEquationChildText",
+    "DocumentDocumentCompanyChildEquationChildToolCall",
+    "DocumentDocumentCompanyChildEquationChildToolResult",
+    "DocumentDocumentCompanyChildEquationChildTraceMessage",
+    "DocumentDocumentCompanyChildFootnote",
+    "DocumentDocumentCompanyChildFootnoteChild",
+    "DocumentDocumentCompanyChildFootnoteChildBlob",
+    "DocumentDocumentCompanyChildFootnoteChildCode",
+    "DocumentDocumentCompanyChildFootnoteChildComment",
+    "DocumentDocumentCompanyChildFootnoteChildDivider",
+    "DocumentDocumentCompanyChildFootnoteChildImage",
+    "DocumentDocumentCompanyChildFootnoteChildLink",
+    "DocumentDocumentCompanyChildFootnoteChildLineBreak",
+    "DocumentDocumentCompanyChildFootnoteChildText",
+    "DocumentDocumentCompanyChildFootnoteChildToolCall",
+    "DocumentDocumentCompanyChildFootnoteChildToolResult",
+    "DocumentDocumentCompanyChildFootnoteChildTraceMessage",
+    "DocumentDocumentCompanyChildHeading",
+    "DocumentDocumentCompanyChildHeadingChild",
+    "DocumentDocumentCompanyChildHeadingChildBlob",
+    "DocumentDocumentCompanyChildHeadingChildCode",
+    "DocumentDocumentCompanyChildHeadingChildComment",
+    "DocumentDocumentCompanyChildHeadingChildDivider",
+    "DocumentDocumentCompanyChildHeadingChildImage",
+    "DocumentDocumentCompanyChildHeadingChildLink",
+    "DocumentDocumentCompanyChildHeadingChildLineBreak",
+    "DocumentDocumentCompanyChildHeadingChildText",
+    "DocumentDocumentCompanyChildHeadingChildToolCall",
+    "DocumentDocumentCompanyChildHeadingChildToolResult",
+    "DocumentDocumentCompanyChildHeadingChildTraceMessage",
+    "DocumentDocumentCompanyChildImage",
+    "DocumentDocumentCompanyChildLink",
+    "DocumentDocumentCompanyChildLineBreak",
+    "DocumentDocumentCompanyChildList",
+    "DocumentDocumentCompanyChildListItem",
+    "DocumentDocumentCompanyChildListItemChild",
+    "DocumentDocumentCompanyChildListItemChildBlob",
+    "DocumentDocumentCompanyChildListItemChildCode",
+    "DocumentDocumentCompanyChildListItemChildComment",
+    "DocumentDocumentCompanyChildListItemChildDivider",
+    "DocumentDocumentCompanyChildListItemChildImage",
+    "DocumentDocumentCompanyChildListItemChildLink",
+    "DocumentDocumentCompanyChildListItemChildLineBreak",
+    "DocumentDocumentCompanyChildListItemChildText",
+    "DocumentDocumentCompanyChildListItemChildToolCall",
+    "DocumentDocumentCompanyChildListItemChildToolResult",
+    "DocumentDocumentCompanyChildListItemChildTraceMessage",
+    "DocumentDocumentCompanyChildParagraph",
+    "DocumentDocumentCompanyChildParagraphChild",
+    "DocumentDocumentCompanyChildParagraphChildBlob",
+    "DocumentDocumentCompanyChildParagraphChildCode",
+    "DocumentDocumentCompanyChildParagraphChildComment",
+    "DocumentDocumentCompanyChildParagraphChildDivider",
+    "DocumentDocumentCompanyChildParagraphChildImage",
+    "DocumentDocumentCompanyChildParagraphChildLink",
+    "DocumentDocumentCompanyChildParagraphChildLineBreak",
+    "DocumentDocumentCompanyChildParagraphChildText",
+    "DocumentDocumentCompanyChildParagraphChildToolCall",
+    "DocumentDocumentCompanyChildParagraphChildToolResult",
+    "DocumentDocumentCompanyChildParagraphChildTraceMessage",
+    "DocumentDocumentCompanyChildQuote",
+    "DocumentDocumentCompanyChildQuoteChild",
+    "DocumentDocumentCompanyChildQuoteChildBlob",
+    "DocumentDocumentCompanyChildQuoteChildCode",
+    "DocumentDocumentCompanyChildQuoteChildComment",
+    "DocumentDocumentCompanyChildQuoteChildDivider",
+    "DocumentDocumentCompanyChildQuoteChildImage",
+    "DocumentDocumentCompanyChildQuoteChildLink",
+    "DocumentDocumentCompanyChildQuoteChildLineBreak",
+    "DocumentDocumentCompanyChildQuoteChildText",
+    "DocumentDocumentCompanyChildQuoteChildToolCall",
+    "DocumentDocumentCompanyChildQuoteChildToolResult",
+    "DocumentDocumentCompanyChildQuoteChildTraceMessage",
+    "DocumentDocumentCompanyChildTable",
+    "DocumentDocumentCompanyChildTableCell",
+    "DocumentDocumentCompanyChildTableCellChild",
+    "DocumentDocumentCompanyChildTableCellChildBlob",
+    "DocumentDocumentCompanyChildTableCellChildCode",
+    "DocumentDocumentCompanyChildTableCellChildComment",
+    "DocumentDocumentCompanyChildTableCellChildDivider",
+    "DocumentDocumentCompanyChildTableCellChildImage",
+    "DocumentDocumentCompanyChildTableCellChildLink",
+    "DocumentDocumentCompanyChildTableCellChildLineBreak",
+    "DocumentDocumentCompanyChildTableCellChildText",
+    "DocumentDocumentCompanyChildTableCellChildToolCall",
+    "DocumentDocumentCompanyChildTableCellChildToolResult",
+    "DocumentDocumentCompanyChildTableCellChildTraceMessage",
+    "DocumentDocumentCompanyChildTableRow",
+    "DocumentDocumentCompanyChildText",
+    "DocumentDocumentCompanyChildToDo",
+    "DocumentDocumentCompanyChildToDoChild",
+    "DocumentDocumentCompanyChildToDoChildBlob",
+    "DocumentDocumentCompanyChildToDoChildCode",
+    "DocumentDocumentCompanyChildToDoChildComment",
+    "DocumentDocumentCompanyChildToDoChildDivider",
+    "DocumentDocumentCompanyChildToDoChildImage",
+    "DocumentDocumentCompanyChildToDoChildLink",
+    "DocumentDocumentCompanyChildToDoChildLineBreak",
+    "DocumentDocumentCompanyChildToDoChildText",
+    "DocumentDocumentCompanyChildToDoChildToolCall",
+    "DocumentDocumentCompanyChildToDoChildToolResult",
+    "DocumentDocumentCompanyChildToDoChildTraceMessage",
+    "DocumentDocumentCompanyChildToolCall",
+    "DocumentDocumentCompanyChildToolResult",
+    "DocumentDocumentCompanyChildTraceMessage",
+    "DocumentDocumentCompanyChildUtterance",
+    "DocumentDocumentDeal",
+    "DocumentDocumentDealChild",
+    "DocumentDocumentDealChildBlob",
+    "DocumentDocumentDealChildCallout",
+    "DocumentDocumentDealChildCalloutChild",
+    "DocumentDocumentDealChildCalloutChildBlob",
+    "DocumentDocumentDealChildCalloutChildCode",
+    "DocumentDocumentDealChildCalloutChildComment",
+    "DocumentDocumentDealChildCalloutChildDivider",
+    "DocumentDocumentDealChildCalloutChildImage",
+    "DocumentDocumentDealChildCalloutChildLink",
+    "DocumentDocumentDealChildCalloutChildLineBreak",
+    "DocumentDocumentDealChildCalloutChildText",
+    "DocumentDocumentDealChildCalloutChildToolCall",
+    "DocumentDocumentDealChildCalloutChildToolResult",
+    "DocumentDocumentDealChildCalloutChildTraceMessage",
+    "DocumentDocumentDealChildChunk",
+    "DocumentDocumentDealChildChunkChild",
+    "DocumentDocumentDealChildChunkChildBlob",
+    "DocumentDocumentDealChildChunkChildCode",
+    "DocumentDocumentDealChildChunkChildComment",
+    "DocumentDocumentDealChildChunkChildDivider",
+    "DocumentDocumentDealChildChunkChildImage",
+    "DocumentDocumentDealChildChunkChildLink",
+    "DocumentDocumentDealChildChunkChildLineBreak",
+    "DocumentDocumentDealChildChunkChildText",
+    "DocumentDocumentDealChildChunkChildToolCall",
+    "DocumentDocumentDealChildChunkChildToolResult",
+    "DocumentDocumentDealChildChunkChildTraceMessage",
+    "DocumentDocumentDealChildCode",
+    "DocumentDocumentDealChildComment",
+    "DocumentDocumentDealChildDivider",
+    "DocumentDocumentDealChildEquation",
+    "DocumentDocumentDealChildEquationChild",
+    "DocumentDocumentDealChildEquationChildBlob",
+    "DocumentDocumentDealChildEquationChildCode",
+    "DocumentDocumentDealChildEquationChildComment",
+    "DocumentDocumentDealChildEquationChildDivider",
+    "DocumentDocumentDealChildEquationChildImage",
+    "DocumentDocumentDealChildEquationChildLink",
+    "DocumentDocumentDealChildEquationChildLineBreak",
+    "DocumentDocumentDealChildEquationChildText",
+    "DocumentDocumentDealChildEquationChildToolCall",
+    "DocumentDocumentDealChildEquationChildToolResult",
+    "DocumentDocumentDealChildEquationChildTraceMessage",
+    "DocumentDocumentDealChildFootnote",
+    "DocumentDocumentDealChildFootnoteChild",
+    "DocumentDocumentDealChildFootnoteChildBlob",
+    "DocumentDocumentDealChildFootnoteChildCode",
+    "DocumentDocumentDealChildFootnoteChildComment",
+    "DocumentDocumentDealChildFootnoteChildDivider",
+    "DocumentDocumentDealChildFootnoteChildImage",
+    "DocumentDocumentDealChildFootnoteChildLink",
+    "DocumentDocumentDealChildFootnoteChildLineBreak",
+    "DocumentDocumentDealChildFootnoteChildText",
+    "DocumentDocumentDealChildFootnoteChildToolCall",
+    "DocumentDocumentDealChildFootnoteChildToolResult",
+    "DocumentDocumentDealChildFootnoteChildTraceMessage",
+    "DocumentDocumentDealChildHeading",
+    "DocumentDocumentDealChildHeadingChild",
+    "DocumentDocumentDealChildHeadingChildBlob",
+    "DocumentDocumentDealChildHeadingChildCode",
+    "DocumentDocumentDealChildHeadingChildComment",
+    "DocumentDocumentDealChildHeadingChildDivider",
+    "DocumentDocumentDealChildHeadingChildImage",
+    "DocumentDocumentDealChildHeadingChildLink",
+    "DocumentDocumentDealChildHeadingChildLineBreak",
+    "DocumentDocumentDealChildHeadingChildText",
+    "DocumentDocumentDealChildHeadingChildToolCall",
+    "DocumentDocumentDealChildHeadingChildToolResult",
+    "DocumentDocumentDealChildHeadingChildTraceMessage",
+    "DocumentDocumentDealChildImage",
+    "DocumentDocumentDealChildLink",
+    "DocumentDocumentDealChildLineBreak",
+    "DocumentDocumentDealChildList",
+    "DocumentDocumentDealChildListItem",
+    "DocumentDocumentDealChildListItemChild",
+    "DocumentDocumentDealChildListItemChildBlob",
+    "DocumentDocumentDealChildListItemChildCode",
+    "DocumentDocumentDealChildListItemChildComment",
+    "DocumentDocumentDealChildListItemChildDivider",
+    "DocumentDocumentDealChildListItemChildImage",
+    "DocumentDocumentDealChildListItemChildLink",
+    "DocumentDocumentDealChildListItemChildLineBreak",
+    "DocumentDocumentDealChildListItemChildText",
+    "DocumentDocumentDealChildListItemChildToolCall",
+    "DocumentDocumentDealChildListItemChildToolResult",
+    "DocumentDocumentDealChildListItemChildTraceMessage",
+    "DocumentDocumentDealChildParagraph",
+    "DocumentDocumentDealChildParagraphChild",
+    "DocumentDocumentDealChildParagraphChildBlob",
+    "DocumentDocumentDealChildParagraphChildCode",
+    "DocumentDocumentDealChildParagraphChildComment",
+    "DocumentDocumentDealChildParagraphChildDivider",
+    "DocumentDocumentDealChildParagraphChildImage",
+    "DocumentDocumentDealChildParagraphChildLink",
+    "DocumentDocumentDealChildParagraphChildLineBreak",
+    "DocumentDocumentDealChildParagraphChildText",
+    "DocumentDocumentDealChildParagraphChildToolCall",
+    "DocumentDocumentDealChildParagraphChildToolResult",
+    "DocumentDocumentDealChildParagraphChildTraceMessage",
+    "DocumentDocumentDealChildQuote",
+    "DocumentDocumentDealChildQuoteChild",
+    "DocumentDocumentDealChildQuoteChildBlob",
+    "DocumentDocumentDealChildQuoteChildCode",
+    "DocumentDocumentDealChildQuoteChildComment",
+    "DocumentDocumentDealChildQuoteChildDivider",
+    "DocumentDocumentDealChildQuoteChildImage",
+    "DocumentDocumentDealChildQuoteChildLink",
+    "DocumentDocumentDealChildQuoteChildLineBreak",
+    "DocumentDocumentDealChildQuoteChildText",
+    "DocumentDocumentDealChildQuoteChildToolCall",
+    "DocumentDocumentDealChildQuoteChildToolResult",
+    "DocumentDocumentDealChildQuoteChildTraceMessage",
+    "DocumentDocumentDealChildTable",
+    "DocumentDocumentDealChildTableCell",
+    "DocumentDocumentDealChildTableCellChild",
+    "DocumentDocumentDealChildTableCellChildBlob",
+    "DocumentDocumentDealChildTableCellChildCode",
+    "DocumentDocumentDealChildTableCellChildComment",
+    "DocumentDocumentDealChildTableCellChildDivider",
+    "DocumentDocumentDealChildTableCellChildImage",
+    "DocumentDocumentDealChildTableCellChildLink",
+    "DocumentDocumentDealChildTableCellChildLineBreak",
+    "DocumentDocumentDealChildTableCellChildText",
+    "DocumentDocumentDealChildTableCellChildToolCall",
+    "DocumentDocumentDealChildTableCellChildToolResult",
+    "DocumentDocumentDealChildTableCellChildTraceMessage",
+    "DocumentDocumentDealChildTableRow",
+    "DocumentDocumentDealChildText",
+    "DocumentDocumentDealChildToDo",
+    "DocumentDocumentDealChildToDoChild",
+    "DocumentDocumentDealChildToDoChildBlob",
+    "DocumentDocumentDealChildToDoChildCode",
+    "DocumentDocumentDealChildToDoChildComment",
+    "DocumentDocumentDealChildToDoChildDivider",
+    "DocumentDocumentDealChildToDoChildImage",
+    "DocumentDocumentDealChildToDoChildLink",
+    "DocumentDocumentDealChildToDoChildLineBreak",
+    "DocumentDocumentDealChildToDoChildText",
+    "DocumentDocumentDealChildToDoChildToolCall",
+    "DocumentDocumentDealChildToDoChildToolResult",
+    "DocumentDocumentDealChildToDoChildTraceMessage",
+    "DocumentDocumentDealChildToolCall",
+    "DocumentDocumentDealChildToolResult",
+    "DocumentDocumentDealChildTraceMessage",
+    "DocumentDocumentDealChildUtterance",
+    "Provenance",
+    "ProvenanceEntity",
+    "ProvenanceSource",
+    "ProvenanceStep",
+]
+
+
+class DocumentDocumentDocumentChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentDocumentChildCalloutChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentDocumentChildCalloutChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentDocumentChildCalloutChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentDocumentChildCalloutChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentDocumentChildCalloutChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentDocumentChildCalloutChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentDocumentChildCalloutChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentDocumentChildCalloutChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentDocumentChildCalloutChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentDocumentChildCalloutChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentDocumentChildCalloutChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentDocumentChildCalloutChild: TypeAlias = Union[
+    DocumentDocumentDocumentChildCalloutChildBlob,
+    DocumentDocumentDocumentChildCalloutChildCode,
+    DocumentDocumentDocumentChildCalloutChildComment,
+    DocumentDocumentDocumentChildCalloutChildDivider,
+    DocumentDocumentDocumentChildCalloutChildImage,
+    DocumentDocumentDocumentChildCalloutChildLink,
+    DocumentDocumentDocumentChildCalloutChildLineBreak,
+    DocumentDocumentDocumentChildCalloutChildText,
+    DocumentDocumentDocumentChildCalloutChildToolCall,
+    DocumentDocumentDocumentChildCalloutChildToolResult,
+    DocumentDocumentDocumentChildCalloutChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentDocumentChildCallout(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentDocumentChildCalloutChild]] = None
+
+    text: Optional[str] = None
+
+    title: Optional[str] = None
+
+    type: Optional[Literal["callout"]] = None
+
+
+class DocumentDocumentDocumentChildChunkChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentDocumentChildChunkChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentDocumentChildChunkChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentDocumentChildChunkChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentDocumentChildChunkChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentDocumentChildChunkChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentDocumentChildChunkChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentDocumentChildChunkChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentDocumentChildChunkChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentDocumentChildChunkChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentDocumentChildChunkChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentDocumentChildChunkChild: TypeAlias = Union[
+    DocumentDocumentDocumentChildChunkChildBlob,
+    DocumentDocumentDocumentChildChunkChildCode,
+    DocumentDocumentDocumentChildChunkChildComment,
+    DocumentDocumentDocumentChildChunkChildDivider,
+    DocumentDocumentDocumentChildChunkChildImage,
+    DocumentDocumentDocumentChildChunkChildLink,
+    DocumentDocumentDocumentChildChunkChildLineBreak,
+    DocumentDocumentDocumentChildChunkChildText,
+    DocumentDocumentDocumentChildChunkChildToolCall,
+    DocumentDocumentDocumentChildChunkChildToolResult,
+    DocumentDocumentDocumentChildChunkChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentDocumentChildChunk(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentDocumentChildChunkChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["chunk"]] = None
+
+
+class DocumentDocumentDocumentChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentDocumentChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentDocumentChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentDocumentChildEquationChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentDocumentChildEquationChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentDocumentChildEquationChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentDocumentChildEquationChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentDocumentChildEquationChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentDocumentChildEquationChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentDocumentChildEquationChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentDocumentChildEquationChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentDocumentChildEquationChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentDocumentChildEquationChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentDocumentChildEquationChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentDocumentChildEquationChild: TypeAlias = Union[
+    DocumentDocumentDocumentChildEquationChildBlob,
+    DocumentDocumentDocumentChildEquationChildCode,
+    DocumentDocumentDocumentChildEquationChildComment,
+    DocumentDocumentDocumentChildEquationChildDivider,
+    DocumentDocumentDocumentChildEquationChildImage,
+    DocumentDocumentDocumentChildEquationChildLink,
+    DocumentDocumentDocumentChildEquationChildLineBreak,
+    DocumentDocumentDocumentChildEquationChildText,
+    DocumentDocumentDocumentChildEquationChildToolCall,
+    DocumentDocumentDocumentChildEquationChildToolResult,
+    DocumentDocumentDocumentChildEquationChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentDocumentChildEquation(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentDocumentChildEquationChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["equation"]] = None
+
+
+class DocumentDocumentDocumentChildFootnoteChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentDocumentChildFootnoteChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentDocumentChildFootnoteChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentDocumentChildFootnoteChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentDocumentChildFootnoteChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentDocumentChildFootnoteChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentDocumentChildFootnoteChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentDocumentChildFootnoteChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentDocumentChildFootnoteChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentDocumentChildFootnoteChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentDocumentChildFootnoteChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentDocumentChildFootnoteChild: TypeAlias = Union[
+    DocumentDocumentDocumentChildFootnoteChildBlob,
+    DocumentDocumentDocumentChildFootnoteChildCode,
+    DocumentDocumentDocumentChildFootnoteChildComment,
+    DocumentDocumentDocumentChildFootnoteChildDivider,
+    DocumentDocumentDocumentChildFootnoteChildImage,
+    DocumentDocumentDocumentChildFootnoteChildLink,
+    DocumentDocumentDocumentChildFootnoteChildLineBreak,
+    DocumentDocumentDocumentChildFootnoteChildText,
+    DocumentDocumentDocumentChildFootnoteChildToolCall,
+    DocumentDocumentDocumentChildFootnoteChildToolResult,
+    DocumentDocumentDocumentChildFootnoteChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentDocumentChildFootnote(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentDocumentChildFootnoteChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["footnote"]] = None
+
+
+class DocumentDocumentDocumentChildHeadingChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentDocumentChildHeadingChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentDocumentChildHeadingChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentDocumentChildHeadingChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentDocumentChildHeadingChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentDocumentChildHeadingChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentDocumentChildHeadingChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentDocumentChildHeadingChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentDocumentChildHeadingChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentDocumentChildHeadingChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentDocumentChildHeadingChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentDocumentChildHeadingChild: TypeAlias = Union[
+    DocumentDocumentDocumentChildHeadingChildBlob,
+    DocumentDocumentDocumentChildHeadingChildCode,
+    DocumentDocumentDocumentChildHeadingChildComment,
+    DocumentDocumentDocumentChildHeadingChildDivider,
+    DocumentDocumentDocumentChildHeadingChildImage,
+    DocumentDocumentDocumentChildHeadingChildLink,
+    DocumentDocumentDocumentChildHeadingChildLineBreak,
+    DocumentDocumentDocumentChildHeadingChildText,
+    DocumentDocumentDocumentChildHeadingChildToolCall,
+    DocumentDocumentDocumentChildHeadingChildToolResult,
+    DocumentDocumentDocumentChildHeadingChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentDocumentChildHeading(BaseModel):
+    level: int
+
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentDocumentChildHeadingChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["heading"]] = None
+
+
+class DocumentDocumentDocumentChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentDocumentChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentDocumentChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentDocumentChildList(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[object]] = None
+
+    ordered: Optional[bool] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["list"]] = None
+
+
+class DocumentDocumentDocumentChildListItemChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentDocumentChildListItemChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentDocumentChildListItemChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentDocumentChildListItemChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentDocumentChildListItemChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentDocumentChildListItemChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentDocumentChildListItemChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentDocumentChildListItemChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentDocumentChildListItemChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentDocumentChildListItemChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentDocumentChildListItemChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentDocumentChildListItemChild: TypeAlias = Union[
+    DocumentDocumentDocumentChildListItemChildBlob,
+    DocumentDocumentDocumentChildListItemChildCode,
+    DocumentDocumentDocumentChildListItemChildComment,
+    DocumentDocumentDocumentChildListItemChildDivider,
+    DocumentDocumentDocumentChildListItemChildImage,
+    DocumentDocumentDocumentChildListItemChildLink,
+    DocumentDocumentDocumentChildListItemChildLineBreak,
+    DocumentDocumentDocumentChildListItemChildText,
+    DocumentDocumentDocumentChildListItemChildToolCall,
+    DocumentDocumentDocumentChildListItemChildToolResult,
+    DocumentDocumentDocumentChildListItemChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentDocumentChildListItem(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentDocumentChildListItemChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["list_item"]] = None
+
+
+class DocumentDocumentDocumentChildParagraphChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentDocumentChildParagraphChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentDocumentChildParagraphChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentDocumentChildParagraphChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentDocumentChildParagraphChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentDocumentChildParagraphChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentDocumentChildParagraphChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentDocumentChildParagraphChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentDocumentChildParagraphChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentDocumentChildParagraphChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentDocumentChildParagraphChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentDocumentChildParagraphChild: TypeAlias = Union[
+    DocumentDocumentDocumentChildParagraphChildBlob,
+    DocumentDocumentDocumentChildParagraphChildCode,
+    DocumentDocumentDocumentChildParagraphChildComment,
+    DocumentDocumentDocumentChildParagraphChildDivider,
+    DocumentDocumentDocumentChildParagraphChildImage,
+    DocumentDocumentDocumentChildParagraphChildLink,
+    DocumentDocumentDocumentChildParagraphChildLineBreak,
+    DocumentDocumentDocumentChildParagraphChildText,
+    DocumentDocumentDocumentChildParagraphChildToolCall,
+    DocumentDocumentDocumentChildParagraphChildToolResult,
+    DocumentDocumentDocumentChildParagraphChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentDocumentChildParagraph(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentDocumentChildParagraphChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["paragraph"]] = None
+
+
+class DocumentDocumentDocumentChildQuoteChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentDocumentChildQuoteChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentDocumentChildQuoteChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentDocumentChildQuoteChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentDocumentChildQuoteChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentDocumentChildQuoteChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentDocumentChildQuoteChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentDocumentChildQuoteChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentDocumentChildQuoteChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentDocumentChildQuoteChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentDocumentChildQuoteChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentDocumentChildQuoteChild: TypeAlias = Union[
+    DocumentDocumentDocumentChildQuoteChildBlob,
+    DocumentDocumentDocumentChildQuoteChildCode,
+    DocumentDocumentDocumentChildQuoteChildComment,
+    DocumentDocumentDocumentChildQuoteChildDivider,
+    DocumentDocumentDocumentChildQuoteChildImage,
+    DocumentDocumentDocumentChildQuoteChildLink,
+    DocumentDocumentDocumentChildQuoteChildLineBreak,
+    DocumentDocumentDocumentChildQuoteChildText,
+    DocumentDocumentDocumentChildQuoteChildToolCall,
+    DocumentDocumentDocumentChildQuoteChildToolResult,
+    DocumentDocumentDocumentChildQuoteChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentDocumentChildQuote(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentDocumentChildQuoteChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["quote"]] = None
+
+
+class DocumentDocumentDocumentChildTable(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[object]] = None
+
+    has_header: Optional[bool] = None
+    """Whether the first row should be treated as a header"""
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["table"]] = None
+
+
+class DocumentDocumentDocumentChildTableCellChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentDocumentChildTableCellChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentDocumentChildTableCellChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentDocumentChildTableCellChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentDocumentChildTableCellChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentDocumentChildTableCellChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentDocumentChildTableCellChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentDocumentChildTableCellChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentDocumentChildTableCellChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentDocumentChildTableCellChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentDocumentChildTableCellChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentDocumentChildTableCellChild: TypeAlias = Union[
+    DocumentDocumentDocumentChildTableCellChildBlob,
+    DocumentDocumentDocumentChildTableCellChildCode,
+    DocumentDocumentDocumentChildTableCellChildComment,
+    DocumentDocumentDocumentChildTableCellChildDivider,
+    DocumentDocumentDocumentChildTableCellChildImage,
+    DocumentDocumentDocumentChildTableCellChildLink,
+    DocumentDocumentDocumentChildTableCellChildLineBreak,
+    DocumentDocumentDocumentChildTableCellChildText,
+    DocumentDocumentDocumentChildTableCellChildToolCall,
+    DocumentDocumentDocumentChildTableCellChildToolResult,
+    DocumentDocumentDocumentChildTableCellChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentDocumentChildTableCell(BaseModel):
+    id: Optional[str] = None
+
+    align: Optional[Literal["left", "center", "right"]] = None
+
+    children: Optional[List[DocumentDocumentDocumentChildTableCellChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["table_cell"]] = None
+
+
+class DocumentDocumentDocumentChildTableRow(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[object]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["table_row"]] = None
+
+
+class DocumentDocumentDocumentChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentDocumentChildToDoChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentDocumentChildToDoChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentDocumentChildToDoChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentDocumentChildToDoChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentDocumentChildToDoChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentDocumentChildToDoChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentDocumentChildToDoChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentDocumentChildToDoChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentDocumentChildToDoChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentDocumentChildToDoChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentDocumentChildToDoChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentDocumentChildToDoChild: TypeAlias = Union[
+    DocumentDocumentDocumentChildToDoChildBlob,
+    DocumentDocumentDocumentChildToDoChildCode,
+    DocumentDocumentDocumentChildToDoChildComment,
+    DocumentDocumentDocumentChildToDoChildDivider,
+    DocumentDocumentDocumentChildToDoChildImage,
+    DocumentDocumentDocumentChildToDoChildLink,
+    DocumentDocumentDocumentChildToDoChildLineBreak,
+    DocumentDocumentDocumentChildToDoChildText,
+    DocumentDocumentDocumentChildToDoChildToolCall,
+    DocumentDocumentDocumentChildToDoChildToolResult,
+    DocumentDocumentDocumentChildToDoChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentDocumentChildToDo(BaseModel):
+    id: Optional[str] = None
+
+    checked: Optional[bool] = None
+
+    children: Optional[List[DocumentDocumentDocumentChildToDoChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["todo"]] = None
+
+
+class DocumentDocumentDocumentChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentDocumentChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentDocumentChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+class DocumentDocumentDocumentChildUtterance(BaseModel):
+    """A speaker-attributed segment of a transcript (ENG-2476/D10).
+
+    "Utterance" is the standard name for this across transcription providers
+    (AssemblyAI, Deepgram, Rev). Timestamps are relative offsets in seconds —
+    provider-native; absolute times derive from `Transcript.started_at`.
+    """
+
+    text: str
+
+    id: Optional[str] = None
+
+    end: Optional[float] = None
+
+    speaker: Optional[object] = None
+
+    start: Optional[float] = None
+
+    type: Optional[Literal["utterance"]] = None
+
+
+DocumentDocumentDocumentChild: TypeAlias = Annotated[
+    Union[
+        DocumentDocumentDocumentChildBlob,
+        DocumentDocumentDocumentChildCallout,
+        DocumentDocumentDocumentChildChunk,
+        DocumentDocumentDocumentChildCode,
+        DocumentDocumentDocumentChildComment,
+        DocumentDocumentDocumentChildDivider,
+        DocumentDocumentDocumentChildEquation,
+        DocumentDocumentDocumentChildFootnote,
+        DocumentDocumentDocumentChildHeading,
+        DocumentDocumentDocumentChildImage,
+        DocumentDocumentDocumentChildLink,
+        DocumentDocumentDocumentChildLineBreak,
+        DocumentDocumentDocumentChildList,
+        DocumentDocumentDocumentChildListItem,
+        DocumentDocumentDocumentChildParagraph,
+        DocumentDocumentDocumentChildQuote,
+        DocumentDocumentDocumentChildTable,
+        DocumentDocumentDocumentChildTableCell,
+        DocumentDocumentDocumentChildTableRow,
+        DocumentDocumentDocumentChildText,
+        DocumentDocumentDocumentChildToDo,
+        DocumentDocumentDocumentChildToolCall,
+        DocumentDocumentDocumentChildToolResult,
+        DocumentDocumentDocumentChildTraceMessage,
+        DocumentDocumentDocumentChildUtterance,
+    ],
+    PropertyInfo(discriminator="type"),
+]
+
+
+class DocumentDocumentDocument(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentDocumentChild]] = None
+
+    text: Optional[str] = None
+
+    title: Optional[str] = None
+
+    type: Optional[Literal["document"]] = None
+
+
+class DocumentDocumentWebsiteChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentWebsiteChildCalloutChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentWebsiteChildCalloutChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentWebsiteChildCalloutChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentWebsiteChildCalloutChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentWebsiteChildCalloutChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentWebsiteChildCalloutChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentWebsiteChildCalloutChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentWebsiteChildCalloutChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentWebsiteChildCalloutChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentWebsiteChildCalloutChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentWebsiteChildCalloutChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentWebsiteChildCalloutChild: TypeAlias = Union[
+    DocumentDocumentWebsiteChildCalloutChildBlob,
+    DocumentDocumentWebsiteChildCalloutChildCode,
+    DocumentDocumentWebsiteChildCalloutChildComment,
+    DocumentDocumentWebsiteChildCalloutChildDivider,
+    DocumentDocumentWebsiteChildCalloutChildImage,
+    DocumentDocumentWebsiteChildCalloutChildLink,
+    DocumentDocumentWebsiteChildCalloutChildLineBreak,
+    DocumentDocumentWebsiteChildCalloutChildText,
+    DocumentDocumentWebsiteChildCalloutChildToolCall,
+    DocumentDocumentWebsiteChildCalloutChildToolResult,
+    DocumentDocumentWebsiteChildCalloutChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentWebsiteChildCallout(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentWebsiteChildCalloutChild]] = None
+
+    text: Optional[str] = None
+
+    title: Optional[str] = None
+
+    type: Optional[Literal["callout"]] = None
+
+
+class DocumentDocumentWebsiteChildChunkChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentWebsiteChildChunkChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentWebsiteChildChunkChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentWebsiteChildChunkChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentWebsiteChildChunkChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentWebsiteChildChunkChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentWebsiteChildChunkChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentWebsiteChildChunkChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentWebsiteChildChunkChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentWebsiteChildChunkChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentWebsiteChildChunkChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentWebsiteChildChunkChild: TypeAlias = Union[
+    DocumentDocumentWebsiteChildChunkChildBlob,
+    DocumentDocumentWebsiteChildChunkChildCode,
+    DocumentDocumentWebsiteChildChunkChildComment,
+    DocumentDocumentWebsiteChildChunkChildDivider,
+    DocumentDocumentWebsiteChildChunkChildImage,
+    DocumentDocumentWebsiteChildChunkChildLink,
+    DocumentDocumentWebsiteChildChunkChildLineBreak,
+    DocumentDocumentWebsiteChildChunkChildText,
+    DocumentDocumentWebsiteChildChunkChildToolCall,
+    DocumentDocumentWebsiteChildChunkChildToolResult,
+    DocumentDocumentWebsiteChildChunkChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentWebsiteChildChunk(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentWebsiteChildChunkChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["chunk"]] = None
+
+
+class DocumentDocumentWebsiteChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentWebsiteChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentWebsiteChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentWebsiteChildEquationChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentWebsiteChildEquationChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentWebsiteChildEquationChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentWebsiteChildEquationChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentWebsiteChildEquationChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentWebsiteChildEquationChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentWebsiteChildEquationChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentWebsiteChildEquationChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentWebsiteChildEquationChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentWebsiteChildEquationChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentWebsiteChildEquationChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentWebsiteChildEquationChild: TypeAlias = Union[
+    DocumentDocumentWebsiteChildEquationChildBlob,
+    DocumentDocumentWebsiteChildEquationChildCode,
+    DocumentDocumentWebsiteChildEquationChildComment,
+    DocumentDocumentWebsiteChildEquationChildDivider,
+    DocumentDocumentWebsiteChildEquationChildImage,
+    DocumentDocumentWebsiteChildEquationChildLink,
+    DocumentDocumentWebsiteChildEquationChildLineBreak,
+    DocumentDocumentWebsiteChildEquationChildText,
+    DocumentDocumentWebsiteChildEquationChildToolCall,
+    DocumentDocumentWebsiteChildEquationChildToolResult,
+    DocumentDocumentWebsiteChildEquationChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentWebsiteChildEquation(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentWebsiteChildEquationChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["equation"]] = None
+
+
+class DocumentDocumentWebsiteChildFootnoteChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentWebsiteChildFootnoteChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentWebsiteChildFootnoteChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentWebsiteChildFootnoteChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentWebsiteChildFootnoteChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentWebsiteChildFootnoteChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentWebsiteChildFootnoteChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentWebsiteChildFootnoteChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentWebsiteChildFootnoteChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentWebsiteChildFootnoteChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentWebsiteChildFootnoteChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentWebsiteChildFootnoteChild: TypeAlias = Union[
+    DocumentDocumentWebsiteChildFootnoteChildBlob,
+    DocumentDocumentWebsiteChildFootnoteChildCode,
+    DocumentDocumentWebsiteChildFootnoteChildComment,
+    DocumentDocumentWebsiteChildFootnoteChildDivider,
+    DocumentDocumentWebsiteChildFootnoteChildImage,
+    DocumentDocumentWebsiteChildFootnoteChildLink,
+    DocumentDocumentWebsiteChildFootnoteChildLineBreak,
+    DocumentDocumentWebsiteChildFootnoteChildText,
+    DocumentDocumentWebsiteChildFootnoteChildToolCall,
+    DocumentDocumentWebsiteChildFootnoteChildToolResult,
+    DocumentDocumentWebsiteChildFootnoteChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentWebsiteChildFootnote(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentWebsiteChildFootnoteChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["footnote"]] = None
+
+
+class DocumentDocumentWebsiteChildHeadingChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentWebsiteChildHeadingChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentWebsiteChildHeadingChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentWebsiteChildHeadingChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentWebsiteChildHeadingChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentWebsiteChildHeadingChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentWebsiteChildHeadingChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentWebsiteChildHeadingChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentWebsiteChildHeadingChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentWebsiteChildHeadingChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentWebsiteChildHeadingChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentWebsiteChildHeadingChild: TypeAlias = Union[
+    DocumentDocumentWebsiteChildHeadingChildBlob,
+    DocumentDocumentWebsiteChildHeadingChildCode,
+    DocumentDocumentWebsiteChildHeadingChildComment,
+    DocumentDocumentWebsiteChildHeadingChildDivider,
+    DocumentDocumentWebsiteChildHeadingChildImage,
+    DocumentDocumentWebsiteChildHeadingChildLink,
+    DocumentDocumentWebsiteChildHeadingChildLineBreak,
+    DocumentDocumentWebsiteChildHeadingChildText,
+    DocumentDocumentWebsiteChildHeadingChildToolCall,
+    DocumentDocumentWebsiteChildHeadingChildToolResult,
+    DocumentDocumentWebsiteChildHeadingChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentWebsiteChildHeading(BaseModel):
+    level: int
+
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentWebsiteChildHeadingChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["heading"]] = None
+
+
+class DocumentDocumentWebsiteChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentWebsiteChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentWebsiteChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentWebsiteChildList(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[object]] = None
+
+    ordered: Optional[bool] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["list"]] = None
+
+
+class DocumentDocumentWebsiteChildListItemChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentWebsiteChildListItemChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentWebsiteChildListItemChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentWebsiteChildListItemChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentWebsiteChildListItemChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentWebsiteChildListItemChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentWebsiteChildListItemChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentWebsiteChildListItemChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentWebsiteChildListItemChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentWebsiteChildListItemChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentWebsiteChildListItemChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentWebsiteChildListItemChild: TypeAlias = Union[
+    DocumentDocumentWebsiteChildListItemChildBlob,
+    DocumentDocumentWebsiteChildListItemChildCode,
+    DocumentDocumentWebsiteChildListItemChildComment,
+    DocumentDocumentWebsiteChildListItemChildDivider,
+    DocumentDocumentWebsiteChildListItemChildImage,
+    DocumentDocumentWebsiteChildListItemChildLink,
+    DocumentDocumentWebsiteChildListItemChildLineBreak,
+    DocumentDocumentWebsiteChildListItemChildText,
+    DocumentDocumentWebsiteChildListItemChildToolCall,
+    DocumentDocumentWebsiteChildListItemChildToolResult,
+    DocumentDocumentWebsiteChildListItemChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentWebsiteChildListItem(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentWebsiteChildListItemChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["list_item"]] = None
+
+
+class DocumentDocumentWebsiteChildParagraphChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentWebsiteChildParagraphChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentWebsiteChildParagraphChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentWebsiteChildParagraphChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentWebsiteChildParagraphChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentWebsiteChildParagraphChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentWebsiteChildParagraphChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentWebsiteChildParagraphChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentWebsiteChildParagraphChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentWebsiteChildParagraphChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentWebsiteChildParagraphChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentWebsiteChildParagraphChild: TypeAlias = Union[
+    DocumentDocumentWebsiteChildParagraphChildBlob,
+    DocumentDocumentWebsiteChildParagraphChildCode,
+    DocumentDocumentWebsiteChildParagraphChildComment,
+    DocumentDocumentWebsiteChildParagraphChildDivider,
+    DocumentDocumentWebsiteChildParagraphChildImage,
+    DocumentDocumentWebsiteChildParagraphChildLink,
+    DocumentDocumentWebsiteChildParagraphChildLineBreak,
+    DocumentDocumentWebsiteChildParagraphChildText,
+    DocumentDocumentWebsiteChildParagraphChildToolCall,
+    DocumentDocumentWebsiteChildParagraphChildToolResult,
+    DocumentDocumentWebsiteChildParagraphChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentWebsiteChildParagraph(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentWebsiteChildParagraphChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["paragraph"]] = None
+
+
+class DocumentDocumentWebsiteChildQuoteChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentWebsiteChildQuoteChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentWebsiteChildQuoteChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentWebsiteChildQuoteChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentWebsiteChildQuoteChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentWebsiteChildQuoteChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentWebsiteChildQuoteChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentWebsiteChildQuoteChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentWebsiteChildQuoteChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentWebsiteChildQuoteChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentWebsiteChildQuoteChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentWebsiteChildQuoteChild: TypeAlias = Union[
+    DocumentDocumentWebsiteChildQuoteChildBlob,
+    DocumentDocumentWebsiteChildQuoteChildCode,
+    DocumentDocumentWebsiteChildQuoteChildComment,
+    DocumentDocumentWebsiteChildQuoteChildDivider,
+    DocumentDocumentWebsiteChildQuoteChildImage,
+    DocumentDocumentWebsiteChildQuoteChildLink,
+    DocumentDocumentWebsiteChildQuoteChildLineBreak,
+    DocumentDocumentWebsiteChildQuoteChildText,
+    DocumentDocumentWebsiteChildQuoteChildToolCall,
+    DocumentDocumentWebsiteChildQuoteChildToolResult,
+    DocumentDocumentWebsiteChildQuoteChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentWebsiteChildQuote(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentWebsiteChildQuoteChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["quote"]] = None
+
+
+class DocumentDocumentWebsiteChildTable(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[object]] = None
+
+    has_header: Optional[bool] = None
+    """Whether the first row should be treated as a header"""
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["table"]] = None
+
+
+class DocumentDocumentWebsiteChildTableCellChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentWebsiteChildTableCellChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentWebsiteChildTableCellChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentWebsiteChildTableCellChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentWebsiteChildTableCellChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentWebsiteChildTableCellChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentWebsiteChildTableCellChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentWebsiteChildTableCellChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentWebsiteChildTableCellChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentWebsiteChildTableCellChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentWebsiteChildTableCellChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentWebsiteChildTableCellChild: TypeAlias = Union[
+    DocumentDocumentWebsiteChildTableCellChildBlob,
+    DocumentDocumentWebsiteChildTableCellChildCode,
+    DocumentDocumentWebsiteChildTableCellChildComment,
+    DocumentDocumentWebsiteChildTableCellChildDivider,
+    DocumentDocumentWebsiteChildTableCellChildImage,
+    DocumentDocumentWebsiteChildTableCellChildLink,
+    DocumentDocumentWebsiteChildTableCellChildLineBreak,
+    DocumentDocumentWebsiteChildTableCellChildText,
+    DocumentDocumentWebsiteChildTableCellChildToolCall,
+    DocumentDocumentWebsiteChildTableCellChildToolResult,
+    DocumentDocumentWebsiteChildTableCellChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentWebsiteChildTableCell(BaseModel):
+    id: Optional[str] = None
+
+    align: Optional[Literal["left", "center", "right"]] = None
+
+    children: Optional[List[DocumentDocumentWebsiteChildTableCellChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["table_cell"]] = None
+
+
+class DocumentDocumentWebsiteChildTableRow(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[object]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["table_row"]] = None
+
+
+class DocumentDocumentWebsiteChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentWebsiteChildToDoChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentWebsiteChildToDoChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentWebsiteChildToDoChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentWebsiteChildToDoChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentWebsiteChildToDoChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentWebsiteChildToDoChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentWebsiteChildToDoChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentWebsiteChildToDoChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentWebsiteChildToDoChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentWebsiteChildToDoChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentWebsiteChildToDoChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentWebsiteChildToDoChild: TypeAlias = Union[
+    DocumentDocumentWebsiteChildToDoChildBlob,
+    DocumentDocumentWebsiteChildToDoChildCode,
+    DocumentDocumentWebsiteChildToDoChildComment,
+    DocumentDocumentWebsiteChildToDoChildDivider,
+    DocumentDocumentWebsiteChildToDoChildImage,
+    DocumentDocumentWebsiteChildToDoChildLink,
+    DocumentDocumentWebsiteChildToDoChildLineBreak,
+    DocumentDocumentWebsiteChildToDoChildText,
+    DocumentDocumentWebsiteChildToDoChildToolCall,
+    DocumentDocumentWebsiteChildToDoChildToolResult,
+    DocumentDocumentWebsiteChildToDoChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentWebsiteChildToDo(BaseModel):
+    id: Optional[str] = None
+
+    checked: Optional[bool] = None
+
+    children: Optional[List[DocumentDocumentWebsiteChildToDoChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["todo"]] = None
+
+
+class DocumentDocumentWebsiteChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentWebsiteChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentWebsiteChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+class DocumentDocumentWebsiteChildUtterance(BaseModel):
+    """A speaker-attributed segment of a transcript (ENG-2476/D10).
+
+    "Utterance" is the standard name for this across transcription providers
+    (AssemblyAI, Deepgram, Rev). Timestamps are relative offsets in seconds —
+    provider-native; absolute times derive from `Transcript.started_at`.
+    """
+
+    text: str
+
+    id: Optional[str] = None
+
+    end: Optional[float] = None
+
+    speaker: Optional[object] = None
+
+    start: Optional[float] = None
+
+    type: Optional[Literal["utterance"]] = None
+
+
+DocumentDocumentWebsiteChild: TypeAlias = Annotated[
+    Union[
+        DocumentDocumentWebsiteChildBlob,
+        DocumentDocumentWebsiteChildCallout,
+        DocumentDocumentWebsiteChildChunk,
+        DocumentDocumentWebsiteChildCode,
+        DocumentDocumentWebsiteChildComment,
+        DocumentDocumentWebsiteChildDivider,
+        DocumentDocumentWebsiteChildEquation,
+        DocumentDocumentWebsiteChildFootnote,
+        DocumentDocumentWebsiteChildHeading,
+        DocumentDocumentWebsiteChildImage,
+        DocumentDocumentWebsiteChildLink,
+        DocumentDocumentWebsiteChildLineBreak,
+        DocumentDocumentWebsiteChildList,
+        DocumentDocumentWebsiteChildListItem,
+        DocumentDocumentWebsiteChildParagraph,
+        DocumentDocumentWebsiteChildQuote,
+        DocumentDocumentWebsiteChildTable,
+        DocumentDocumentWebsiteChildTableCell,
+        DocumentDocumentWebsiteChildTableRow,
+        DocumentDocumentWebsiteChildText,
+        DocumentDocumentWebsiteChildToDo,
+        DocumentDocumentWebsiteChildToolCall,
+        DocumentDocumentWebsiteChildToolResult,
+        DocumentDocumentWebsiteChildTraceMessage,
+        DocumentDocumentWebsiteChildUtterance,
+    ],
+    PropertyInfo(discriminator="type"),
+]
+
+
+class DocumentDocumentWebsite(BaseModel):
+    url: str
+
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentWebsiteChild]] = None
+
+    description: Optional[str] = None
+
+    favicon: Optional[str] = None
+
+    image_url: Optional[str] = None
+
+    language: Optional[str] = None
+
+    text: Optional[str] = None
+
+    title: Optional[str] = None
+
+    type: Optional[Literal["website"]] = None
+
+
+class DocumentDocumentTaskChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentTaskChildCalloutChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentTaskChildCalloutChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentTaskChildCalloutChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentTaskChildCalloutChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentTaskChildCalloutChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentTaskChildCalloutChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentTaskChildCalloutChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentTaskChildCalloutChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentTaskChildCalloutChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentTaskChildCalloutChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentTaskChildCalloutChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentTaskChildCalloutChild: TypeAlias = Union[
+    DocumentDocumentTaskChildCalloutChildBlob,
+    DocumentDocumentTaskChildCalloutChildCode,
+    DocumentDocumentTaskChildCalloutChildComment,
+    DocumentDocumentTaskChildCalloutChildDivider,
+    DocumentDocumentTaskChildCalloutChildImage,
+    DocumentDocumentTaskChildCalloutChildLink,
+    DocumentDocumentTaskChildCalloutChildLineBreak,
+    DocumentDocumentTaskChildCalloutChildText,
+    DocumentDocumentTaskChildCalloutChildToolCall,
+    DocumentDocumentTaskChildCalloutChildToolResult,
+    DocumentDocumentTaskChildCalloutChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentTaskChildCallout(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentTaskChildCalloutChild]] = None
+
+    text: Optional[str] = None
+
+    title: Optional[str] = None
+
+    type: Optional[Literal["callout"]] = None
+
+
+class DocumentDocumentTaskChildChunkChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentTaskChildChunkChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentTaskChildChunkChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentTaskChildChunkChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentTaskChildChunkChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentTaskChildChunkChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentTaskChildChunkChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentTaskChildChunkChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentTaskChildChunkChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentTaskChildChunkChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentTaskChildChunkChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentTaskChildChunkChild: TypeAlias = Union[
+    DocumentDocumentTaskChildChunkChildBlob,
+    DocumentDocumentTaskChildChunkChildCode,
+    DocumentDocumentTaskChildChunkChildComment,
+    DocumentDocumentTaskChildChunkChildDivider,
+    DocumentDocumentTaskChildChunkChildImage,
+    DocumentDocumentTaskChildChunkChildLink,
+    DocumentDocumentTaskChildChunkChildLineBreak,
+    DocumentDocumentTaskChildChunkChildText,
+    DocumentDocumentTaskChildChunkChildToolCall,
+    DocumentDocumentTaskChildChunkChildToolResult,
+    DocumentDocumentTaskChildChunkChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentTaskChildChunk(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentTaskChildChunkChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["chunk"]] = None
+
+
+class DocumentDocumentTaskChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentTaskChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentTaskChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentTaskChildEquationChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentTaskChildEquationChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentTaskChildEquationChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentTaskChildEquationChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentTaskChildEquationChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentTaskChildEquationChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentTaskChildEquationChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentTaskChildEquationChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentTaskChildEquationChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentTaskChildEquationChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentTaskChildEquationChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentTaskChildEquationChild: TypeAlias = Union[
+    DocumentDocumentTaskChildEquationChildBlob,
+    DocumentDocumentTaskChildEquationChildCode,
+    DocumentDocumentTaskChildEquationChildComment,
+    DocumentDocumentTaskChildEquationChildDivider,
+    DocumentDocumentTaskChildEquationChildImage,
+    DocumentDocumentTaskChildEquationChildLink,
+    DocumentDocumentTaskChildEquationChildLineBreak,
+    DocumentDocumentTaskChildEquationChildText,
+    DocumentDocumentTaskChildEquationChildToolCall,
+    DocumentDocumentTaskChildEquationChildToolResult,
+    DocumentDocumentTaskChildEquationChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentTaskChildEquation(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentTaskChildEquationChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["equation"]] = None
+
+
+class DocumentDocumentTaskChildFootnoteChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentTaskChildFootnoteChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentTaskChildFootnoteChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentTaskChildFootnoteChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentTaskChildFootnoteChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentTaskChildFootnoteChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentTaskChildFootnoteChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentTaskChildFootnoteChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentTaskChildFootnoteChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentTaskChildFootnoteChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentTaskChildFootnoteChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentTaskChildFootnoteChild: TypeAlias = Union[
+    DocumentDocumentTaskChildFootnoteChildBlob,
+    DocumentDocumentTaskChildFootnoteChildCode,
+    DocumentDocumentTaskChildFootnoteChildComment,
+    DocumentDocumentTaskChildFootnoteChildDivider,
+    DocumentDocumentTaskChildFootnoteChildImage,
+    DocumentDocumentTaskChildFootnoteChildLink,
+    DocumentDocumentTaskChildFootnoteChildLineBreak,
+    DocumentDocumentTaskChildFootnoteChildText,
+    DocumentDocumentTaskChildFootnoteChildToolCall,
+    DocumentDocumentTaskChildFootnoteChildToolResult,
+    DocumentDocumentTaskChildFootnoteChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentTaskChildFootnote(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentTaskChildFootnoteChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["footnote"]] = None
+
+
+class DocumentDocumentTaskChildHeadingChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentTaskChildHeadingChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentTaskChildHeadingChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentTaskChildHeadingChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentTaskChildHeadingChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentTaskChildHeadingChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentTaskChildHeadingChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentTaskChildHeadingChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentTaskChildHeadingChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentTaskChildHeadingChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentTaskChildHeadingChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentTaskChildHeadingChild: TypeAlias = Union[
+    DocumentDocumentTaskChildHeadingChildBlob,
+    DocumentDocumentTaskChildHeadingChildCode,
+    DocumentDocumentTaskChildHeadingChildComment,
+    DocumentDocumentTaskChildHeadingChildDivider,
+    DocumentDocumentTaskChildHeadingChildImage,
+    DocumentDocumentTaskChildHeadingChildLink,
+    DocumentDocumentTaskChildHeadingChildLineBreak,
+    DocumentDocumentTaskChildHeadingChildText,
+    DocumentDocumentTaskChildHeadingChildToolCall,
+    DocumentDocumentTaskChildHeadingChildToolResult,
+    DocumentDocumentTaskChildHeadingChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentTaskChildHeading(BaseModel):
+    level: int
+
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentTaskChildHeadingChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["heading"]] = None
+
+
+class DocumentDocumentTaskChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentTaskChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentTaskChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentTaskChildList(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[object]] = None
+
+    ordered: Optional[bool] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["list"]] = None
+
+
+class DocumentDocumentTaskChildListItemChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentTaskChildListItemChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentTaskChildListItemChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentTaskChildListItemChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentTaskChildListItemChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentTaskChildListItemChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentTaskChildListItemChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentTaskChildListItemChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentTaskChildListItemChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentTaskChildListItemChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentTaskChildListItemChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentTaskChildListItemChild: TypeAlias = Union[
+    DocumentDocumentTaskChildListItemChildBlob,
+    DocumentDocumentTaskChildListItemChildCode,
+    DocumentDocumentTaskChildListItemChildComment,
+    DocumentDocumentTaskChildListItemChildDivider,
+    DocumentDocumentTaskChildListItemChildImage,
+    DocumentDocumentTaskChildListItemChildLink,
+    DocumentDocumentTaskChildListItemChildLineBreak,
+    DocumentDocumentTaskChildListItemChildText,
+    DocumentDocumentTaskChildListItemChildToolCall,
+    DocumentDocumentTaskChildListItemChildToolResult,
+    DocumentDocumentTaskChildListItemChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentTaskChildListItem(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentTaskChildListItemChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["list_item"]] = None
+
+
+class DocumentDocumentTaskChildParagraphChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentTaskChildParagraphChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentTaskChildParagraphChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentTaskChildParagraphChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentTaskChildParagraphChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentTaskChildParagraphChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentTaskChildParagraphChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentTaskChildParagraphChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentTaskChildParagraphChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentTaskChildParagraphChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentTaskChildParagraphChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentTaskChildParagraphChild: TypeAlias = Union[
+    DocumentDocumentTaskChildParagraphChildBlob,
+    DocumentDocumentTaskChildParagraphChildCode,
+    DocumentDocumentTaskChildParagraphChildComment,
+    DocumentDocumentTaskChildParagraphChildDivider,
+    DocumentDocumentTaskChildParagraphChildImage,
+    DocumentDocumentTaskChildParagraphChildLink,
+    DocumentDocumentTaskChildParagraphChildLineBreak,
+    DocumentDocumentTaskChildParagraphChildText,
+    DocumentDocumentTaskChildParagraphChildToolCall,
+    DocumentDocumentTaskChildParagraphChildToolResult,
+    DocumentDocumentTaskChildParagraphChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentTaskChildParagraph(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentTaskChildParagraphChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["paragraph"]] = None
+
+
+class DocumentDocumentTaskChildQuoteChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentTaskChildQuoteChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentTaskChildQuoteChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentTaskChildQuoteChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentTaskChildQuoteChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentTaskChildQuoteChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentTaskChildQuoteChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentTaskChildQuoteChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentTaskChildQuoteChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentTaskChildQuoteChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentTaskChildQuoteChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentTaskChildQuoteChild: TypeAlias = Union[
+    DocumentDocumentTaskChildQuoteChildBlob,
+    DocumentDocumentTaskChildQuoteChildCode,
+    DocumentDocumentTaskChildQuoteChildComment,
+    DocumentDocumentTaskChildQuoteChildDivider,
+    DocumentDocumentTaskChildQuoteChildImage,
+    DocumentDocumentTaskChildQuoteChildLink,
+    DocumentDocumentTaskChildQuoteChildLineBreak,
+    DocumentDocumentTaskChildQuoteChildText,
+    DocumentDocumentTaskChildQuoteChildToolCall,
+    DocumentDocumentTaskChildQuoteChildToolResult,
+    DocumentDocumentTaskChildQuoteChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentTaskChildQuote(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentTaskChildQuoteChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["quote"]] = None
+
+
+class DocumentDocumentTaskChildTable(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[object]] = None
+
+    has_header: Optional[bool] = None
+    """Whether the first row should be treated as a header"""
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["table"]] = None
+
+
+class DocumentDocumentTaskChildTableCellChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentTaskChildTableCellChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentTaskChildTableCellChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentTaskChildTableCellChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentTaskChildTableCellChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentTaskChildTableCellChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentTaskChildTableCellChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentTaskChildTableCellChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentTaskChildTableCellChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentTaskChildTableCellChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentTaskChildTableCellChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentTaskChildTableCellChild: TypeAlias = Union[
+    DocumentDocumentTaskChildTableCellChildBlob,
+    DocumentDocumentTaskChildTableCellChildCode,
+    DocumentDocumentTaskChildTableCellChildComment,
+    DocumentDocumentTaskChildTableCellChildDivider,
+    DocumentDocumentTaskChildTableCellChildImage,
+    DocumentDocumentTaskChildTableCellChildLink,
+    DocumentDocumentTaskChildTableCellChildLineBreak,
+    DocumentDocumentTaskChildTableCellChildText,
+    DocumentDocumentTaskChildTableCellChildToolCall,
+    DocumentDocumentTaskChildTableCellChildToolResult,
+    DocumentDocumentTaskChildTableCellChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentTaskChildTableCell(BaseModel):
+    id: Optional[str] = None
+
+    align: Optional[Literal["left", "center", "right"]] = None
+
+    children: Optional[List[DocumentDocumentTaskChildTableCellChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["table_cell"]] = None
+
+
+class DocumentDocumentTaskChildTableRow(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[object]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["table_row"]] = None
+
+
+class DocumentDocumentTaskChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentTaskChildToDoChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentTaskChildToDoChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentTaskChildToDoChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentTaskChildToDoChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentTaskChildToDoChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentTaskChildToDoChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentTaskChildToDoChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentTaskChildToDoChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentTaskChildToDoChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentTaskChildToDoChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentTaskChildToDoChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentTaskChildToDoChild: TypeAlias = Union[
+    DocumentDocumentTaskChildToDoChildBlob,
+    DocumentDocumentTaskChildToDoChildCode,
+    DocumentDocumentTaskChildToDoChildComment,
+    DocumentDocumentTaskChildToDoChildDivider,
+    DocumentDocumentTaskChildToDoChildImage,
+    DocumentDocumentTaskChildToDoChildLink,
+    DocumentDocumentTaskChildToDoChildLineBreak,
+    DocumentDocumentTaskChildToDoChildText,
+    DocumentDocumentTaskChildToDoChildToolCall,
+    DocumentDocumentTaskChildToDoChildToolResult,
+    DocumentDocumentTaskChildToDoChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentTaskChildToDo(BaseModel):
+    id: Optional[str] = None
+
+    checked: Optional[bool] = None
+
+    children: Optional[List[DocumentDocumentTaskChildToDoChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["todo"]] = None
+
+
+class DocumentDocumentTaskChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentTaskChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentTaskChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+class DocumentDocumentTaskChildUtterance(BaseModel):
+    """A speaker-attributed segment of a transcript (ENG-2476/D10).
+
+    "Utterance" is the standard name for this across transcription providers
+    (AssemblyAI, Deepgram, Rev). Timestamps are relative offsets in seconds —
+    provider-native; absolute times derive from `Transcript.started_at`.
+    """
+
+    text: str
+
+    id: Optional[str] = None
+
+    end: Optional[float] = None
+
+    speaker: Optional[object] = None
+
+    start: Optional[float] = None
+
+    type: Optional[Literal["utterance"]] = None
+
+
+DocumentDocumentTaskChild: TypeAlias = Annotated[
+    Union[
+        DocumentDocumentTaskChildBlob,
+        DocumentDocumentTaskChildCallout,
+        DocumentDocumentTaskChildChunk,
+        DocumentDocumentTaskChildCode,
+        DocumentDocumentTaskChildComment,
+        DocumentDocumentTaskChildDivider,
+        DocumentDocumentTaskChildEquation,
+        DocumentDocumentTaskChildFootnote,
+        DocumentDocumentTaskChildHeading,
+        DocumentDocumentTaskChildImage,
+        DocumentDocumentTaskChildLink,
+        DocumentDocumentTaskChildLineBreak,
+        DocumentDocumentTaskChildList,
+        DocumentDocumentTaskChildListItem,
+        DocumentDocumentTaskChildParagraph,
+        DocumentDocumentTaskChildQuote,
+        DocumentDocumentTaskChildTable,
+        DocumentDocumentTaskChildTableCell,
+        DocumentDocumentTaskChildTableRow,
+        DocumentDocumentTaskChildText,
+        DocumentDocumentTaskChildToDo,
+        DocumentDocumentTaskChildToolCall,
+        DocumentDocumentTaskChildToolResult,
+        DocumentDocumentTaskChildTraceMessage,
+        DocumentDocumentTaskChildUtterance,
+    ],
+    PropertyInfo(discriminator="type"),
+]
+
+
+class DocumentDocumentTaskCommentSenderChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentTaskCommentSenderChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentTaskCommentSenderChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentTaskCommentSenderChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentTaskCommentSenderChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentTaskCommentSenderChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentTaskCommentSenderChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentTaskCommentSenderChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentTaskCommentSenderChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentTaskCommentSenderChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentTaskCommentSenderChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentTaskCommentSenderChild: TypeAlias = Union[
+    DocumentDocumentTaskCommentSenderChildBlob,
+    DocumentDocumentTaskCommentSenderChildCode,
+    DocumentDocumentTaskCommentSenderChildComment,
+    DocumentDocumentTaskCommentSenderChildDivider,
+    DocumentDocumentTaskCommentSenderChildImage,
+    DocumentDocumentTaskCommentSenderChildLink,
+    DocumentDocumentTaskCommentSenderChildLineBreak,
+    DocumentDocumentTaskCommentSenderChildText,
+    DocumentDocumentTaskCommentSenderChildToolCall,
+    DocumentDocumentTaskCommentSenderChildToolResult,
+    DocumentDocumentTaskCommentSenderChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentTaskCommentSender(BaseModel):
+    id: Optional[str] = None
+
+    address: Optional[str] = None
+
+    alt_names: Optional[List[str]] = None
+
+    children: Optional[List[DocumentDocumentTaskCommentSenderChild]] = None
+
+    company: Optional[str] = None
+
+    company_ids: Optional[List[str]] = None
+
+    date_of_birth: Optional[date] = None
+
+    deal_ids: Optional[List[str]] = None
+
+    email: Optional[str] = None
+
+    emails: Optional[List[str]] = None
+    """All known email addresses; `email` holds the primary one"""
+
+    image_url: Optional[str] = None
+
+    job_title: Optional[str] = None
+
+    link_urls: Optional[List[str]] = None
+
+    name: Optional[str] = None
+
+    phone_numbers: Optional[List[str]] = None
+
+    tags: Optional[List[str]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["person"]] = None
+
+    username: Optional[str] = None
+
+
+class DocumentDocumentTaskCommentChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentTaskCommentChildCalloutChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentTaskCommentChildCalloutChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentTaskCommentChildCalloutChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentTaskCommentChildCalloutChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentTaskCommentChildCalloutChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentTaskCommentChildCalloutChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentTaskCommentChildCalloutChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentTaskCommentChildCalloutChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentTaskCommentChildCalloutChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentTaskCommentChildCalloutChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentTaskCommentChildCalloutChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentTaskCommentChildCalloutChild: TypeAlias = Union[
+    DocumentDocumentTaskCommentChildCalloutChildBlob,
+    DocumentDocumentTaskCommentChildCalloutChildCode,
+    DocumentDocumentTaskCommentChildCalloutChildComment,
+    DocumentDocumentTaskCommentChildCalloutChildDivider,
+    DocumentDocumentTaskCommentChildCalloutChildImage,
+    DocumentDocumentTaskCommentChildCalloutChildLink,
+    DocumentDocumentTaskCommentChildCalloutChildLineBreak,
+    DocumentDocumentTaskCommentChildCalloutChildText,
+    DocumentDocumentTaskCommentChildCalloutChildToolCall,
+    DocumentDocumentTaskCommentChildCalloutChildToolResult,
+    DocumentDocumentTaskCommentChildCalloutChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentTaskCommentChildCallout(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentTaskCommentChildCalloutChild]] = None
+
+    text: Optional[str] = None
+
+    title: Optional[str] = None
+
+    type: Optional[Literal["callout"]] = None
+
+
+class DocumentDocumentTaskCommentChildChunkChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentTaskCommentChildChunkChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentTaskCommentChildChunkChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentTaskCommentChildChunkChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentTaskCommentChildChunkChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentTaskCommentChildChunkChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentTaskCommentChildChunkChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentTaskCommentChildChunkChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentTaskCommentChildChunkChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentTaskCommentChildChunkChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentTaskCommentChildChunkChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentTaskCommentChildChunkChild: TypeAlias = Union[
+    DocumentDocumentTaskCommentChildChunkChildBlob,
+    DocumentDocumentTaskCommentChildChunkChildCode,
+    DocumentDocumentTaskCommentChildChunkChildComment,
+    DocumentDocumentTaskCommentChildChunkChildDivider,
+    DocumentDocumentTaskCommentChildChunkChildImage,
+    DocumentDocumentTaskCommentChildChunkChildLink,
+    DocumentDocumentTaskCommentChildChunkChildLineBreak,
+    DocumentDocumentTaskCommentChildChunkChildText,
+    DocumentDocumentTaskCommentChildChunkChildToolCall,
+    DocumentDocumentTaskCommentChildChunkChildToolResult,
+    DocumentDocumentTaskCommentChildChunkChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentTaskCommentChildChunk(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentTaskCommentChildChunkChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["chunk"]] = None
+
+
+class DocumentDocumentTaskCommentChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentTaskCommentChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentTaskCommentChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentTaskCommentChildEquationChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentTaskCommentChildEquationChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentTaskCommentChildEquationChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentTaskCommentChildEquationChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentTaskCommentChildEquationChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentTaskCommentChildEquationChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentTaskCommentChildEquationChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentTaskCommentChildEquationChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentTaskCommentChildEquationChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentTaskCommentChildEquationChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentTaskCommentChildEquationChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentTaskCommentChildEquationChild: TypeAlias = Union[
+    DocumentDocumentTaskCommentChildEquationChildBlob,
+    DocumentDocumentTaskCommentChildEquationChildCode,
+    DocumentDocumentTaskCommentChildEquationChildComment,
+    DocumentDocumentTaskCommentChildEquationChildDivider,
+    DocumentDocumentTaskCommentChildEquationChildImage,
+    DocumentDocumentTaskCommentChildEquationChildLink,
+    DocumentDocumentTaskCommentChildEquationChildLineBreak,
+    DocumentDocumentTaskCommentChildEquationChildText,
+    DocumentDocumentTaskCommentChildEquationChildToolCall,
+    DocumentDocumentTaskCommentChildEquationChildToolResult,
+    DocumentDocumentTaskCommentChildEquationChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentTaskCommentChildEquation(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentTaskCommentChildEquationChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["equation"]] = None
+
+
+class DocumentDocumentTaskCommentChildFootnoteChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentTaskCommentChildFootnoteChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentTaskCommentChildFootnoteChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentTaskCommentChildFootnoteChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentTaskCommentChildFootnoteChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentTaskCommentChildFootnoteChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentTaskCommentChildFootnoteChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentTaskCommentChildFootnoteChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentTaskCommentChildFootnoteChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentTaskCommentChildFootnoteChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentTaskCommentChildFootnoteChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentTaskCommentChildFootnoteChild: TypeAlias = Union[
+    DocumentDocumentTaskCommentChildFootnoteChildBlob,
+    DocumentDocumentTaskCommentChildFootnoteChildCode,
+    DocumentDocumentTaskCommentChildFootnoteChildComment,
+    DocumentDocumentTaskCommentChildFootnoteChildDivider,
+    DocumentDocumentTaskCommentChildFootnoteChildImage,
+    DocumentDocumentTaskCommentChildFootnoteChildLink,
+    DocumentDocumentTaskCommentChildFootnoteChildLineBreak,
+    DocumentDocumentTaskCommentChildFootnoteChildText,
+    DocumentDocumentTaskCommentChildFootnoteChildToolCall,
+    DocumentDocumentTaskCommentChildFootnoteChildToolResult,
+    DocumentDocumentTaskCommentChildFootnoteChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentTaskCommentChildFootnote(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentTaskCommentChildFootnoteChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["footnote"]] = None
+
+
+class DocumentDocumentTaskCommentChildHeadingChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentTaskCommentChildHeadingChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentTaskCommentChildHeadingChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentTaskCommentChildHeadingChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentTaskCommentChildHeadingChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentTaskCommentChildHeadingChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentTaskCommentChildHeadingChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentTaskCommentChildHeadingChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentTaskCommentChildHeadingChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentTaskCommentChildHeadingChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentTaskCommentChildHeadingChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentTaskCommentChildHeadingChild: TypeAlias = Union[
+    DocumentDocumentTaskCommentChildHeadingChildBlob,
+    DocumentDocumentTaskCommentChildHeadingChildCode,
+    DocumentDocumentTaskCommentChildHeadingChildComment,
+    DocumentDocumentTaskCommentChildHeadingChildDivider,
+    DocumentDocumentTaskCommentChildHeadingChildImage,
+    DocumentDocumentTaskCommentChildHeadingChildLink,
+    DocumentDocumentTaskCommentChildHeadingChildLineBreak,
+    DocumentDocumentTaskCommentChildHeadingChildText,
+    DocumentDocumentTaskCommentChildHeadingChildToolCall,
+    DocumentDocumentTaskCommentChildHeadingChildToolResult,
+    DocumentDocumentTaskCommentChildHeadingChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentTaskCommentChildHeading(BaseModel):
+    level: int
+
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentTaskCommentChildHeadingChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["heading"]] = None
+
+
+class DocumentDocumentTaskCommentChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentTaskCommentChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentTaskCommentChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentTaskCommentChildList(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[object]] = None
+
+    ordered: Optional[bool] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["list"]] = None
+
+
+class DocumentDocumentTaskCommentChildListItemChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentTaskCommentChildListItemChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentTaskCommentChildListItemChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentTaskCommentChildListItemChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentTaskCommentChildListItemChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentTaskCommentChildListItemChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentTaskCommentChildListItemChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentTaskCommentChildListItemChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentTaskCommentChildListItemChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentTaskCommentChildListItemChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentTaskCommentChildListItemChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentTaskCommentChildListItemChild: TypeAlias = Union[
+    DocumentDocumentTaskCommentChildListItemChildBlob,
+    DocumentDocumentTaskCommentChildListItemChildCode,
+    DocumentDocumentTaskCommentChildListItemChildComment,
+    DocumentDocumentTaskCommentChildListItemChildDivider,
+    DocumentDocumentTaskCommentChildListItemChildImage,
+    DocumentDocumentTaskCommentChildListItemChildLink,
+    DocumentDocumentTaskCommentChildListItemChildLineBreak,
+    DocumentDocumentTaskCommentChildListItemChildText,
+    DocumentDocumentTaskCommentChildListItemChildToolCall,
+    DocumentDocumentTaskCommentChildListItemChildToolResult,
+    DocumentDocumentTaskCommentChildListItemChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentTaskCommentChildListItem(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentTaskCommentChildListItemChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["list_item"]] = None
+
+
+class DocumentDocumentTaskCommentChildParagraphChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentTaskCommentChildParagraphChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentTaskCommentChildParagraphChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentTaskCommentChildParagraphChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentTaskCommentChildParagraphChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentTaskCommentChildParagraphChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentTaskCommentChildParagraphChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentTaskCommentChildParagraphChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentTaskCommentChildParagraphChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentTaskCommentChildParagraphChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentTaskCommentChildParagraphChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentTaskCommentChildParagraphChild: TypeAlias = Union[
+    DocumentDocumentTaskCommentChildParagraphChildBlob,
+    DocumentDocumentTaskCommentChildParagraphChildCode,
+    DocumentDocumentTaskCommentChildParagraphChildComment,
+    DocumentDocumentTaskCommentChildParagraphChildDivider,
+    DocumentDocumentTaskCommentChildParagraphChildImage,
+    DocumentDocumentTaskCommentChildParagraphChildLink,
+    DocumentDocumentTaskCommentChildParagraphChildLineBreak,
+    DocumentDocumentTaskCommentChildParagraphChildText,
+    DocumentDocumentTaskCommentChildParagraphChildToolCall,
+    DocumentDocumentTaskCommentChildParagraphChildToolResult,
+    DocumentDocumentTaskCommentChildParagraphChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentTaskCommentChildParagraph(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentTaskCommentChildParagraphChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["paragraph"]] = None
+
+
+class DocumentDocumentTaskCommentChildQuoteChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentTaskCommentChildQuoteChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentTaskCommentChildQuoteChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentTaskCommentChildQuoteChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentTaskCommentChildQuoteChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentTaskCommentChildQuoteChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentTaskCommentChildQuoteChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentTaskCommentChildQuoteChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentTaskCommentChildQuoteChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentTaskCommentChildQuoteChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentTaskCommentChildQuoteChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentTaskCommentChildQuoteChild: TypeAlias = Union[
+    DocumentDocumentTaskCommentChildQuoteChildBlob,
+    DocumentDocumentTaskCommentChildQuoteChildCode,
+    DocumentDocumentTaskCommentChildQuoteChildComment,
+    DocumentDocumentTaskCommentChildQuoteChildDivider,
+    DocumentDocumentTaskCommentChildQuoteChildImage,
+    DocumentDocumentTaskCommentChildQuoteChildLink,
+    DocumentDocumentTaskCommentChildQuoteChildLineBreak,
+    DocumentDocumentTaskCommentChildQuoteChildText,
+    DocumentDocumentTaskCommentChildQuoteChildToolCall,
+    DocumentDocumentTaskCommentChildQuoteChildToolResult,
+    DocumentDocumentTaskCommentChildQuoteChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentTaskCommentChildQuote(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentTaskCommentChildQuoteChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["quote"]] = None
+
+
+class DocumentDocumentTaskCommentChildTable(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[object]] = None
+
+    has_header: Optional[bool] = None
+    """Whether the first row should be treated as a header"""
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["table"]] = None
+
+
+class DocumentDocumentTaskCommentChildTableCellChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentTaskCommentChildTableCellChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentTaskCommentChildTableCellChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentTaskCommentChildTableCellChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentTaskCommentChildTableCellChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentTaskCommentChildTableCellChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentTaskCommentChildTableCellChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentTaskCommentChildTableCellChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentTaskCommentChildTableCellChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentTaskCommentChildTableCellChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentTaskCommentChildTableCellChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentTaskCommentChildTableCellChild: TypeAlias = Union[
+    DocumentDocumentTaskCommentChildTableCellChildBlob,
+    DocumentDocumentTaskCommentChildTableCellChildCode,
+    DocumentDocumentTaskCommentChildTableCellChildComment,
+    DocumentDocumentTaskCommentChildTableCellChildDivider,
+    DocumentDocumentTaskCommentChildTableCellChildImage,
+    DocumentDocumentTaskCommentChildTableCellChildLink,
+    DocumentDocumentTaskCommentChildTableCellChildLineBreak,
+    DocumentDocumentTaskCommentChildTableCellChildText,
+    DocumentDocumentTaskCommentChildTableCellChildToolCall,
+    DocumentDocumentTaskCommentChildTableCellChildToolResult,
+    DocumentDocumentTaskCommentChildTableCellChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentTaskCommentChildTableCell(BaseModel):
+    id: Optional[str] = None
+
+    align: Optional[Literal["left", "center", "right"]] = None
+
+    children: Optional[List[DocumentDocumentTaskCommentChildTableCellChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["table_cell"]] = None
+
+
+class DocumentDocumentTaskCommentChildTableRow(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[object]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["table_row"]] = None
+
+
+class DocumentDocumentTaskCommentChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentTaskCommentChildToDoChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentTaskCommentChildToDoChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentTaskCommentChildToDoChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentTaskCommentChildToDoChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentTaskCommentChildToDoChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentTaskCommentChildToDoChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentTaskCommentChildToDoChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentTaskCommentChildToDoChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentTaskCommentChildToDoChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentTaskCommentChildToDoChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentTaskCommentChildToDoChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentTaskCommentChildToDoChild: TypeAlias = Union[
+    DocumentDocumentTaskCommentChildToDoChildBlob,
+    DocumentDocumentTaskCommentChildToDoChildCode,
+    DocumentDocumentTaskCommentChildToDoChildComment,
+    DocumentDocumentTaskCommentChildToDoChildDivider,
+    DocumentDocumentTaskCommentChildToDoChildImage,
+    DocumentDocumentTaskCommentChildToDoChildLink,
+    DocumentDocumentTaskCommentChildToDoChildLineBreak,
+    DocumentDocumentTaskCommentChildToDoChildText,
+    DocumentDocumentTaskCommentChildToDoChildToolCall,
+    DocumentDocumentTaskCommentChildToDoChildToolResult,
+    DocumentDocumentTaskCommentChildToDoChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentTaskCommentChildToDo(BaseModel):
+    id: Optional[str] = None
+
+    checked: Optional[bool] = None
+
+    children: Optional[List[DocumentDocumentTaskCommentChildToDoChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["todo"]] = None
+
+
+class DocumentDocumentTaskCommentChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentTaskCommentChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentTaskCommentChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+class DocumentDocumentTaskCommentChildUtterance(BaseModel):
+    """A speaker-attributed segment of a transcript (ENG-2476/D10).
+
+    "Utterance" is the standard name for this across transcription providers
+    (AssemblyAI, Deepgram, Rev). Timestamps are relative offsets in seconds —
+    provider-native; absolute times derive from `Transcript.started_at`.
+    """
+
+    text: str
+
+    id: Optional[str] = None
+
+    end: Optional[float] = None
+
+    speaker: Optional[object] = None
+
+    start: Optional[float] = None
+
+    type: Optional[Literal["utterance"]] = None
+
+
+DocumentDocumentTaskCommentChild: TypeAlias = Annotated[
+    Union[
+        DocumentDocumentTaskCommentChildBlob,
+        DocumentDocumentTaskCommentChildCallout,
+        DocumentDocumentTaskCommentChildChunk,
+        DocumentDocumentTaskCommentChildCode,
+        DocumentDocumentTaskCommentChildComment,
+        DocumentDocumentTaskCommentChildDivider,
+        DocumentDocumentTaskCommentChildEquation,
+        DocumentDocumentTaskCommentChildFootnote,
+        DocumentDocumentTaskCommentChildHeading,
+        DocumentDocumentTaskCommentChildImage,
+        DocumentDocumentTaskCommentChildLink,
+        DocumentDocumentTaskCommentChildLineBreak,
+        DocumentDocumentTaskCommentChildList,
+        DocumentDocumentTaskCommentChildListItem,
+        DocumentDocumentTaskCommentChildParagraph,
+        DocumentDocumentTaskCommentChildQuote,
+        DocumentDocumentTaskCommentChildTable,
+        DocumentDocumentTaskCommentChildTableCell,
+        DocumentDocumentTaskCommentChildTableRow,
+        DocumentDocumentTaskCommentChildText,
+        DocumentDocumentTaskCommentChildToDo,
+        DocumentDocumentTaskCommentChildToolCall,
+        DocumentDocumentTaskCommentChildToolResult,
+        DocumentDocumentTaskCommentChildTraceMessage,
+        DocumentDocumentTaskCommentChildUtterance,
+    ],
+    PropertyInfo(discriminator="type"),
+]
+
+
+class DocumentDocumentTaskCommentMentionedUserChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentTaskCommentMentionedUserChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentTaskCommentMentionedUserChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentTaskCommentMentionedUserChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentTaskCommentMentionedUserChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentTaskCommentMentionedUserChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentTaskCommentMentionedUserChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentTaskCommentMentionedUserChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentTaskCommentMentionedUserChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentTaskCommentMentionedUserChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentTaskCommentMentionedUserChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentTaskCommentMentionedUserChild: TypeAlias = Union[
+    DocumentDocumentTaskCommentMentionedUserChildBlob,
+    DocumentDocumentTaskCommentMentionedUserChildCode,
+    DocumentDocumentTaskCommentMentionedUserChildComment,
+    DocumentDocumentTaskCommentMentionedUserChildDivider,
+    DocumentDocumentTaskCommentMentionedUserChildImage,
+    DocumentDocumentTaskCommentMentionedUserChildLink,
+    DocumentDocumentTaskCommentMentionedUserChildLineBreak,
+    DocumentDocumentTaskCommentMentionedUserChildText,
+    DocumentDocumentTaskCommentMentionedUserChildToolCall,
+    DocumentDocumentTaskCommentMentionedUserChildToolResult,
+    DocumentDocumentTaskCommentMentionedUserChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentTaskCommentMentionedUser(BaseModel):
+    id: Optional[str] = None
+
+    address: Optional[str] = None
+
+    alt_names: Optional[List[str]] = None
+
+    children: Optional[List[DocumentDocumentTaskCommentMentionedUserChild]] = None
+
+    company: Optional[str] = None
+
+    company_ids: Optional[List[str]] = None
+
+    date_of_birth: Optional[date] = None
+
+    deal_ids: Optional[List[str]] = None
+
+    email: Optional[str] = None
+
+    emails: Optional[List[str]] = None
+    """All known email addresses; `email` holds the primary one"""
+
+    image_url: Optional[str] = None
+
+    job_title: Optional[str] = None
+
+    link_urls: Optional[List[str]] = None
+
+    name: Optional[str] = None
+
+    phone_numbers: Optional[List[str]] = None
+
+    tags: Optional[List[str]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["person"]] = None
+
+    username: Optional[str] = None
+
+
+class DocumentDocumentTaskComment(BaseModel):
+    date: datetime
+
+    sender: DocumentDocumentTaskCommentSender
+
+    id: Optional[str] = None
+
+    channel: Optional[str] = None
+    """
+    The channel or platform where the message was posted, if this Message is not
+    explicitly part of a conversation
+    """
+
+    children: Optional[List[DocumentDocumentTaskCommentChild]] = None
+
+    external_id: Optional[str] = None
+    """Provider message id (e.g. Slack ts, Gmail message id) — merge-dedup key"""
+
+    is_self: Optional[bool] = None
+
+    mentioned_users: Optional[List[DocumentDocumentTaskCommentMentionedUser]] = None
+
+    num_replies: Optional[int] = None
+
+    replies: Optional[List[object]] = None
+    """The replies or comments to the message"""
+
+    text: Optional[str] = None
+
+    thread_id: Optional[str] = None
+
+    title: Optional[str] = None
+    """The subject or title of the message"""
+
+    type: Optional[Literal["message"]] = None
+
+    updated_at: Optional[datetime] = None
+
+    upvotes: Optional[int] = None
+    """The number of upvotes, likes, or reactions on the message"""
+
+
+class DocumentDocumentTask(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentTaskChild]] = None
+
+    comments: Optional[List[DocumentDocumentTaskComment]] = None
+
+    due_at: Optional[datetime] = None
+
+    priority: Optional[Literal["urgent", "high", "medium", "low"]] = None
+
+    status: Optional[Literal["completed", "not_started", "in_progress", "cancelled"]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["task"]] = None
+
+
+class DocumentDocumentPersonChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentPersonChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentPersonChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentPersonChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentPersonChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentPersonChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentPersonChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentPersonChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentPersonChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentPersonChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentPersonChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentPersonChild: TypeAlias = Union[
+    DocumentDocumentPersonChildBlob,
+    DocumentDocumentPersonChildCode,
+    DocumentDocumentPersonChildComment,
+    DocumentDocumentPersonChildDivider,
+    DocumentDocumentPersonChildImage,
+    DocumentDocumentPersonChildLink,
+    DocumentDocumentPersonChildLineBreak,
+    DocumentDocumentPersonChildText,
+    DocumentDocumentPersonChildToolCall,
+    DocumentDocumentPersonChildToolResult,
+    DocumentDocumentPersonChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentPerson(BaseModel):
+    id: Optional[str] = None
+
+    address: Optional[str] = None
+
+    alt_names: Optional[List[str]] = None
+
+    children: Optional[List[DocumentDocumentPersonChild]] = None
+
+    company: Optional[str] = None
+
+    company_ids: Optional[List[str]] = None
+
+    date_of_birth: Optional[date] = None
+
+    deal_ids: Optional[List[str]] = None
+
+    email: Optional[str] = None
+
+    emails: Optional[List[str]] = None
+    """All known email addresses; `email` holds the primary one"""
+
+    image_url: Optional[str] = None
+
+    job_title: Optional[str] = None
+
+    link_urls: Optional[List[str]] = None
+
+    name: Optional[str] = None
+
+    phone_numbers: Optional[List[str]] = None
+
+    tags: Optional[List[str]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["person"]] = None
+
+    username: Optional[str] = None
+
+
+class DocumentDocumentMessageSenderChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentMessageSenderChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentMessageSenderChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentMessageSenderChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentMessageSenderChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentMessageSenderChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentMessageSenderChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentMessageSenderChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentMessageSenderChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentMessageSenderChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentMessageSenderChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentMessageSenderChild: TypeAlias = Union[
+    DocumentDocumentMessageSenderChildBlob,
+    DocumentDocumentMessageSenderChildCode,
+    DocumentDocumentMessageSenderChildComment,
+    DocumentDocumentMessageSenderChildDivider,
+    DocumentDocumentMessageSenderChildImage,
+    DocumentDocumentMessageSenderChildLink,
+    DocumentDocumentMessageSenderChildLineBreak,
+    DocumentDocumentMessageSenderChildText,
+    DocumentDocumentMessageSenderChildToolCall,
+    DocumentDocumentMessageSenderChildToolResult,
+    DocumentDocumentMessageSenderChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentMessageSender(BaseModel):
+    id: Optional[str] = None
+
+    address: Optional[str] = None
+
+    alt_names: Optional[List[str]] = None
+
+    children: Optional[List[DocumentDocumentMessageSenderChild]] = None
+
+    company: Optional[str] = None
+
+    company_ids: Optional[List[str]] = None
+
+    date_of_birth: Optional[date] = None
+
+    deal_ids: Optional[List[str]] = None
+
+    email: Optional[str] = None
+
+    emails: Optional[List[str]] = None
+    """All known email addresses; `email` holds the primary one"""
+
+    image_url: Optional[str] = None
+
+    job_title: Optional[str] = None
+
+    link_urls: Optional[List[str]] = None
+
+    name: Optional[str] = None
+
+    phone_numbers: Optional[List[str]] = None
+
+    tags: Optional[List[str]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["person"]] = None
+
+    username: Optional[str] = None
+
+
+class DocumentDocumentMessageChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentMessageChildCalloutChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentMessageChildCalloutChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentMessageChildCalloutChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentMessageChildCalloutChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentMessageChildCalloutChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentMessageChildCalloutChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentMessageChildCalloutChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentMessageChildCalloutChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentMessageChildCalloutChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentMessageChildCalloutChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentMessageChildCalloutChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentMessageChildCalloutChild: TypeAlias = Union[
+    DocumentDocumentMessageChildCalloutChildBlob,
+    DocumentDocumentMessageChildCalloutChildCode,
+    DocumentDocumentMessageChildCalloutChildComment,
+    DocumentDocumentMessageChildCalloutChildDivider,
+    DocumentDocumentMessageChildCalloutChildImage,
+    DocumentDocumentMessageChildCalloutChildLink,
+    DocumentDocumentMessageChildCalloutChildLineBreak,
+    DocumentDocumentMessageChildCalloutChildText,
+    DocumentDocumentMessageChildCalloutChildToolCall,
+    DocumentDocumentMessageChildCalloutChildToolResult,
+    DocumentDocumentMessageChildCalloutChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentMessageChildCallout(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentMessageChildCalloutChild]] = None
+
+    text: Optional[str] = None
+
+    title: Optional[str] = None
+
+    type: Optional[Literal["callout"]] = None
+
+
+class DocumentDocumentMessageChildChunkChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentMessageChildChunkChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentMessageChildChunkChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentMessageChildChunkChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentMessageChildChunkChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentMessageChildChunkChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentMessageChildChunkChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentMessageChildChunkChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentMessageChildChunkChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentMessageChildChunkChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentMessageChildChunkChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentMessageChildChunkChild: TypeAlias = Union[
+    DocumentDocumentMessageChildChunkChildBlob,
+    DocumentDocumentMessageChildChunkChildCode,
+    DocumentDocumentMessageChildChunkChildComment,
+    DocumentDocumentMessageChildChunkChildDivider,
+    DocumentDocumentMessageChildChunkChildImage,
+    DocumentDocumentMessageChildChunkChildLink,
+    DocumentDocumentMessageChildChunkChildLineBreak,
+    DocumentDocumentMessageChildChunkChildText,
+    DocumentDocumentMessageChildChunkChildToolCall,
+    DocumentDocumentMessageChildChunkChildToolResult,
+    DocumentDocumentMessageChildChunkChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentMessageChildChunk(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentMessageChildChunkChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["chunk"]] = None
+
+
+class DocumentDocumentMessageChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentMessageChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentMessageChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentMessageChildEquationChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentMessageChildEquationChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentMessageChildEquationChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentMessageChildEquationChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentMessageChildEquationChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentMessageChildEquationChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentMessageChildEquationChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentMessageChildEquationChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentMessageChildEquationChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentMessageChildEquationChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentMessageChildEquationChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentMessageChildEquationChild: TypeAlias = Union[
+    DocumentDocumentMessageChildEquationChildBlob,
+    DocumentDocumentMessageChildEquationChildCode,
+    DocumentDocumentMessageChildEquationChildComment,
+    DocumentDocumentMessageChildEquationChildDivider,
+    DocumentDocumentMessageChildEquationChildImage,
+    DocumentDocumentMessageChildEquationChildLink,
+    DocumentDocumentMessageChildEquationChildLineBreak,
+    DocumentDocumentMessageChildEquationChildText,
+    DocumentDocumentMessageChildEquationChildToolCall,
+    DocumentDocumentMessageChildEquationChildToolResult,
+    DocumentDocumentMessageChildEquationChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentMessageChildEquation(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentMessageChildEquationChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["equation"]] = None
+
+
+class DocumentDocumentMessageChildFootnoteChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentMessageChildFootnoteChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentMessageChildFootnoteChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentMessageChildFootnoteChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentMessageChildFootnoteChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentMessageChildFootnoteChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentMessageChildFootnoteChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentMessageChildFootnoteChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentMessageChildFootnoteChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentMessageChildFootnoteChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentMessageChildFootnoteChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentMessageChildFootnoteChild: TypeAlias = Union[
+    DocumentDocumentMessageChildFootnoteChildBlob,
+    DocumentDocumentMessageChildFootnoteChildCode,
+    DocumentDocumentMessageChildFootnoteChildComment,
+    DocumentDocumentMessageChildFootnoteChildDivider,
+    DocumentDocumentMessageChildFootnoteChildImage,
+    DocumentDocumentMessageChildFootnoteChildLink,
+    DocumentDocumentMessageChildFootnoteChildLineBreak,
+    DocumentDocumentMessageChildFootnoteChildText,
+    DocumentDocumentMessageChildFootnoteChildToolCall,
+    DocumentDocumentMessageChildFootnoteChildToolResult,
+    DocumentDocumentMessageChildFootnoteChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentMessageChildFootnote(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentMessageChildFootnoteChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["footnote"]] = None
+
+
+class DocumentDocumentMessageChildHeadingChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentMessageChildHeadingChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentMessageChildHeadingChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentMessageChildHeadingChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentMessageChildHeadingChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentMessageChildHeadingChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentMessageChildHeadingChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentMessageChildHeadingChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentMessageChildHeadingChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentMessageChildHeadingChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentMessageChildHeadingChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentMessageChildHeadingChild: TypeAlias = Union[
+    DocumentDocumentMessageChildHeadingChildBlob,
+    DocumentDocumentMessageChildHeadingChildCode,
+    DocumentDocumentMessageChildHeadingChildComment,
+    DocumentDocumentMessageChildHeadingChildDivider,
+    DocumentDocumentMessageChildHeadingChildImage,
+    DocumentDocumentMessageChildHeadingChildLink,
+    DocumentDocumentMessageChildHeadingChildLineBreak,
+    DocumentDocumentMessageChildHeadingChildText,
+    DocumentDocumentMessageChildHeadingChildToolCall,
+    DocumentDocumentMessageChildHeadingChildToolResult,
+    DocumentDocumentMessageChildHeadingChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentMessageChildHeading(BaseModel):
+    level: int
+
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentMessageChildHeadingChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["heading"]] = None
+
+
+class DocumentDocumentMessageChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentMessageChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentMessageChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentMessageChildList(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[object]] = None
+
+    ordered: Optional[bool] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["list"]] = None
+
+
+class DocumentDocumentMessageChildListItemChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentMessageChildListItemChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentMessageChildListItemChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentMessageChildListItemChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentMessageChildListItemChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentMessageChildListItemChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentMessageChildListItemChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentMessageChildListItemChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentMessageChildListItemChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentMessageChildListItemChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentMessageChildListItemChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentMessageChildListItemChild: TypeAlias = Union[
+    DocumentDocumentMessageChildListItemChildBlob,
+    DocumentDocumentMessageChildListItemChildCode,
+    DocumentDocumentMessageChildListItemChildComment,
+    DocumentDocumentMessageChildListItemChildDivider,
+    DocumentDocumentMessageChildListItemChildImage,
+    DocumentDocumentMessageChildListItemChildLink,
+    DocumentDocumentMessageChildListItemChildLineBreak,
+    DocumentDocumentMessageChildListItemChildText,
+    DocumentDocumentMessageChildListItemChildToolCall,
+    DocumentDocumentMessageChildListItemChildToolResult,
+    DocumentDocumentMessageChildListItemChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentMessageChildListItem(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentMessageChildListItemChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["list_item"]] = None
+
+
+class DocumentDocumentMessageChildParagraphChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentMessageChildParagraphChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentMessageChildParagraphChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentMessageChildParagraphChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentMessageChildParagraphChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentMessageChildParagraphChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentMessageChildParagraphChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentMessageChildParagraphChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentMessageChildParagraphChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentMessageChildParagraphChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentMessageChildParagraphChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentMessageChildParagraphChild: TypeAlias = Union[
+    DocumentDocumentMessageChildParagraphChildBlob,
+    DocumentDocumentMessageChildParagraphChildCode,
+    DocumentDocumentMessageChildParagraphChildComment,
+    DocumentDocumentMessageChildParagraphChildDivider,
+    DocumentDocumentMessageChildParagraphChildImage,
+    DocumentDocumentMessageChildParagraphChildLink,
+    DocumentDocumentMessageChildParagraphChildLineBreak,
+    DocumentDocumentMessageChildParagraphChildText,
+    DocumentDocumentMessageChildParagraphChildToolCall,
+    DocumentDocumentMessageChildParagraphChildToolResult,
+    DocumentDocumentMessageChildParagraphChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentMessageChildParagraph(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentMessageChildParagraphChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["paragraph"]] = None
+
+
+class DocumentDocumentMessageChildQuoteChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentMessageChildQuoteChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentMessageChildQuoteChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentMessageChildQuoteChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentMessageChildQuoteChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentMessageChildQuoteChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentMessageChildQuoteChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentMessageChildQuoteChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentMessageChildQuoteChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentMessageChildQuoteChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentMessageChildQuoteChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentMessageChildQuoteChild: TypeAlias = Union[
+    DocumentDocumentMessageChildQuoteChildBlob,
+    DocumentDocumentMessageChildQuoteChildCode,
+    DocumentDocumentMessageChildQuoteChildComment,
+    DocumentDocumentMessageChildQuoteChildDivider,
+    DocumentDocumentMessageChildQuoteChildImage,
+    DocumentDocumentMessageChildQuoteChildLink,
+    DocumentDocumentMessageChildQuoteChildLineBreak,
+    DocumentDocumentMessageChildQuoteChildText,
+    DocumentDocumentMessageChildQuoteChildToolCall,
+    DocumentDocumentMessageChildQuoteChildToolResult,
+    DocumentDocumentMessageChildQuoteChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentMessageChildQuote(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentMessageChildQuoteChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["quote"]] = None
+
+
+class DocumentDocumentMessageChildTable(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[object]] = None
+
+    has_header: Optional[bool] = None
+    """Whether the first row should be treated as a header"""
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["table"]] = None
+
+
+class DocumentDocumentMessageChildTableCellChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentMessageChildTableCellChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentMessageChildTableCellChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentMessageChildTableCellChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentMessageChildTableCellChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentMessageChildTableCellChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentMessageChildTableCellChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentMessageChildTableCellChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentMessageChildTableCellChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentMessageChildTableCellChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentMessageChildTableCellChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentMessageChildTableCellChild: TypeAlias = Union[
+    DocumentDocumentMessageChildTableCellChildBlob,
+    DocumentDocumentMessageChildTableCellChildCode,
+    DocumentDocumentMessageChildTableCellChildComment,
+    DocumentDocumentMessageChildTableCellChildDivider,
+    DocumentDocumentMessageChildTableCellChildImage,
+    DocumentDocumentMessageChildTableCellChildLink,
+    DocumentDocumentMessageChildTableCellChildLineBreak,
+    DocumentDocumentMessageChildTableCellChildText,
+    DocumentDocumentMessageChildTableCellChildToolCall,
+    DocumentDocumentMessageChildTableCellChildToolResult,
+    DocumentDocumentMessageChildTableCellChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentMessageChildTableCell(BaseModel):
+    id: Optional[str] = None
+
+    align: Optional[Literal["left", "center", "right"]] = None
+
+    children: Optional[List[DocumentDocumentMessageChildTableCellChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["table_cell"]] = None
+
+
+class DocumentDocumentMessageChildTableRow(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[object]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["table_row"]] = None
+
+
+class DocumentDocumentMessageChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentMessageChildToDoChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentMessageChildToDoChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentMessageChildToDoChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentMessageChildToDoChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentMessageChildToDoChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentMessageChildToDoChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentMessageChildToDoChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentMessageChildToDoChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentMessageChildToDoChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentMessageChildToDoChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentMessageChildToDoChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentMessageChildToDoChild: TypeAlias = Union[
+    DocumentDocumentMessageChildToDoChildBlob,
+    DocumentDocumentMessageChildToDoChildCode,
+    DocumentDocumentMessageChildToDoChildComment,
+    DocumentDocumentMessageChildToDoChildDivider,
+    DocumentDocumentMessageChildToDoChildImage,
+    DocumentDocumentMessageChildToDoChildLink,
+    DocumentDocumentMessageChildToDoChildLineBreak,
+    DocumentDocumentMessageChildToDoChildText,
+    DocumentDocumentMessageChildToDoChildToolCall,
+    DocumentDocumentMessageChildToDoChildToolResult,
+    DocumentDocumentMessageChildToDoChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentMessageChildToDo(BaseModel):
+    id: Optional[str] = None
+
+    checked: Optional[bool] = None
+
+    children: Optional[List[DocumentDocumentMessageChildToDoChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["todo"]] = None
+
+
+class DocumentDocumentMessageChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentMessageChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentMessageChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+class DocumentDocumentMessageChildUtterance(BaseModel):
+    """A speaker-attributed segment of a transcript (ENG-2476/D10).
+
+    "Utterance" is the standard name for this across transcription providers
+    (AssemblyAI, Deepgram, Rev). Timestamps are relative offsets in seconds —
+    provider-native; absolute times derive from `Transcript.started_at`.
+    """
+
+    text: str
+
+    id: Optional[str] = None
+
+    end: Optional[float] = None
+
+    speaker: Optional[object] = None
+
+    start: Optional[float] = None
+
+    type: Optional[Literal["utterance"]] = None
+
+
+DocumentDocumentMessageChild: TypeAlias = Annotated[
+    Union[
+        DocumentDocumentMessageChildBlob,
+        DocumentDocumentMessageChildCallout,
+        DocumentDocumentMessageChildChunk,
+        DocumentDocumentMessageChildCode,
+        DocumentDocumentMessageChildComment,
+        DocumentDocumentMessageChildDivider,
+        DocumentDocumentMessageChildEquation,
+        DocumentDocumentMessageChildFootnote,
+        DocumentDocumentMessageChildHeading,
+        DocumentDocumentMessageChildImage,
+        DocumentDocumentMessageChildLink,
+        DocumentDocumentMessageChildLineBreak,
+        DocumentDocumentMessageChildList,
+        DocumentDocumentMessageChildListItem,
+        DocumentDocumentMessageChildParagraph,
+        DocumentDocumentMessageChildQuote,
+        DocumentDocumentMessageChildTable,
+        DocumentDocumentMessageChildTableCell,
+        DocumentDocumentMessageChildTableRow,
+        DocumentDocumentMessageChildText,
+        DocumentDocumentMessageChildToDo,
+        DocumentDocumentMessageChildToolCall,
+        DocumentDocumentMessageChildToolResult,
+        DocumentDocumentMessageChildTraceMessage,
+        DocumentDocumentMessageChildUtterance,
+    ],
+    PropertyInfo(discriminator="type"),
+]
+
+
+class DocumentDocumentMessageMentionedUserChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentMessageMentionedUserChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentMessageMentionedUserChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentMessageMentionedUserChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentMessageMentionedUserChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentMessageMentionedUserChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentMessageMentionedUserChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentMessageMentionedUserChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentMessageMentionedUserChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentMessageMentionedUserChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentMessageMentionedUserChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentMessageMentionedUserChild: TypeAlias = Union[
+    DocumentDocumentMessageMentionedUserChildBlob,
+    DocumentDocumentMessageMentionedUserChildCode,
+    DocumentDocumentMessageMentionedUserChildComment,
+    DocumentDocumentMessageMentionedUserChildDivider,
+    DocumentDocumentMessageMentionedUserChildImage,
+    DocumentDocumentMessageMentionedUserChildLink,
+    DocumentDocumentMessageMentionedUserChildLineBreak,
+    DocumentDocumentMessageMentionedUserChildText,
+    DocumentDocumentMessageMentionedUserChildToolCall,
+    DocumentDocumentMessageMentionedUserChildToolResult,
+    DocumentDocumentMessageMentionedUserChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentMessageMentionedUser(BaseModel):
+    id: Optional[str] = None
+
+    address: Optional[str] = None
+
+    alt_names: Optional[List[str]] = None
+
+    children: Optional[List[DocumentDocumentMessageMentionedUserChild]] = None
+
+    company: Optional[str] = None
+
+    company_ids: Optional[List[str]] = None
+
+    date_of_birth: Optional[date] = None
+
+    deal_ids: Optional[List[str]] = None
+
+    email: Optional[str] = None
+
+    emails: Optional[List[str]] = None
+    """All known email addresses; `email` holds the primary one"""
+
+    image_url: Optional[str] = None
+
+    job_title: Optional[str] = None
+
+    link_urls: Optional[List[str]] = None
+
+    name: Optional[str] = None
+
+    phone_numbers: Optional[List[str]] = None
+
+    tags: Optional[List[str]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["person"]] = None
+
+    username: Optional[str] = None
+
+
+class DocumentDocumentMessage(BaseModel):
+    date: datetime
+
+    sender: DocumentDocumentMessageSender
+
+    id: Optional[str] = None
+
+    channel: Optional[str] = None
+    """
+    The channel or platform where the message was posted, if this Message is not
+    explicitly part of a conversation
+    """
+
+    children: Optional[List[DocumentDocumentMessageChild]] = None
+
+    external_id: Optional[str] = None
+    """Provider message id (e.g. Slack ts, Gmail message id) — merge-dedup key"""
+
+    is_self: Optional[bool] = None
+
+    mentioned_users: Optional[List[DocumentDocumentMessageMentionedUser]] = None
+
+    num_replies: Optional[int] = None
+
+    replies: Optional[List[object]] = None
+    """The replies or comments to the message"""
+
+    text: Optional[str] = None
+
+    thread_id: Optional[str] = None
+
+    title: Optional[str] = None
+    """The subject or title of the message"""
+
+    type: Optional[Literal["message"]] = None
+
+    updated_at: Optional[datetime] = None
+
+    upvotes: Optional[int] = None
+    """The number of upvotes, likes, or reactions on the message"""
+
+
+class DocumentDocumentEventAttendeeChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentEventAttendeeChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentEventAttendeeChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentEventAttendeeChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentEventAttendeeChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentEventAttendeeChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentEventAttendeeChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentEventAttendeeChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentEventAttendeeChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentEventAttendeeChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentEventAttendeeChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentEventAttendeeChild: TypeAlias = Union[
+    DocumentDocumentEventAttendeeChildBlob,
+    DocumentDocumentEventAttendeeChildCode,
+    DocumentDocumentEventAttendeeChildComment,
+    DocumentDocumentEventAttendeeChildDivider,
+    DocumentDocumentEventAttendeeChildImage,
+    DocumentDocumentEventAttendeeChildLink,
+    DocumentDocumentEventAttendeeChildLineBreak,
+    DocumentDocumentEventAttendeeChildText,
+    DocumentDocumentEventAttendeeChildToolCall,
+    DocumentDocumentEventAttendeeChildToolResult,
+    DocumentDocumentEventAttendeeChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentEventAttendee(BaseModel):
+    id: Optional[str] = None
+
+    address: Optional[str] = None
+
+    alt_names: Optional[List[str]] = None
+
+    children: Optional[List[DocumentDocumentEventAttendeeChild]] = None
+
+    company: Optional[str] = None
+
+    company_ids: Optional[List[str]] = None
+
+    date_of_birth: Optional[date] = None
+
+    deal_ids: Optional[List[str]] = None
+
+    email: Optional[str] = None
+
+    emails: Optional[List[str]] = None
+    """All known email addresses; `email` holds the primary one"""
+
+    image_url: Optional[str] = None
+
+    job_title: Optional[str] = None
+
+    link_urls: Optional[List[str]] = None
+
+    name: Optional[str] = None
+
+    phone_numbers: Optional[List[str]] = None
+
+    tags: Optional[List[str]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["person"]] = None
+
+    username: Optional[str] = None
+
+
+class DocumentDocumentEventChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentEventChildCalloutChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentEventChildCalloutChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentEventChildCalloutChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentEventChildCalloutChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentEventChildCalloutChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentEventChildCalloutChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentEventChildCalloutChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentEventChildCalloutChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentEventChildCalloutChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentEventChildCalloutChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentEventChildCalloutChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentEventChildCalloutChild: TypeAlias = Union[
+    DocumentDocumentEventChildCalloutChildBlob,
+    DocumentDocumentEventChildCalloutChildCode,
+    DocumentDocumentEventChildCalloutChildComment,
+    DocumentDocumentEventChildCalloutChildDivider,
+    DocumentDocumentEventChildCalloutChildImage,
+    DocumentDocumentEventChildCalloutChildLink,
+    DocumentDocumentEventChildCalloutChildLineBreak,
+    DocumentDocumentEventChildCalloutChildText,
+    DocumentDocumentEventChildCalloutChildToolCall,
+    DocumentDocumentEventChildCalloutChildToolResult,
+    DocumentDocumentEventChildCalloutChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentEventChildCallout(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentEventChildCalloutChild]] = None
+
+    text: Optional[str] = None
+
+    title: Optional[str] = None
+
+    type: Optional[Literal["callout"]] = None
+
+
+class DocumentDocumentEventChildChunkChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentEventChildChunkChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentEventChildChunkChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentEventChildChunkChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentEventChildChunkChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentEventChildChunkChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentEventChildChunkChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentEventChildChunkChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentEventChildChunkChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentEventChildChunkChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentEventChildChunkChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentEventChildChunkChild: TypeAlias = Union[
+    DocumentDocumentEventChildChunkChildBlob,
+    DocumentDocumentEventChildChunkChildCode,
+    DocumentDocumentEventChildChunkChildComment,
+    DocumentDocumentEventChildChunkChildDivider,
+    DocumentDocumentEventChildChunkChildImage,
+    DocumentDocumentEventChildChunkChildLink,
+    DocumentDocumentEventChildChunkChildLineBreak,
+    DocumentDocumentEventChildChunkChildText,
+    DocumentDocumentEventChildChunkChildToolCall,
+    DocumentDocumentEventChildChunkChildToolResult,
+    DocumentDocumentEventChildChunkChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentEventChildChunk(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentEventChildChunkChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["chunk"]] = None
+
+
+class DocumentDocumentEventChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentEventChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentEventChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentEventChildEquationChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentEventChildEquationChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentEventChildEquationChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentEventChildEquationChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentEventChildEquationChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentEventChildEquationChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentEventChildEquationChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentEventChildEquationChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentEventChildEquationChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentEventChildEquationChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentEventChildEquationChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentEventChildEquationChild: TypeAlias = Union[
+    DocumentDocumentEventChildEquationChildBlob,
+    DocumentDocumentEventChildEquationChildCode,
+    DocumentDocumentEventChildEquationChildComment,
+    DocumentDocumentEventChildEquationChildDivider,
+    DocumentDocumentEventChildEquationChildImage,
+    DocumentDocumentEventChildEquationChildLink,
+    DocumentDocumentEventChildEquationChildLineBreak,
+    DocumentDocumentEventChildEquationChildText,
+    DocumentDocumentEventChildEquationChildToolCall,
+    DocumentDocumentEventChildEquationChildToolResult,
+    DocumentDocumentEventChildEquationChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentEventChildEquation(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentEventChildEquationChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["equation"]] = None
+
+
+class DocumentDocumentEventChildFootnoteChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentEventChildFootnoteChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentEventChildFootnoteChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentEventChildFootnoteChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentEventChildFootnoteChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentEventChildFootnoteChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentEventChildFootnoteChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentEventChildFootnoteChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentEventChildFootnoteChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentEventChildFootnoteChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentEventChildFootnoteChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentEventChildFootnoteChild: TypeAlias = Union[
+    DocumentDocumentEventChildFootnoteChildBlob,
+    DocumentDocumentEventChildFootnoteChildCode,
+    DocumentDocumentEventChildFootnoteChildComment,
+    DocumentDocumentEventChildFootnoteChildDivider,
+    DocumentDocumentEventChildFootnoteChildImage,
+    DocumentDocumentEventChildFootnoteChildLink,
+    DocumentDocumentEventChildFootnoteChildLineBreak,
+    DocumentDocumentEventChildFootnoteChildText,
+    DocumentDocumentEventChildFootnoteChildToolCall,
+    DocumentDocumentEventChildFootnoteChildToolResult,
+    DocumentDocumentEventChildFootnoteChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentEventChildFootnote(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentEventChildFootnoteChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["footnote"]] = None
+
+
+class DocumentDocumentEventChildHeadingChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentEventChildHeadingChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentEventChildHeadingChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentEventChildHeadingChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentEventChildHeadingChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentEventChildHeadingChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentEventChildHeadingChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentEventChildHeadingChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentEventChildHeadingChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentEventChildHeadingChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentEventChildHeadingChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentEventChildHeadingChild: TypeAlias = Union[
+    DocumentDocumentEventChildHeadingChildBlob,
+    DocumentDocumentEventChildHeadingChildCode,
+    DocumentDocumentEventChildHeadingChildComment,
+    DocumentDocumentEventChildHeadingChildDivider,
+    DocumentDocumentEventChildHeadingChildImage,
+    DocumentDocumentEventChildHeadingChildLink,
+    DocumentDocumentEventChildHeadingChildLineBreak,
+    DocumentDocumentEventChildHeadingChildText,
+    DocumentDocumentEventChildHeadingChildToolCall,
+    DocumentDocumentEventChildHeadingChildToolResult,
+    DocumentDocumentEventChildHeadingChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentEventChildHeading(BaseModel):
+    level: int
+
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentEventChildHeadingChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["heading"]] = None
+
+
+class DocumentDocumentEventChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentEventChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentEventChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentEventChildList(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[object]] = None
+
+    ordered: Optional[bool] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["list"]] = None
+
+
+class DocumentDocumentEventChildListItemChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentEventChildListItemChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentEventChildListItemChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentEventChildListItemChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentEventChildListItemChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentEventChildListItemChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentEventChildListItemChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentEventChildListItemChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentEventChildListItemChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentEventChildListItemChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentEventChildListItemChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentEventChildListItemChild: TypeAlias = Union[
+    DocumentDocumentEventChildListItemChildBlob,
+    DocumentDocumentEventChildListItemChildCode,
+    DocumentDocumentEventChildListItemChildComment,
+    DocumentDocumentEventChildListItemChildDivider,
+    DocumentDocumentEventChildListItemChildImage,
+    DocumentDocumentEventChildListItemChildLink,
+    DocumentDocumentEventChildListItemChildLineBreak,
+    DocumentDocumentEventChildListItemChildText,
+    DocumentDocumentEventChildListItemChildToolCall,
+    DocumentDocumentEventChildListItemChildToolResult,
+    DocumentDocumentEventChildListItemChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentEventChildListItem(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentEventChildListItemChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["list_item"]] = None
+
+
+class DocumentDocumentEventChildParagraphChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentEventChildParagraphChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentEventChildParagraphChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentEventChildParagraphChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentEventChildParagraphChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentEventChildParagraphChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentEventChildParagraphChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentEventChildParagraphChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentEventChildParagraphChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentEventChildParagraphChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentEventChildParagraphChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentEventChildParagraphChild: TypeAlias = Union[
+    DocumentDocumentEventChildParagraphChildBlob,
+    DocumentDocumentEventChildParagraphChildCode,
+    DocumentDocumentEventChildParagraphChildComment,
+    DocumentDocumentEventChildParagraphChildDivider,
+    DocumentDocumentEventChildParagraphChildImage,
+    DocumentDocumentEventChildParagraphChildLink,
+    DocumentDocumentEventChildParagraphChildLineBreak,
+    DocumentDocumentEventChildParagraphChildText,
+    DocumentDocumentEventChildParagraphChildToolCall,
+    DocumentDocumentEventChildParagraphChildToolResult,
+    DocumentDocumentEventChildParagraphChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentEventChildParagraph(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentEventChildParagraphChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["paragraph"]] = None
+
+
+class DocumentDocumentEventChildQuoteChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentEventChildQuoteChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentEventChildQuoteChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentEventChildQuoteChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentEventChildQuoteChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentEventChildQuoteChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentEventChildQuoteChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentEventChildQuoteChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentEventChildQuoteChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentEventChildQuoteChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentEventChildQuoteChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentEventChildQuoteChild: TypeAlias = Union[
+    DocumentDocumentEventChildQuoteChildBlob,
+    DocumentDocumentEventChildQuoteChildCode,
+    DocumentDocumentEventChildQuoteChildComment,
+    DocumentDocumentEventChildQuoteChildDivider,
+    DocumentDocumentEventChildQuoteChildImage,
+    DocumentDocumentEventChildQuoteChildLink,
+    DocumentDocumentEventChildQuoteChildLineBreak,
+    DocumentDocumentEventChildQuoteChildText,
+    DocumentDocumentEventChildQuoteChildToolCall,
+    DocumentDocumentEventChildQuoteChildToolResult,
+    DocumentDocumentEventChildQuoteChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentEventChildQuote(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentEventChildQuoteChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["quote"]] = None
+
+
+class DocumentDocumentEventChildTable(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[object]] = None
+
+    has_header: Optional[bool] = None
+    """Whether the first row should be treated as a header"""
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["table"]] = None
+
+
+class DocumentDocumentEventChildTableCellChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentEventChildTableCellChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentEventChildTableCellChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentEventChildTableCellChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentEventChildTableCellChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentEventChildTableCellChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentEventChildTableCellChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentEventChildTableCellChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentEventChildTableCellChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentEventChildTableCellChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentEventChildTableCellChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentEventChildTableCellChild: TypeAlias = Union[
+    DocumentDocumentEventChildTableCellChildBlob,
+    DocumentDocumentEventChildTableCellChildCode,
+    DocumentDocumentEventChildTableCellChildComment,
+    DocumentDocumentEventChildTableCellChildDivider,
+    DocumentDocumentEventChildTableCellChildImage,
+    DocumentDocumentEventChildTableCellChildLink,
+    DocumentDocumentEventChildTableCellChildLineBreak,
+    DocumentDocumentEventChildTableCellChildText,
+    DocumentDocumentEventChildTableCellChildToolCall,
+    DocumentDocumentEventChildTableCellChildToolResult,
+    DocumentDocumentEventChildTableCellChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentEventChildTableCell(BaseModel):
+    id: Optional[str] = None
+
+    align: Optional[Literal["left", "center", "right"]] = None
+
+    children: Optional[List[DocumentDocumentEventChildTableCellChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["table_cell"]] = None
+
+
+class DocumentDocumentEventChildTableRow(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[object]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["table_row"]] = None
+
+
+class DocumentDocumentEventChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentEventChildToDoChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentEventChildToDoChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentEventChildToDoChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentEventChildToDoChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentEventChildToDoChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentEventChildToDoChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentEventChildToDoChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentEventChildToDoChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentEventChildToDoChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentEventChildToDoChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentEventChildToDoChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentEventChildToDoChild: TypeAlias = Union[
+    DocumentDocumentEventChildToDoChildBlob,
+    DocumentDocumentEventChildToDoChildCode,
+    DocumentDocumentEventChildToDoChildComment,
+    DocumentDocumentEventChildToDoChildDivider,
+    DocumentDocumentEventChildToDoChildImage,
+    DocumentDocumentEventChildToDoChildLink,
+    DocumentDocumentEventChildToDoChildLineBreak,
+    DocumentDocumentEventChildToDoChildText,
+    DocumentDocumentEventChildToDoChildToolCall,
+    DocumentDocumentEventChildToDoChildToolResult,
+    DocumentDocumentEventChildToDoChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentEventChildToDo(BaseModel):
+    id: Optional[str] = None
+
+    checked: Optional[bool] = None
+
+    children: Optional[List[DocumentDocumentEventChildToDoChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["todo"]] = None
+
+
+class DocumentDocumentEventChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentEventChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentEventChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+class DocumentDocumentEventChildUtterance(BaseModel):
+    """A speaker-attributed segment of a transcript (ENG-2476/D10).
+
+    "Utterance" is the standard name for this across transcription providers
+    (AssemblyAI, Deepgram, Rev). Timestamps are relative offsets in seconds —
+    provider-native; absolute times derive from `Transcript.started_at`.
+    """
+
+    text: str
+
+    id: Optional[str] = None
+
+    end: Optional[float] = None
+
+    speaker: Optional[object] = None
+
+    start: Optional[float] = None
+
+    type: Optional[Literal["utterance"]] = None
+
+
+DocumentDocumentEventChild: TypeAlias = Annotated[
+    Union[
+        DocumentDocumentEventChildBlob,
+        DocumentDocumentEventChildCallout,
+        DocumentDocumentEventChildChunk,
+        DocumentDocumentEventChildCode,
+        DocumentDocumentEventChildComment,
+        DocumentDocumentEventChildDivider,
+        DocumentDocumentEventChildEquation,
+        DocumentDocumentEventChildFootnote,
+        DocumentDocumentEventChildHeading,
+        DocumentDocumentEventChildImage,
+        DocumentDocumentEventChildLink,
+        DocumentDocumentEventChildLineBreak,
+        DocumentDocumentEventChildList,
+        DocumentDocumentEventChildListItem,
+        DocumentDocumentEventChildParagraph,
+        DocumentDocumentEventChildQuote,
+        DocumentDocumentEventChildTable,
+        DocumentDocumentEventChildTableCell,
+        DocumentDocumentEventChildTableRow,
+        DocumentDocumentEventChildText,
+        DocumentDocumentEventChildToDo,
+        DocumentDocumentEventChildToolCall,
+        DocumentDocumentEventChildToolResult,
+        DocumentDocumentEventChildTraceMessage,
+        DocumentDocumentEventChildUtterance,
+    ],
+    PropertyInfo(discriminator="type"),
+]
+
+
+class DocumentDocumentEvent(BaseModel):
+    id: Optional[str] = None
+
+    attendees: Optional[List[DocumentDocumentEventAttendee]] = None
+
+    children: Optional[List[DocumentDocumentEventChild]] = None
+
+    end_at: Optional[datetime] = None
+
+    location: Optional[str] = None
+
+    meeting_url: Optional[str] = None
+
+    start_at: Optional[datetime] = None
+
+    text: Optional[str] = None
+
+    title: Optional[str] = None
+
+    type: Optional[Literal["event"]] = None
+
+
+class DocumentDocumentFileChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentFileChildCalloutChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentFileChildCalloutChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentFileChildCalloutChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentFileChildCalloutChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentFileChildCalloutChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentFileChildCalloutChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentFileChildCalloutChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentFileChildCalloutChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentFileChildCalloutChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentFileChildCalloutChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentFileChildCalloutChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentFileChildCalloutChild: TypeAlias = Union[
+    DocumentDocumentFileChildCalloutChildBlob,
+    DocumentDocumentFileChildCalloutChildCode,
+    DocumentDocumentFileChildCalloutChildComment,
+    DocumentDocumentFileChildCalloutChildDivider,
+    DocumentDocumentFileChildCalloutChildImage,
+    DocumentDocumentFileChildCalloutChildLink,
+    DocumentDocumentFileChildCalloutChildLineBreak,
+    DocumentDocumentFileChildCalloutChildText,
+    DocumentDocumentFileChildCalloutChildToolCall,
+    DocumentDocumentFileChildCalloutChildToolResult,
+    DocumentDocumentFileChildCalloutChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentFileChildCallout(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentFileChildCalloutChild]] = None
+
+    text: Optional[str] = None
+
+    title: Optional[str] = None
+
+    type: Optional[Literal["callout"]] = None
+
+
+class DocumentDocumentFileChildChunkChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentFileChildChunkChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentFileChildChunkChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentFileChildChunkChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentFileChildChunkChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentFileChildChunkChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentFileChildChunkChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentFileChildChunkChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentFileChildChunkChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentFileChildChunkChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentFileChildChunkChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentFileChildChunkChild: TypeAlias = Union[
+    DocumentDocumentFileChildChunkChildBlob,
+    DocumentDocumentFileChildChunkChildCode,
+    DocumentDocumentFileChildChunkChildComment,
+    DocumentDocumentFileChildChunkChildDivider,
+    DocumentDocumentFileChildChunkChildImage,
+    DocumentDocumentFileChildChunkChildLink,
+    DocumentDocumentFileChildChunkChildLineBreak,
+    DocumentDocumentFileChildChunkChildText,
+    DocumentDocumentFileChildChunkChildToolCall,
+    DocumentDocumentFileChildChunkChildToolResult,
+    DocumentDocumentFileChildChunkChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentFileChildChunk(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentFileChildChunkChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["chunk"]] = None
+
+
+class DocumentDocumentFileChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentFileChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentFileChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentFileChildEquationChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentFileChildEquationChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentFileChildEquationChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentFileChildEquationChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentFileChildEquationChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentFileChildEquationChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentFileChildEquationChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentFileChildEquationChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentFileChildEquationChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentFileChildEquationChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentFileChildEquationChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentFileChildEquationChild: TypeAlias = Union[
+    DocumentDocumentFileChildEquationChildBlob,
+    DocumentDocumentFileChildEquationChildCode,
+    DocumentDocumentFileChildEquationChildComment,
+    DocumentDocumentFileChildEquationChildDivider,
+    DocumentDocumentFileChildEquationChildImage,
+    DocumentDocumentFileChildEquationChildLink,
+    DocumentDocumentFileChildEquationChildLineBreak,
+    DocumentDocumentFileChildEquationChildText,
+    DocumentDocumentFileChildEquationChildToolCall,
+    DocumentDocumentFileChildEquationChildToolResult,
+    DocumentDocumentFileChildEquationChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentFileChildEquation(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentFileChildEquationChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["equation"]] = None
+
+
+class DocumentDocumentFileChildFootnoteChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentFileChildFootnoteChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentFileChildFootnoteChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentFileChildFootnoteChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentFileChildFootnoteChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentFileChildFootnoteChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentFileChildFootnoteChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentFileChildFootnoteChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentFileChildFootnoteChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentFileChildFootnoteChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentFileChildFootnoteChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentFileChildFootnoteChild: TypeAlias = Union[
+    DocumentDocumentFileChildFootnoteChildBlob,
+    DocumentDocumentFileChildFootnoteChildCode,
+    DocumentDocumentFileChildFootnoteChildComment,
+    DocumentDocumentFileChildFootnoteChildDivider,
+    DocumentDocumentFileChildFootnoteChildImage,
+    DocumentDocumentFileChildFootnoteChildLink,
+    DocumentDocumentFileChildFootnoteChildLineBreak,
+    DocumentDocumentFileChildFootnoteChildText,
+    DocumentDocumentFileChildFootnoteChildToolCall,
+    DocumentDocumentFileChildFootnoteChildToolResult,
+    DocumentDocumentFileChildFootnoteChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentFileChildFootnote(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentFileChildFootnoteChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["footnote"]] = None
+
+
+class DocumentDocumentFileChildHeadingChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentFileChildHeadingChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentFileChildHeadingChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentFileChildHeadingChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentFileChildHeadingChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentFileChildHeadingChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentFileChildHeadingChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentFileChildHeadingChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentFileChildHeadingChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentFileChildHeadingChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentFileChildHeadingChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentFileChildHeadingChild: TypeAlias = Union[
+    DocumentDocumentFileChildHeadingChildBlob,
+    DocumentDocumentFileChildHeadingChildCode,
+    DocumentDocumentFileChildHeadingChildComment,
+    DocumentDocumentFileChildHeadingChildDivider,
+    DocumentDocumentFileChildHeadingChildImage,
+    DocumentDocumentFileChildHeadingChildLink,
+    DocumentDocumentFileChildHeadingChildLineBreak,
+    DocumentDocumentFileChildHeadingChildText,
+    DocumentDocumentFileChildHeadingChildToolCall,
+    DocumentDocumentFileChildHeadingChildToolResult,
+    DocumentDocumentFileChildHeadingChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentFileChildHeading(BaseModel):
+    level: int
+
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentFileChildHeadingChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["heading"]] = None
+
+
+class DocumentDocumentFileChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentFileChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentFileChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentFileChildList(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[object]] = None
+
+    ordered: Optional[bool] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["list"]] = None
+
+
+class DocumentDocumentFileChildListItemChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentFileChildListItemChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentFileChildListItemChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentFileChildListItemChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentFileChildListItemChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentFileChildListItemChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentFileChildListItemChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentFileChildListItemChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentFileChildListItemChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentFileChildListItemChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentFileChildListItemChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentFileChildListItemChild: TypeAlias = Union[
+    DocumentDocumentFileChildListItemChildBlob,
+    DocumentDocumentFileChildListItemChildCode,
+    DocumentDocumentFileChildListItemChildComment,
+    DocumentDocumentFileChildListItemChildDivider,
+    DocumentDocumentFileChildListItemChildImage,
+    DocumentDocumentFileChildListItemChildLink,
+    DocumentDocumentFileChildListItemChildLineBreak,
+    DocumentDocumentFileChildListItemChildText,
+    DocumentDocumentFileChildListItemChildToolCall,
+    DocumentDocumentFileChildListItemChildToolResult,
+    DocumentDocumentFileChildListItemChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentFileChildListItem(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentFileChildListItemChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["list_item"]] = None
+
+
+class DocumentDocumentFileChildParagraphChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentFileChildParagraphChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentFileChildParagraphChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentFileChildParagraphChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentFileChildParagraphChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentFileChildParagraphChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentFileChildParagraphChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentFileChildParagraphChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentFileChildParagraphChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentFileChildParagraphChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentFileChildParagraphChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentFileChildParagraphChild: TypeAlias = Union[
+    DocumentDocumentFileChildParagraphChildBlob,
+    DocumentDocumentFileChildParagraphChildCode,
+    DocumentDocumentFileChildParagraphChildComment,
+    DocumentDocumentFileChildParagraphChildDivider,
+    DocumentDocumentFileChildParagraphChildImage,
+    DocumentDocumentFileChildParagraphChildLink,
+    DocumentDocumentFileChildParagraphChildLineBreak,
+    DocumentDocumentFileChildParagraphChildText,
+    DocumentDocumentFileChildParagraphChildToolCall,
+    DocumentDocumentFileChildParagraphChildToolResult,
+    DocumentDocumentFileChildParagraphChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentFileChildParagraph(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentFileChildParagraphChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["paragraph"]] = None
+
+
+class DocumentDocumentFileChildQuoteChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentFileChildQuoteChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentFileChildQuoteChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentFileChildQuoteChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentFileChildQuoteChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentFileChildQuoteChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentFileChildQuoteChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentFileChildQuoteChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentFileChildQuoteChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentFileChildQuoteChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentFileChildQuoteChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentFileChildQuoteChild: TypeAlias = Union[
+    DocumentDocumentFileChildQuoteChildBlob,
+    DocumentDocumentFileChildQuoteChildCode,
+    DocumentDocumentFileChildQuoteChildComment,
+    DocumentDocumentFileChildQuoteChildDivider,
+    DocumentDocumentFileChildQuoteChildImage,
+    DocumentDocumentFileChildQuoteChildLink,
+    DocumentDocumentFileChildQuoteChildLineBreak,
+    DocumentDocumentFileChildQuoteChildText,
+    DocumentDocumentFileChildQuoteChildToolCall,
+    DocumentDocumentFileChildQuoteChildToolResult,
+    DocumentDocumentFileChildQuoteChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentFileChildQuote(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentFileChildQuoteChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["quote"]] = None
+
+
+class DocumentDocumentFileChildTable(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[object]] = None
+
+    has_header: Optional[bool] = None
+    """Whether the first row should be treated as a header"""
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["table"]] = None
+
+
+class DocumentDocumentFileChildTableCellChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentFileChildTableCellChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentFileChildTableCellChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentFileChildTableCellChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentFileChildTableCellChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentFileChildTableCellChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentFileChildTableCellChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentFileChildTableCellChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentFileChildTableCellChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentFileChildTableCellChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentFileChildTableCellChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentFileChildTableCellChild: TypeAlias = Union[
+    DocumentDocumentFileChildTableCellChildBlob,
+    DocumentDocumentFileChildTableCellChildCode,
+    DocumentDocumentFileChildTableCellChildComment,
+    DocumentDocumentFileChildTableCellChildDivider,
+    DocumentDocumentFileChildTableCellChildImage,
+    DocumentDocumentFileChildTableCellChildLink,
+    DocumentDocumentFileChildTableCellChildLineBreak,
+    DocumentDocumentFileChildTableCellChildText,
+    DocumentDocumentFileChildTableCellChildToolCall,
+    DocumentDocumentFileChildTableCellChildToolResult,
+    DocumentDocumentFileChildTableCellChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentFileChildTableCell(BaseModel):
+    id: Optional[str] = None
+
+    align: Optional[Literal["left", "center", "right"]] = None
+
+    children: Optional[List[DocumentDocumentFileChildTableCellChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["table_cell"]] = None
+
+
+class DocumentDocumentFileChildTableRow(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[object]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["table_row"]] = None
+
+
+class DocumentDocumentFileChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentFileChildToDoChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentFileChildToDoChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentFileChildToDoChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentFileChildToDoChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentFileChildToDoChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentFileChildToDoChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentFileChildToDoChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentFileChildToDoChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentFileChildToDoChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentFileChildToDoChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentFileChildToDoChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentFileChildToDoChild: TypeAlias = Union[
+    DocumentDocumentFileChildToDoChildBlob,
+    DocumentDocumentFileChildToDoChildCode,
+    DocumentDocumentFileChildToDoChildComment,
+    DocumentDocumentFileChildToDoChildDivider,
+    DocumentDocumentFileChildToDoChildImage,
+    DocumentDocumentFileChildToDoChildLink,
+    DocumentDocumentFileChildToDoChildLineBreak,
+    DocumentDocumentFileChildToDoChildText,
+    DocumentDocumentFileChildToDoChildToolCall,
+    DocumentDocumentFileChildToDoChildToolResult,
+    DocumentDocumentFileChildToDoChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentFileChildToDo(BaseModel):
+    id: Optional[str] = None
+
+    checked: Optional[bool] = None
+
+    children: Optional[List[DocumentDocumentFileChildToDoChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["todo"]] = None
+
+
+class DocumentDocumentFileChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentFileChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentFileChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+class DocumentDocumentFileChildUtterance(BaseModel):
+    """A speaker-attributed segment of a transcript (ENG-2476/D10).
+
+    "Utterance" is the standard name for this across transcription providers
+    (AssemblyAI, Deepgram, Rev). Timestamps are relative offsets in seconds —
+    provider-native; absolute times derive from `Transcript.started_at`.
+    """
+
+    text: str
+
+    id: Optional[str] = None
+
+    end: Optional[float] = None
+
+    speaker: Optional[object] = None
+
+    start: Optional[float] = None
+
+    type: Optional[Literal["utterance"]] = None
+
+
+DocumentDocumentFileChild: TypeAlias = Annotated[
+    Union[
+        DocumentDocumentFileChildBlob,
+        DocumentDocumentFileChildCallout,
+        DocumentDocumentFileChildChunk,
+        DocumentDocumentFileChildCode,
+        DocumentDocumentFileChildComment,
+        DocumentDocumentFileChildDivider,
+        DocumentDocumentFileChildEquation,
+        DocumentDocumentFileChildFootnote,
+        DocumentDocumentFileChildHeading,
+        DocumentDocumentFileChildImage,
+        DocumentDocumentFileChildLink,
+        DocumentDocumentFileChildLineBreak,
+        DocumentDocumentFileChildList,
+        DocumentDocumentFileChildListItem,
+        DocumentDocumentFileChildParagraph,
+        DocumentDocumentFileChildQuote,
+        DocumentDocumentFileChildTable,
+        DocumentDocumentFileChildTableCell,
+        DocumentDocumentFileChildTableRow,
+        DocumentDocumentFileChildText,
+        DocumentDocumentFileChildToDo,
+        DocumentDocumentFileChildToolCall,
+        DocumentDocumentFileChildToolResult,
+        DocumentDocumentFileChildTraceMessage,
+        DocumentDocumentFileChildUtterance,
+    ],
+    PropertyInfo(discriminator="type"),
+]
+
+
+class DocumentDocumentFile(BaseModel):
+    content_type: str
+
+    filename: str
+
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentFileChild]] = None
+
+    path: Optional[List[str]] = None
+
+    text: Optional[str] = None
+
+    title: Optional[str] = None
+
+    type: Optional[Literal["file"]] = None
+
+
+class DocumentDocumentConversationChildSenderChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentConversationChildSenderChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentConversationChildSenderChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentConversationChildSenderChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentConversationChildSenderChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentConversationChildSenderChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentConversationChildSenderChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentConversationChildSenderChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentConversationChildSenderChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentConversationChildSenderChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentConversationChildSenderChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentConversationChildSenderChild: TypeAlias = Union[
+    DocumentDocumentConversationChildSenderChildBlob,
+    DocumentDocumentConversationChildSenderChildCode,
+    DocumentDocumentConversationChildSenderChildComment,
+    DocumentDocumentConversationChildSenderChildDivider,
+    DocumentDocumentConversationChildSenderChildImage,
+    DocumentDocumentConversationChildSenderChildLink,
+    DocumentDocumentConversationChildSenderChildLineBreak,
+    DocumentDocumentConversationChildSenderChildText,
+    DocumentDocumentConversationChildSenderChildToolCall,
+    DocumentDocumentConversationChildSenderChildToolResult,
+    DocumentDocumentConversationChildSenderChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentConversationChildSender(BaseModel):
+    id: Optional[str] = None
+
+    address: Optional[str] = None
+
+    alt_names: Optional[List[str]] = None
+
+    children: Optional[List[DocumentDocumentConversationChildSenderChild]] = None
+
+    company: Optional[str] = None
+
+    company_ids: Optional[List[str]] = None
+
+    date_of_birth: Optional[date] = None
+
+    deal_ids: Optional[List[str]] = None
+
+    email: Optional[str] = None
+
+    emails: Optional[List[str]] = None
+    """All known email addresses; `email` holds the primary one"""
+
+    image_url: Optional[str] = None
+
+    job_title: Optional[str] = None
+
+    link_urls: Optional[List[str]] = None
+
+    name: Optional[str] = None
+
+    phone_numbers: Optional[List[str]] = None
+
+    tags: Optional[List[str]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["person"]] = None
+
+    username: Optional[str] = None
+
+
+class DocumentDocumentConversationChildChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentConversationChildChildCalloutChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentConversationChildChildCalloutChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentConversationChildChildCalloutChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentConversationChildChildCalloutChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentConversationChildChildCalloutChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentConversationChildChildCalloutChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentConversationChildChildCalloutChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentConversationChildChildCalloutChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentConversationChildChildCalloutChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentConversationChildChildCalloutChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentConversationChildChildCalloutChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentConversationChildChildCalloutChild: TypeAlias = Union[
+    DocumentDocumentConversationChildChildCalloutChildBlob,
+    DocumentDocumentConversationChildChildCalloutChildCode,
+    DocumentDocumentConversationChildChildCalloutChildComment,
+    DocumentDocumentConversationChildChildCalloutChildDivider,
+    DocumentDocumentConversationChildChildCalloutChildImage,
+    DocumentDocumentConversationChildChildCalloutChildLink,
+    DocumentDocumentConversationChildChildCalloutChildLineBreak,
+    DocumentDocumentConversationChildChildCalloutChildText,
+    DocumentDocumentConversationChildChildCalloutChildToolCall,
+    DocumentDocumentConversationChildChildCalloutChildToolResult,
+    DocumentDocumentConversationChildChildCalloutChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentConversationChildChildCallout(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentConversationChildChildCalloutChild]] = None
+
+    text: Optional[str] = None
+
+    title: Optional[str] = None
+
+    type: Optional[Literal["callout"]] = None
+
+
+class DocumentDocumentConversationChildChildChunkChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentConversationChildChildChunkChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentConversationChildChildChunkChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentConversationChildChildChunkChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentConversationChildChildChunkChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentConversationChildChildChunkChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentConversationChildChildChunkChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentConversationChildChildChunkChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentConversationChildChildChunkChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentConversationChildChildChunkChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentConversationChildChildChunkChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentConversationChildChildChunkChild: TypeAlias = Union[
+    DocumentDocumentConversationChildChildChunkChildBlob,
+    DocumentDocumentConversationChildChildChunkChildCode,
+    DocumentDocumentConversationChildChildChunkChildComment,
+    DocumentDocumentConversationChildChildChunkChildDivider,
+    DocumentDocumentConversationChildChildChunkChildImage,
+    DocumentDocumentConversationChildChildChunkChildLink,
+    DocumentDocumentConversationChildChildChunkChildLineBreak,
+    DocumentDocumentConversationChildChildChunkChildText,
+    DocumentDocumentConversationChildChildChunkChildToolCall,
+    DocumentDocumentConversationChildChildChunkChildToolResult,
+    DocumentDocumentConversationChildChildChunkChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentConversationChildChildChunk(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentConversationChildChildChunkChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["chunk"]] = None
+
+
+class DocumentDocumentConversationChildChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentConversationChildChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentConversationChildChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentConversationChildChildEquationChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentConversationChildChildEquationChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentConversationChildChildEquationChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentConversationChildChildEquationChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentConversationChildChildEquationChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentConversationChildChildEquationChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentConversationChildChildEquationChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentConversationChildChildEquationChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentConversationChildChildEquationChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentConversationChildChildEquationChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentConversationChildChildEquationChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentConversationChildChildEquationChild: TypeAlias = Union[
+    DocumentDocumentConversationChildChildEquationChildBlob,
+    DocumentDocumentConversationChildChildEquationChildCode,
+    DocumentDocumentConversationChildChildEquationChildComment,
+    DocumentDocumentConversationChildChildEquationChildDivider,
+    DocumentDocumentConversationChildChildEquationChildImage,
+    DocumentDocumentConversationChildChildEquationChildLink,
+    DocumentDocumentConversationChildChildEquationChildLineBreak,
+    DocumentDocumentConversationChildChildEquationChildText,
+    DocumentDocumentConversationChildChildEquationChildToolCall,
+    DocumentDocumentConversationChildChildEquationChildToolResult,
+    DocumentDocumentConversationChildChildEquationChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentConversationChildChildEquation(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentConversationChildChildEquationChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["equation"]] = None
+
+
+class DocumentDocumentConversationChildChildFootnoteChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentConversationChildChildFootnoteChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentConversationChildChildFootnoteChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentConversationChildChildFootnoteChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentConversationChildChildFootnoteChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentConversationChildChildFootnoteChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentConversationChildChildFootnoteChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentConversationChildChildFootnoteChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentConversationChildChildFootnoteChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentConversationChildChildFootnoteChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentConversationChildChildFootnoteChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentConversationChildChildFootnoteChild: TypeAlias = Union[
+    DocumentDocumentConversationChildChildFootnoteChildBlob,
+    DocumentDocumentConversationChildChildFootnoteChildCode,
+    DocumentDocumentConversationChildChildFootnoteChildComment,
+    DocumentDocumentConversationChildChildFootnoteChildDivider,
+    DocumentDocumentConversationChildChildFootnoteChildImage,
+    DocumentDocumentConversationChildChildFootnoteChildLink,
+    DocumentDocumentConversationChildChildFootnoteChildLineBreak,
+    DocumentDocumentConversationChildChildFootnoteChildText,
+    DocumentDocumentConversationChildChildFootnoteChildToolCall,
+    DocumentDocumentConversationChildChildFootnoteChildToolResult,
+    DocumentDocumentConversationChildChildFootnoteChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentConversationChildChildFootnote(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentConversationChildChildFootnoteChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["footnote"]] = None
+
+
+class DocumentDocumentConversationChildChildHeadingChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentConversationChildChildHeadingChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentConversationChildChildHeadingChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentConversationChildChildHeadingChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentConversationChildChildHeadingChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentConversationChildChildHeadingChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentConversationChildChildHeadingChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentConversationChildChildHeadingChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentConversationChildChildHeadingChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentConversationChildChildHeadingChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentConversationChildChildHeadingChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentConversationChildChildHeadingChild: TypeAlias = Union[
+    DocumentDocumentConversationChildChildHeadingChildBlob,
+    DocumentDocumentConversationChildChildHeadingChildCode,
+    DocumentDocumentConversationChildChildHeadingChildComment,
+    DocumentDocumentConversationChildChildHeadingChildDivider,
+    DocumentDocumentConversationChildChildHeadingChildImage,
+    DocumentDocumentConversationChildChildHeadingChildLink,
+    DocumentDocumentConversationChildChildHeadingChildLineBreak,
+    DocumentDocumentConversationChildChildHeadingChildText,
+    DocumentDocumentConversationChildChildHeadingChildToolCall,
+    DocumentDocumentConversationChildChildHeadingChildToolResult,
+    DocumentDocumentConversationChildChildHeadingChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentConversationChildChildHeading(BaseModel):
+    level: int
+
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentConversationChildChildHeadingChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["heading"]] = None
+
+
+class DocumentDocumentConversationChildChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentConversationChildChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentConversationChildChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentConversationChildChildList(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[object]] = None
+
+    ordered: Optional[bool] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["list"]] = None
+
+
+class DocumentDocumentConversationChildChildListItemChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentConversationChildChildListItemChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentConversationChildChildListItemChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentConversationChildChildListItemChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentConversationChildChildListItemChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentConversationChildChildListItemChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentConversationChildChildListItemChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentConversationChildChildListItemChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentConversationChildChildListItemChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentConversationChildChildListItemChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentConversationChildChildListItemChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentConversationChildChildListItemChild: TypeAlias = Union[
+    DocumentDocumentConversationChildChildListItemChildBlob,
+    DocumentDocumentConversationChildChildListItemChildCode,
+    DocumentDocumentConversationChildChildListItemChildComment,
+    DocumentDocumentConversationChildChildListItemChildDivider,
+    DocumentDocumentConversationChildChildListItemChildImage,
+    DocumentDocumentConversationChildChildListItemChildLink,
+    DocumentDocumentConversationChildChildListItemChildLineBreak,
+    DocumentDocumentConversationChildChildListItemChildText,
+    DocumentDocumentConversationChildChildListItemChildToolCall,
+    DocumentDocumentConversationChildChildListItemChildToolResult,
+    DocumentDocumentConversationChildChildListItemChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentConversationChildChildListItem(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentConversationChildChildListItemChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["list_item"]] = None
+
+
+class DocumentDocumentConversationChildChildParagraphChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentConversationChildChildParagraphChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentConversationChildChildParagraphChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentConversationChildChildParagraphChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentConversationChildChildParagraphChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentConversationChildChildParagraphChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentConversationChildChildParagraphChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentConversationChildChildParagraphChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentConversationChildChildParagraphChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentConversationChildChildParagraphChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentConversationChildChildParagraphChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentConversationChildChildParagraphChild: TypeAlias = Union[
+    DocumentDocumentConversationChildChildParagraphChildBlob,
+    DocumentDocumentConversationChildChildParagraphChildCode,
+    DocumentDocumentConversationChildChildParagraphChildComment,
+    DocumentDocumentConversationChildChildParagraphChildDivider,
+    DocumentDocumentConversationChildChildParagraphChildImage,
+    DocumentDocumentConversationChildChildParagraphChildLink,
+    DocumentDocumentConversationChildChildParagraphChildLineBreak,
+    DocumentDocumentConversationChildChildParagraphChildText,
+    DocumentDocumentConversationChildChildParagraphChildToolCall,
+    DocumentDocumentConversationChildChildParagraphChildToolResult,
+    DocumentDocumentConversationChildChildParagraphChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentConversationChildChildParagraph(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentConversationChildChildParagraphChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["paragraph"]] = None
+
+
+class DocumentDocumentConversationChildChildQuoteChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentConversationChildChildQuoteChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentConversationChildChildQuoteChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentConversationChildChildQuoteChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentConversationChildChildQuoteChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentConversationChildChildQuoteChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentConversationChildChildQuoteChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentConversationChildChildQuoteChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentConversationChildChildQuoteChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentConversationChildChildQuoteChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentConversationChildChildQuoteChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentConversationChildChildQuoteChild: TypeAlias = Union[
+    DocumentDocumentConversationChildChildQuoteChildBlob,
+    DocumentDocumentConversationChildChildQuoteChildCode,
+    DocumentDocumentConversationChildChildQuoteChildComment,
+    DocumentDocumentConversationChildChildQuoteChildDivider,
+    DocumentDocumentConversationChildChildQuoteChildImage,
+    DocumentDocumentConversationChildChildQuoteChildLink,
+    DocumentDocumentConversationChildChildQuoteChildLineBreak,
+    DocumentDocumentConversationChildChildQuoteChildText,
+    DocumentDocumentConversationChildChildQuoteChildToolCall,
+    DocumentDocumentConversationChildChildQuoteChildToolResult,
+    DocumentDocumentConversationChildChildQuoteChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentConversationChildChildQuote(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentConversationChildChildQuoteChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["quote"]] = None
+
+
+class DocumentDocumentConversationChildChildTable(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[object]] = None
+
+    has_header: Optional[bool] = None
+    """Whether the first row should be treated as a header"""
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["table"]] = None
+
+
+class DocumentDocumentConversationChildChildTableCellChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentConversationChildChildTableCellChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentConversationChildChildTableCellChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentConversationChildChildTableCellChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentConversationChildChildTableCellChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentConversationChildChildTableCellChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentConversationChildChildTableCellChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentConversationChildChildTableCellChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentConversationChildChildTableCellChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentConversationChildChildTableCellChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentConversationChildChildTableCellChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentConversationChildChildTableCellChild: TypeAlias = Union[
+    DocumentDocumentConversationChildChildTableCellChildBlob,
+    DocumentDocumentConversationChildChildTableCellChildCode,
+    DocumentDocumentConversationChildChildTableCellChildComment,
+    DocumentDocumentConversationChildChildTableCellChildDivider,
+    DocumentDocumentConversationChildChildTableCellChildImage,
+    DocumentDocumentConversationChildChildTableCellChildLink,
+    DocumentDocumentConversationChildChildTableCellChildLineBreak,
+    DocumentDocumentConversationChildChildTableCellChildText,
+    DocumentDocumentConversationChildChildTableCellChildToolCall,
+    DocumentDocumentConversationChildChildTableCellChildToolResult,
+    DocumentDocumentConversationChildChildTableCellChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentConversationChildChildTableCell(BaseModel):
+    id: Optional[str] = None
+
+    align: Optional[Literal["left", "center", "right"]] = None
+
+    children: Optional[List[DocumentDocumentConversationChildChildTableCellChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["table_cell"]] = None
+
+
+class DocumentDocumentConversationChildChildTableRow(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[object]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["table_row"]] = None
+
+
+class DocumentDocumentConversationChildChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentConversationChildChildToDoChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentConversationChildChildToDoChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentConversationChildChildToDoChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentConversationChildChildToDoChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentConversationChildChildToDoChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentConversationChildChildToDoChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentConversationChildChildToDoChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentConversationChildChildToDoChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentConversationChildChildToDoChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentConversationChildChildToDoChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentConversationChildChildToDoChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentConversationChildChildToDoChild: TypeAlias = Union[
+    DocumentDocumentConversationChildChildToDoChildBlob,
+    DocumentDocumentConversationChildChildToDoChildCode,
+    DocumentDocumentConversationChildChildToDoChildComment,
+    DocumentDocumentConversationChildChildToDoChildDivider,
+    DocumentDocumentConversationChildChildToDoChildImage,
+    DocumentDocumentConversationChildChildToDoChildLink,
+    DocumentDocumentConversationChildChildToDoChildLineBreak,
+    DocumentDocumentConversationChildChildToDoChildText,
+    DocumentDocumentConversationChildChildToDoChildToolCall,
+    DocumentDocumentConversationChildChildToDoChildToolResult,
+    DocumentDocumentConversationChildChildToDoChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentConversationChildChildToDo(BaseModel):
+    id: Optional[str] = None
+
+    checked: Optional[bool] = None
+
+    children: Optional[List[DocumentDocumentConversationChildChildToDoChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["todo"]] = None
+
+
+class DocumentDocumentConversationChildChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentConversationChildChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentConversationChildChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+class DocumentDocumentConversationChildChildUtterance(BaseModel):
+    """A speaker-attributed segment of a transcript (ENG-2476/D10).
+
+    "Utterance" is the standard name for this across transcription providers
+    (AssemblyAI, Deepgram, Rev). Timestamps are relative offsets in seconds —
+    provider-native; absolute times derive from `Transcript.started_at`.
+    """
+
+    text: str
+
+    id: Optional[str] = None
+
+    end: Optional[float] = None
+
+    speaker: Optional[object] = None
+
+    start: Optional[float] = None
+
+    type: Optional[Literal["utterance"]] = None
+
+
+DocumentDocumentConversationChildChild: TypeAlias = Annotated[
+    Union[
+        DocumentDocumentConversationChildChildBlob,
+        DocumentDocumentConversationChildChildCallout,
+        DocumentDocumentConversationChildChildChunk,
+        DocumentDocumentConversationChildChildCode,
+        DocumentDocumentConversationChildChildComment,
+        DocumentDocumentConversationChildChildDivider,
+        DocumentDocumentConversationChildChildEquation,
+        DocumentDocumentConversationChildChildFootnote,
+        DocumentDocumentConversationChildChildHeading,
+        DocumentDocumentConversationChildChildImage,
+        DocumentDocumentConversationChildChildLink,
+        DocumentDocumentConversationChildChildLineBreak,
+        DocumentDocumentConversationChildChildList,
+        DocumentDocumentConversationChildChildListItem,
+        DocumentDocumentConversationChildChildParagraph,
+        DocumentDocumentConversationChildChildQuote,
+        DocumentDocumentConversationChildChildTable,
+        DocumentDocumentConversationChildChildTableCell,
+        DocumentDocumentConversationChildChildTableRow,
+        DocumentDocumentConversationChildChildText,
+        DocumentDocumentConversationChildChildToDo,
+        DocumentDocumentConversationChildChildToolCall,
+        DocumentDocumentConversationChildChildToolResult,
+        DocumentDocumentConversationChildChildTraceMessage,
+        DocumentDocumentConversationChildChildUtterance,
+    ],
+    PropertyInfo(discriminator="type"),
+]
+
+
+class DocumentDocumentConversationChildMentionedUserChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentConversationChildMentionedUserChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentConversationChildMentionedUserChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentConversationChildMentionedUserChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentConversationChildMentionedUserChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentConversationChildMentionedUserChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentConversationChildMentionedUserChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentConversationChildMentionedUserChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentConversationChildMentionedUserChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentConversationChildMentionedUserChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentConversationChildMentionedUserChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentConversationChildMentionedUserChild: TypeAlias = Union[
+    DocumentDocumentConversationChildMentionedUserChildBlob,
+    DocumentDocumentConversationChildMentionedUserChildCode,
+    DocumentDocumentConversationChildMentionedUserChildComment,
+    DocumentDocumentConversationChildMentionedUserChildDivider,
+    DocumentDocumentConversationChildMentionedUserChildImage,
+    DocumentDocumentConversationChildMentionedUserChildLink,
+    DocumentDocumentConversationChildMentionedUserChildLineBreak,
+    DocumentDocumentConversationChildMentionedUserChildText,
+    DocumentDocumentConversationChildMentionedUserChildToolCall,
+    DocumentDocumentConversationChildMentionedUserChildToolResult,
+    DocumentDocumentConversationChildMentionedUserChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentConversationChildMentionedUser(BaseModel):
+    id: Optional[str] = None
+
+    address: Optional[str] = None
+
+    alt_names: Optional[List[str]] = None
+
+    children: Optional[List[DocumentDocumentConversationChildMentionedUserChild]] = None
+
+    company: Optional[str] = None
+
+    company_ids: Optional[List[str]] = None
+
+    date_of_birth: Optional[date] = None
+
+    deal_ids: Optional[List[str]] = None
+
+    email: Optional[str] = None
+
+    emails: Optional[List[str]] = None
+    """All known email addresses; `email` holds the primary one"""
+
+    image_url: Optional[str] = None
+
+    job_title: Optional[str] = None
+
+    link_urls: Optional[List[str]] = None
+
+    name: Optional[str] = None
+
+    phone_numbers: Optional[List[str]] = None
+
+    tags: Optional[List[str]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["person"]] = None
+
+    username: Optional[str] = None
+
+
+class DocumentDocumentConversationChild(BaseModel):
+    date: datetime
+
+    sender: DocumentDocumentConversationChildSender
+
+    id: Optional[str] = None
+
+    channel: Optional[str] = None
+    """
+    The channel or platform where the message was posted, if this Message is not
+    explicitly part of a conversation
+    """
+
+    children: Optional[List[DocumentDocumentConversationChildChild]] = None
+
+    external_id: Optional[str] = None
+    """Provider message id (e.g. Slack ts, Gmail message id) — merge-dedup key"""
+
+    is_self: Optional[bool] = None
+
+    mentioned_users: Optional[List[DocumentDocumentConversationChildMentionedUser]] = None
+
+    num_replies: Optional[int] = None
+
+    replies: Optional[List[object]] = None
+    """The replies or comments to the message"""
+
+    text: Optional[str] = None
+
+    thread_id: Optional[str] = None
+
+    title: Optional[str] = None
+    """The subject or title of the message"""
+
+    type: Optional[Literal["message"]] = None
+
+    updated_at: Optional[datetime] = None
+
+    upvotes: Optional[int] = None
+    """The number of upvotes, likes, or reactions on the message"""
+
+
+class DocumentDocumentConversation(BaseModel):
+    id: Optional[str] = None
+
+    channel: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentConversationChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["conversation"]] = None
+
+
+class DocumentDocumentTraceChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+class DocumentDocumentTraceChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentTraceChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+DocumentDocumentTraceChild: TypeAlias = Annotated[
+    Union[
+        DocumentDocumentTraceChildTraceMessage, DocumentDocumentTraceChildToolCall, DocumentDocumentTraceChildToolResult
+    ],
+    PropertyInfo(discriminator="type"),
+]
+
+
+class DocumentDocumentTrace(BaseModel):
+    """An agent trace/transcript containing a sequence of steps.
+
+    Steps can be TraceMessage (user/assistant messages or thinking),
+    ToolCall (function calls), or ToolResult (tool responses).
+    """
+
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentTraceChild]] = None
+
+    text: Optional[str] = None
+
+    title: Optional[str] = None
+
+    type: Optional[Literal["trace"]] = None
+
+
+class DocumentDocumentTranscriptChild(BaseModel):
+    """A speaker-attributed segment of a transcript (ENG-2476/D10).
+
+    "Utterance" is the standard name for this across transcription providers
+    (AssemblyAI, Deepgram, Rev). Timestamps are relative offsets in seconds —
+    provider-native; absolute times derive from `Transcript.started_at`.
+    """
+
+    text: str
+
+    id: Optional[str] = None
+
+    end: Optional[float] = None
+
+    speaker: Optional[object] = None
+
+    start: Optional[float] = None
+
+    type: Optional[Literal["utterance"]] = None
+
+
+class DocumentDocumentTranscriptParticipantChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentTranscriptParticipantChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentTranscriptParticipantChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentTranscriptParticipantChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentTranscriptParticipantChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentTranscriptParticipantChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentTranscriptParticipantChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentTranscriptParticipantChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentTranscriptParticipantChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentTranscriptParticipantChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentTranscriptParticipantChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentTranscriptParticipantChild: TypeAlias = Union[
+    DocumentDocumentTranscriptParticipantChildBlob,
+    DocumentDocumentTranscriptParticipantChildCode,
+    DocumentDocumentTranscriptParticipantChildComment,
+    DocumentDocumentTranscriptParticipantChildDivider,
+    DocumentDocumentTranscriptParticipantChildImage,
+    DocumentDocumentTranscriptParticipantChildLink,
+    DocumentDocumentTranscriptParticipantChildLineBreak,
+    DocumentDocumentTranscriptParticipantChildText,
+    DocumentDocumentTranscriptParticipantChildToolCall,
+    DocumentDocumentTranscriptParticipantChildToolResult,
+    DocumentDocumentTranscriptParticipantChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentTranscriptParticipant(BaseModel):
+    id: Optional[str] = None
+
+    address: Optional[str] = None
+
+    alt_names: Optional[List[str]] = None
+
+    children: Optional[List[DocumentDocumentTranscriptParticipantChild]] = None
+
+    company: Optional[str] = None
+
+    company_ids: Optional[List[str]] = None
+
+    date_of_birth: Optional[date] = None
+
+    deal_ids: Optional[List[str]] = None
+
+    email: Optional[str] = None
+
+    emails: Optional[List[str]] = None
+    """All known email addresses; `email` holds the primary one"""
+
+    image_url: Optional[str] = None
+
+    job_title: Optional[str] = None
+
+    link_urls: Optional[List[str]] = None
+
+    name: Optional[str] = None
+
+    phone_numbers: Optional[List[str]] = None
+
+    tags: Optional[List[str]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["person"]] = None
+
+    username: Optional[str] = None
+
+
+class DocumentDocumentTranscript(BaseModel):
+    """
+    A time-anchored, speaker-attributed transcript — meetings, calls
+    (ENG-2476/D10; mirrors the Trace+TraceStep precedent).
+
+    Utterance timestamps are relative offsets from `started_at`, which is the
+    absolute wall-clock anchor.
+    """
+
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentTranscriptChild]] = None
+
+    ended_at: Optional[datetime] = None
+
+    participants: Optional[List[DocumentDocumentTranscriptParticipant]] = None
+
+    started_at: Optional[datetime] = None
+
+    text: Optional[str] = None
+
+    title: Optional[str] = None
+
+    type: Optional[Literal["transcript"]] = None
+
+
+class DocumentDocumentCompanyChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentCompanyChildCalloutChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentCompanyChildCalloutChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentCompanyChildCalloutChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentCompanyChildCalloutChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentCompanyChildCalloutChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentCompanyChildCalloutChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentCompanyChildCalloutChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentCompanyChildCalloutChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentCompanyChildCalloutChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentCompanyChildCalloutChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentCompanyChildCalloutChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentCompanyChildCalloutChild: TypeAlias = Union[
+    DocumentDocumentCompanyChildCalloutChildBlob,
+    DocumentDocumentCompanyChildCalloutChildCode,
+    DocumentDocumentCompanyChildCalloutChildComment,
+    DocumentDocumentCompanyChildCalloutChildDivider,
+    DocumentDocumentCompanyChildCalloutChildImage,
+    DocumentDocumentCompanyChildCalloutChildLink,
+    DocumentDocumentCompanyChildCalloutChildLineBreak,
+    DocumentDocumentCompanyChildCalloutChildText,
+    DocumentDocumentCompanyChildCalloutChildToolCall,
+    DocumentDocumentCompanyChildCalloutChildToolResult,
+    DocumentDocumentCompanyChildCalloutChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentCompanyChildCallout(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentCompanyChildCalloutChild]] = None
+
+    text: Optional[str] = None
+
+    title: Optional[str] = None
+
+    type: Optional[Literal["callout"]] = None
+
+
+class DocumentDocumentCompanyChildChunkChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentCompanyChildChunkChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentCompanyChildChunkChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentCompanyChildChunkChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentCompanyChildChunkChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentCompanyChildChunkChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentCompanyChildChunkChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentCompanyChildChunkChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentCompanyChildChunkChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentCompanyChildChunkChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentCompanyChildChunkChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentCompanyChildChunkChild: TypeAlias = Union[
+    DocumentDocumentCompanyChildChunkChildBlob,
+    DocumentDocumentCompanyChildChunkChildCode,
+    DocumentDocumentCompanyChildChunkChildComment,
+    DocumentDocumentCompanyChildChunkChildDivider,
+    DocumentDocumentCompanyChildChunkChildImage,
+    DocumentDocumentCompanyChildChunkChildLink,
+    DocumentDocumentCompanyChildChunkChildLineBreak,
+    DocumentDocumentCompanyChildChunkChildText,
+    DocumentDocumentCompanyChildChunkChildToolCall,
+    DocumentDocumentCompanyChildChunkChildToolResult,
+    DocumentDocumentCompanyChildChunkChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentCompanyChildChunk(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentCompanyChildChunkChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["chunk"]] = None
+
+
+class DocumentDocumentCompanyChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentCompanyChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentCompanyChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentCompanyChildEquationChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentCompanyChildEquationChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentCompanyChildEquationChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentCompanyChildEquationChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentCompanyChildEquationChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentCompanyChildEquationChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentCompanyChildEquationChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentCompanyChildEquationChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentCompanyChildEquationChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentCompanyChildEquationChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentCompanyChildEquationChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentCompanyChildEquationChild: TypeAlias = Union[
+    DocumentDocumentCompanyChildEquationChildBlob,
+    DocumentDocumentCompanyChildEquationChildCode,
+    DocumentDocumentCompanyChildEquationChildComment,
+    DocumentDocumentCompanyChildEquationChildDivider,
+    DocumentDocumentCompanyChildEquationChildImage,
+    DocumentDocumentCompanyChildEquationChildLink,
+    DocumentDocumentCompanyChildEquationChildLineBreak,
+    DocumentDocumentCompanyChildEquationChildText,
+    DocumentDocumentCompanyChildEquationChildToolCall,
+    DocumentDocumentCompanyChildEquationChildToolResult,
+    DocumentDocumentCompanyChildEquationChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentCompanyChildEquation(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentCompanyChildEquationChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["equation"]] = None
+
+
+class DocumentDocumentCompanyChildFootnoteChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentCompanyChildFootnoteChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentCompanyChildFootnoteChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentCompanyChildFootnoteChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentCompanyChildFootnoteChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentCompanyChildFootnoteChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentCompanyChildFootnoteChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentCompanyChildFootnoteChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentCompanyChildFootnoteChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentCompanyChildFootnoteChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentCompanyChildFootnoteChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentCompanyChildFootnoteChild: TypeAlias = Union[
+    DocumentDocumentCompanyChildFootnoteChildBlob,
+    DocumentDocumentCompanyChildFootnoteChildCode,
+    DocumentDocumentCompanyChildFootnoteChildComment,
+    DocumentDocumentCompanyChildFootnoteChildDivider,
+    DocumentDocumentCompanyChildFootnoteChildImage,
+    DocumentDocumentCompanyChildFootnoteChildLink,
+    DocumentDocumentCompanyChildFootnoteChildLineBreak,
+    DocumentDocumentCompanyChildFootnoteChildText,
+    DocumentDocumentCompanyChildFootnoteChildToolCall,
+    DocumentDocumentCompanyChildFootnoteChildToolResult,
+    DocumentDocumentCompanyChildFootnoteChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentCompanyChildFootnote(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentCompanyChildFootnoteChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["footnote"]] = None
+
+
+class DocumentDocumentCompanyChildHeadingChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentCompanyChildHeadingChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentCompanyChildHeadingChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentCompanyChildHeadingChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentCompanyChildHeadingChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentCompanyChildHeadingChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentCompanyChildHeadingChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentCompanyChildHeadingChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentCompanyChildHeadingChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentCompanyChildHeadingChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentCompanyChildHeadingChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentCompanyChildHeadingChild: TypeAlias = Union[
+    DocumentDocumentCompanyChildHeadingChildBlob,
+    DocumentDocumentCompanyChildHeadingChildCode,
+    DocumentDocumentCompanyChildHeadingChildComment,
+    DocumentDocumentCompanyChildHeadingChildDivider,
+    DocumentDocumentCompanyChildHeadingChildImage,
+    DocumentDocumentCompanyChildHeadingChildLink,
+    DocumentDocumentCompanyChildHeadingChildLineBreak,
+    DocumentDocumentCompanyChildHeadingChildText,
+    DocumentDocumentCompanyChildHeadingChildToolCall,
+    DocumentDocumentCompanyChildHeadingChildToolResult,
+    DocumentDocumentCompanyChildHeadingChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentCompanyChildHeading(BaseModel):
+    level: int
+
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentCompanyChildHeadingChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["heading"]] = None
+
+
+class DocumentDocumentCompanyChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentCompanyChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentCompanyChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentCompanyChildList(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[object]] = None
+
+    ordered: Optional[bool] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["list"]] = None
+
+
+class DocumentDocumentCompanyChildListItemChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentCompanyChildListItemChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentCompanyChildListItemChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentCompanyChildListItemChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentCompanyChildListItemChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentCompanyChildListItemChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentCompanyChildListItemChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentCompanyChildListItemChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentCompanyChildListItemChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentCompanyChildListItemChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentCompanyChildListItemChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentCompanyChildListItemChild: TypeAlias = Union[
+    DocumentDocumentCompanyChildListItemChildBlob,
+    DocumentDocumentCompanyChildListItemChildCode,
+    DocumentDocumentCompanyChildListItemChildComment,
+    DocumentDocumentCompanyChildListItemChildDivider,
+    DocumentDocumentCompanyChildListItemChildImage,
+    DocumentDocumentCompanyChildListItemChildLink,
+    DocumentDocumentCompanyChildListItemChildLineBreak,
+    DocumentDocumentCompanyChildListItemChildText,
+    DocumentDocumentCompanyChildListItemChildToolCall,
+    DocumentDocumentCompanyChildListItemChildToolResult,
+    DocumentDocumentCompanyChildListItemChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentCompanyChildListItem(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentCompanyChildListItemChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["list_item"]] = None
+
+
+class DocumentDocumentCompanyChildParagraphChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentCompanyChildParagraphChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentCompanyChildParagraphChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentCompanyChildParagraphChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentCompanyChildParagraphChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentCompanyChildParagraphChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentCompanyChildParagraphChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentCompanyChildParagraphChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentCompanyChildParagraphChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentCompanyChildParagraphChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentCompanyChildParagraphChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentCompanyChildParagraphChild: TypeAlias = Union[
+    DocumentDocumentCompanyChildParagraphChildBlob,
+    DocumentDocumentCompanyChildParagraphChildCode,
+    DocumentDocumentCompanyChildParagraphChildComment,
+    DocumentDocumentCompanyChildParagraphChildDivider,
+    DocumentDocumentCompanyChildParagraphChildImage,
+    DocumentDocumentCompanyChildParagraphChildLink,
+    DocumentDocumentCompanyChildParagraphChildLineBreak,
+    DocumentDocumentCompanyChildParagraphChildText,
+    DocumentDocumentCompanyChildParagraphChildToolCall,
+    DocumentDocumentCompanyChildParagraphChildToolResult,
+    DocumentDocumentCompanyChildParagraphChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentCompanyChildParagraph(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentCompanyChildParagraphChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["paragraph"]] = None
+
+
+class DocumentDocumentCompanyChildQuoteChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentCompanyChildQuoteChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentCompanyChildQuoteChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentCompanyChildQuoteChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentCompanyChildQuoteChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentCompanyChildQuoteChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentCompanyChildQuoteChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentCompanyChildQuoteChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentCompanyChildQuoteChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentCompanyChildQuoteChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentCompanyChildQuoteChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentCompanyChildQuoteChild: TypeAlias = Union[
+    DocumentDocumentCompanyChildQuoteChildBlob,
+    DocumentDocumentCompanyChildQuoteChildCode,
+    DocumentDocumentCompanyChildQuoteChildComment,
+    DocumentDocumentCompanyChildQuoteChildDivider,
+    DocumentDocumentCompanyChildQuoteChildImage,
+    DocumentDocumentCompanyChildQuoteChildLink,
+    DocumentDocumentCompanyChildQuoteChildLineBreak,
+    DocumentDocumentCompanyChildQuoteChildText,
+    DocumentDocumentCompanyChildQuoteChildToolCall,
+    DocumentDocumentCompanyChildQuoteChildToolResult,
+    DocumentDocumentCompanyChildQuoteChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentCompanyChildQuote(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentCompanyChildQuoteChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["quote"]] = None
+
+
+class DocumentDocumentCompanyChildTable(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[object]] = None
+
+    has_header: Optional[bool] = None
+    """Whether the first row should be treated as a header"""
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["table"]] = None
+
+
+class DocumentDocumentCompanyChildTableCellChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentCompanyChildTableCellChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentCompanyChildTableCellChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentCompanyChildTableCellChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentCompanyChildTableCellChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentCompanyChildTableCellChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentCompanyChildTableCellChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentCompanyChildTableCellChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentCompanyChildTableCellChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentCompanyChildTableCellChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentCompanyChildTableCellChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentCompanyChildTableCellChild: TypeAlias = Union[
+    DocumentDocumentCompanyChildTableCellChildBlob,
+    DocumentDocumentCompanyChildTableCellChildCode,
+    DocumentDocumentCompanyChildTableCellChildComment,
+    DocumentDocumentCompanyChildTableCellChildDivider,
+    DocumentDocumentCompanyChildTableCellChildImage,
+    DocumentDocumentCompanyChildTableCellChildLink,
+    DocumentDocumentCompanyChildTableCellChildLineBreak,
+    DocumentDocumentCompanyChildTableCellChildText,
+    DocumentDocumentCompanyChildTableCellChildToolCall,
+    DocumentDocumentCompanyChildTableCellChildToolResult,
+    DocumentDocumentCompanyChildTableCellChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentCompanyChildTableCell(BaseModel):
+    id: Optional[str] = None
+
+    align: Optional[Literal["left", "center", "right"]] = None
+
+    children: Optional[List[DocumentDocumentCompanyChildTableCellChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["table_cell"]] = None
+
+
+class DocumentDocumentCompanyChildTableRow(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[object]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["table_row"]] = None
+
+
+class DocumentDocumentCompanyChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentCompanyChildToDoChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentCompanyChildToDoChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentCompanyChildToDoChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentCompanyChildToDoChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentCompanyChildToDoChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentCompanyChildToDoChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentCompanyChildToDoChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentCompanyChildToDoChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentCompanyChildToDoChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentCompanyChildToDoChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentCompanyChildToDoChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentCompanyChildToDoChild: TypeAlias = Union[
+    DocumentDocumentCompanyChildToDoChildBlob,
+    DocumentDocumentCompanyChildToDoChildCode,
+    DocumentDocumentCompanyChildToDoChildComment,
+    DocumentDocumentCompanyChildToDoChildDivider,
+    DocumentDocumentCompanyChildToDoChildImage,
+    DocumentDocumentCompanyChildToDoChildLink,
+    DocumentDocumentCompanyChildToDoChildLineBreak,
+    DocumentDocumentCompanyChildToDoChildText,
+    DocumentDocumentCompanyChildToDoChildToolCall,
+    DocumentDocumentCompanyChildToDoChildToolResult,
+    DocumentDocumentCompanyChildToDoChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentCompanyChildToDo(BaseModel):
+    id: Optional[str] = None
+
+    checked: Optional[bool] = None
+
+    children: Optional[List[DocumentDocumentCompanyChildToDoChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["todo"]] = None
+
+
+class DocumentDocumentCompanyChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentCompanyChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentCompanyChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+class DocumentDocumentCompanyChildUtterance(BaseModel):
+    """A speaker-attributed segment of a transcript (ENG-2476/D10).
+
+    "Utterance" is the standard name for this across transcription providers
+    (AssemblyAI, Deepgram, Rev). Timestamps are relative offsets in seconds —
+    provider-native; absolute times derive from `Transcript.started_at`.
+    """
+
+    text: str
+
+    id: Optional[str] = None
+
+    end: Optional[float] = None
+
+    speaker: Optional[object] = None
+
+    start: Optional[float] = None
+
+    type: Optional[Literal["utterance"]] = None
+
+
+DocumentDocumentCompanyChild: TypeAlias = Annotated[
+    Union[
+        DocumentDocumentCompanyChildBlob,
+        DocumentDocumentCompanyChildCallout,
+        DocumentDocumentCompanyChildChunk,
+        DocumentDocumentCompanyChildCode,
+        DocumentDocumentCompanyChildComment,
+        DocumentDocumentCompanyChildDivider,
+        DocumentDocumentCompanyChildEquation,
+        DocumentDocumentCompanyChildFootnote,
+        DocumentDocumentCompanyChildHeading,
+        DocumentDocumentCompanyChildImage,
+        DocumentDocumentCompanyChildLink,
+        DocumentDocumentCompanyChildLineBreak,
+        DocumentDocumentCompanyChildList,
+        DocumentDocumentCompanyChildListItem,
+        DocumentDocumentCompanyChildParagraph,
+        DocumentDocumentCompanyChildQuote,
+        DocumentDocumentCompanyChildTable,
+        DocumentDocumentCompanyChildTableCell,
+        DocumentDocumentCompanyChildTableRow,
+        DocumentDocumentCompanyChildText,
+        DocumentDocumentCompanyChildToDo,
+        DocumentDocumentCompanyChildToolCall,
+        DocumentDocumentCompanyChildToolResult,
+        DocumentDocumentCompanyChildTraceMessage,
+        DocumentDocumentCompanyChildUtterance,
+    ],
+    PropertyInfo(discriminator="type"),
+]
+
+
+class DocumentDocumentCompany(BaseModel):
+    """A CRM company/account record (ENG-2476/D10)."""
+
+    id: Optional[str] = None
+
+    address: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentCompanyChild]] = None
+
+    contact_ids: Optional[List[str]] = None
+
+    deal_ids: Optional[List[str]] = None
+
+    description: Optional[str] = None
+
+    emails: Optional[List[str]] = None
+
+    employees: Optional[int] = None
+
+    image_url: Optional[str] = None
+
+    industry: Optional[str] = None
+
+    is_active: Optional[bool] = None
+
+    name: Optional[str] = None
+
+    phone_numbers: Optional[List[str]] = None
+
+    tags: Optional[List[str]] = None
+
+    text: Optional[str] = None
+
+    timezone: Optional[str] = None
+
+    type: Optional[Literal["company"]] = None
+
+    websites: Optional[List[str]] = None
+
+
+class DocumentDocumentDealChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentDealChildCalloutChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentDealChildCalloutChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentDealChildCalloutChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentDealChildCalloutChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentDealChildCalloutChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentDealChildCalloutChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentDealChildCalloutChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentDealChildCalloutChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentDealChildCalloutChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentDealChildCalloutChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentDealChildCalloutChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentDealChildCalloutChild: TypeAlias = Union[
+    DocumentDocumentDealChildCalloutChildBlob,
+    DocumentDocumentDealChildCalloutChildCode,
+    DocumentDocumentDealChildCalloutChildComment,
+    DocumentDocumentDealChildCalloutChildDivider,
+    DocumentDocumentDealChildCalloutChildImage,
+    DocumentDocumentDealChildCalloutChildLink,
+    DocumentDocumentDealChildCalloutChildLineBreak,
+    DocumentDocumentDealChildCalloutChildText,
+    DocumentDocumentDealChildCalloutChildToolCall,
+    DocumentDocumentDealChildCalloutChildToolResult,
+    DocumentDocumentDealChildCalloutChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentDealChildCallout(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentDealChildCalloutChild]] = None
+
+    text: Optional[str] = None
+
+    title: Optional[str] = None
+
+    type: Optional[Literal["callout"]] = None
+
+
+class DocumentDocumentDealChildChunkChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentDealChildChunkChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentDealChildChunkChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentDealChildChunkChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentDealChildChunkChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentDealChildChunkChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentDealChildChunkChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentDealChildChunkChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentDealChildChunkChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentDealChildChunkChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentDealChildChunkChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentDealChildChunkChild: TypeAlias = Union[
+    DocumentDocumentDealChildChunkChildBlob,
+    DocumentDocumentDealChildChunkChildCode,
+    DocumentDocumentDealChildChunkChildComment,
+    DocumentDocumentDealChildChunkChildDivider,
+    DocumentDocumentDealChildChunkChildImage,
+    DocumentDocumentDealChildChunkChildLink,
+    DocumentDocumentDealChildChunkChildLineBreak,
+    DocumentDocumentDealChildChunkChildText,
+    DocumentDocumentDealChildChunkChildToolCall,
+    DocumentDocumentDealChildChunkChildToolResult,
+    DocumentDocumentDealChildChunkChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentDealChildChunk(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentDealChildChunkChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["chunk"]] = None
+
+
+class DocumentDocumentDealChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentDealChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentDealChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentDealChildEquationChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentDealChildEquationChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentDealChildEquationChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentDealChildEquationChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentDealChildEquationChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentDealChildEquationChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentDealChildEquationChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentDealChildEquationChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentDealChildEquationChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentDealChildEquationChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentDealChildEquationChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentDealChildEquationChild: TypeAlias = Union[
+    DocumentDocumentDealChildEquationChildBlob,
+    DocumentDocumentDealChildEquationChildCode,
+    DocumentDocumentDealChildEquationChildComment,
+    DocumentDocumentDealChildEquationChildDivider,
+    DocumentDocumentDealChildEquationChildImage,
+    DocumentDocumentDealChildEquationChildLink,
+    DocumentDocumentDealChildEquationChildLineBreak,
+    DocumentDocumentDealChildEquationChildText,
+    DocumentDocumentDealChildEquationChildToolCall,
+    DocumentDocumentDealChildEquationChildToolResult,
+    DocumentDocumentDealChildEquationChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentDealChildEquation(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentDealChildEquationChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["equation"]] = None
+
+
+class DocumentDocumentDealChildFootnoteChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentDealChildFootnoteChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentDealChildFootnoteChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentDealChildFootnoteChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentDealChildFootnoteChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentDealChildFootnoteChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentDealChildFootnoteChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentDealChildFootnoteChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentDealChildFootnoteChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentDealChildFootnoteChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentDealChildFootnoteChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentDealChildFootnoteChild: TypeAlias = Union[
+    DocumentDocumentDealChildFootnoteChildBlob,
+    DocumentDocumentDealChildFootnoteChildCode,
+    DocumentDocumentDealChildFootnoteChildComment,
+    DocumentDocumentDealChildFootnoteChildDivider,
+    DocumentDocumentDealChildFootnoteChildImage,
+    DocumentDocumentDealChildFootnoteChildLink,
+    DocumentDocumentDealChildFootnoteChildLineBreak,
+    DocumentDocumentDealChildFootnoteChildText,
+    DocumentDocumentDealChildFootnoteChildToolCall,
+    DocumentDocumentDealChildFootnoteChildToolResult,
+    DocumentDocumentDealChildFootnoteChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentDealChildFootnote(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentDealChildFootnoteChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["footnote"]] = None
+
+
+class DocumentDocumentDealChildHeadingChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentDealChildHeadingChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentDealChildHeadingChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentDealChildHeadingChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentDealChildHeadingChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentDealChildHeadingChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentDealChildHeadingChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentDealChildHeadingChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentDealChildHeadingChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentDealChildHeadingChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentDealChildHeadingChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentDealChildHeadingChild: TypeAlias = Union[
+    DocumentDocumentDealChildHeadingChildBlob,
+    DocumentDocumentDealChildHeadingChildCode,
+    DocumentDocumentDealChildHeadingChildComment,
+    DocumentDocumentDealChildHeadingChildDivider,
+    DocumentDocumentDealChildHeadingChildImage,
+    DocumentDocumentDealChildHeadingChildLink,
+    DocumentDocumentDealChildHeadingChildLineBreak,
+    DocumentDocumentDealChildHeadingChildText,
+    DocumentDocumentDealChildHeadingChildToolCall,
+    DocumentDocumentDealChildHeadingChildToolResult,
+    DocumentDocumentDealChildHeadingChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentDealChildHeading(BaseModel):
+    level: int
+
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentDealChildHeadingChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["heading"]] = None
+
+
+class DocumentDocumentDealChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentDealChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentDealChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentDealChildList(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[object]] = None
+
+    ordered: Optional[bool] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["list"]] = None
+
+
+class DocumentDocumentDealChildListItemChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentDealChildListItemChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentDealChildListItemChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentDealChildListItemChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentDealChildListItemChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentDealChildListItemChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentDealChildListItemChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentDealChildListItemChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentDealChildListItemChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentDealChildListItemChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentDealChildListItemChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentDealChildListItemChild: TypeAlias = Union[
+    DocumentDocumentDealChildListItemChildBlob,
+    DocumentDocumentDealChildListItemChildCode,
+    DocumentDocumentDealChildListItemChildComment,
+    DocumentDocumentDealChildListItemChildDivider,
+    DocumentDocumentDealChildListItemChildImage,
+    DocumentDocumentDealChildListItemChildLink,
+    DocumentDocumentDealChildListItemChildLineBreak,
+    DocumentDocumentDealChildListItemChildText,
+    DocumentDocumentDealChildListItemChildToolCall,
+    DocumentDocumentDealChildListItemChildToolResult,
+    DocumentDocumentDealChildListItemChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentDealChildListItem(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentDealChildListItemChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["list_item"]] = None
+
+
+class DocumentDocumentDealChildParagraphChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentDealChildParagraphChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentDealChildParagraphChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentDealChildParagraphChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentDealChildParagraphChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentDealChildParagraphChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentDealChildParagraphChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentDealChildParagraphChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentDealChildParagraphChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentDealChildParagraphChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentDealChildParagraphChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentDealChildParagraphChild: TypeAlias = Union[
+    DocumentDocumentDealChildParagraphChildBlob,
+    DocumentDocumentDealChildParagraphChildCode,
+    DocumentDocumentDealChildParagraphChildComment,
+    DocumentDocumentDealChildParagraphChildDivider,
+    DocumentDocumentDealChildParagraphChildImage,
+    DocumentDocumentDealChildParagraphChildLink,
+    DocumentDocumentDealChildParagraphChildLineBreak,
+    DocumentDocumentDealChildParagraphChildText,
+    DocumentDocumentDealChildParagraphChildToolCall,
+    DocumentDocumentDealChildParagraphChildToolResult,
+    DocumentDocumentDealChildParagraphChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentDealChildParagraph(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentDealChildParagraphChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["paragraph"]] = None
+
+
+class DocumentDocumentDealChildQuoteChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentDealChildQuoteChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentDealChildQuoteChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentDealChildQuoteChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentDealChildQuoteChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentDealChildQuoteChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentDealChildQuoteChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentDealChildQuoteChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentDealChildQuoteChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentDealChildQuoteChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentDealChildQuoteChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentDealChildQuoteChild: TypeAlias = Union[
+    DocumentDocumentDealChildQuoteChildBlob,
+    DocumentDocumentDealChildQuoteChildCode,
+    DocumentDocumentDealChildQuoteChildComment,
+    DocumentDocumentDealChildQuoteChildDivider,
+    DocumentDocumentDealChildQuoteChildImage,
+    DocumentDocumentDealChildQuoteChildLink,
+    DocumentDocumentDealChildQuoteChildLineBreak,
+    DocumentDocumentDealChildQuoteChildText,
+    DocumentDocumentDealChildQuoteChildToolCall,
+    DocumentDocumentDealChildQuoteChildToolResult,
+    DocumentDocumentDealChildQuoteChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentDealChildQuote(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[DocumentDocumentDealChildQuoteChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["quote"]] = None
+
+
+class DocumentDocumentDealChildTable(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[object]] = None
+
+    has_header: Optional[bool] = None
+    """Whether the first row should be treated as a header"""
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["table"]] = None
+
+
+class DocumentDocumentDealChildTableCellChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentDealChildTableCellChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentDealChildTableCellChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentDealChildTableCellChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentDealChildTableCellChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentDealChildTableCellChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentDealChildTableCellChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentDealChildTableCellChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentDealChildTableCellChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentDealChildTableCellChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentDealChildTableCellChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentDealChildTableCellChild: TypeAlias = Union[
+    DocumentDocumentDealChildTableCellChildBlob,
+    DocumentDocumentDealChildTableCellChildCode,
+    DocumentDocumentDealChildTableCellChildComment,
+    DocumentDocumentDealChildTableCellChildDivider,
+    DocumentDocumentDealChildTableCellChildImage,
+    DocumentDocumentDealChildTableCellChildLink,
+    DocumentDocumentDealChildTableCellChildLineBreak,
+    DocumentDocumentDealChildTableCellChildText,
+    DocumentDocumentDealChildTableCellChildToolCall,
+    DocumentDocumentDealChildTableCellChildToolResult,
+    DocumentDocumentDealChildTableCellChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentDealChildTableCell(BaseModel):
+    id: Optional[str] = None
+
+    align: Optional[Literal["left", "center", "right"]] = None
+
+    children: Optional[List[DocumentDocumentDealChildTableCellChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["table_cell"]] = None
+
+
+class DocumentDocumentDealChildTableRow(BaseModel):
+    id: Optional[str] = None
+
+    children: Optional[List[object]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["table_row"]] = None
+
+
+class DocumentDocumentDealChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentDealChildToDoChildBlob(BaseModel):
+    """Represents embedded binary data using data URI scheme.
+
+    Format: data:[<media type>][;base64],<data>
+    Example: data:text/html;base64,PGh0bWw+...
+    """
+
+    data: str
+
+    mimetype: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["blob"]] = None
+
+
+class DocumentDocumentDealChildToDoChildCode(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    language: Optional[str] = None
+
+    type: Optional[Literal["code"]] = None
+
+
+class DocumentDocumentDealChildToDoChildComment(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    created_at: Optional[datetime] = None
+
+    type: Optional[Literal["comment"]] = None
+
+
+class DocumentDocumentDealChildToDoChildDivider(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["divider"]] = None
+
+
+class DocumentDocumentDealChildToDoChildImage(BaseModel):
+    src: str
+
+    text: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["image"]] = None
+
+
+class DocumentDocumentDealChildToDoChildLink(BaseModel):
+    text: str
+
+    url: str
+
+    id: Optional[str] = None
+
+    type: Optional[Literal["link"]] = None
+
+
+class DocumentDocumentDealChildToDoChildLineBreak(BaseModel):
+    id: Optional[str] = None
+
+    type: Optional[Literal["line_break"]] = None
+
+
+class DocumentDocumentDealChildToDoChildText(BaseModel):
+    text: str
+
+    id: Optional[str] = None
+
+    marks: Optional[List[Literal["bold", "italic", "underline", "strikethrough", "code", "math"]]] = None
+
+    type: Optional[Literal["text"]] = None
+
+
+class DocumentDocumentDealChildToDoChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentDealChildToDoChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentDealChildToDoChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+DocumentDocumentDealChildToDoChild: TypeAlias = Union[
+    DocumentDocumentDealChildToDoChildBlob,
+    DocumentDocumentDealChildToDoChildCode,
+    DocumentDocumentDealChildToDoChildComment,
+    DocumentDocumentDealChildToDoChildDivider,
+    DocumentDocumentDealChildToDoChildImage,
+    DocumentDocumentDealChildToDoChildLink,
+    DocumentDocumentDealChildToDoChildLineBreak,
+    DocumentDocumentDealChildToDoChildText,
+    DocumentDocumentDealChildToDoChildToolCall,
+    DocumentDocumentDealChildToDoChildToolResult,
+    DocumentDocumentDealChildToDoChildTraceMessage,
+    object,
+]
+
+
+class DocumentDocumentDealChildToDo(BaseModel):
+    id: Optional[str] = None
+
+    checked: Optional[bool] = None
+
+    children: Optional[List[DocumentDocumentDealChildToDoChild]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["todo"]] = None
+
+
+class DocumentDocumentDealChildToolCall(BaseModel):
+    """A tool/function call made by the assistant."""
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    args: Optional[Dict[str, object]] = None
+
+    type: Optional[Literal["tool_call"]] = None
+
+
+class DocumentDocumentDealChildToolResult(BaseModel):
+    """The result of a tool call."""
+
+    output: Union[str, Dict[str, object], List[object]]
+
+    tool_call_id: str
+
+    tool_name: str
+
+    id: Optional[str] = None
+
+    is_error: Optional[bool] = None
+
+    type: Optional[Literal["tool_result"]] = None
+
+
+class DocumentDocumentDealChildTraceMessage(BaseModel):
+    """A message in an agent trace (user message, assistant message, or thinking)."""
+
+    text: str
+
+    id: Optional[str] = None
+
+    message_type: Optional[Literal["message", "thinking"]] = None
+
+    role: Optional[Literal["user", "assistant"]] = None
+
+    timestamp: Optional[datetime] = None
+
+    type: Optional[Literal["trace_message"]] = None
+
+
+class DocumentDocumentDealChildUtterance(BaseModel):
+    """A speaker-attributed segment of a transcript (ENG-2476/D10).
+
+    "Utterance" is the standard name for this across transcription providers
+    (AssemblyAI, Deepgram, Rev). Timestamps are relative offsets in seconds —
+    provider-native; absolute times derive from `Transcript.started_at`.
+    """
+
+    text: str
+
+    id: Optional[str] = None
+
+    end: Optional[float] = None
+
+    speaker: Optional[object] = None
+
+    start: Optional[float] = None
+
+    type: Optional[Literal["utterance"]] = None
+
+
+DocumentDocumentDealChild: TypeAlias = Annotated[
+    Union[
+        DocumentDocumentDealChildBlob,
+        DocumentDocumentDealChildCallout,
+        DocumentDocumentDealChildChunk,
+        DocumentDocumentDealChildCode,
+        DocumentDocumentDealChildComment,
+        DocumentDocumentDealChildDivider,
+        DocumentDocumentDealChildEquation,
+        DocumentDocumentDealChildFootnote,
+        DocumentDocumentDealChildHeading,
+        DocumentDocumentDealChildImage,
+        DocumentDocumentDealChildLink,
+        DocumentDocumentDealChildLineBreak,
+        DocumentDocumentDealChildList,
+        DocumentDocumentDealChildListItem,
+        DocumentDocumentDealChildParagraph,
+        DocumentDocumentDealChildQuote,
+        DocumentDocumentDealChildTable,
+        DocumentDocumentDealChildTableCell,
+        DocumentDocumentDealChildTableRow,
+        DocumentDocumentDealChildText,
+        DocumentDocumentDealChildToDo,
+        DocumentDocumentDealChildToolCall,
+        DocumentDocumentDealChildToolResult,
+        DocumentDocumentDealChildTraceMessage,
+        DocumentDocumentDealChildUtterance,
+    ],
+    PropertyInfo(discriminator="type"),
+]
+
+
+class DocumentDocumentDeal(BaseModel):
+    """A CRM deal/opportunity record (ENG-2476/D10)."""
+
+    id: Optional[str] = None
+
+    amount: Optional[float] = None
+
+    children: Optional[List[DocumentDocumentDealChild]] = None
+
+    closed_at: Optional[datetime] = None
+
+    company_ids: Optional[List[str]] = None
+
+    contact_ids: Optional[List[str]] = None
+
+    currency: Optional[str] = None
+
+    deal_source: Optional[str] = None
+
+    lost_reason: Optional[str] = None
+
+    name: Optional[str] = None
+
+    pipeline: Optional[str] = None
+
+    probability: Optional[float] = None
+
+    stage: Optional[str] = None
+
+    tags: Optional[List[str]] = None
+
+    text: Optional[str] = None
+
+    type: Optional[Literal["deal"]] = None
+
+    won_reason: Optional[str] = None
+
+
+DocumentDocument: TypeAlias = Annotated[
+    Union[
+        DocumentDocumentDocument,
+        DocumentDocumentWebsite,
+        DocumentDocumentTask,
+        DocumentDocumentPerson,
+        DocumentDocumentMessage,
+        DocumentDocumentEvent,
+        DocumentDocumentFile,
+        DocumentDocumentConversation,
+        DocumentDocumentTrace,
+        DocumentDocumentTranscript,
+        DocumentDocumentCompany,
+        DocumentDocumentDeal,
+    ],
+    PropertyInfo(discriminator="type"),
+]
+
+
+class Document(BaseModel):
+    """
+    A `DocumentResponse` plus the query-path fields a `ScoredDocument` carries
+    (ENG-2479): relevance score, matched highlights, and the concatenated
+    summary of those highlights.
+    """
+
+    document: DocumentDocument
+    """The full hyperdoc tree.
+
+    Switch on `type` for the document frame and recurse `children` for the body —
+    see the `<Hyperdoc />` renderer.
+    """
+
+    resource_id: str
+
+    source: Literal[
+        "reddit",
+        "notion",
+        "slack",
+        "google_calendar",
+        "google_mail",
+        "box",
+        "dropbox",
+        "github",
+        "google_drive",
+        "vault",
+        "web_crawler",
+        "trace",
+        "microsoft_teams",
+        "gmail_actions",
+        "granola",
+        "fathom",
+        "fireflies",
+        "linear",
+        "hubspot",
+        "salesforce",
+        "coda",
+        "lightfield",
+    ]
+
+    type: str
+    """Hyperdoc document type discriminator (document, message, file, event, ...)."""
+
+    collection: Optional[str] = None
+    """The document's collection, if any."""
+
+    document_date: Optional[datetime] = None
+    """The document's own date (e.g. email sent date, event date)."""
+
+    highlights: Optional[List[object]] = None
+    """The matched chunks that made this document a hit, with per-chunk scores."""
+
+    ingested_at: Optional[datetime] = None
+    """When Hyperspell first indexed the document."""
+
+    last_modified_at: Optional[datetime] = None
+    """When the source document was last modified."""
+
+    metadata: Optional[Dict[str, object]] = None
+    """Filterable custom metadata attached to the document."""
+
+    score: Optional[float] = None
+    """Relevance of the document to the query."""
+
+    status: Optional[Literal["pending", "processing", "completed", "failed", "pending_review", "skipped"]] = None
+    """Indexing status of the document."""
+
+    summary: Optional[str] = None
+    """Concatenated text of the matched highlights."""
+
+    title: Optional[str] = None
+    """Human-readable document title."""
 
 
 class ProvenanceEntity(BaseModel):
@@ -88,10 +21042,14 @@ class Provenance(BaseModel):
 
 
 class QueryResult(BaseModel):
-    documents: List[Resource]
-
     answer: Optional[str] = None
     """The answer to the query, if the request was set to answer."""
+
+    documents: Optional[List[Document]] = None
+    """
+    The matching documents, each carrying its hyperdoc tree plus query-path
+    score/highlights/summary (ENG-2479 Phase 4).
+    """
 
     errors: Optional[List[Dict[str, str]]] = None
     """Errors that occurred during the query.

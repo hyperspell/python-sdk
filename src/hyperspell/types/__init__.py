@@ -3,8 +3,7 @@
 from __future__ import annotations
 
 from .token import Token as Token
-from .memory import Memory as Memory
-from .shared import Metadata as Metadata, Resource as Resource, QueryResult as QueryResult, Notification as Notification
+from .shared import QueryResult as QueryResult
 from .memory_status import MemoryStatus as MemoryStatus
 from .auth_me_response import AuthMeResponse as AuthMeResponse
 from .memory_add_params import MemoryAddParams as MemoryAddParams
@@ -12,8 +11,10 @@ from .vault_list_params import VaultListParams as VaultListParams
 from .folder_list_params import FolderListParams as FolderListParams
 from .memory_list_params import MemoryListParams as MemoryListParams
 from .session_add_params import SessionAddParams as SessionAddParams
+from .memory_get_response import MemoryGetResponse as MemoryGetResponse
 from .vault_list_response import VaultListResponse as VaultListResponse
 from .folder_list_response import FolderListResponse as FolderListResponse
+from .memory_list_response import MemoryListResponse as MemoryListResponse
 from .memory_search_params import MemorySearchParams as MemorySearchParams
 from .memory_update_params import MemoryUpdateParams as MemoryUpdateParams
 from .memory_upload_params import MemoryUploadParams as MemoryUploadParams
