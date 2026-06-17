@@ -39,6 +39,7 @@ class ActionAddReactionParams(TypedDict, total=False):
             "salesforce",
             "coda",
             "lightfield",
+            "gong",
         ]
     ]
     """Integration provider (e.g., slack)"""

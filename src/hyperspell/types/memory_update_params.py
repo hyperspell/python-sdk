@@ -36,6 +36,7 @@ class MemoryUpdateParams(TypedDict, total=False):
             "salesforce",
             "coda",
             "lightfield",
+            "gong",
         ]
     ]
 

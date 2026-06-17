@@ -47,6 +47,7 @@ class Integration(BaseModel):
         "salesforce",
         "coda",
         "lightfield",
+        "gong",
     ]
     """The integration's provider"""
 

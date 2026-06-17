@@ -46,6 +46,7 @@ class MemoryListParams(TypedDict, total=False):
             "salesforce",
             "coda",
             "lightfield",
+            "gong",
         ]
     ]
     """Filter documents by source."""

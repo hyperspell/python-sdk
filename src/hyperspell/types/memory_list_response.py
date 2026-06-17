@@ -38617,6 +38617,7 @@ class MemoryListResponse(BaseModel):
         "salesforce",
         "coda",
         "lightfield",
+        "gong",
     ]
 
     type: str
