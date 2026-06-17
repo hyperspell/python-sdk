@@ -56,6 +56,7 @@ class AuthMeResponse(BaseModel):
             "salesforce",
             "coda",
             "lightfield",
+            "gong",
         ]
     ]
     """All integrations available for the app"""
@@ -84,6 +85,7 @@ class AuthMeResponse(BaseModel):
             "salesforce",
             "coda",
             "lightfield",
+            "gong",
         ]
     ]
     """All integrations installed for the user"""

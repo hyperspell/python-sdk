@@ -33,6 +33,7 @@ class WebCrawlerIndexResponse(BaseModel):
         "salesforce",
         "coda",
         "lightfield",
+        "gong",
     ]
 
     status: Literal["pending", "processing", "completed", "failed", "pending_review", "skipped"]

@@ -38628,6 +38628,7 @@ class Document(BaseModel):
         "salesforce",
         "coda",
         "lightfield",
+        "gong",
     ]
 
     type: str
@@ -38702,6 +38703,7 @@ class ProvenanceSource(BaseModel):
         "salesforce",
         "coda",
         "lightfield",
+        "gong",
     ]
 
     score: Optional[float] = None

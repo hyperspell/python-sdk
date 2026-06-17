@@ -37,6 +37,7 @@ class MemoryDeleteResponse(BaseModel):
         "salesforce",
         "coda",
         "lightfield",
+        "gong",
     ]
 
     success: bool

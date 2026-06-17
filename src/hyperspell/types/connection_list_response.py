@@ -41,6 +41,7 @@ class Connection(BaseModel):
         "salesforce",
         "coda",
         "lightfield",
+        "gong",
     ]
     """The connection's provider"""
 
