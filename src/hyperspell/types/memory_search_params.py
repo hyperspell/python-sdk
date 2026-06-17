@@ -17,7 +17,6 @@ __all__ = [
     "OptionsGoogleDrive",
     "OptionsGoogleMail",
     "OptionsNotion",
-    "OptionsReddit",
     "OptionsSlack",
     "OptionsVault",
     "OptionsWebCrawler",
@@ -167,30 +166,6 @@ class OptionsNotion(TypedDict, total=False):
     """
 
 
-class OptionsReddit(TypedDict, total=False):
-    """Search options for Reddit"""
-
-    period: Literal["hour", "day", "week", "month", "year", "all"]
-    """The time period to search. Defaults to 'month'."""
-
-    sort: Literal["relevance", "new", "hot", "top", "comments"]
-    """The sort order of the posts. Defaults to 'relevance'."""
-
-    subreddit: Optional[str]
-    """The subreddit to search.
-
-    If not provided, the query will be searched for in all subreddits.
-    """
-
-    weight: float
-    """Weight of results from this source.
-
-    A weight greater than 1.0 means more results from this source will be returned,
-    a weight less than 1.0 means fewer results will be returned. This will only
-    affect results if multiple sources are queried at the same time.
-    """
-
-
 class OptionsSlack(TypedDict, total=False):
     """Search options for Slack"""
 
@@ -304,9 +279,6 @@ class Options(TypedDict, total=False):
     halved. Resources with no recency timestamp are passed through unchanged. Leave
     unset to disable.
     """
-
-    reddit: OptionsReddit
-    """Search options for Reddit"""
 
     resource_ids: Optional[SequenceNotStr[str]]
     """Only return results from these specific resource IDs.
