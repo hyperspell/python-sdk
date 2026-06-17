@@ -317,12 +317,6 @@ class TestMemories:
                     "weight": 0,
                 },
                 "recency_half_life_days": 1,
-                "reddit": {
-                    "period": "hour",
-                    "sort": "relevance",
-                    "subreddit": "subreddit",
-                    "weight": 0,
-                },
                 "resource_ids": ["string"],
                 "slack": {
                     "channels": ["string"],
@@ -729,12 +723,6 @@ class TestAsyncMemories:
                     "weight": 0,
                 },
                 "recency_half_life_days": 1,
-                "reddit": {
-                    "period": "hour",
-                    "sort": "relevance",
-                    "subreddit": "subreddit",
-                    "weight": 0,
-                },
                 "resource_ids": ["string"],
                 "slack": {
                     "channels": ["string"],
