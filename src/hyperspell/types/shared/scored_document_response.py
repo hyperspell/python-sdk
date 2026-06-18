@@ -2,15 +2,15 @@
 
 from __future__ import annotations
 
-from typing import Dict, Union, Optional
+from typing import Dict, List, Union, Optional
 from datetime import datetime
 from typing_extensions import Literal, Annotated, TypeAlias
 
-from .._utils import PropertyInfo
-from .._models import BaseModel
-from .shared.trace import Trace
+from .trace import Trace
+from ..._utils import PropertyInfo
+from ..._models import BaseModel
 
-__all__ = ["MemoryGetResponse", "Document"]
+__all__ = ["ScoredDocumentResponse", "Document"]
 
 Document: TypeAlias = Annotated[
     Union[
@@ -31,8 +31,12 @@ Document: TypeAlias = Annotated[
 ]
 
 
-class MemoryGetResponse(BaseModel):
-    """A document-shaped API response carrying the hyperdoc tree (ENG-2479/D12)."""
+class ScoredDocumentResponse(BaseModel):
+    """
+    A `DocumentResponse` plus the query-path fields a `ScoredDocument` carries
+    (ENG-2479): relevance score, matched highlights, and the concatenated
+    summary of those highlights.
+    """
 
     document: Document
     """The full hyperdoc tree.
@@ -78,6 +82,9 @@ class MemoryGetResponse(BaseModel):
     document_date: Optional[datetime] = None
     """The document's own date (e.g. email sent date, event date)."""
 
+    highlights: Optional[List[object]] = None
+    """The matched chunks that made this document a hit, with per-chunk scores."""
+
     ingested_at: Optional[datetime] = None
     """When Hyperspell first indexed the document."""
 
@@ -87,21 +94,27 @@ class MemoryGetResponse(BaseModel):
     metadata: Optional[Dict[str, object]] = None
     """Filterable custom metadata attached to the document."""
 
+    score: Optional[float] = None
+    """Relevance of the document to the query."""
+
     status: Optional[Literal["pending", "processing", "completed", "failed", "pending_review", "skipped"]] = None
     """Indexing status of the document."""
+
+    summary: Optional[str] = None
+    """Concatenated text of the matched highlights."""
 
     title: Optional[str] = None
     """Human-readable document title."""
 
 
-from .shared import document
-from .shared.deal import Deal
-from .shared.file import File
-from .shared.task import Task
-from .shared.event import Event
-from .shared.person import Person
-from .shared.company import Company
-from .shared.message import Message
-from .shared.website import Website
-from .shared.transcript import Transcript
-from .shared.conversation import Conversation
+from . import document
+from .deal import Deal
+from .file import File
+from .task import Task
+from .event import Event
+from .person import Person
+from .company import Company
+from .message import Message
+from .website import Website
+from .transcript import Transcript
+from .conversation import Conversation

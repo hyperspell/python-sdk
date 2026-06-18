@@ -1,7 +1,52 @@
 # Shared Types
 
 ```python
-from hyperspell.types import Metadata, QueryResult
+from hyperspell.types import (
+    Blob,
+    Callout,
+    Chunk,
+    Code,
+    Comment,
+    Company,
+    Conversation,
+    Deal,
+    Divider,
+    Document,
+    Equation,
+    Event,
+    File,
+    Footnote,
+    Heading,
+    Image,
+    LineBreak,
+    Link,
+    List,
+    ListItem,
+    Message,
+    Metadata,
+    Paragraph,
+    Person,
+    Provenance,
+    ProvenanceEntity,
+    ProvenanceSource,
+    ProvenanceStep,
+    QueryResult,
+    Quote,
+    ScoredDocumentResponse,
+    Table,
+    TableCell,
+    TableRow,
+    Task,
+    Text,
+    ToDo,
+    ToolCall,
+    ToolResult,
+    Trace,
+    TraceMessage,
+    Transcript,
+    Utterance,
+    Website,
+)
 ```
 
 # Connections
