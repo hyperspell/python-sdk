@@ -39,11 +39,23 @@ class Integration(BaseModel):
         "trace",
         "microsoft_teams",
         "gmail_actions",
+        "granola",
+        "fathom",
+        "fireflies",
+        "linear",
+        "hubspot",
+        "salesforce",
+        "coda",
+        "lightfield",
+        "gong",
     ]
     """The integration's provider"""
 
     actions_only: Optional[bool] = None
     """Whether this integration only supports write actions (no sync)"""
+
+    requires_channel_selection: Optional[bool] = None
+    """Whether the user must select channels before indexing starts"""
 
 
 class IntegrationListResponse(BaseModel):

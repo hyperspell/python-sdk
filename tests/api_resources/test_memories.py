@@ -10,15 +10,16 @@ import pytest
 from hyperspell import Hyperspell, AsyncHyperspell
 from tests.utils import assert_matches_type
 from hyperspell.types import (
-    Memory,
     MemoryStatus,
+    MemoryGetResponse,
+    MemoryListResponse,
     MemoryDeleteResponse,
     MemoryStatusResponse,
     MemoryAddBulkResponse,
 )
 from hyperspell._utils import parse_datetime
 from hyperspell.pagination import SyncCursorPage, AsyncCursorPage
-from hyperspell.types.shared import Resource, QueryResult
+from hyperspell.types.shared import QueryResult
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -40,6 +41,7 @@ class TestMemories:
             resource_id="resource_id",
             source="reddit",
             collection="string",
+            date=parse_datetime("2019-12-27T18:11:19.117Z"),
             metadata={"foo": "string"},
             text="string",
             title="string",
@@ -83,7 +85,7 @@ class TestMemories:
     @parametrize
     def test_method_list(self, client: Hyperspell) -> None:
         memory = client.memories.list()
-        assert_matches_type(SyncCursorPage[Resource], memory, path=["response"])
+        assert_matches_type(SyncCursorPage[MemoryListResponse], memory, path=["response"])
 
     @parametrize
     def test_method_list_with_all_params(self, client: Hyperspell) -> None:
@@ -95,7 +97,7 @@ class TestMemories:
             source="reddit",
             status="pending",
         )
-        assert_matches_type(SyncCursorPage[Resource], memory, path=["response"])
+        assert_matches_type(SyncCursorPage[MemoryListResponse], memory, path=["response"])
 
     @parametrize
     def test_raw_response_list(self, client: Hyperspell) -> None:
@@ -104,7 +106,7 @@ class TestMemories:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         memory = response.parse()
-        assert_matches_type(SyncCursorPage[Resource], memory, path=["response"])
+        assert_matches_type(SyncCursorPage[MemoryListResponse], memory, path=["response"])
 
     @parametrize
     def test_streaming_response_list(self, client: Hyperspell) -> None:
@@ -113,7 +115,7 @@ class TestMemories:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             memory = response.parse()
-            assert_matches_type(SyncCursorPage[Resource], memory, path=["response"])
+            assert_matches_type(SyncCursorPage[MemoryListResponse], memory, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -243,7 +245,7 @@ class TestMemories:
             resource_id="resource_id",
             source="reddit",
         )
-        assert_matches_type(Memory, memory, path=["response"])
+        assert_matches_type(MemoryGetResponse, memory, path=["response"])
 
     @parametrize
     def test_raw_response_get(self, client: Hyperspell) -> None:
@@ -255,7 +257,7 @@ class TestMemories:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         memory = response.parse()
-        assert_matches_type(Memory, memory, path=["response"])
+        assert_matches_type(MemoryGetResponse, memory, path=["response"])
 
     @parametrize
     def test_streaming_response_get(self, client: Hyperspell) -> None:
@@ -267,7 +269,7 @@ class TestMemories:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             memory = response.parse()
-            assert_matches_type(Memory, memory, path=["response"])
+            assert_matches_type(MemoryGetResponse, memory, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -291,7 +293,7 @@ class TestMemories:
         memory = client.memories.search(
             query="What does Hyperspell do?",
             answer=True,
-            effort=0,
+            effort="minimal",
             max_results=0,
             options={
                 "after": parse_datetime("2019-12-27T18:11:19.117Z"),
@@ -314,12 +316,7 @@ class TestMemories:
                     "notion_page_ids": ["string"],
                     "weight": 0,
                 },
-                "reddit": {
-                    "period": "hour",
-                    "sort": "relevance",
-                    "subreddit": "subreddit",
-                    "weight": 0,
-                },
+                "recency_half_life_days": 1,
                 "resource_ids": ["string"],
                 "slack": {
                     "channels": ["string"],
@@ -336,6 +333,7 @@ class TestMemories:
                     "weight": 0,
                 },
             },
+            provenance=True,
             sources=["vault"],
         )
         assert_matches_type(QueryResult, memory, path=["response"])
@@ -449,6 +447,7 @@ class TestAsyncMemories:
             resource_id="resource_id",
             source="reddit",
             collection="string",
+            date=parse_datetime("2019-12-27T18:11:19.117Z"),
             metadata={"foo": "string"},
             text="string",
             title="string",
@@ -492,7 +491,7 @@ class TestAsyncMemories:
     @parametrize
     async def test_method_list(self, async_client: AsyncHyperspell) -> None:
         memory = await async_client.memories.list()
-        assert_matches_type(AsyncCursorPage[Resource], memory, path=["response"])
+        assert_matches_type(AsyncCursorPage[MemoryListResponse], memory, path=["response"])
 
     @parametrize
     async def test_method_list_with_all_params(self, async_client: AsyncHyperspell) -> None:
@@ -504,7 +503,7 @@ class TestAsyncMemories:
             source="reddit",
             status="pending",
         )
-        assert_matches_type(AsyncCursorPage[Resource], memory, path=["response"])
+        assert_matches_type(AsyncCursorPage[MemoryListResponse], memory, path=["response"])
 
     @parametrize
     async def test_raw_response_list(self, async_client: AsyncHyperspell) -> None:
@@ -513,7 +512,7 @@ class TestAsyncMemories:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         memory = await response.parse()
-        assert_matches_type(AsyncCursorPage[Resource], memory, path=["response"])
+        assert_matches_type(AsyncCursorPage[MemoryListResponse], memory, path=["response"])
 
     @parametrize
     async def test_streaming_response_list(self, async_client: AsyncHyperspell) -> None:
@@ -522,7 +521,7 @@ class TestAsyncMemories:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             memory = await response.parse()
-            assert_matches_type(AsyncCursorPage[Resource], memory, path=["response"])
+            assert_matches_type(AsyncCursorPage[MemoryListResponse], memory, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -652,7 +651,7 @@ class TestAsyncMemories:
             resource_id="resource_id",
             source="reddit",
         )
-        assert_matches_type(Memory, memory, path=["response"])
+        assert_matches_type(MemoryGetResponse, memory, path=["response"])
 
     @parametrize
     async def test_raw_response_get(self, async_client: AsyncHyperspell) -> None:
@@ -664,7 +663,7 @@ class TestAsyncMemories:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         memory = await response.parse()
-        assert_matches_type(Memory, memory, path=["response"])
+        assert_matches_type(MemoryGetResponse, memory, path=["response"])
 
     @parametrize
     async def test_streaming_response_get(self, async_client: AsyncHyperspell) -> None:
@@ -676,7 +675,7 @@ class TestAsyncMemories:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             memory = await response.parse()
-            assert_matches_type(Memory, memory, path=["response"])
+            assert_matches_type(MemoryGetResponse, memory, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -700,7 +699,7 @@ class TestAsyncMemories:
         memory = await async_client.memories.search(
             query="What does Hyperspell do?",
             answer=True,
-            effort=0,
+            effort="minimal",
             max_results=0,
             options={
                 "after": parse_datetime("2019-12-27T18:11:19.117Z"),
@@ -723,12 +722,7 @@ class TestAsyncMemories:
                     "notion_page_ids": ["string"],
                     "weight": 0,
                 },
-                "reddit": {
-                    "period": "hour",
-                    "sort": "relevance",
-                    "subreddit": "subreddit",
-                    "weight": 0,
-                },
+                "recency_half_life_days": 1,
                 "resource_ids": ["string"],
                 "slack": {
                     "channels": ["string"],
@@ -745,6 +739,7 @@ class TestAsyncMemories:
                     "weight": 0,
                 },
             },
+            provenance=True,
             sources=["vault"],
         )
         assert_matches_type(QueryResult, memory, path=["response"])

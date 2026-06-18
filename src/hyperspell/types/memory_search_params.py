@@ -17,7 +17,6 @@ __all__ = [
     "OptionsGoogleDrive",
     "OptionsGoogleMail",
     "OptionsNotion",
-    "OptionsReddit",
     "OptionsSlack",
     "OptionsVault",
     "OptionsWebCrawler",
@@ -31,11 +30,15 @@ class MemorySearchParams(TypedDict, total=False):
     answer: bool
     """If true, the query will be answered along with matching source documents."""
 
-    effort: int
-    """Effort level.
+    effort: Literal["minimal", "low", "medium", "high", "very_high"]
+    """How much compute to spend on retrieval.
 
-    0 = pass query through verbatim. 1 = LLM rewrites the query for better retrieval
-    and extracts date filters.
+    Mirrors the dial popularized by frontier-model APIs (OpenAI reasoning_effort,
+    etc.). 'minimal' = verbatim single-shot retrieval (fastest). 'low' = LLM
+    rewrites the query for better retrieval and extracts date filters. 'medium' =
+    rewrite + agentic refinement loop (the answer LLM may request additional
+    retrieval rounds, up to 3). 'high' = rewrite + extended refinement (up to 6
+    rounds). Higher = better recall, more latency, more cost.
     """
 
     max_results: int
@@ -43,6 +46,14 @@ class MemorySearchParams(TypedDict, total=False):
 
     options: Options
     """Search options for the query."""
+
+    provenance: bool
+    """
+    If true (effort='very_high' only), attach a provenance record to the response:
+    the source documents and entities the answer was grounded in, the agent's search
+    trajectory, and any sources that failed. Adds one indexed lookup; intended for
+    auditability / compliance use cases.
+    """
 
     sources: List[
         Literal[
@@ -60,6 +71,15 @@ class MemorySearchParams(TypedDict, total=False):
             "trace",
             "microsoft_teams",
             "gmail_actions",
+            "granola",
+            "fathom",
+            "fireflies",
+            "linear",
+            "hubspot",
+            "salesforce",
+            "coda",
+            "lightfield",
+            "gong",
         ]
     ]
     """Only query documents from these sources."""
@@ -135,30 +155,6 @@ class OptionsNotion(TypedDict, total=False):
     """List of Notion page IDs to search.
 
     If not provided, all pages in the workspace will be searched.
-    """
-
-    weight: float
-    """Weight of results from this source.
-
-    A weight greater than 1.0 means more results from this source will be returned,
-    a weight less than 1.0 means fewer results will be returned. This will only
-    affect results if multiple sources are queried at the same time.
-    """
-
-
-class OptionsReddit(TypedDict, total=False):
-    """Search options for Reddit"""
-
-    period: Literal["hour", "day", "week", "month", "year", "all"]
-    """The time period to search. Defaults to 'month'."""
-
-    sort: Literal["relevance", "new", "hot", "top", "comments"]
-    """The sort order of the posts. Defaults to 'relevance'."""
-
-    subreddit: Optional[str]
-    """The subreddit to search.
-
-    If not provided, the query will be searched for in all subreddits.
     """
 
     weight: float
@@ -275,8 +271,14 @@ class Options(TypedDict, total=False):
     notion: OptionsNotion
     """Search options for Notion"""
 
-    reddit: OptionsReddit
-    """Search options for Reddit"""
+    recency_half_life_days: Optional[float]
+    """
+    When set, multiplies each result's score by an exponential-decay factor based on
+    the document's most recent activity timestamp (source-reported last_modified,
+    falling back to document_date). A document one half-life old gets its score
+    halved. Resources with no recency timestamp are passed through unchanged. Leave
+    unset to disable.
+    """
 
     resource_ids: Optional[SequenceNotStr[str]]
     """Only return results from these specific resource IDs.

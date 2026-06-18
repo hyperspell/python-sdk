@@ -25,6 +25,15 @@ class MemoryStatus(BaseModel):
         "trace",
         "microsoft_teams",
         "gmail_actions",
+        "granola",
+        "fathom",
+        "fireflies",
+        "linear",
+        "hubspot",
+        "salesforce",
+        "coda",
+        "lightfield",
+        "gong",
     ]
 
     status: Literal["pending", "processing", "completed", "failed", "pending_review", "skipped"]

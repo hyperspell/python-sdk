@@ -3,13 +3,14 @@
 from typing import Optional
 from typing_extensions import Literal
 
-from .metadata import Metadata
 from ..._models import BaseModel
 
-__all__ = ["Resource"]
+__all__ = ["ProvenanceSource"]
 
 
-class Resource(BaseModel):
+class ProvenanceSource(BaseModel):
+    """A source document that informed the final answer (the post-rank result set)."""
+
     resource_id: str
 
     source: Literal[
@@ -27,17 +28,17 @@ class Resource(BaseModel):
         "trace",
         "microsoft_teams",
         "gmail_actions",
+        "granola",
+        "fathom",
+        "fireflies",
+        "linear",
+        "hubspot",
+        "salesforce",
+        "coda",
+        "lightfield",
+        "gong",
     ]
 
-    folder_id: Optional[str] = None
-    """Provider folder ID this resource belongs to"""
-
-    metadata: Optional[Metadata] = None
-
-    parent_folder_id: Optional[str] = None
-    """Parent folder ID for policy inheritance"""
-
     score: Optional[float] = None
-    """The relevance of the resource to the query"""
 
     title: Optional[str] = None

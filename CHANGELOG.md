@@ -1,5 +1,53 @@
 # Changelog
 
+## 0.38.0 (2026-06-18)
+
+Full Changelog: [v0.37.0...v0.38.0](https://github.com/hyperspell/python-sdk/compare/v0.37.0...v0.38.0)
+
+### Features
+
+* **api:** api update ([6392fa7](https://github.com/hyperspell/python-sdk/commit/6392fa73061b1cfaf4efffd86653e416a3f132ce))
+* **api:** api update ([29f46b0](https://github.com/hyperspell/python-sdk/commit/29f46b0abc638850c7ea2ed800b886d8a81c3569))
+* **api:** api update ([22cdd86](https://github.com/hyperspell/python-sdk/commit/22cdd8677c2d30fad4ebc6fe97715fcf01628506))
+* **api:** api update ([eeb82b7](https://github.com/hyperspell/python-sdk/commit/eeb82b767927c783df8233b637e63f7c4c14640c))
+* **api:** api update ([02ef637](https://github.com/hyperspell/python-sdk/commit/02ef6374b47293a4b3cd5c5f1bd179a80973aac2))
+* **api:** api update ([e991d68](https://github.com/hyperspell/python-sdk/commit/e991d68d0bd84df2fc52804c431a03127374d1bb))
+* **api:** api update ([a95dee2](https://github.com/hyperspell/python-sdk/commit/a95dee2cb72e8c64be1a4523d7325848c6d9e227))
+* **api:** api update ([e160f73](https://github.com/hyperspell/python-sdk/commit/e160f73c629eff27681b2d13d8cdd9c645cad17e))
+* **api:** api update ([58c8d7c](https://github.com/hyperspell/python-sdk/commit/58c8d7cd0aeb73b2a28dcc30dadac3b5d63bdcb8))
+* **api:** api update ([42d3c82](https://github.com/hyperspell/python-sdk/commit/42d3c825a891a655d999e55ab02572c8cf7d283b))
+* **api:** api update ([edd9b41](https://github.com/hyperspell/python-sdk/commit/edd9b41ea428964bb74381e415df2e3616c6a46e))
+* **api:** api update ([cc26c43](https://github.com/hyperspell/python-sdk/commit/cc26c43e007a42b9ac4de6554d0280ef56b2b713))
+* **api:** api update ([aa0cc75](https://github.com/hyperspell/python-sdk/commit/aa0cc7576de289e8e8dd152c773339e9ac27aafe))
+* **api:** api update ([335d028](https://github.com/hyperspell/python-sdk/commit/335d0288f43e7f681a783f887ce1415ee57cad22))
+* **api:** api update ([3b25c10](https://github.com/hyperspell/python-sdk/commit/3b25c10a9f2be985dcfbfaf059f5595ea316d5f5))
+* **api:** api update ([92fd43a](https://github.com/hyperspell/python-sdk/commit/92fd43a735c10a678fb2e9b3f052c43607b6fb8a))
+* **api:** api update ([7a8e495](https://github.com/hyperspell/python-sdk/commit/7a8e495ee6b8f162dce5c3124b007d2d60f6cdd6))
+* **api:** manual updates ([b25c195](https://github.com/hyperspell/python-sdk/commit/b25c1958b809f7957f354ce2b44cf3a84b8b01e0))
+* **api:** manual updates ([5e31b8a](https://github.com/hyperspell/python-sdk/commit/5e31b8a01c916a8e9afaf744f7bb8e670c8692c4))
+* **api:** manual updates ([cb78a3e](https://github.com/hyperspell/python-sdk/commit/cb78a3e76e04a5ead28e3ea0d5433d05cc6a64d1))
+* **api:** manual updates ([23c9221](https://github.com/hyperspell/python-sdk/commit/23c9221674f7d4d4d563b3e8d80d55c0b884114a))
+* **internal/types:** support eagerly validating pydantic iterators ([e47301a](https://github.com/hyperspell/python-sdk/commit/e47301a63173dd90013f6a2f127baf4cfd9e1553))
+* support setting headers via env ([eba0398](https://github.com/hyperspell/python-sdk/commit/eba039883cd57a0b9df0c4779d1370af59cd36ce))
+
+
+### Bug Fixes
+
+* **client:** add missing f-string prefix in file type error message ([6dbd3ec](https://github.com/hyperspell/python-sdk/commit/6dbd3ecf89c76051dde508e759d15db97acc4141))
+* use correct field name format for multipart file arrays ([0f569cc](https://github.com/hyperspell/python-sdk/commit/0f569cccc70ea96a2da668846b62bf65af449561))
+
+
+### Performance Improvements
+
+* **client:** optimize file structure copying in multipart requests ([c28640c](https://github.com/hyperspell/python-sdk/commit/c28640c64d25fd5dde07836e60e970069b0b65fe))
+
+
+### Chores
+
+* **internal:** more robust bootstrap script ([d4a39dc](https://github.com/hyperspell/python-sdk/commit/d4a39dc3c6f710bf9b9c481197043eeb4a9f8ac9))
+* **internal:** reformat pyproject.toml ([19a83c3](https://github.com/hyperspell/python-sdk/commit/19a83c32f936735d997727bda0bb0ba523f8086c))
+* **tests:** bump steady to v0.22.1 ([7d67d91](https://github.com/hyperspell/python-sdk/commit/7d67d91802b13e3110af4e1ab313cc36ed66ca74))
+
 ## 0.37.0 (2026-04-16)
 
 Full Changelog: [v0.36.0...v0.37.0](https://github.com/hyperspell/python-sdk/compare/v0.36.0...v0.37.0)

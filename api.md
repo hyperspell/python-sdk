@@ -1,7 +1,52 @@
 # Shared Types
 
 ```python
-from hyperspell.types import Metadata, Notification, QueryResult, Resource
+from hyperspell.types import (
+    Blob,
+    Callout,
+    Chunk,
+    Code,
+    Comment,
+    Company,
+    Conversation,
+    Deal,
+    Divider,
+    Document,
+    Equation,
+    Event,
+    File,
+    Footnote,
+    Heading,
+    Image,
+    LineBreak,
+    Link,
+    List,
+    ListItem,
+    Message,
+    Metadata,
+    Paragraph,
+    Person,
+    Provenance,
+    ProvenanceEntity,
+    ProvenanceSource,
+    ProvenanceStep,
+    QueryResult,
+    Quote,
+    ScoredDocumentResponse,
+    Table,
+    TableCell,
+    TableRow,
+    Task,
+    Text,
+    ToDo,
+    ToolCall,
+    ToolResult,
+    Trace,
+    TraceMessage,
+    Transcript,
+    Utterance,
+    Website,
+)
 ```
 
 # Connections
@@ -86,10 +131,11 @@ Types:
 
 ```python
 from hyperspell.types import (
-    Memory,
     MemoryStatus,
+    MemoryListResponse,
     MemoryDeleteResponse,
     MemoryAddBulkResponse,
+    MemoryGetResponse,
     MemoryStatusResponse,
 )
 ```
@@ -97,11 +143,11 @@ from hyperspell.types import (
 Methods:
 
 - <code title="post /memories/update/{source}/{resource_id}">client.memories.<a href="./src/hyperspell/resources/memories.py">update</a>(resource_id, \*, source, \*\*<a href="src/hyperspell/types/memory_update_params.py">params</a>) -> <a href="./src/hyperspell/types/memory_status.py">MemoryStatus</a></code>
-- <code title="get /memories/list">client.memories.<a href="./src/hyperspell/resources/memories.py">list</a>(\*\*<a href="src/hyperspell/types/memory_list_params.py">params</a>) -> <a href="./src/hyperspell/types/shared/resource.py">SyncCursorPage[Resource]</a></code>
+- <code title="get /memories/list">client.memories.<a href="./src/hyperspell/resources/memories.py">list</a>(\*\*<a href="src/hyperspell/types/memory_list_params.py">params</a>) -> <a href="./src/hyperspell/types/memory_list_response.py">SyncCursorPage[MemoryListResponse]</a></code>
 - <code title="delete /memories/delete/{source}/{resource_id}">client.memories.<a href="./src/hyperspell/resources/memories.py">delete</a>(resource_id, \*, source) -> <a href="./src/hyperspell/types/memory_delete_response.py">MemoryDeleteResponse</a></code>
 - <code title="post /memories/add">client.memories.<a href="./src/hyperspell/resources/memories.py">add</a>(\*\*<a href="src/hyperspell/types/memory_add_params.py">params</a>) -> <a href="./src/hyperspell/types/memory_status.py">MemoryStatus</a></code>
 - <code title="post /memories/add/bulk">client.memories.<a href="./src/hyperspell/resources/memories.py">add_bulk</a>(\*\*<a href="src/hyperspell/types/memory_add_bulk_params.py">params</a>) -> <a href="./src/hyperspell/types/memory_add_bulk_response.py">MemoryAddBulkResponse</a></code>
-- <code title="get /memories/get/{source}/{resource_id}">client.memories.<a href="./src/hyperspell/resources/memories.py">get</a>(resource_id, \*, source) -> <a href="./src/hyperspell/types/memory.py">Memory</a></code>
+- <code title="get /memories/get/{source}/{resource_id}">client.memories.<a href="./src/hyperspell/resources/memories.py">get</a>(resource_id, \*, source) -> <a href="./src/hyperspell/types/memory_get_response.py">MemoryGetResponse</a></code>
 - <code title="post /memories/query">client.memories.<a href="./src/hyperspell/resources/memories.py">search</a>(\*\*<a href="src/hyperspell/types/memory_search_params.py">params</a>) -> <a href="./src/hyperspell/types/shared/query_result.py">QueryResult</a></code>
 - <code title="get /memories/status">client.memories.<a href="./src/hyperspell/resources/memories.py">status</a>() -> <a href="./src/hyperspell/types/memory_status_response.py">MemoryStatusResponse</a></code>
 - <code title="post /memories/upload">client.memories.<a href="./src/hyperspell/resources/memories.py">upload</a>(\*\*<a href="src/hyperspell/types/memory_upload_params.py">params</a>) -> <a href="./src/hyperspell/types/memory_status.py">MemoryStatus</a></code>
@@ -111,12 +157,17 @@ Methods:
 Types:
 
 ```python
-from hyperspell.types import EvaluateScoreHighlightResponse, EvaluateScoreQueryResponse
+from hyperspell.types import (
+    EvaluateListQueriesResponse,
+    EvaluateScoreHighlightResponse,
+    EvaluateScoreQueryResponse,
+)
 ```
 
 Methods:
 
 - <code title="get /evaluate/query/{query_id}">client.evaluate.<a href="./src/hyperspell/resources/evaluate.py">get_query</a>(query_id) -> <a href="./src/hyperspell/types/shared/query_result.py">QueryResult</a></code>
+- <code title="get /evaluate/queries">client.evaluate.<a href="./src/hyperspell/resources/evaluate.py">list_queries</a>(\*\*<a href="src/hyperspell/types/evaluate_list_queries_params.py">params</a>) -> <a href="./src/hyperspell/types/evaluate_list_queries_response.py">SyncCursorPage[EvaluateListQueriesResponse]</a></code>
 - <code title="post /evaluate/highlight/{highlight_id}">client.evaluate.<a href="./src/hyperspell/resources/evaluate.py">score_highlight</a>(highlight_id, \*\*<a href="src/hyperspell/types/evaluate_score_highlight_params.py">params</a>) -> <a href="./src/hyperspell/types/evaluate_score_highlight_response.py">EvaluateScoreHighlightResponse</a></code>
 - <code title="post /evaluate/query/{query_id}">client.evaluate.<a href="./src/hyperspell/resources/evaluate.py">score_query</a>(query_id, \*\*<a href="src/hyperspell/types/evaluate_score_query_params.py">params</a>) -> <a href="./src/hyperspell/types/evaluate_score_query_response.py">EvaluateScoreQueryResponse</a></code>
 

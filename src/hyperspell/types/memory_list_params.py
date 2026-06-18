@@ -38,6 +38,15 @@ class MemoryListParams(TypedDict, total=False):
             "trace",
             "microsoft_teams",
             "gmail_actions",
+            "granola",
+            "fathom",
+            "fireflies",
+            "linear",
+            "hubspot",
+            "salesforce",
+            "coda",
+            "lightfield",
+            "gong",
         ]
     ]
     """Filter documents by source."""

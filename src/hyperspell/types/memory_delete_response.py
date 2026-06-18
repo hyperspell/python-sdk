@@ -29,6 +29,15 @@ class MemoryDeleteResponse(BaseModel):
         "trace",
         "microsoft_teams",
         "gmail_actions",
+        "granola",
+        "fathom",
+        "fireflies",
+        "linear",
+        "hubspot",
+        "salesforce",
+        "coda",
+        "lightfield",
+        "gong",
     ]
 
     success: bool

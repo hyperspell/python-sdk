@@ -48,6 +48,15 @@ class AuthMeResponse(BaseModel):
             "trace",
             "microsoft_teams",
             "gmail_actions",
+            "granola",
+            "fathom",
+            "fireflies",
+            "linear",
+            "hubspot",
+            "salesforce",
+            "coda",
+            "lightfield",
+            "gong",
         ]
     ]
     """All integrations available for the app"""
@@ -68,6 +77,15 @@ class AuthMeResponse(BaseModel):
             "trace",
             "microsoft_teams",
             "gmail_actions",
+            "granola",
+            "fathom",
+            "fireflies",
+            "linear",
+            "hubspot",
+            "salesforce",
+            "coda",
+            "lightfield",
+            "gong",
         ]
     ]
     """All integrations installed for the user"""
