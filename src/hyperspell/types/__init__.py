@@ -2,8 +2,55 @@
 
 from __future__ import annotations
 
+from . import shared, memory_get_response, memory_list_response
+from .. import _compat
 from .token import Token as Token
-from .shared import Metadata as Metadata, QueryResult as QueryResult
+from .shared import (
+    Blob as Blob,
+    Code as Code,
+    Deal as Deal,
+    File as File,
+    Link as Link,
+    List as List,
+    Task as Task,
+    Text as Text,
+    ToDo as ToDo,
+    Chunk as Chunk,
+    Event as Event,
+    Image as Image,
+    Quote as Quote,
+    Table as Table,
+    Trace as Trace,
+    Person as Person,
+    Callout as Callout,
+    Comment as Comment,
+    Company as Company,
+    Divider as Divider,
+    Heading as Heading,
+    Message as Message,
+    Website as Website,
+    Document as Document,
+    Equation as Equation,
+    Footnote as Footnote,
+    ListItem as ListItem,
+    Metadata as Metadata,
+    TableRow as TableRow,
+    ToolCall as ToolCall,
+    LineBreak as LineBreak,
+    Paragraph as Paragraph,
+    TableCell as TableCell,
+    Utterance as Utterance,
+    Provenance as Provenance,
+    ToolResult as ToolResult,
+    Transcript as Transcript,
+    QueryResult as QueryResult,
+    Conversation as Conversation,
+    TraceMessage as TraceMessage,
+    ProvenanceStep as ProvenanceStep,
+    ProvenanceEntity as ProvenanceEntity,
+    ProvenanceSource as ProvenanceSource,
+    ScoredDocumentResponse as ScoredDocumentResponse,
+)
 from .memory_status import MemoryStatus as MemoryStatus
 from .auth_me_response import AuthMeResponse as AuthMeResponse
 from .memory_add_params import MemoryAddParams as MemoryAddParams
@@ -43,3 +90,68 @@ from .folder_list_policies_response import FolderListPoliciesResponse as FolderL
 from .evaluate_list_queries_response import EvaluateListQueriesResponse as EvaluateListQueriesResponse
 from .evaluate_score_highlight_params import EvaluateScoreHighlightParams as EvaluateScoreHighlightParams
 from .evaluate_score_highlight_response import EvaluateScoreHighlightResponse as EvaluateScoreHighlightResponse
+
+# Rebuild cyclical models only after all modules are imported.
+# This ensures that, when building the deferred (due to cyclical references) model schema,
+# Pydantic can resolve the necessary references.
+# See: https://github.com/pydantic/pydantic/issues/11250 for more context.
+if _compat.PYDANTIC_V1:
+    memory_list_response.MemoryListResponse.update_forward_refs()  # type: ignore
+    memory_get_response.MemoryGetResponse.update_forward_refs()  # type: ignore
+    shared.callout.Callout.update_forward_refs()  # type: ignore
+    shared.chunk.Chunk.update_forward_refs()  # type: ignore
+    shared.company.Company.update_forward_refs()  # type: ignore
+    shared.conversation.Conversation.update_forward_refs()  # type: ignore
+    shared.deal.Deal.update_forward_refs()  # type: ignore
+    shared.document.Document.update_forward_refs()  # type: ignore
+    shared.equation.Equation.update_forward_refs()  # type: ignore
+    shared.event.Event.update_forward_refs()  # type: ignore
+    shared.file.File.update_forward_refs()  # type: ignore
+    shared.footnote.Footnote.update_forward_refs()  # type: ignore
+    shared.heading.Heading.update_forward_refs()  # type: ignore
+    shared.list.List.update_forward_refs()  # type: ignore
+    shared.list_item.ListItem.update_forward_refs()  # type: ignore
+    shared.message.Message.update_forward_refs()  # type: ignore
+    shared.paragraph.Paragraph.update_forward_refs()  # type: ignore
+    shared.person.Person.update_forward_refs()  # type: ignore
+    shared.query_result.QueryResult.update_forward_refs()  # type: ignore
+    shared.quote.Quote.update_forward_refs()  # type: ignore
+    shared.scored_document_response.ScoredDocumentResponse.update_forward_refs()  # type: ignore
+    shared.table.Table.update_forward_refs()  # type: ignore
+    shared.table_cell.TableCell.update_forward_refs()  # type: ignore
+    shared.table_row.TableRow.update_forward_refs()  # type: ignore
+    shared.task.Task.update_forward_refs()  # type: ignore
+    shared.to_do.ToDo.update_forward_refs()  # type: ignore
+    shared.transcript.Transcript.update_forward_refs()  # type: ignore
+    shared.utterance.Utterance.update_forward_refs()  # type: ignore
+    shared.website.Website.update_forward_refs()  # type: ignore
+else:
+    memory_list_response.MemoryListResponse.model_rebuild(_parent_namespace_depth=0)
+    memory_get_response.MemoryGetResponse.model_rebuild(_parent_namespace_depth=0)
+    shared.callout.Callout.model_rebuild(_parent_namespace_depth=0)
+    shared.chunk.Chunk.model_rebuild(_parent_namespace_depth=0)
+    shared.company.Company.model_rebuild(_parent_namespace_depth=0)
+    shared.conversation.Conversation.model_rebuild(_parent_namespace_depth=0)
+    shared.deal.Deal.model_rebuild(_parent_namespace_depth=0)
+    shared.document.Document.model_rebuild(_parent_namespace_depth=0)
+    shared.equation.Equation.model_rebuild(_parent_namespace_depth=0)
+    shared.event.Event.model_rebuild(_parent_namespace_depth=0)
+    shared.file.File.model_rebuild(_parent_namespace_depth=0)
+    shared.footnote.Footnote.model_rebuild(_parent_namespace_depth=0)
+    shared.heading.Heading.model_rebuild(_parent_namespace_depth=0)
+    shared.list.List.model_rebuild(_parent_namespace_depth=0)
+    shared.list_item.ListItem.model_rebuild(_parent_namespace_depth=0)
+    shared.message.Message.model_rebuild(_parent_namespace_depth=0)
+    shared.paragraph.Paragraph.model_rebuild(_parent_namespace_depth=0)
+    shared.person.Person.model_rebuild(_parent_namespace_depth=0)
+    shared.query_result.QueryResult.model_rebuild(_parent_namespace_depth=0)
+    shared.quote.Quote.model_rebuild(_parent_namespace_depth=0)
+    shared.scored_document_response.ScoredDocumentResponse.model_rebuild(_parent_namespace_depth=0)
+    shared.table.Table.model_rebuild(_parent_namespace_depth=0)
+    shared.table_cell.TableCell.model_rebuild(_parent_namespace_depth=0)
+    shared.table_row.TableRow.model_rebuild(_parent_namespace_depth=0)
+    shared.task.Task.model_rebuild(_parent_namespace_depth=0)
+    shared.to_do.ToDo.model_rebuild(_parent_namespace_depth=0)
+    shared.transcript.Transcript.model_rebuild(_parent_namespace_depth=0)
+    shared.utterance.Utterance.model_rebuild(_parent_namespace_depth=0)
+    shared.website.Website.model_rebuild(_parent_namespace_depth=0)
