@@ -294,7 +294,7 @@ class TestMemories:
             query="What does Hyperspell do?",
             answer=True,
             effort="minimal",
-            max_results=0,
+            max_results=1,
             options={
                 "after": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "answer_model": "llama-3.1",
@@ -310,7 +310,7 @@ class TestMemories:
                     "label_ids": ["string"],
                     "weight": 0,
                 },
-                "max_results": 200,
+                "max_results": 1,
                 "memory_types": ["procedure"],
                 "notion": {
                     "notion_page_ids": ["string"],
@@ -700,7 +700,7 @@ class TestAsyncMemories:
             query="What does Hyperspell do?",
             answer=True,
             effort="minimal",
-            max_results=0,
+            max_results=1,
             options={
                 "after": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "answer_model": "llama-3.1",
@@ -716,7 +716,7 @@ class TestAsyncMemories:
                     "label_ids": ["string"],
                     "weight": 0,
                 },
-                "max_results": 200,
+                "max_results": 1,
                 "memory_types": ["procedure"],
                 "notion": {
                     "notion_page_ids": ["string"],
