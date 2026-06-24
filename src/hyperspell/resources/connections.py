@@ -72,8 +72,14 @@ class ConnectionsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ConnectionRevokeResponse:
         """
-        Revokes Hyperspell's access the given provider and deletes all stored
-        credentials and indexed data.
+        Revoke Hyperspell's access to a provider and delete this user's stored data.
+
+        The external OAuth/Unified revoke and the (potentially large) data purge run in
+        a background Temporal workflow; this returns `202 Accepted` immediately. A heavy
+        provider — a Gmail account can carry hundreds of thousands of chunks — plus a
+        slow third-party revoke would otherwise outrun the request timeout: the old
+        synchronous path "timed out" for the caller while still finishing server-side,
+        making the outcome invisible. Idempotent per (app, user, provider).
 
         Args:
           extra_headers: Send extra headers
@@ -146,8 +152,14 @@ class AsyncConnectionsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ConnectionRevokeResponse:
         """
-        Revokes Hyperspell's access the given provider and deletes all stored
-        credentials and indexed data.
+        Revoke Hyperspell's access to a provider and delete this user's stored data.
+
+        The external OAuth/Unified revoke and the (potentially large) data purge run in
+        a background Temporal workflow; this returns `202 Accepted` immediately. A heavy
+        provider — a Gmail account can carry hundreds of thousands of chunks — plus a
+        slow third-party revoke would otherwise outrun the request timeout: the old
+        synchronous path "timed out" for the caller while still finishing server-side,
+        making the outcome invisible. Idempotent per (app, user, provider).
 
         Args:
           extra_headers: Send extra headers
