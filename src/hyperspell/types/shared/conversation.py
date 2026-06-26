@@ -32,6 +32,8 @@ class Conversation(BaseModel):
 
     text: Optional[str] = None
 
+    title: Optional[str] = None
+
     type: Optional[Literal["conversation"]] = None
 
 
