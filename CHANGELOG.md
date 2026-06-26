@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.39.0](https://github.com/hyperspell/python-sdk/compare/v0.38.0...v0.39.0) (2026-06-26)
+
+
+### Features
+
+* migrate SDK release automation to release-please (off Stainless) ([#114](https://github.com/hyperspell/python-sdk/issues/114)) ([bf89680](https://github.com/hyperspell/python-sdk/commit/bf896805f8b35f8fc60233c64a2cc3de6034ad4c))
+
 ## 0.38.0 (2026-06-18)
 
 Full Changelog: [v0.37.0...v0.38.0](https://github.com/hyperspell/python-sdk/compare/v0.37.0...v0.38.0)
