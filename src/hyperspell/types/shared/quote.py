@@ -42,6 +42,7 @@ if TYPE_CHECKING or not PYDANTIC_V1:
                 LineBreak,
                 "ListList",
                 "ListItem",
+                "Page",
                 "Paragraph",
                 "Quote",
                 "Table",
@@ -74,6 +75,7 @@ else:
             LineBreak,
             "ListList",
             "ListItem",
+            "Page",
             "Paragraph",
             "Quote",
             "Table",
@@ -96,15 +98,10 @@ class Quote(BaseModel):
     children: Optional[TypingList[Child]] = None
 
     metadata: Optional[Metadata] = None
-    """Per-block annotations carried by any Hyperdoc node (ENG-1390).
+    """Optional annotations carried by a hyperdoc node.
 
-    Out-of-band annotations that travel with a block but aren't part of its content:
-    provenance (`sources`) and human edit attribution (`edited_by`). New annotation
-    types get added here as typed fields as the need arises.
-
-    Empty by default. Because `Node.model_dump` forces `exclude_none=True`, an unset
-    `metadata` (None) is dropped from serialization entirely, and within a populated
-    `Metadata` only the set keys survive.
+    Includes source provenance and human edit attribution. Unset metadata is omitted
+    from serialized responses.
     """
 
     text: Optional[str] = None
@@ -113,6 +110,7 @@ class Quote(BaseModel):
 
 
 from .list import List as ListList
+from .page import Page
 from .chunk import Chunk
 from .table import Table
 from .to_do import ToDo

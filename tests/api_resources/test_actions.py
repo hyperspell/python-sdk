@@ -25,7 +25,7 @@ class TestActions:
         action = client.actions.add_reaction(
             channel="channel",
             name="name",
-            provider="reddit",
+            provider="slack",
             timestamp="timestamp",
         )
         assert_matches_type(ActionAddReactionResponse, action, path=["response"])
@@ -35,7 +35,7 @@ class TestActions:
         action = client.actions.add_reaction(
             channel="channel",
             name="name",
-            provider="reddit",
+            provider="slack",
             timestamp="timestamp",
             connection="connection",
         )
@@ -46,7 +46,7 @@ class TestActions:
         response = client.actions.with_raw_response.add_reaction(
             channel="channel",
             name="name",
-            provider="reddit",
+            provider="slack",
             timestamp="timestamp",
         )
 
@@ -60,7 +60,7 @@ class TestActions:
         with client.actions.with_streaming_response.add_reaction(
             channel="channel",
             name="name",
-            provider="reddit",
+            provider="slack",
             timestamp="timestamp",
         ) as response:
             assert not response.is_closed
@@ -74,7 +74,7 @@ class TestActions:
     @parametrize
     def test_method_send_message(self, client: Hyperspell) -> None:
         action = client.actions.send_message(
-            provider="reddit",
+            provider="slack",
             text="text",
         )
         assert_matches_type(ActionSendMessageResponse, action, path=["response"])
@@ -82,7 +82,7 @@ class TestActions:
     @parametrize
     def test_method_send_message_with_all_params(self, client: Hyperspell) -> None:
         action = client.actions.send_message(
-            provider="reddit",
+            provider="slack",
             text="text",
             channel="channel",
             connection="connection",
@@ -93,7 +93,7 @@ class TestActions:
     @parametrize
     def test_raw_response_send_message(self, client: Hyperspell) -> None:
         response = client.actions.with_raw_response.send_message(
-            provider="reddit",
+            provider="slack",
             text="text",
         )
 
@@ -105,7 +105,7 @@ class TestActions:
     @parametrize
     def test_streaming_response_send_message(self, client: Hyperspell) -> None:
         with client.actions.with_streaming_response.send_message(
-            provider="reddit",
+            provider="slack",
             text="text",
         ) as response:
             assert not response.is_closed
@@ -127,7 +127,7 @@ class TestAsyncActions:
         action = await async_client.actions.add_reaction(
             channel="channel",
             name="name",
-            provider="reddit",
+            provider="slack",
             timestamp="timestamp",
         )
         assert_matches_type(ActionAddReactionResponse, action, path=["response"])
@@ -137,7 +137,7 @@ class TestAsyncActions:
         action = await async_client.actions.add_reaction(
             channel="channel",
             name="name",
-            provider="reddit",
+            provider="slack",
             timestamp="timestamp",
             connection="connection",
         )
@@ -148,7 +148,7 @@ class TestAsyncActions:
         response = await async_client.actions.with_raw_response.add_reaction(
             channel="channel",
             name="name",
-            provider="reddit",
+            provider="slack",
             timestamp="timestamp",
         )
 
@@ -162,7 +162,7 @@ class TestAsyncActions:
         async with async_client.actions.with_streaming_response.add_reaction(
             channel="channel",
             name="name",
-            provider="reddit",
+            provider="slack",
             timestamp="timestamp",
         ) as response:
             assert not response.is_closed
@@ -176,7 +176,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_send_message(self, async_client: AsyncHyperspell) -> None:
         action = await async_client.actions.send_message(
-            provider="reddit",
+            provider="slack",
             text="text",
         )
         assert_matches_type(ActionSendMessageResponse, action, path=["response"])
@@ -184,7 +184,7 @@ class TestAsyncActions:
     @parametrize
     async def test_method_send_message_with_all_params(self, async_client: AsyncHyperspell) -> None:
         action = await async_client.actions.send_message(
-            provider="reddit",
+            provider="slack",
             text="text",
             channel="channel",
             connection="connection",
@@ -195,7 +195,7 @@ class TestAsyncActions:
     @parametrize
     async def test_raw_response_send_message(self, async_client: AsyncHyperspell) -> None:
         response = await async_client.actions.with_raw_response.send_message(
-            provider="reddit",
+            provider="slack",
             text="text",
         )
 
@@ -207,7 +207,7 @@ class TestAsyncActions:
     @parametrize
     async def test_streaming_response_send_message(self, async_client: AsyncHyperspell) -> None:
         async with async_client.actions.with_streaming_response.send_message(
-            provider="reddit",
+            provider="slack",
             text="text",
         ) as response:
             assert not response.is_closed

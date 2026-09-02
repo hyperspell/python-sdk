@@ -43,6 +43,7 @@ if TYPE_CHECKING or not PYDANTIC_V1:
                 LineBreak,
                 "ListList",
                 "ListItem",
+                "Page",
                 "Paragraph",
                 "Quote",
                 "Table",
@@ -75,6 +76,7 @@ else:
             LineBreak,
             "ListList",
             "ListItem",
+            "Page",
             "Paragraph",
             "Quote",
             "Table",
@@ -98,6 +100,8 @@ class Person(BaseModel):
 
     alt_names: Optional[TypingList[str]] = None
 
+    buying_roles: Optional[TypingList[str]] = None
+
     children: Optional[TypingList[Child]] = None
 
     company: Optional[str] = None
@@ -113,25 +117,48 @@ class Person(BaseModel):
     emails: Optional[TypingList[str]] = None
     """All known email addresses; `email` holds the primary one"""
 
+    employment_role: Optional[str] = None
+
+    employment_seniority: Optional[str] = None
+
+    employment_sub_role: Optional[str] = None
+
     image_url: Optional[str] = None
+
+    industry: Optional[str] = None
+
+    is_app_user: Optional[bool] = None
+
+    is_bot: Optional[bool] = None
 
     job_title: Optional[str] = None
 
+    last_sales_activity_at: Optional[str] = None
+
+    last_sales_activity_type: Optional[str] = None
+
+    lead_status: Optional[str] = None
+
+    lifecycle_stage: Optional[str] = None
+
     link_urls: Optional[TypingList[str]] = None
 
+    linkedin_url: Optional[str] = None
+
+    marketing_contact_status: Optional[str] = None
+
     metadata: Optional[Metadata] = None
-    """Per-block annotations carried by any Hyperdoc node (ENG-1390).
+    """Optional annotations carried by a hyperdoc node.
 
-    Out-of-band annotations that travel with a block but aren't part of its content:
-    provenance (`sources`) and human edit attribution (`edited_by`). New annotation
-    types get added here as typed fields as the need arises.
-
-    Empty by default. Because `Node.model_dump` forces `exclude_none=True`, an unset
-    `metadata` (None) is dropped from serialization entirely, and within a populated
-    `Metadata` only the set keys survive.
+    Includes source provenance and human edit attribution. Unset metadata is omitted
+    from serialized responses.
     """
 
     name: Optional[str] = None
+
+    original_source: Optional[str] = None
+
+    persona: Optional[str] = None
 
     phone_numbers: Optional[TypingList[str]] = None
 
@@ -139,12 +166,17 @@ class Person(BaseModel):
 
     text: Optional[str] = None
 
+    timezone: Optional[str] = None
+
     type: Optional[Literal["person"]] = None
 
     username: Optional[str] = None
 
+    website: Optional[str] = None
+
 
 from .list import List as ListList
+from .page import Page
 from .chunk import Chunk
 from .quote import Quote
 from .table import Table

@@ -93,6 +93,7 @@ class TestMemories:
             collection="collection",
             cursor="cursor",
             filter="filter",
+            include_chunks=0,
             size=0,
             source="reddit",
             status="pending",
@@ -248,6 +249,15 @@ class TestMemories:
         assert_matches_type(MemoryGetResponse, memory, path=["response"])
 
     @parametrize
+    def test_method_get_with_all_params(self, client: Hyperspell) -> None:
+        memory = client.memories.get(
+            resource_id="resource_id",
+            source="reddit",
+            include_chunks=True,
+        )
+        assert_matches_type(MemoryGetResponse, memory, path=["response"])
+
+    @parametrize
     def test_raw_response_get(self, client: Hyperspell) -> None:
         response = client.memories.with_raw_response.get(
             resource_id="resource_id",
@@ -299,12 +309,7 @@ class TestMemories:
                 "after": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "answer_model": "llama-3.1",
                 "before": parse_datetime("2019-12-27T18:11:19.117Z"),
-                "box": {"weight": 0},
                 "filter": {},
-                "google_calendar": {
-                    "calendar_id": "calendar_id",
-                    "weight": 0,
-                },
                 "google_drive": {"weight": 0},
                 "google_mail": {
                     "label_ids": ["string"],
@@ -326,6 +331,7 @@ class TestMemories:
                     "include_private": True,
                     "weight": 0,
                 },
+                "timezone": "timezone",
                 "vault": {"weight": 0},
                 "web_crawler": {
                     "max_depth": 0,
@@ -499,6 +505,7 @@ class TestAsyncMemories:
             collection="collection",
             cursor="cursor",
             filter="filter",
+            include_chunks=0,
             size=0,
             source="reddit",
             status="pending",
@@ -654,6 +661,15 @@ class TestAsyncMemories:
         assert_matches_type(MemoryGetResponse, memory, path=["response"])
 
     @parametrize
+    async def test_method_get_with_all_params(self, async_client: AsyncHyperspell) -> None:
+        memory = await async_client.memories.get(
+            resource_id="resource_id",
+            source="reddit",
+            include_chunks=True,
+        )
+        assert_matches_type(MemoryGetResponse, memory, path=["response"])
+
+    @parametrize
     async def test_raw_response_get(self, async_client: AsyncHyperspell) -> None:
         response = await async_client.memories.with_raw_response.get(
             resource_id="resource_id",
@@ -705,12 +721,7 @@ class TestAsyncMemories:
                 "after": parse_datetime("2019-12-27T18:11:19.117Z"),
                 "answer_model": "llama-3.1",
                 "before": parse_datetime("2019-12-27T18:11:19.117Z"),
-                "box": {"weight": 0},
                 "filter": {},
-                "google_calendar": {
-                    "calendar_id": "calendar_id",
-                    "weight": 0,
-                },
                 "google_drive": {"weight": 0},
                 "google_mail": {
                     "label_ids": ["string"],
@@ -732,6 +743,7 @@ class TestAsyncMemories:
                     "include_private": True,
                     "weight": 0,
                 },
+                "timezone": "timezone",
                 "vault": {"weight": 0},
                 "web_crawler": {
                     "max_depth": 0,

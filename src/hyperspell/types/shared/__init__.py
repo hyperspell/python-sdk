@@ -6,6 +6,7 @@ from .deal import Deal as Deal
 from .file import File as File
 from .link import Link as Link
 from .list import List as List
+from .page import Page as Page
 from .task import Task as Task
 from .text import Text as Text
 from .chunk import Chunk as Chunk

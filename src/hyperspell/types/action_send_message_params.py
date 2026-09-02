@@ -9,34 +9,8 @@ __all__ = ["ActionSendMessageParams"]
 
 
 class ActionSendMessageParams(TypedDict, total=False):
-    provider: Required[
-        Literal[
-            "reddit",
-            "notion",
-            "slack",
-            "google_calendar",
-            "google_mail",
-            "box",
-            "dropbox",
-            "github",
-            "google_drive",
-            "vault",
-            "web_crawler",
-            "trace",
-            "microsoft_teams",
-            "gmail_actions",
-            "granola",
-            "fathom",
-            "fireflies",
-            "linear",
-            "hubspot",
-            "salesforce",
-            "coda",
-            "lightfield",
-            "gong",
-        ]
-    ]
-    """Integration provider (e.g., slack)"""
+    provider: Required[Literal["slack"]]
+    """Integration provider."""
 
     text: Required[str]
     """Message text"""

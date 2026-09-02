@@ -12,8 +12,6 @@ from .._utils import PropertyInfo
 __all__ = [
     "MemorySearchParams",
     "Options",
-    "OptionsBox",
-    "OptionsGoogleCalendar",
     "OptionsGoogleDrive",
     "OptionsGoogleMail",
     "OptionsNotion",
@@ -31,14 +29,11 @@ class MemorySearchParams(TypedDict, total=False):
     """If true, the query will be answered along with matching source documents."""
 
     effort: Literal["minimal", "low", "medium", "high", "very_high"]
-    """How much compute to spend on retrieval.
+    """Controls retrieval thoroughness.
 
-    Mirrors the dial popularized by frontier-model APIs (OpenAI reasoning_effort,
-    etc.). 'minimal' = verbatim single-shot retrieval (fastest). 'low' = LLM
-    rewrites the query for better retrieval and extracts date filters. 'medium' =
-    rewrite + agentic refinement loop (the answer LLM may request additional
-    retrieval rounds, up to 3). 'high' = rewrite + extended refinement (up to 6
-    rounds). Higher = better recall, more latency, more cost.
+    'minimal' performs direct retrieval. 'low' improves the query and extracts date
+    filters. 'medium' adds up to 3 refinement rounds; 'high' allows up to 6. Higher
+    levels can improve recall but add latency and cost.
     """
 
     max_results: int
@@ -51,8 +46,8 @@ class MemorySearchParams(TypedDict, total=False):
     """
     If true (effort='very_high' only), attach a provenance record to the response:
     the source documents and entities the answer was grounded in, the agent's search
-    trajectory, and any sources that failed. Adds one indexed lookup; intended for
-    auditability / compliance use cases.
+    trajectory, and any sources that failed. Intended for auditability and
+    compliance use cases.
     """
 
     sources: List[
@@ -62,57 +57,42 @@ class MemorySearchParams(TypedDict, total=False):
             "slack",
             "google_calendar",
             "google_mail",
+            "imap",
+            "google_meet",
             "box",
             "dropbox",
             "github",
+            "gitlab",
             "google_drive",
             "vault",
             "web_crawler",
             "trace",
+            "microsoft_outlook",
             "microsoft_teams",
-            "gmail_actions",
             "granola",
             "fathom",
             "fireflies",
+            "figma",
             "linear",
             "hubspot",
             "salesforce",
             "coda",
-            "lightfield",
+            "confluence",
+            "jira",
+            "metabase",
             "gong",
+            "clickup",
+            "lightfield",
+            "pylon",
+            "fellow",
+            "odoo",
+            "external_mcp",
         ]
     ]
-    """Only query documents from these sources."""
+    """Only query documents from these sources.
 
-
-class OptionsBox(TypedDict, total=False):
-    """Search options for Box"""
-
-    weight: float
-    """Weight of results from this source.
-
-    A weight greater than 1.0 means more results from this source will be returned,
-    a weight less than 1.0 means fewer results will be returned. This will only
-    affect results if multiple sources are queried at the same time.
-    """
-
-
-class OptionsGoogleCalendar(TypedDict, total=False):
-    """Search options for Google Calendar"""
-
-    calendar_id: Optional[str]
-    """The ID of the calendar to search.
-
-    If not provided, it will use the ID of the default calendar. You can get the
-    list of calendars with the `/integrations/google_calendar/list` endpoint.
-    """
-
-    weight: float
-    """Weight of results from this source.
-
-    A weight greater than 1.0 means more results from this source will be returned,
-    a weight less than 1.0 means fewer results will be returned. This will only
-    affect results if multiple sources are queried at the same time.
+    Names are case-insensitive and accept either separator, so `Google Drive`'s
+    provider may be given as `google_drive`, `google-drive`, or `GOOGLE_DRIVE`.
     """
 
 
@@ -233,24 +213,29 @@ class Options(TypedDict, total=False):
     """Only query documents created on or after this date."""
 
     answer_model: Literal[
-        "llama-3.1", "gemma2", "qwen-qwq", "mistral-saba", "llama-4-scout", "deepseek-r1", "gpt-oss-20b", "gpt-oss-120b"
+        "llama-3.1",
+        "gemma2",
+        "qwen-qwq",
+        "mistral-saba",
+        "llama-4-scout",
+        "deepseek-r1",
+        "gpt-oss-20b",
+        "gpt-oss-120b",
+        "claude-sonnet-4-6",
+        "claude-sonnet-5",
+        "claude-opus-4-7",
+        "claude-opus-4-8",
     ]
     """Model to use for answer generation when answer=True"""
 
     before: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
     """Only query documents created before this date."""
 
-    box: OptionsBox
-    """Search options for Box"""
-
     filter: Optional[Dict[str, object]]
     """Metadata filters using MongoDB-style operators.
 
     Example: {'status': 'published', 'priority': {'$gt': 3}}
     """
-
-    google_calendar: OptionsGoogleCalendar
-    """Search options for Google Calendar"""
 
     google_drive: OptionsGoogleDrive
     """Search options for Google Drive"""
@@ -289,6 +274,12 @@ class Options(TypedDict, total=False):
 
     slack: OptionsSlack
     """Search options for Slack"""
+
+    timezone: str
+    """IANA timezone used to interpret date-only bounds and relative calendar phrases.
+
+    Defaults to UTC.
+    """
 
     vault: OptionsVault
     """Search options for vault"""

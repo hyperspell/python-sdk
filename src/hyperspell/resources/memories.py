@@ -10,6 +10,7 @@ import httpx
 
 from ..types import (
     memory_add_params,
+    memory_get_params,
     memory_list_params,
     memory_search_params,
     memory_update_params,
@@ -70,24 +71,36 @@ class MemoriesResource(SyncAPIResource):
             "slack",
             "google_calendar",
             "google_mail",
+            "imap",
+            "google_meet",
             "box",
             "dropbox",
             "github",
+            "gitlab",
             "google_drive",
             "vault",
             "web_crawler",
             "trace",
+            "microsoft_outlook",
             "microsoft_teams",
-            "gmail_actions",
             "granola",
             "fathom",
             "fireflies",
+            "figma",
             "linear",
             "hubspot",
             "salesforce",
             "coda",
-            "lightfield",
+            "confluence",
+            "jira",
+            "metabase",
             "gong",
+            "clickup",
+            "lightfield",
+            "pylon",
+            "fellow",
+            "odoo",
+            "external_mcp",
         ],
         collection: Union[str, object, None] | Omit = omit,
         date: Union[Union[str, datetime], object, None] | Omit = omit,
@@ -159,6 +172,7 @@ class MemoriesResource(SyncAPIResource):
         collection: Optional[str] | Omit = omit,
         cursor: Optional[str] | Omit = omit,
         filter: Optional[str] | Omit = omit,
+        include_chunks: int | Omit = omit,
         size: int | Omit = omit,
         source: Optional[
             Literal[
@@ -167,28 +181,44 @@ class MemoriesResource(SyncAPIResource):
                 "slack",
                 "google_calendar",
                 "google_mail",
+                "imap",
+                "google_meet",
                 "box",
                 "dropbox",
                 "github",
+                "gitlab",
                 "google_drive",
                 "vault",
                 "web_crawler",
                 "trace",
+                "microsoft_outlook",
                 "microsoft_teams",
-                "gmail_actions",
                 "granola",
                 "fathom",
                 "fireflies",
+                "figma",
                 "linear",
                 "hubspot",
                 "salesforce",
                 "coda",
-                "lightfield",
+                "confluence",
+                "jira",
+                "metabase",
                 "gong",
+                "clickup",
+                "lightfield",
+                "pylon",
+                "fellow",
+                "odoo",
+                "external_mcp",
             ]
         ]
         | Omit = omit,
-        status: Optional[Literal["pending", "processing", "completed", "failed", "pending_review", "skipped"]]
+        status: Optional[
+            Literal[
+                "pending", "processing", "completed", "failed", "pending_review", "skipped", "filtered", "cancelled"
+            ]
+        ]
         | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -208,6 +238,10 @@ class MemoriesResource(SyncAPIResource):
           filter:
               Filter documents by metadata using MongoDB-style operators. Example:
               {"department": "engineering", "priority": {"$gt": 3}}
+
+          include_chunks: When > 0, include up to this many extracted memories (chunks with summaries) per
+              document in each item's `chunks` field, in document order. 0 (default) omits
+              them.
 
           source: Filter documents by source.
 
@@ -234,6 +268,7 @@ class MemoriesResource(SyncAPIResource):
                         "collection": collection,
                         "cursor": cursor,
                         "filter": filter,
+                        "include_chunks": include_chunks,
                         "size": size,
                         "source": source,
                         "status": status,
@@ -254,24 +289,36 @@ class MemoriesResource(SyncAPIResource):
             "slack",
             "google_calendar",
             "google_mail",
+            "imap",
+            "google_meet",
             "box",
             "dropbox",
             "github",
+            "gitlab",
             "google_drive",
             "vault",
             "web_crawler",
             "trace",
+            "microsoft_outlook",
             "microsoft_teams",
-            "gmail_actions",
             "granola",
             "fathom",
             "fireflies",
+            "figma",
             "linear",
             "hubspot",
             "salesforce",
             "coda",
-            "lightfield",
+            "confluence",
+            "jira",
+            "metabase",
             "gong",
+            "clickup",
+            "lightfield",
+            "pylon",
+            "fellow",
+            "odoo",
+            "external_mcp",
         ],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -281,23 +328,7 @@ class MemoriesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MemoryDeleteResponse:
         """
-        Delete a memory and its associated chunks from the index.
-
-        This removes the memory completely from the vector index and database. The
-        operation deletes:
-
-        1. All chunks associated with the resource (including embeddings)
-        2. The documents row AND any legacy resources rows sharing the identity —
-           leaving either one behind would resurrect the memory through the double-read
-           path (ENG-2477).
-
-        Args: source: The document provider (e.g., gmail, notion, vault) resource_id:
-        The unique identifier of the resource to delete api_token: Authentication token
-
-        Returns: MemoryDeletionResponse with deletion details
-
-        Raises: DocumentNotFound: If the resource doesn't exist or user doesn't have
-        access
+        Delete a memory accessible to the authenticated credential.
 
         Args:
           extra_headers: Send extra headers
@@ -402,9 +433,9 @@ class MemoriesResource(SyncAPIResource):
         """
         Adds multiple documents to the index in a single request.
 
-        All items are validated before any database operations occur. If any item fails
-        validation, the entire batch is rejected with a 422 error detailing which items
-        failed and why.
+        All items are validated before processing begins. If any item fails validation,
+        the entire batch is rejected with a 422 error detailing which items failed and
+        why.
 
         Maximum 100 items per request. Each item follows the same schema as the
         single-item /memories/add endpoint.
@@ -439,25 +470,38 @@ class MemoriesResource(SyncAPIResource):
             "slack",
             "google_calendar",
             "google_mail",
+            "imap",
+            "google_meet",
             "box",
             "dropbox",
             "github",
+            "gitlab",
             "google_drive",
             "vault",
             "web_crawler",
             "trace",
+            "microsoft_outlook",
             "microsoft_teams",
-            "gmail_actions",
             "granola",
             "fathom",
             "fireflies",
+            "figma",
             "linear",
             "hubspot",
             "salesforce",
             "coda",
-            "lightfield",
+            "confluence",
+            "jira",
+            "metabase",
             "gong",
+            "clickup",
+            "lightfield",
+            "pylon",
+            "fellow",
+            "odoo",
+            "external_mcp",
         ],
+        include_chunks: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -466,10 +510,13 @@ class MemoriesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MemoryGetResponse:
         """
-        Retrieves a document by provider and resource_id, as a document-shaped response
-        carrying the full hyperdoc tree (ENG-2479 Phase 4).
+        Retrieve a document by provider and resource ID, including its full hyperdoc
+        tree.
 
         Args:
+          include_chunks: When true, include the document's extracted memories (chunks with summaries) in
+              the `chunks` field, in document order.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -485,7 +532,11 @@ class MemoriesResource(SyncAPIResource):
         return self._get(
             path_template("/memories/get/{source}/{resource_id}", source=source, resource_id=resource_id),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform({"include_chunks": include_chunks}, memory_get_params.MemoryGetParams),
             ),
             cast_to=MemoryGetResponse,
         )
@@ -506,24 +557,36 @@ class MemoriesResource(SyncAPIResource):
                 "slack",
                 "google_calendar",
                 "google_mail",
+                "imap",
+                "google_meet",
                 "box",
                 "dropbox",
                 "github",
+                "gitlab",
                 "google_drive",
                 "vault",
                 "web_crawler",
                 "trace",
+                "microsoft_outlook",
                 "microsoft_teams",
-                "gmail_actions",
                 "granola",
                 "fathom",
                 "fireflies",
+                "figma",
                 "linear",
                 "hubspot",
                 "salesforce",
                 "coda",
-                "lightfield",
+                "confluence",
+                "jira",
+                "metabase",
                 "gong",
+                "clickup",
+                "lightfield",
+                "pylon",
+                "fellow",
+                "odoo",
+                "external_mcp",
             ]
         ]
         | Omit = omit,
@@ -542,13 +605,10 @@ class MemoriesResource(SyncAPIResource):
 
           answer: If true, the query will be answered along with matching source documents.
 
-          effort: How much compute to spend on retrieval. Mirrors the dial popularized by
-              frontier-model APIs (OpenAI reasoning_effort, etc.). 'minimal' = verbatim
-              single-shot retrieval (fastest). 'low' = LLM rewrites the query for better
-              retrieval and extracts date filters. 'medium' = rewrite + agentic refinement
-              loop (the answer LLM may request additional retrieval rounds, up to 3). 'high' =
-              rewrite + extended refinement (up to 6 rounds). Higher = better recall, more
-              latency, more cost.
+          effort: Controls retrieval thoroughness. 'minimal' performs direct retrieval. 'low'
+              improves the query and extracts date filters. 'medium' adds up to 3 refinement
+              rounds; 'high' allows up to 6. Higher levels can improve recall but add latency
+              and cost.
 
           max_results: Maximum number of results to return.
 
@@ -557,10 +617,12 @@ class MemoriesResource(SyncAPIResource):
           provenance:
               If true (effort='very_high' only), attach a provenance record to the response:
               the source documents and entities the answer was grounded in, the agent's search
-              trajectory, and any sources that failed. Adds one indexed lookup; intended for
-              auditability / compliance use cases.
+              trajectory, and any sources that failed. Intended for auditability and
+              compliance use cases.
 
-          sources: Only query documents from these sources.
+          sources: Only query documents from these sources. Names are case-insensitive and accept
+              either separator, so `Google Drive`'s provider may be given as `google_drive`,
+              `google-drive`, or `GOOGLE_DRIVE`.
 
           extra_headers: Send extra headers
 
@@ -703,24 +765,36 @@ class AsyncMemoriesResource(AsyncAPIResource):
             "slack",
             "google_calendar",
             "google_mail",
+            "imap",
+            "google_meet",
             "box",
             "dropbox",
             "github",
+            "gitlab",
             "google_drive",
             "vault",
             "web_crawler",
             "trace",
+            "microsoft_outlook",
             "microsoft_teams",
-            "gmail_actions",
             "granola",
             "fathom",
             "fireflies",
+            "figma",
             "linear",
             "hubspot",
             "salesforce",
             "coda",
-            "lightfield",
+            "confluence",
+            "jira",
+            "metabase",
             "gong",
+            "clickup",
+            "lightfield",
+            "pylon",
+            "fellow",
+            "odoo",
+            "external_mcp",
         ],
         collection: Union[str, object, None] | Omit = omit,
         date: Union[Union[str, datetime], object, None] | Omit = omit,
@@ -792,6 +866,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
         collection: Optional[str] | Omit = omit,
         cursor: Optional[str] | Omit = omit,
         filter: Optional[str] | Omit = omit,
+        include_chunks: int | Omit = omit,
         size: int | Omit = omit,
         source: Optional[
             Literal[
@@ -800,28 +875,44 @@ class AsyncMemoriesResource(AsyncAPIResource):
                 "slack",
                 "google_calendar",
                 "google_mail",
+                "imap",
+                "google_meet",
                 "box",
                 "dropbox",
                 "github",
+                "gitlab",
                 "google_drive",
                 "vault",
                 "web_crawler",
                 "trace",
+                "microsoft_outlook",
                 "microsoft_teams",
-                "gmail_actions",
                 "granola",
                 "fathom",
                 "fireflies",
+                "figma",
                 "linear",
                 "hubspot",
                 "salesforce",
                 "coda",
-                "lightfield",
+                "confluence",
+                "jira",
+                "metabase",
                 "gong",
+                "clickup",
+                "lightfield",
+                "pylon",
+                "fellow",
+                "odoo",
+                "external_mcp",
             ]
         ]
         | Omit = omit,
-        status: Optional[Literal["pending", "processing", "completed", "failed", "pending_review", "skipped"]]
+        status: Optional[
+            Literal[
+                "pending", "processing", "completed", "failed", "pending_review", "skipped", "filtered", "cancelled"
+            ]
+        ]
         | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -841,6 +932,10 @@ class AsyncMemoriesResource(AsyncAPIResource):
           filter:
               Filter documents by metadata using MongoDB-style operators. Example:
               {"department": "engineering", "priority": {"$gt": 3}}
+
+          include_chunks: When > 0, include up to this many extracted memories (chunks with summaries) per
+              document in each item's `chunks` field, in document order. 0 (default) omits
+              them.
 
           source: Filter documents by source.
 
@@ -867,6 +962,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
                         "collection": collection,
                         "cursor": cursor,
                         "filter": filter,
+                        "include_chunks": include_chunks,
                         "size": size,
                         "source": source,
                         "status": status,
@@ -887,24 +983,36 @@ class AsyncMemoriesResource(AsyncAPIResource):
             "slack",
             "google_calendar",
             "google_mail",
+            "imap",
+            "google_meet",
             "box",
             "dropbox",
             "github",
+            "gitlab",
             "google_drive",
             "vault",
             "web_crawler",
             "trace",
+            "microsoft_outlook",
             "microsoft_teams",
-            "gmail_actions",
             "granola",
             "fathom",
             "fireflies",
+            "figma",
             "linear",
             "hubspot",
             "salesforce",
             "coda",
-            "lightfield",
+            "confluence",
+            "jira",
+            "metabase",
             "gong",
+            "clickup",
+            "lightfield",
+            "pylon",
+            "fellow",
+            "odoo",
+            "external_mcp",
         ],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -914,23 +1022,7 @@ class AsyncMemoriesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MemoryDeleteResponse:
         """
-        Delete a memory and its associated chunks from the index.
-
-        This removes the memory completely from the vector index and database. The
-        operation deletes:
-
-        1. All chunks associated with the resource (including embeddings)
-        2. The documents row AND any legacy resources rows sharing the identity —
-           leaving either one behind would resurrect the memory through the double-read
-           path (ENG-2477).
-
-        Args: source: The document provider (e.g., gmail, notion, vault) resource_id:
-        The unique identifier of the resource to delete api_token: Authentication token
-
-        Returns: MemoryDeletionResponse with deletion details
-
-        Raises: DocumentNotFound: If the resource doesn't exist or user doesn't have
-        access
+        Delete a memory accessible to the authenticated credential.
 
         Args:
           extra_headers: Send extra headers
@@ -1035,9 +1127,9 @@ class AsyncMemoriesResource(AsyncAPIResource):
         """
         Adds multiple documents to the index in a single request.
 
-        All items are validated before any database operations occur. If any item fails
-        validation, the entire batch is rejected with a 422 error detailing which items
-        failed and why.
+        All items are validated before processing begins. If any item fails validation,
+        the entire batch is rejected with a 422 error detailing which items failed and
+        why.
 
         Maximum 100 items per request. Each item follows the same schema as the
         single-item /memories/add endpoint.
@@ -1072,25 +1164,38 @@ class AsyncMemoriesResource(AsyncAPIResource):
             "slack",
             "google_calendar",
             "google_mail",
+            "imap",
+            "google_meet",
             "box",
             "dropbox",
             "github",
+            "gitlab",
             "google_drive",
             "vault",
             "web_crawler",
             "trace",
+            "microsoft_outlook",
             "microsoft_teams",
-            "gmail_actions",
             "granola",
             "fathom",
             "fireflies",
+            "figma",
             "linear",
             "hubspot",
             "salesforce",
             "coda",
-            "lightfield",
+            "confluence",
+            "jira",
+            "metabase",
             "gong",
+            "clickup",
+            "lightfield",
+            "pylon",
+            "fellow",
+            "odoo",
+            "external_mcp",
         ],
+        include_chunks: bool | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1099,10 +1204,13 @@ class AsyncMemoriesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MemoryGetResponse:
         """
-        Retrieves a document by provider and resource_id, as a document-shaped response
-        carrying the full hyperdoc tree (ENG-2479 Phase 4).
+        Retrieve a document by provider and resource ID, including its full hyperdoc
+        tree.
 
         Args:
+          include_chunks: When true, include the document's extracted memories (chunks with summaries) in
+              the `chunks` field, in document order.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -1118,7 +1226,13 @@ class AsyncMemoriesResource(AsyncAPIResource):
         return await self._get(
             path_template("/memories/get/{source}/{resource_id}", source=source, resource_id=resource_id),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {"include_chunks": include_chunks}, memory_get_params.MemoryGetParams
+                ),
             ),
             cast_to=MemoryGetResponse,
         )
@@ -1139,24 +1253,36 @@ class AsyncMemoriesResource(AsyncAPIResource):
                 "slack",
                 "google_calendar",
                 "google_mail",
+                "imap",
+                "google_meet",
                 "box",
                 "dropbox",
                 "github",
+                "gitlab",
                 "google_drive",
                 "vault",
                 "web_crawler",
                 "trace",
+                "microsoft_outlook",
                 "microsoft_teams",
-                "gmail_actions",
                 "granola",
                 "fathom",
                 "fireflies",
+                "figma",
                 "linear",
                 "hubspot",
                 "salesforce",
                 "coda",
-                "lightfield",
+                "confluence",
+                "jira",
+                "metabase",
                 "gong",
+                "clickup",
+                "lightfield",
+                "pylon",
+                "fellow",
+                "odoo",
+                "external_mcp",
             ]
         ]
         | Omit = omit,
@@ -1175,13 +1301,10 @@ class AsyncMemoriesResource(AsyncAPIResource):
 
           answer: If true, the query will be answered along with matching source documents.
 
-          effort: How much compute to spend on retrieval. Mirrors the dial popularized by
-              frontier-model APIs (OpenAI reasoning_effort, etc.). 'minimal' = verbatim
-              single-shot retrieval (fastest). 'low' = LLM rewrites the query for better
-              retrieval and extracts date filters. 'medium' = rewrite + agentic refinement
-              loop (the answer LLM may request additional retrieval rounds, up to 3). 'high' =
-              rewrite + extended refinement (up to 6 rounds). Higher = better recall, more
-              latency, more cost.
+          effort: Controls retrieval thoroughness. 'minimal' performs direct retrieval. 'low'
+              improves the query and extracts date filters. 'medium' adds up to 3 refinement
+              rounds; 'high' allows up to 6. Higher levels can improve recall but add latency
+              and cost.
 
           max_results: Maximum number of results to return.
 
@@ -1190,10 +1313,12 @@ class AsyncMemoriesResource(AsyncAPIResource):
           provenance:
               If true (effort='very_high' only), attach a provenance record to the response:
               the source documents and entities the answer was grounded in, the agent's search
-              trajectory, and any sources that failed. Adds one indexed lookup; intended for
-              auditability / compliance use cases.
+              trajectory, and any sources that failed. Intended for auditability and
+              compliance use cases.
 
-          sources: Only query documents from these sources.
+          sources: Only query documents from these sources. Names are case-insensitive and accept
+              either separator, so `Google Drive`'s provider may be given as `google_drive`,
+              `google-drive`, or `GOOGLE_DRIVE`.
 
           extra_headers: Send extra headers
 

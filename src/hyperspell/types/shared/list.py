@@ -3,8 +3,9 @@
 from __future__ import annotations
 
 import typing
-from typing_extensions import Literal, TypeAlias, TypeAliasType
+from typing_extensions import Literal, Annotated, TypeAlias, TypeAliasType
 
+from ..._utils import PropertyInfo
 from .metadata import Metadata
 from ..._compat import PYDANTIC_V1
 from ..._models import BaseModel
@@ -12,9 +13,9 @@ from ..._models import BaseModel
 __all__ = ["List", "Child"]
 
 if typing.TYPE_CHECKING or not PYDANTIC_V1:
-    Child = TypeAliasType("Child", typing.Union["ListItem", "ToDo"])
+    Child = TypeAliasType("Child", Annotated[typing.Union["ListItem", "ToDo"], PropertyInfo(discriminator="type")])
 else:
-    Child: TypeAlias = typing.Union["ListItem", "ToDo"]
+    Child: TypeAlias = Annotated[typing.Union["ListItem", "ToDo"], PropertyInfo(discriminator="type")]
 
 
 class List(BaseModel):
@@ -23,15 +24,10 @@ class List(BaseModel):
     children: typing.Optional[typing.List[Child]] = None
 
     metadata: typing.Optional[Metadata] = None
-    """Per-block annotations carried by any Hyperdoc node (ENG-1390).
+    """Optional annotations carried by a hyperdoc node.
 
-    Out-of-band annotations that travel with a block but aren't part of its content:
-    provenance (`sources`) and human edit attribution (`edited_by`). New annotation
-    types get added here as typed fields as the need arises.
-
-    Empty by default. Because `Node.model_dump` forces `exclude_none=True`, an unset
-    `metadata` (None) is dropped from serialization entirely, and within a populated
-    `Metadata` only the set keys survive.
+    Includes source provenance and human edit attribution. Unset metadata is omitted
+    from serialized responses.
     """
 
     ordered: typing.Optional[bool] = None

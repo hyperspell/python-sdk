@@ -35,7 +35,18 @@ from ._base_client import (
 )
 
 if TYPE_CHECKING:
-    from .resources import auth, vaults, actions, folders, evaluate, memories, sessions, connections, integrations
+    from .resources import (
+        auth,
+        vaults,
+        actions,
+        folders,
+        evaluate,
+        memories,
+        sessions,
+        connections,
+        integrations,
+        context_documents,
+    )
     from .resources.auth import AuthResource, AsyncAuthResource
     from .resources.vaults import VaultsResource, AsyncVaultsResource
     from .resources.actions import ActionsResource, AsyncActionsResource
@@ -45,6 +56,7 @@ if TYPE_CHECKING:
     from .resources.sessions import SessionsResource, AsyncSessionsResource
     from .resources.connections import ConnectionsResource, AsyncConnectionsResource
     from .resources.integrations.integrations import IntegrationsResource, AsyncIntegrationsResource
+    from .resources.context_documents.context_documents import ContextDocumentsResource, AsyncContextDocumentsResource
 
 __all__ = [
     "Timeout",
@@ -145,6 +157,12 @@ class Hyperspell(SyncAPIClient):
         return IntegrationsResource(self)
 
     @cached_property
+    def context_documents(self) -> ContextDocumentsResource:
+        from .resources.context_documents import ContextDocumentsResource
+
+        return ContextDocumentsResource(self)
+
+    @cached_property
     def memories(self) -> MemoriesResource:
         from .resources.memories import MemoriesResource
 
@@ -196,19 +214,8 @@ class Hyperspell(SyncAPIClient):
     @property
     @override
     def auth_headers(self) -> dict[str, str]:
-        return {**self._api_key, **self._as_user}
-
-    @property
-    def _api_key(self) -> dict[str, str]:
         api_key = self.api_key
         return {"Authorization": f"Bearer {api_key}"}
-
-    @property
-    def _as_user(self) -> dict[str, str]:
-        user_id = self.user_id
-        if user_id is None:
-            return {}
-        return {"X-As-User": user_id}
 
     @property
     @override
@@ -216,6 +223,7 @@ class Hyperspell(SyncAPIClient):
         return {
             **super().default_headers,
             "X-Stainless-Async": "false",
+            "X-As-User": self.user_id if self.user_id is not None else Omit(),
             **self._custom_headers,
         }
 
@@ -393,6 +401,12 @@ class AsyncHyperspell(AsyncAPIClient):
         return AsyncIntegrationsResource(self)
 
     @cached_property
+    def context_documents(self) -> AsyncContextDocumentsResource:
+        from .resources.context_documents import AsyncContextDocumentsResource
+
+        return AsyncContextDocumentsResource(self)
+
+    @cached_property
     def memories(self) -> AsyncMemoriesResource:
         from .resources.memories import AsyncMemoriesResource
 
@@ -444,19 +458,8 @@ class AsyncHyperspell(AsyncAPIClient):
     @property
     @override
     def auth_headers(self) -> dict[str, str]:
-        return {**self._api_key, **self._as_user}
-
-    @property
-    def _api_key(self) -> dict[str, str]:
         api_key = self.api_key
         return {"Authorization": f"Bearer {api_key}"}
-
-    @property
-    def _as_user(self) -> dict[str, str]:
-        user_id = self.user_id
-        if user_id is None:
-            return {}
-        return {"X-As-User": user_id}
 
     @property
     @override
@@ -464,6 +467,7 @@ class AsyncHyperspell(AsyncAPIClient):
         return {
             **super().default_headers,
             "X-Stainless-Async": f"async:{get_async_library()}",
+            "X-As-User": self.user_id if self.user_id is not None else Omit(),
             **self._custom_headers,
         }
 
@@ -579,6 +583,12 @@ class HyperspellWithRawResponse:
         return IntegrationsResourceWithRawResponse(self._client.integrations)
 
     @cached_property
+    def context_documents(self) -> context_documents.ContextDocumentsResourceWithRawResponse:
+        from .resources.context_documents import ContextDocumentsResourceWithRawResponse
+
+        return ContextDocumentsResourceWithRawResponse(self._client.context_documents)
+
+    @cached_property
     def memories(self) -> memories.MemoriesResourceWithRawResponse:
         from .resources.memories import MemoriesResourceWithRawResponse
 
@@ -638,6 +648,12 @@ class AsyncHyperspellWithRawResponse:
         from .resources.integrations import AsyncIntegrationsResourceWithRawResponse
 
         return AsyncIntegrationsResourceWithRawResponse(self._client.integrations)
+
+    @cached_property
+    def context_documents(self) -> context_documents.AsyncContextDocumentsResourceWithRawResponse:
+        from .resources.context_documents import AsyncContextDocumentsResourceWithRawResponse
+
+        return AsyncContextDocumentsResourceWithRawResponse(self._client.context_documents)
 
     @cached_property
     def memories(self) -> memories.AsyncMemoriesResourceWithRawResponse:
@@ -701,6 +717,12 @@ class HyperspellWithStreamedResponse:
         return IntegrationsResourceWithStreamingResponse(self._client.integrations)
 
     @cached_property
+    def context_documents(self) -> context_documents.ContextDocumentsResourceWithStreamingResponse:
+        from .resources.context_documents import ContextDocumentsResourceWithStreamingResponse
+
+        return ContextDocumentsResourceWithStreamingResponse(self._client.context_documents)
+
+    @cached_property
     def memories(self) -> memories.MemoriesResourceWithStreamingResponse:
         from .resources.memories import MemoriesResourceWithStreamingResponse
 
@@ -760,6 +782,12 @@ class AsyncHyperspellWithStreamedResponse:
         from .resources.integrations import AsyncIntegrationsResourceWithStreamingResponse
 
         return AsyncIntegrationsResourceWithStreamingResponse(self._client.integrations)
+
+    @cached_property
+    def context_documents(self) -> context_documents.AsyncContextDocumentsResourceWithStreamingResponse:
+        from .resources.context_documents import AsyncContextDocumentsResourceWithStreamingResponse
+
+        return AsyncContextDocumentsResourceWithStreamingResponse(self._client.context_documents)
 
     @cached_property
     def memories(self) -> memories.AsyncMemoriesResourceWithStreamingResponse:

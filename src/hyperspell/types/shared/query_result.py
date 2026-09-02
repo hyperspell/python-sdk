@@ -14,10 +14,16 @@ class QueryResult(BaseModel):
     answer: Optional[str] = None
     """The answer to the query, if the request was set to answer."""
 
+    disclaimer: Optional[str] = None
+    """Privacy notice set when cross-user alpha mode ran.
+
+    Callers must display it alongside the synthesized answer.
+    """
+
     documents: Optional[List["ScoredDocumentResponse"]] = None
     """
-    The matching documents, each carrying its hyperdoc tree plus query-path
-    score/highlights/summary (ENG-2479 Phase 4).
+    The matching documents, each carrying its hyperdoc tree plus query-path score,
+    highlights, and summary.
     """
 
     errors: Optional[List[Dict[str, str]]] = None
@@ -28,12 +34,7 @@ class QueryResult(BaseModel):
     """
 
     provenance: Optional[Provenance] = None
-    """Auditability record attached to an agentic answer.
-
-    Gated behind `provenance=true` on the request: the cheap parts (sources, steps,
-    failed_sources) are derived from in-memory loop state, but `entities` costs one
-    indexed DB lookup, so the whole record is only built on request.
-    """
+    """Auditability record returned when requested for a supported query."""
 
     query: Optional[str] = None
     """The query string that was issued."""
