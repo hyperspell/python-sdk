@@ -72,6 +72,14 @@ from .integrations import (
     IntegrationsResourceWithStreamingResponse,
     AsyncIntegrationsResourceWithStreamingResponse,
 )
+from .context_documents import (
+    ContextDocumentsResource,
+    AsyncContextDocumentsResource,
+    ContextDocumentsResourceWithRawResponse,
+    AsyncContextDocumentsResourceWithRawResponse,
+    ContextDocumentsResourceWithStreamingResponse,
+    AsyncContextDocumentsResourceWithStreamingResponse,
+)
 
 __all__ = [
     "ConnectionsResource",
@@ -92,6 +100,12 @@ __all__ = [
     "AsyncIntegrationsResourceWithRawResponse",
     "IntegrationsResourceWithStreamingResponse",
     "AsyncIntegrationsResourceWithStreamingResponse",
+    "ContextDocumentsResource",
+    "AsyncContextDocumentsResource",
+    "ContextDocumentsResourceWithRawResponse",
+    "AsyncContextDocumentsResourceWithRawResponse",
+    "ContextDocumentsResourceWithStreamingResponse",
+    "AsyncContextDocumentsResourceWithStreamingResponse",
     "MemoriesResource",
     "AsyncMemoriesResource",
     "MemoriesResourceWithRawResponse",

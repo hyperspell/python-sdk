@@ -8,13 +8,10 @@ __all__ = ["Metadata", "Source"]
 
 
 class Source(BaseModel):
-    """A reference to a memory/chunk that a block's content is grounded in (ENG-1390).
+    """A reference to source content that supports a block.
 
-    Chunks are the unit persisted to the DB — extracted memories become chunks when
-    indexed — so `chunk_id` is the stable pointer back to the source. `resource_id`
-    and `source` locate the originating document; `score` carries optional retrieval
-    relevance. Kept deliberately self-contained (plain `str` for `source` rather than
-    the `DocumentProviders` enum) so the hyperdoc format stays free of app-layer imports.
+    ``chunk_id`` identifies the supporting content. ``resource_id`` and
+    ``source`` identify its document, and ``score`` optionally records relevance.
     """
 
     chunk_id: str
@@ -27,15 +24,10 @@ class Source(BaseModel):
 
 
 class Metadata(BaseModel):
-    """Per-block annotations carried by any Hyperdoc node (ENG-1390).
+    """Optional annotations carried by a hyperdoc node.
 
-    Out-of-band annotations that travel with a block but aren't part of its content:
-    provenance (`sources`) and human edit attribution (`edited_by`). New annotation
-    types get added here as typed fields as the need arises.
-
-    Empty by default. Because `Node.model_dump` forces `exclude_none=True`, an unset
-    `metadata` (None) is dropped from serialization entirely, and within a populated
-    `Metadata` only the set keys survive.
+    Includes source provenance and human edit attribution. Unset metadata is
+    omitted from serialized responses.
     """
 
     edited_by: Optional[str] = None

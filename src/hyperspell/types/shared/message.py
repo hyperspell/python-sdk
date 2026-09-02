@@ -39,6 +39,7 @@ Child: TypeAlias = Annotated[
         LineBreak,
         "ListList",
         "ListItem",
+        "Page",
         "Paragraph",
         "Quote",
         "Table",
@@ -78,15 +79,10 @@ class Message(BaseModel):
     mentioned_users: Optional[TypingList["Person"]] = None
 
     metadata: Optional[Metadata] = None
-    """Per-block annotations carried by any Hyperdoc node (ENG-1390).
+    """Optional annotations carried by a hyperdoc node.
 
-    Out-of-band annotations that travel with a block but aren't part of its content:
-    provenance (`sources`) and human edit attribution (`edited_by`). New annotation
-    types get added here as typed fields as the need arises.
-
-    Empty by default. Because `Node.model_dump` forces `exclude_none=True`, an unset
-    `metadata` (None) is dropped from serialization entirely, and within a populated
-    `Metadata` only the set keys survive.
+    Includes source provenance and human edit attribution. Unset metadata is omitted
+    from serialized responses.
     """
 
     num_replies: Optional[int] = None
@@ -110,6 +106,7 @@ class Message(BaseModel):
 
 
 from .list import List as ListList
+from .page import Page
 from .chunk import Chunk
 from .quote import Quote
 from .table import Table

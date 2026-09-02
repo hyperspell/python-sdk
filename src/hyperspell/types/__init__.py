@@ -12,6 +12,7 @@ from .shared import (
     File as File,
     Link as Link,
     List as List,
+    Page as Page,
     Task as Task,
     Text as Text,
     ToDo as ToDo,
@@ -54,6 +55,7 @@ from .shared import (
 from .memory_status import MemoryStatus as MemoryStatus
 from .auth_me_response import AuthMeResponse as AuthMeResponse
 from .memory_add_params import MemoryAddParams as MemoryAddParams
+from .memory_get_params import MemoryGetParams as MemoryGetParams
 from .vault_list_params import VaultListParams as VaultListParams
 from .folder_list_params import FolderListParams as FolderListParams
 from .memory_list_params import MemoryListParams as MemoryListParams
@@ -81,15 +83,20 @@ from .integration_connect_params import IntegrationConnectParams as IntegrationC
 from .evaluate_score_query_params import EvaluateScoreQueryParams as EvaluateScoreQueryParams
 from .action_add_reaction_response import ActionAddReactionResponse as ActionAddReactionResponse
 from .action_send_message_response import ActionSendMessageResponse as ActionSendMessageResponse
+from .context_document_list_params import ContextDocumentListParams as ContextDocumentListParams
 from .evaluate_list_queries_params import EvaluateListQueriesParams as EvaluateListQueriesParams
 from .folder_set_policies_response import FolderSetPoliciesResponse as FolderSetPoliciesResponse
 from .integration_connect_response import IntegrationConnectResponse as IntegrationConnectResponse
+from .context_document_get_response import ContextDocumentGetResponse as ContextDocumentGetResponse
 from .evaluate_score_query_response import EvaluateScoreQueryResponse as EvaluateScoreQueryResponse
 from .folder_delete_policy_response import FolderDeletePolicyResponse as FolderDeletePolicyResponse
 from .folder_list_policies_response import FolderListPoliciesResponse as FolderListPoliciesResponse
+from .context_document_list_response import ContextDocumentListResponse as ContextDocumentListResponse
 from .evaluate_list_queries_response import EvaluateListQueriesResponse as EvaluateListQueriesResponse
 from .evaluate_score_highlight_params import EvaluateScoreHighlightParams as EvaluateScoreHighlightParams
+from .context_document_generate_params import ContextDocumentGenerateParams as ContextDocumentGenerateParams
 from .evaluate_score_highlight_response import EvaluateScoreHighlightResponse as EvaluateScoreHighlightResponse
+from .context_document_generate_response import ContextDocumentGenerateResponse as ContextDocumentGenerateResponse
 
 # Rebuild cyclical models only after all modules are imported.
 # This ensures that, when building the deferred (due to cyclical references) model schema,
@@ -112,6 +119,7 @@ if _compat.PYDANTIC_V1:
     shared.list.List.update_forward_refs()  # type: ignore
     shared.list_item.ListItem.update_forward_refs()  # type: ignore
     shared.message.Message.update_forward_refs()  # type: ignore
+    shared.page.Page.update_forward_refs()  # type: ignore
     shared.paragraph.Paragraph.update_forward_refs()  # type: ignore
     shared.person.Person.update_forward_refs()  # type: ignore
     shared.query_result.QueryResult.update_forward_refs()  # type: ignore
@@ -142,6 +150,7 @@ else:
     shared.list.List.model_rebuild(_parent_namespace_depth=0)
     shared.list_item.ListItem.model_rebuild(_parent_namespace_depth=0)
     shared.message.Message.model_rebuild(_parent_namespace_depth=0)
+    shared.page.Page.model_rebuild(_parent_namespace_depth=0)
     shared.paragraph.Paragraph.model_rebuild(_parent_namespace_depth=0)
     shared.person.Person.model_rebuild(_parent_namespace_depth=0)
     shared.query_result.QueryResult.model_rebuild(_parent_namespace_depth=0)

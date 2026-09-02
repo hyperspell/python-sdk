@@ -74,12 +74,9 @@ class ConnectionsResource(SyncAPIResource):
         """
         Revoke Hyperspell's access to a provider and delete this user's stored data.
 
-        The external OAuth/Unified revoke and the (potentially large) data purge run in
-        a background Temporal workflow; this returns `202 Accepted` immediately. A heavy
-        provider — a Gmail account can carry hundreds of thousands of chunks — plus a
-        slow third-party revoke would otherwise outrun the request timeout: the old
-        synchronous path "timed out" for the caller while still finishing server-side,
-        making the outcome invisible. Idempotent per (app, user, provider).
+        Revocation and deletion are processed asynchronously, so the endpoint returns
+        `202 Accepted` immediately. Repeated requests for the same app, user, and
+        provider are safe.
 
         Args:
           extra_headers: Send extra headers
@@ -154,12 +151,9 @@ class AsyncConnectionsResource(AsyncAPIResource):
         """
         Revoke Hyperspell's access to a provider and delete this user's stored data.
 
-        The external OAuth/Unified revoke and the (potentially large) data purge run in
-        a background Temporal workflow; this returns `202 Accepted` immediately. A heavy
-        provider — a Gmail account can carry hundreds of thousands of chunks — plus a
-        slow third-party revoke would otherwise outrun the request timeout: the old
-        synchronous path "timed out" for the caller while still finishing server-side,
-        making the outcome invisible. Idempotent per (app, user, provider).
+        Revocation and deletion are processed asynchronously, so the endpoint returns
+        `202 Accepted` immediately. Repeated requests for the same app, user, and
+        provider are safe.
 
         Args:
           extra_headers: Send extra headers

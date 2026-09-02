@@ -38,6 +38,7 @@ import os
 from hyperspell import Hyperspell
 
 client = Hyperspell(
+    user_id="My User ID",
     api_key=os.environ.get("HYPERSPELL_API_KEY"),  # This is the default and can be omitted
 )
 
@@ -62,6 +63,7 @@ import asyncio
 from hyperspell import AsyncHyperspell
 
 client = AsyncHyperspell(
+    user_id="My User ID",
     api_key=os.environ.get("HYPERSPELL_API_KEY"),  # This is the default and can be omitted
 )
 
@@ -100,6 +102,7 @@ from hyperspell import AsyncHyperspell
 
 async def main() -> None:
     async with AsyncHyperspell(
+        user_id="My User ID",
         api_key=os.environ.get("HYPERSPELL_API_KEY"),  # This is the default and can be omitted
         http_client=DefaultAioHttpClient(),
     ) as client:
@@ -130,14 +133,16 @@ This library provides auto-paginating iterators with each list response, so you 
 ```python
 from hyperspell import Hyperspell
 
-client = Hyperspell()
+client = Hyperspell(
+    user_id="My User ID",
+)
 
-all_memories = []
+all_context_documents = []
 # Automatically fetches more pages as needed.
-for memory in client.memories.list():
-    # Do something with memory here
-    all_memories.append(memory)
-print(all_memories)
+for context_document in client.context_documents.list():
+    # Do something with context_document here
+    all_context_documents.append(context_document)
+print(all_context_documents)
 ```
 
 Or, asynchronously:
@@ -146,15 +151,17 @@ Or, asynchronously:
 import asyncio
 from hyperspell import AsyncHyperspell
 
-client = AsyncHyperspell()
+client = AsyncHyperspell(
+    user_id="My User ID",
+)
 
 
 async def main() -> None:
-    all_memories = []
+    all_context_documents = []
     # Iterate through items across all pages, issuing requests as needed.
-    async for memory in client.memories.list():
-        all_memories.append(memory)
-    print(all_memories)
+    async for context_document in client.context_documents.list():
+        all_context_documents.append(context_document)
+    print(all_context_documents)
 
 
 asyncio.run(main())
@@ -163,11 +170,11 @@ asyncio.run(main())
 Alternatively, you can use the `.has_next_page()`, `.next_page_info()`, or `.get_next_page()` methods for more granular control working with pages:
 
 ```python
-first_page = await client.memories.list()
+first_page = await client.context_documents.list()
 if first_page.has_next_page():
     print(f"will fetch next page using these details: {first_page.next_page_info()}")
     next_page = await first_page.get_next_page()
-    print(f"number of items we just fetched: {len(next_page.items)}")
+    print(f"number of items we just fetched: {len(next_page.documents)}")
 
 # Remove `await` for non-async usage.
 ```
@@ -175,11 +182,11 @@ if first_page.has_next_page():
 Or just work directly with the returned data:
 
 ```python
-first_page = await client.memories.list()
+first_page = await client.context_documents.list()
 
 print(f"next page cursor: {first_page.next_cursor}")  # => "next page cursor: ..."
-for memory in first_page.items:
-    print(memory.resource_id)
+for context_document in first_page.documents:
+    print(context_document.document_id)
 
 # Remove `await` for non-async usage.
 ```
@@ -191,13 +198,14 @@ Nested parameters are dictionaries, typed using `TypedDict`, for example:
 ```python
 from hyperspell import Hyperspell
 
-client = Hyperspell()
-
-query_result = client.memories.search(
-    query="What does Hyperspell do?",
-    options={"filter": {}},
+client = Hyperspell(
+    user_id="My User ID",
 )
-print(query_result.options)
+
+config = client.context_documents.config.update(
+    structure={},
+)
+print(config.structure)
 ```
 
 ## File uploads
@@ -208,7 +216,9 @@ Request parameters that correspond to file uploads can be passed as `bytes`, or 
 from pathlib import Path
 from hyperspell import Hyperspell
 
-client = Hyperspell()
+client = Hyperspell(
+    user_id="My User ID",
+)
 
 client.memories.upload(
     file=Path("/path/to/file"),
@@ -230,7 +240,9 @@ All errors inherit from `hyperspell.APIError`.
 import hyperspell
 from hyperspell import Hyperspell
 
-client = Hyperspell()
+client = Hyperspell(
+    user_id="My User ID",
+)
 
 try:
     client.memories.add(
@@ -273,6 +285,7 @@ from hyperspell import Hyperspell
 
 # Configure the default for all requests:
 client = Hyperspell(
+    user_id="My User ID",
     # default is 2
     max_retries=0,
 )
@@ -293,12 +306,14 @@ from hyperspell import Hyperspell
 
 # Configure the default for all requests:
 client = Hyperspell(
+    user_id="My User ID",
     # 20 seconds (default is 1 minute)
     timeout=20.0,
 )
 
 # More granular control:
 client = Hyperspell(
+    user_id="My User ID",
     timeout=httpx.Timeout(60.0, read=5.0, write=10.0, connect=2.0),
 )
 
@@ -345,7 +360,9 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 ```py
 from hyperspell import Hyperspell
 
-client = Hyperspell()
+client = Hyperspell(
+    user_id="My User ID",
+)
 response = client.memories.with_raw_response.add(
     text="...",
 )
@@ -424,6 +441,7 @@ import httpx
 from hyperspell import Hyperspell, DefaultHttpxClient
 
 client = Hyperspell(
+    user_id="My User ID",
     # Or use the `HYPERSPELL_BASE_URL` env var
     base_url="http://my.test.server.example.com:8083",
     http_client=DefaultHttpxClient(
@@ -446,7 +464,9 @@ By default the library closes underlying HTTP connections whenever the client is
 ```py
 from hyperspell import Hyperspell
 
-with Hyperspell() as client:
+with Hyperspell(
+    user_id="My User ID",
+) as client:
   # make requests here
   ...
 

@@ -24,31 +24,58 @@ class Connection(BaseModel):
         "slack",
         "google_calendar",
         "google_mail",
+        "imap",
+        "google_meet",
         "box",
         "dropbox",
         "github",
+        "gitlab",
         "google_drive",
         "vault",
         "web_crawler",
         "trace",
+        "microsoft_outlook",
         "microsoft_teams",
-        "gmail_actions",
         "granola",
         "fathom",
         "fireflies",
+        "figma",
         "linear",
         "hubspot",
         "salesforce",
         "coda",
-        "lightfield",
+        "confluence",
+        "jira",
+        "metabase",
         "gong",
+        "clickup",
+        "lightfield",
+        "pylon",
+        "fellow",
+        "odoo",
+        "external_mcp",
     ]
     """The connection's provider"""
 
-    selected_count: Optional[int] = None
+    backfill_state: Optional[Literal["backfilling", "quiesced", "completed", "unknown"]] = None
     """
-    Count of items in user_options.channels (Teams: workspaces selected; 0 means
-    nothing is being indexed for integrations that require selection).
+    State of the historical backfill for providers that deliver history
+    asynchronously: 'backfilling' while history is still streaming in, 'quiesced'
+    once no backfill batch has arrived for a while (drained or stalled), 'completed'
+    if the provider confirmed completion, and 'unknown' when the provider has not
+    reported a backfill state.
+    """
+
+    scope: Optional[Literal["user", "app"]] = None
+    """
+    'user' for a personal connection; 'app' for an org-wide (app-level) connection
+    installed once by an app admin and shared with every user of the app.
+    """
+
+    selected_count: Optional[int] = None
+    """Number of items selected for this connection.
+
+    For integrations that require selection, 0 means nothing is being indexed.
     """
 
 

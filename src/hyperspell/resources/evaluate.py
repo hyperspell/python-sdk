@@ -96,8 +96,8 @@ class EvaluateResource(SyncAPIResource):
         """
         Paginate through all prior queries for the app, newest first.
 
-        User tokens only see their own queries; admin tokens see every query in the app
-        and can narrow to a single user with the `user_id` filter.
+        Requests scoped to a user only see that user's queries. App-wide requests see
+        every query in the app and can filter by `user_id`.
 
         Args:
           user_id: Filter queries by the user that issued them.
@@ -283,8 +283,8 @@ class AsyncEvaluateResource(AsyncAPIResource):
         """
         Paginate through all prior queries for the app, newest first.
 
-        User tokens only see their own queries; admin tokens see every query in the app
-        and can narrow to a single user with the `user_id` filter.
+        Requests scoped to a user only see that user's queries. App-wide requests see
+        every query in the app and can filter by `user_id`.
 
         Args:
           user_id: Filter queries by the user that issued them.

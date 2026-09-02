@@ -50,31 +50,7 @@ class ActionsResource(SyncAPIResource):
         *,
         channel: str,
         name: str,
-        provider: Literal[
-            "reddit",
-            "notion",
-            "slack",
-            "google_calendar",
-            "google_mail",
-            "box",
-            "dropbox",
-            "github",
-            "google_drive",
-            "vault",
-            "web_crawler",
-            "trace",
-            "microsoft_teams",
-            "gmail_actions",
-            "granola",
-            "fathom",
-            "fireflies",
-            "linear",
-            "hubspot",
-            "salesforce",
-            "coda",
-            "lightfield",
-            "gong",
-        ],
+        provider: Literal["slack"],
         timestamp: str,
         connection: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -92,7 +68,7 @@ class ActionsResource(SyncAPIResource):
 
           name: Emoji name without colons (e.g., thumbsup)
 
-          provider: Integration provider (e.g., slack)
+          provider: Integration provider.
 
           timestamp: Message timestamp to react to
 
@@ -127,31 +103,7 @@ class ActionsResource(SyncAPIResource):
     def send_message(
         self,
         *,
-        provider: Literal[
-            "reddit",
-            "notion",
-            "slack",
-            "google_calendar",
-            "google_mail",
-            "box",
-            "dropbox",
-            "github",
-            "google_drive",
-            "vault",
-            "web_crawler",
-            "trace",
-            "microsoft_teams",
-            "gmail_actions",
-            "granola",
-            "fathom",
-            "fireflies",
-            "linear",
-            "hubspot",
-            "salesforce",
-            "coda",
-            "lightfield",
-            "gong",
-        ],
+        provider: Literal["slack"],
         text: str,
         channel: Optional[str] | Omit = omit,
         connection: Optional[str] | Omit = omit,
@@ -167,7 +119,7 @@ class ActionsResource(SyncAPIResource):
         Send a message to a channel or conversation on a connected integration.
 
         Args:
-          provider: Integration provider (e.g., slack)
+          provider: Integration provider.
 
           text: Message text
 
@@ -229,31 +181,7 @@ class AsyncActionsResource(AsyncAPIResource):
         *,
         channel: str,
         name: str,
-        provider: Literal[
-            "reddit",
-            "notion",
-            "slack",
-            "google_calendar",
-            "google_mail",
-            "box",
-            "dropbox",
-            "github",
-            "google_drive",
-            "vault",
-            "web_crawler",
-            "trace",
-            "microsoft_teams",
-            "gmail_actions",
-            "granola",
-            "fathom",
-            "fireflies",
-            "linear",
-            "hubspot",
-            "salesforce",
-            "coda",
-            "lightfield",
-            "gong",
-        ],
+        provider: Literal["slack"],
         timestamp: str,
         connection: Optional[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -271,7 +199,7 @@ class AsyncActionsResource(AsyncAPIResource):
 
           name: Emoji name without colons (e.g., thumbsup)
 
-          provider: Integration provider (e.g., slack)
+          provider: Integration provider.
 
           timestamp: Message timestamp to react to
 
@@ -306,31 +234,7 @@ class AsyncActionsResource(AsyncAPIResource):
     async def send_message(
         self,
         *,
-        provider: Literal[
-            "reddit",
-            "notion",
-            "slack",
-            "google_calendar",
-            "google_mail",
-            "box",
-            "dropbox",
-            "github",
-            "google_drive",
-            "vault",
-            "web_crawler",
-            "trace",
-            "microsoft_teams",
-            "gmail_actions",
-            "granola",
-            "fathom",
-            "fireflies",
-            "linear",
-            "hubspot",
-            "salesforce",
-            "coda",
-            "lightfield",
-            "gong",
-        ],
+        provider: Literal["slack"],
         text: str,
         channel: Optional[str] | Omit = omit,
         connection: Optional[str] | Omit = omit,
@@ -346,7 +250,7 @@ class AsyncActionsResource(AsyncAPIResource):
         Send a message to a channel or conversation on a connected integration.
 
         Args:
-          provider: Integration provider (e.g., slack)
+          provider: Integration provider.
 
           text: Message text
 

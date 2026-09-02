@@ -438,12 +438,10 @@ class TestHyperspell:
         client = Hyperspell(base_url=base_url, api_key=api_key, user_id=user_id, _strict_response_validation=True)
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("Authorization") == f"Bearer {api_key}"
-        request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
-        assert request.headers.get("X-As-User") == user_id
 
         with pytest.raises(HyperspellError):
             with update_env(**{"HYPERSPELL_API_KEY": Omit()}):
-                client2 = Hyperspell(base_url=base_url, api_key=None, user_id=None, _strict_response_validation=True)
+                client2 = Hyperspell(base_url=base_url, api_key=None, user_id=user_id, _strict_response_validation=True)
             _ = client2
 
     def test_default_query_option(self) -> None:
@@ -1424,13 +1422,11 @@ class TestAsyncHyperspell:
         client = AsyncHyperspell(base_url=base_url, api_key=api_key, user_id=user_id, _strict_response_validation=True)
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
         assert request.headers.get("Authorization") == f"Bearer {api_key}"
-        request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
-        assert request.headers.get("X-As-User") == user_id
 
         with pytest.raises(HyperspellError):
             with update_env(**{"HYPERSPELL_API_KEY": Omit()}):
                 client2 = AsyncHyperspell(
-                    base_url=base_url, api_key=None, user_id=None, _strict_response_validation=True
+                    base_url=base_url, api_key=None, user_id=user_id, _strict_response_validation=True
                 )
             _ = client2
 

@@ -20,6 +20,13 @@ class MemoryListParams(TypedDict, total=False):
     Example: {"department": "engineering", "priority": {"$gt": 3}}
     """
 
+    include_chunks: int
+    """
+    When > 0, include up to this many extracted memories (chunks with summaries) per
+    document in each item's `chunks` field, in document order. 0 (default) omits
+    them.
+    """
+
     size: int
 
     source: Optional[
@@ -29,27 +36,41 @@ class MemoryListParams(TypedDict, total=False):
             "slack",
             "google_calendar",
             "google_mail",
+            "imap",
+            "google_meet",
             "box",
             "dropbox",
             "github",
+            "gitlab",
             "google_drive",
             "vault",
             "web_crawler",
             "trace",
+            "microsoft_outlook",
             "microsoft_teams",
-            "gmail_actions",
             "granola",
             "fathom",
             "fireflies",
+            "figma",
             "linear",
             "hubspot",
             "salesforce",
             "coda",
-            "lightfield",
+            "confluence",
+            "jira",
+            "metabase",
             "gong",
+            "clickup",
+            "lightfield",
+            "pylon",
+            "fellow",
+            "odoo",
+            "external_mcp",
         ]
     ]
     """Filter documents by source."""
 
-    status: Optional[Literal["pending", "processing", "completed", "failed", "pending_review", "skipped"]]
+    status: Optional[
+        Literal["pending", "processing", "completed", "failed", "pending_review", "skipped", "filtered", "cancelled"]
+    ]
     """Filter documents by status."""

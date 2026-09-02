@@ -11,12 +11,7 @@ __all__ = ["Provenance"]
 
 
 class Provenance(BaseModel):
-    """Auditability record attached to an agentic answer.
-
-    Gated behind ``provenance=true`` on the request: the cheap parts (sources,
-    steps, failed_sources) are derived from in-memory loop state, but ``entities``
-    costs one indexed DB lookup, so the whole record is only built on request.
-    """
+    """Auditability record returned when requested for a supported query."""
 
     entities: Optional[List[ProvenanceEntity]] = None
 

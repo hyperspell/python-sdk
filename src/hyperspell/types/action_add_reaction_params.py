@@ -15,34 +15,8 @@ class ActionAddReactionParams(TypedDict, total=False):
     name: Required[str]
     """Emoji name without colons (e.g., thumbsup)"""
 
-    provider: Required[
-        Literal[
-            "reddit",
-            "notion",
-            "slack",
-            "google_calendar",
-            "google_mail",
-            "box",
-            "dropbox",
-            "github",
-            "google_drive",
-            "vault",
-            "web_crawler",
-            "trace",
-            "microsoft_teams",
-            "gmail_actions",
-            "granola",
-            "fathom",
-            "fireflies",
-            "linear",
-            "hubspot",
-            "salesforce",
-            "coda",
-            "lightfield",
-            "gong",
-        ]
-    ]
-    """Integration provider (e.g., slack)"""
+    provider: Required[Literal["slack"]]
+    """Integration provider."""
 
     timestamp: Required[str]
     """Message timestamp to react to"""

@@ -12,11 +12,9 @@ __all__ = ["Utterance"]
 
 
 class Utterance(BaseModel):
-    """A speaker-attributed segment of a transcript (ENG-2476/D10).
+    """A speaker-attributed segment of a transcript.
 
-    "Utterance" is the standard name for this across transcription providers
-    (AssemblyAI, Deepgram, Rev). Timestamps are relative offsets in seconds —
-    provider-native; absolute times derive from `Transcript.started_at`.
+    Start and end times are offsets in seconds from the beginning of the transcript.
     """
 
     text: str
@@ -26,15 +24,10 @@ class Utterance(BaseModel):
     end: Optional[float] = None
 
     metadata: Optional[Metadata] = None
-    """Per-block annotations carried by any Hyperdoc node (ENG-1390).
+    """Optional annotations carried by a hyperdoc node.
 
-    Out-of-band annotations that travel with a block but aren't part of its content:
-    provenance (`sources`) and human edit attribution (`edited_by`). New annotation
-    types get added here as typed fields as the need arises.
-
-    Empty by default. Because `Node.model_dump` forces `exclude_none=True`, an unset
-    `metadata` (None) is dropped from serialization entirely, and within a populated
-    `Metadata` only the set keys survive.
+    Includes source provenance and human edit attribution. Unset metadata is omitted
+    from serialized responses.
     """
 
     speaker: Optional["Person"] = None

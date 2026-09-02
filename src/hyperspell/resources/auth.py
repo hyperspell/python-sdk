@@ -55,7 +55,12 @@ class AuthResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AuthDeleteUserResponse:
-        """Endpoint to delete user."""
+        """
+        Delete the calling user's data (GDPR erasure).
+
+        Deletion is processed asynchronously. The endpoint returns `202 Accepted` with
+        an identifier for the deletion request.
+        """
         return self._delete(
             "/auth/delete",
             options=make_request_options(
@@ -103,6 +108,7 @@ class AuthResource(SyncAPIResource):
 
         Args:
           expires_in: Token lifetime, e.g., '30m', '2h', '1d'. Defaults to 24 hours if not provided.
+              Maximum 30 days.
 
           origin: Origin of the request, used for CSRF protection. If set, the token will only be
               valid for requests originating from this origin.
@@ -162,7 +168,12 @@ class AsyncAuthResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AuthDeleteUserResponse:
-        """Endpoint to delete user."""
+        """
+        Delete the calling user's data (GDPR erasure).
+
+        Deletion is processed asynchronously. The endpoint returns `202 Accepted` with
+        an identifier for the deletion request.
+        """
         return await self._delete(
             "/auth/delete",
             options=make_request_options(
@@ -210,6 +221,7 @@ class AsyncAuthResource(AsyncAPIResource):
 
         Args:
           expires_in: Token lifetime, e.g., '30m', '2h', '1d'. Defaults to 24 hours if not provided.
+              Maximum 30 days.
 
           origin: Origin of the request, used for CSRF protection. If set, the token will only be
               valid for requests originating from this origin.

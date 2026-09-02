@@ -9,3 +9,5 @@ class AuthDeleteUserResponse(BaseModel):
     message: str
 
     success: bool
+
+    workflow_id: str
