@@ -8,6 +8,14 @@ from .auth import (
     AuthResourceWithStreamingResponse,
     AsyncAuthResourceWithStreamingResponse,
 )
+from .live import (
+    LiveResource,
+    AsyncLiveResource,
+    LiveResourceWithRawResponse,
+    AsyncLiveResourceWithRawResponse,
+    LiveResourceWithStreamingResponse,
+    AsyncLiveResourceWithStreamingResponse,
+)
 from .vaults import (
     VaultsResource,
     AsyncVaultsResource,
@@ -31,6 +39,14 @@ from .folders import (
     AsyncFoldersResourceWithRawResponse,
     FoldersResourceWithStreamingResponse,
     AsyncFoldersResourceWithStreamingResponse,
+)
+from .entities import (
+    EntitiesResource,
+    AsyncEntitiesResource,
+    EntitiesResourceWithRawResponse,
+    AsyncEntitiesResourceWithRawResponse,
+    EntitiesResourceWithStreamingResponse,
+    AsyncEntitiesResourceWithStreamingResponse,
 )
 from .evaluate import (
     EvaluateResource,
@@ -72,14 +88,6 @@ from .integrations import (
     IntegrationsResourceWithStreamingResponse,
     AsyncIntegrationsResourceWithStreamingResponse,
 )
-from .context_documents import (
-    ContextDocumentsResource,
-    AsyncContextDocumentsResource,
-    ContextDocumentsResourceWithRawResponse,
-    AsyncContextDocumentsResourceWithRawResponse,
-    ContextDocumentsResourceWithStreamingResponse,
-    AsyncContextDocumentsResourceWithStreamingResponse,
-)
 
 __all__ = [
     "ConnectionsResource",
@@ -100,12 +108,18 @@ __all__ = [
     "AsyncIntegrationsResourceWithRawResponse",
     "IntegrationsResourceWithStreamingResponse",
     "AsyncIntegrationsResourceWithStreamingResponse",
-    "ContextDocumentsResource",
-    "AsyncContextDocumentsResource",
-    "ContextDocumentsResourceWithRawResponse",
-    "AsyncContextDocumentsResourceWithRawResponse",
-    "ContextDocumentsResourceWithStreamingResponse",
-    "AsyncContextDocumentsResourceWithStreamingResponse",
+    "EntitiesResource",
+    "AsyncEntitiesResource",
+    "EntitiesResourceWithRawResponse",
+    "AsyncEntitiesResourceWithRawResponse",
+    "EntitiesResourceWithStreamingResponse",
+    "AsyncEntitiesResourceWithStreamingResponse",
+    "LiveResource",
+    "AsyncLiveResource",
+    "LiveResourceWithRawResponse",
+    "AsyncLiveResourceWithRawResponse",
+    "LiveResourceWithStreamingResponse",
+    "AsyncLiveResourceWithStreamingResponse",
     "MemoriesResource",
     "AsyncMemoriesResource",
     "MemoriesResourceWithRawResponse",

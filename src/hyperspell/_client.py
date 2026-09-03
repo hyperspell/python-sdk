@@ -37,26 +37,28 @@ from ._base_client import (
 if TYPE_CHECKING:
     from .resources import (
         auth,
+        live,
         vaults,
         actions,
         folders,
+        entities,
         evaluate,
         memories,
         sessions,
         connections,
         integrations,
-        context_documents,
     )
     from .resources.auth import AuthResource, AsyncAuthResource
+    from .resources.live import LiveResource, AsyncLiveResource
     from .resources.vaults import VaultsResource, AsyncVaultsResource
     from .resources.actions import ActionsResource, AsyncActionsResource
     from .resources.folders import FoldersResource, AsyncFoldersResource
+    from .resources.entities import EntitiesResource, AsyncEntitiesResource
     from .resources.evaluate import EvaluateResource, AsyncEvaluateResource
     from .resources.memories import MemoriesResource, AsyncMemoriesResource
     from .resources.sessions import SessionsResource, AsyncSessionsResource
     from .resources.connections import ConnectionsResource, AsyncConnectionsResource
     from .resources.integrations.integrations import IntegrationsResource, AsyncIntegrationsResource
-    from .resources.context_documents.context_documents import ContextDocumentsResource, AsyncContextDocumentsResource
 
 __all__ = [
     "Timeout",
@@ -157,10 +159,16 @@ class Hyperspell(SyncAPIClient):
         return IntegrationsResource(self)
 
     @cached_property
-    def context_documents(self) -> ContextDocumentsResource:
-        from .resources.context_documents import ContextDocumentsResource
+    def entities(self) -> EntitiesResource:
+        from .resources.entities import EntitiesResource
 
-        return ContextDocumentsResource(self)
+        return EntitiesResource(self)
+
+    @cached_property
+    def live(self) -> LiveResource:
+        from .resources.live import LiveResource
+
+        return LiveResource(self)
 
     @cached_property
     def memories(self) -> MemoriesResource:
@@ -401,10 +409,16 @@ class AsyncHyperspell(AsyncAPIClient):
         return AsyncIntegrationsResource(self)
 
     @cached_property
-    def context_documents(self) -> AsyncContextDocumentsResource:
-        from .resources.context_documents import AsyncContextDocumentsResource
+    def entities(self) -> AsyncEntitiesResource:
+        from .resources.entities import AsyncEntitiesResource
 
-        return AsyncContextDocumentsResource(self)
+        return AsyncEntitiesResource(self)
+
+    @cached_property
+    def live(self) -> AsyncLiveResource:
+        from .resources.live import AsyncLiveResource
+
+        return AsyncLiveResource(self)
 
     @cached_property
     def memories(self) -> AsyncMemoriesResource:
@@ -583,10 +597,16 @@ class HyperspellWithRawResponse:
         return IntegrationsResourceWithRawResponse(self._client.integrations)
 
     @cached_property
-    def context_documents(self) -> context_documents.ContextDocumentsResourceWithRawResponse:
-        from .resources.context_documents import ContextDocumentsResourceWithRawResponse
+    def entities(self) -> entities.EntitiesResourceWithRawResponse:
+        from .resources.entities import EntitiesResourceWithRawResponse
 
-        return ContextDocumentsResourceWithRawResponse(self._client.context_documents)
+        return EntitiesResourceWithRawResponse(self._client.entities)
+
+    @cached_property
+    def live(self) -> live.LiveResourceWithRawResponse:
+        from .resources.live import LiveResourceWithRawResponse
+
+        return LiveResourceWithRawResponse(self._client.live)
 
     @cached_property
     def memories(self) -> memories.MemoriesResourceWithRawResponse:
@@ -650,10 +670,16 @@ class AsyncHyperspellWithRawResponse:
         return AsyncIntegrationsResourceWithRawResponse(self._client.integrations)
 
     @cached_property
-    def context_documents(self) -> context_documents.AsyncContextDocumentsResourceWithRawResponse:
-        from .resources.context_documents import AsyncContextDocumentsResourceWithRawResponse
+    def entities(self) -> entities.AsyncEntitiesResourceWithRawResponse:
+        from .resources.entities import AsyncEntitiesResourceWithRawResponse
 
-        return AsyncContextDocumentsResourceWithRawResponse(self._client.context_documents)
+        return AsyncEntitiesResourceWithRawResponse(self._client.entities)
+
+    @cached_property
+    def live(self) -> live.AsyncLiveResourceWithRawResponse:
+        from .resources.live import AsyncLiveResourceWithRawResponse
+
+        return AsyncLiveResourceWithRawResponse(self._client.live)
 
     @cached_property
     def memories(self) -> memories.AsyncMemoriesResourceWithRawResponse:
@@ -717,10 +743,16 @@ class HyperspellWithStreamedResponse:
         return IntegrationsResourceWithStreamingResponse(self._client.integrations)
 
     @cached_property
-    def context_documents(self) -> context_documents.ContextDocumentsResourceWithStreamingResponse:
-        from .resources.context_documents import ContextDocumentsResourceWithStreamingResponse
+    def entities(self) -> entities.EntitiesResourceWithStreamingResponse:
+        from .resources.entities import EntitiesResourceWithStreamingResponse
 
-        return ContextDocumentsResourceWithStreamingResponse(self._client.context_documents)
+        return EntitiesResourceWithStreamingResponse(self._client.entities)
+
+    @cached_property
+    def live(self) -> live.LiveResourceWithStreamingResponse:
+        from .resources.live import LiveResourceWithStreamingResponse
+
+        return LiveResourceWithStreamingResponse(self._client.live)
 
     @cached_property
     def memories(self) -> memories.MemoriesResourceWithStreamingResponse:
@@ -784,10 +816,16 @@ class AsyncHyperspellWithStreamedResponse:
         return AsyncIntegrationsResourceWithStreamingResponse(self._client.integrations)
 
     @cached_property
-    def context_documents(self) -> context_documents.AsyncContextDocumentsResourceWithStreamingResponse:
-        from .resources.context_documents import AsyncContextDocumentsResourceWithStreamingResponse
+    def entities(self) -> entities.AsyncEntitiesResourceWithStreamingResponse:
+        from .resources.entities import AsyncEntitiesResourceWithStreamingResponse
 
-        return AsyncContextDocumentsResourceWithStreamingResponse(self._client.context_documents)
+        return AsyncEntitiesResourceWithStreamingResponse(self._client.entities)
+
+    @cached_property
+    def live(self) -> live.AsyncLiveResourceWithStreamingResponse:
+        from .resources.live import AsyncLiveResourceWithStreamingResponse
+
+        return AsyncLiveResourceWithStreamingResponse(self._client.live)
 
     @cached_property
     def memories(self) -> memories.AsyncMemoriesResourceWithStreamingResponse:

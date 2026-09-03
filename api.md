@@ -108,74 +108,39 @@ Methods:
 
 - <code title="get /integrations/web_crawler/index">client.integrations.web_crawler.<a href="./src/hyperspell/resources/integrations/web_crawler.py">index</a>(\*\*<a href="src/hyperspell/types/integrations/web_crawler_index_params.py">params</a>) -> <a href="./src/hyperspell/types/integrations/web_crawler_index_response.py">WebCrawlerIndexResponse</a></code>
 
-# ContextDocuments
+# Entities
+
+Types:
+
+```python
+from hyperspell.types import EntityListResponse, EntityGetResponse, EntitySearchResponse
+```
+
+Methods:
+
+- <code title="get /entities">client.entities.<a href="./src/hyperspell/resources/entities.py">list</a>(\*\*<a href="src/hyperspell/types/entity_list_params.py">params</a>) -> <a href="./src/hyperspell/types/entity_list_response.py">SyncEntityCursorPage[EntityListResponse]</a></code>
+- <code title="get /entities/{entity_id}">client.entities.<a href="./src/hyperspell/resources/entities.py">get</a>(entity_id) -> <a href="./src/hyperspell/types/entity_get_response.py">EntityGetResponse</a></code>
+- <code title="post /entities/search">client.entities.<a href="./src/hyperspell/resources/entities.py">search</a>(\*\*<a href="src/hyperspell/types/entity_search_params.py">params</a>) -> <a href="./src/hyperspell/types/entity_search_response.py">EntitySearchResponse</a></code>
+
+# Live
 
 Types:
 
 ```python
 from hyperspell.types import (
-    ContextDocumentListResponse,
-    ContextDocumentGenerateResponse,
-    ContextDocumentGetResponse,
+    LiveGetResourceResponse,
+    LiveListResourcesResponse,
+    LiveListSourcesResponse,
+    LiveSearchResponse,
 )
 ```
 
 Methods:
 
-- <code title="get /context-documents">client.context_documents.<a href="./src/hyperspell/resources/context_documents/context_documents.py">list</a>(\*\*<a href="src/hyperspell/types/context_document_list_params.py">params</a>) -> <a href="./src/hyperspell/types/context_document_list_response.py">SyncContextDocumentsCursorPage[ContextDocumentListResponse]</a></code>
-- <code title="post /context-documents/generate">client.context_documents.<a href="./src/hyperspell/resources/context_documents/context_documents.py">generate</a>(\*\*<a href="src/hyperspell/types/context_document_generate_params.py">params</a>) -> <a href="./src/hyperspell/types/context_document_generate_response.py">ContextDocumentGenerateResponse</a></code>
-- <code title="get /context-documents/{document_id}">client.context_documents.<a href="./src/hyperspell/resources/context_documents/context_documents.py">get</a>(document_id) -> <a href="./src/hyperspell/types/context_document_get_response.py">ContextDocumentGetResponse</a></code>
-
-## Trees
-
-Types:
-
-```python
-from hyperspell.types.context_documents import (
-    TreeGenerateResponse,
-    TreeGetResponse,
-    TreeGetLatestResponse,
-    TreeProgressResponse,
-)
-```
-
-Methods:
-
-- <code title="post /context-documents/tree">client.context_documents.trees.<a href="./src/hyperspell/resources/context_documents/trees.py">generate</a>(\*\*<a href="src/hyperspell/types/context_documents/tree_generate_params.py">params</a>) -> <a href="./src/hyperspell/types/context_documents/tree_generate_response.py">TreeGenerateResponse</a></code>
-- <code title="get /context-documents/tree/by-id/{tree_id}">client.context_documents.trees.<a href="./src/hyperspell/resources/context_documents/trees.py">get</a>(tree_id) -> <a href="./src/hyperspell/types/context_documents/tree_get_response.py">TreeGetResponse</a></code>
-- <code title="get /context-documents/tree/latest">client.context_documents.trees.<a href="./src/hyperspell/resources/context_documents/trees.py">get_latest</a>(\*\*<a href="src/hyperspell/types/context_documents/tree_get_latest_params.py">params</a>) -> <a href="./src/hyperspell/types/context_documents/tree_get_latest_response.py">TreeGetLatestResponse</a></code>
-- <code title="get /context-documents/tree/{tree_id}/progress">client.context_documents.trees.<a href="./src/hyperspell/resources/context_documents/trees.py">progress</a>(tree_id) -> <a href="./src/hyperspell/types/context_documents/tree_progress_response.py">TreeProgressResponse</a></code>
-
-## Digests
-
-Types:
-
-```python
-from hyperspell.types.context_documents import DigestListResponse, DigestGenerateResponse
-```
-
-Methods:
-
-- <code title="get /context-documents/digest/list">client.context_documents.digests.<a href="./src/hyperspell/resources/context_documents/digests.py">list</a>(\*\*<a href="src/hyperspell/types/context_documents/digest_list_params.py">params</a>) -> <a href="./src/hyperspell/types/context_documents/digest_list_response.py">DigestListResponse</a></code>
-- <code title="post /context-documents/digest">client.context_documents.digests.<a href="./src/hyperspell/resources/context_documents/digests.py">generate</a>(\*\*<a href="src/hyperspell/types/context_documents/digest_generate_params.py">params</a>) -> <a href="./src/hyperspell/types/context_documents/digest_generate_response.py">DigestGenerateResponse</a></code>
-
-## Config
-
-Types:
-
-```python
-from hyperspell.types.context_documents import (
-    ConfigUpdateResponse,
-    ConfigGetResponse,
-    ConfigResetResponse,
-)
-```
-
-Methods:
-
-- <code title="patch /context-documents/config">client.context_documents.config.<a href="./src/hyperspell/resources/context_documents/config.py">update</a>(\*\*<a href="src/hyperspell/types/context_documents/config_update_params.py">params</a>) -> <a href="./src/hyperspell/types/context_documents/config_update_response.py">ConfigUpdateResponse</a></code>
-- <code title="get /context-documents/config">client.context_documents.config.<a href="./src/hyperspell/resources/context_documents/config.py">get</a>() -> <a href="./src/hyperspell/types/context_documents/config_get_response.py">ConfigGetResponse</a></code>
-- <code title="post /context-documents/config/reset">client.context_documents.config.<a href="./src/hyperspell/resources/context_documents/config.py">reset</a>() -> <a href="./src/hyperspell/types/context_documents/config_reset_response.py">ConfigResetResponse</a></code>
+- <code title="get /live/{source}/resources/{resource_id}">client.live.<a href="./src/hyperspell/resources/live.py">get_resource</a>(resource_id, \*, source, \*\*<a href="src/hyperspell/types/live_get_resource_params.py">params</a>) -> <a href="./src/hyperspell/types/live_get_resource_response.py">LiveGetResourceResponse</a></code>
+- <code title="get /live/{source}/resources">client.live.<a href="./src/hyperspell/resources/live.py">list_resources</a>(source, \*\*<a href="src/hyperspell/types/live_list_resources_params.py">params</a>) -> <a href="./src/hyperspell/types/live_list_resources_response.py">SyncCursorPage[LiveListResourcesResponse]</a></code>
+- <code title="get /live/sources">client.live.<a href="./src/hyperspell/resources/live.py">list_sources</a>() -> <a href="./src/hyperspell/types/live_list_sources_response.py">LiveListSourcesResponse</a></code>
+- <code title="post /live/{source}/search">client.live.<a href="./src/hyperspell/resources/live.py">search</a>(source, \*\*<a href="src/hyperspell/types/live_search_params.py">params</a>) -> <a href="./src/hyperspell/types/live_search_response.py">LiveSearchResponse</a></code>
 
 # Memories
 
