@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.40.0](https://github.com/hyperspell/python-sdk/compare/v0.39.0...v0.40.0) (2026-09-03)
+
+
+### Features
+
+* **api:** sync generated SDK from staging ca1f56f6d237bb6dca45205a5ebe0a82f96ac4fb ([#116](https://github.com/hyperspell/python-sdk/issues/116)) ([252fede](https://github.com/hyperspell/python-sdk/commit/252fede224b49862d05cd26285e601b5aea87360))
+* **api:** sync generated SDK from staging cafa7d065818039fba629a81ec2e43c3a97c79e8 ([#118](https://github.com/hyperspell/python-sdk/issues/118)) ([bbed944](https://github.com/hyperspell/python-sdk/commit/bbed944e1ccf5aa40c069dc09b80e42a04f55223))
+
+
+### Bug Fixes
+
+* validate the production release token ([#119](https://github.com/hyperspell/python-sdk/issues/119)) ([dc09e88](https://github.com/hyperspell/python-sdk/commit/dc09e88f7a9927a3a60c42ec313080fbcfdb1fe3))
+
 ## [0.39.0](https://github.com/hyperspell/python-sdk/compare/v0.38.0...v0.39.0) (2026-06-26)
 
 
