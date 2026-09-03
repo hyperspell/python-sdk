@@ -5,7 +5,7 @@ from typing_extensions import override
 
 from ._base_client import BasePage, PageInfo, BaseSyncPage, BaseAsyncPage
 
-__all__ = ["SyncCursorPage", "AsyncCursorPage", "SyncContextDocumentsCursorPage", "AsyncContextDocumentsCursorPage"]
+__all__ = ["SyncCursorPage", "AsyncCursorPage", "SyncEntityCursorPage", "AsyncEntityCursorPage"]
 
 _T = TypeVar("_T")
 
@@ -50,16 +50,16 @@ class AsyncCursorPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
         return PageInfo(params={"cursor": next_cursor})
 
 
-class SyncContextDocumentsCursorPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
-    documents: List[_T]
+class SyncEntityCursorPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]):
+    items: List[_T]
     next_cursor: Optional[str] = None
 
     @override
     def _get_page_items(self) -> List[_T]:
-        documents = self.documents
-        if not documents:
+        items = self.items
+        if not items:
             return []
-        return documents
+        return items
 
     @override
     def next_page_info(self) -> Optional[PageInfo]:
@@ -70,16 +70,16 @@ class SyncContextDocumentsCursorPage(BaseSyncPage[_T], BasePage[_T], Generic[_T]
         return PageInfo(params={"cursor": next_cursor})
 
 
-class AsyncContextDocumentsCursorPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
-    documents: List[_T]
+class AsyncEntityCursorPage(BaseAsyncPage[_T], BasePage[_T], Generic[_T]):
+    items: List[_T]
     next_cursor: Optional[str] = None
 
     @override
     def _get_page_items(self) -> List[_T]:
-        documents = self.documents
-        if not documents:
+        items = self.items
+        if not items:
             return []
-        return documents
+        return items
 
     @override
     def next_page_info(self) -> Optional[PageInfo]:

@@ -137,12 +137,12 @@ client = Hyperspell(
     user_id="My User ID",
 )
 
-all_context_documents = []
+all_entities = []
 # Automatically fetches more pages as needed.
-for context_document in client.context_documents.list():
-    # Do something with context_document here
-    all_context_documents.append(context_document)
-print(all_context_documents)
+for entity in client.entities.list():
+    # Do something with entity here
+    all_entities.append(entity)
+print(all_entities)
 ```
 
 Or, asynchronously:
@@ -157,11 +157,11 @@ client = AsyncHyperspell(
 
 
 async def main() -> None:
-    all_context_documents = []
+    all_entities = []
     # Iterate through items across all pages, issuing requests as needed.
-    async for context_document in client.context_documents.list():
-        all_context_documents.append(context_document)
-    print(all_context_documents)
+    async for entity in client.entities.list():
+        all_entities.append(entity)
+    print(all_entities)
 
 
 asyncio.run(main())
@@ -170,11 +170,11 @@ asyncio.run(main())
 Alternatively, you can use the `.has_next_page()`, `.next_page_info()`, or `.get_next_page()` methods for more granular control working with pages:
 
 ```python
-first_page = await client.context_documents.list()
+first_page = await client.entities.list()
 if first_page.has_next_page():
     print(f"will fetch next page using these details: {first_page.next_page_info()}")
     next_page = await first_page.get_next_page()
-    print(f"number of items we just fetched: {len(next_page.documents)}")
+    print(f"number of items we just fetched: {len(next_page.items)}")
 
 # Remove `await` for non-async usage.
 ```
@@ -182,11 +182,11 @@ if first_page.has_next_page():
 Or just work directly with the returned data:
 
 ```python
-first_page = await client.context_documents.list()
+first_page = await client.entities.list()
 
 print(f"next page cursor: {first_page.next_cursor}")  # => "next page cursor: ..."
-for context_document in first_page.documents:
-    print(context_document.document_id)
+for entity in first_page.items:
+    print(entity.id)
 
 # Remove `await` for non-async usage.
 ```
@@ -202,10 +202,11 @@ client = Hyperspell(
     user_id="My User ID",
 )
 
-config = client.context_documents.config.update(
-    structure={},
+query_result = client.memories.search(
+    query="What does Hyperspell do?",
+    options={"filter": {}},
 )
-print(config.structure)
+print(query_result.options)
 ```
 
 ## File uploads
